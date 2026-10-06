@@ -7,7 +7,7 @@
 
 /* Bubbly, colorful card backs and a little more thinking time */
 .card:not(.face):not(.animal):not(.matched){background:radial-gradient(circle at 22% 20%,#fff9 0 5px,transparent 6px),radial-gradient(circle at 78% 72%,#fff6 0 9px,transparent 10px),radial-gradient(circle at 68% 24%,#ffdcff 0 7px,transparent 8px),linear-gradient(145deg,#8b72ff 0%,#4bb9f5 48%,#58e4cb 100%);border:3px solid #fff;border-radius:20px;color:#fff;font-size:clamp(30px,5vw,44px);text-shadow:0 3px 0 #6552bc,0 5px 12px #34317b66;box-shadow:0 5px 0 #5d55c7,0 8px 0 #fff8 inset,0 10px 18px #5148a833;position:relative;transform:translateY(0)}
-.card:not(.face):not(.animal):not(.matched)::before{content:"";position:absolute;inset:7px;border:2px dashed #ffffffa8;border-radius:14px;pointer-events:none}
+.card:not(.face):not(.animal):not(.matched)::before{content:"";position:absolute;inset:7px;border:2px solid #ffffffa8;border-radius:14px;pointer-events:none}
 .card:not(.face):not(.animal):not(.matched):hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 0 #5d55c7,0 12px 20px #5148a844}
 .card.animal{border-radius:20px;border:3px solid #fff;box-shadow:0 5px 0 #e2a4d0,0 8px 18px #5148a822;background:linear-gradient(145deg,#fff9fe,#fffdf3);}
 .card.matched{border-radius:20px;box-shadow:0 4px 0 #83cfa1,0 0 18px #9bf2b466;}
