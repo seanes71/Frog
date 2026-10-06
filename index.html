@@ -32,4 +32,31 @@ body{background-color:#b9e9d8!important;background-image:radial-gradient(ellipse
 body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.48;background:repeating-radial-gradient(ellipse at 32% 48%,transparent 0 34px,#effffb55 35px 37px,transparent 38px 70px);background-size:620px 360px}
 @media(max-width:800px){body{background-attachment:scroll!important}body:before{opacity:.28}}
 </style>
+<style id="frog-match-finish-polish">
+body.pond-sunset{background:radial-gradient(ellipse at 10% 15%,#fff4cf 0 28px,transparent 29px),radial-gradient(ellipse at 90% 78%,#ffc4b8 0 34px,transparent 35px),linear-gradient(145deg,#ffe8bd,#ffd5e5 55%,#e5dcff)!important}
+body.pond-moonlight{background:radial-gradient(ellipse at 12% 18%,#e7f4ff 0 26px,transparent 27px),radial-gradient(ellipse at 90% 76%,#b3c9ff 0 35px,transparent 36px),linear-gradient(145deg,#172d58,#456da0 55%,#a6b9e6)!important;color:#f7fbff}
+body.pond-moonlight .panel,body.pond-moonlight .pill{background:#f6f9ff!important;color:#203456!important}
+body.pond-candy{background:radial-gradient(ellipse at 12% 18%,#ffc9eb 0 28px,transparent 29px),radial-gradient(ellipse at 88% 76%,#b8f2ff 0 36px,transparent 37px),linear-gradient(145deg,#ffe3f3,#e8dfff 55%,#d5f8ff)!important}
+.pondThemeShelf{margin-top:12px;padding:12px;border-radius:16px;background:#ffffffc9;border:2px solid #d6e9dc}
+.pondThemeShelf h3{margin:0 0 4px;font-size:15px}.pondThemeShelf p{font-size:12px;color:#5f7567;margin:0 0 9px}
+.pondThemeChoices{display:flex;gap:6px;flex-wrap:wrap}.pondThemeChoices button{border:2px solid #d7e8dc;border-radius:11px;background:#fff;padding:7px 9px;font-size:11px;font-weight:850;cursor:pointer}.pondThemeChoices button.active{border-color:#31995b;background:#e4ffeb}.pondThemeChoices button:disabled{opacity:.52;cursor:not-allowed}
+.card{will-change:transform;touch-action:manipulation}.card.face{animation:pondCardReveal .24s cubic-bezier(.2,.8,.3,1)}@keyframes pondCardReveal{0%{transform:scale(.88);opacity:.65}75%{transform:scale(1.045)}100%{transform:scale(1);opacity:1}}
+.pondConfetti{position:fixed;top:-20px;z-index:10030;pointer-events:none;font-size:20px;animation:pondConfettiFall 2.2s ease-in forwards}@keyframes pondConfettiFall{to{transform:translateY(110vh) rotate(650deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+<script id="frog-match-finish-polish-script">
+(()=>{if(window.__frogMatchFinishPolish)return;window.__frogMatchFinishPolish=true;
+const themes=[{id:'classic',label:'🌿 Classic Pond',need:0,cls:''},{id:'sunset',label:'🌅 Sunset Pond',need:3,cls:'pond-sunset'},{id:'moonlight',label:'🌙 Moonlit Pond',need:5,cls:'pond-moonlight'},{id:'candy',label:'🍬 Candy Pond',need:8,cls:'pond-candy'}];
+const collection=document.querySelector('.collection');
+if(collection&&!document.querySelector('.pondThemeShelf')){const panel=document.createElement('section');panel.className='pondThemeShelf';panel.innerHTML='<h3>🌈 Your Pond, Your Style</h3><p>Win games to unlock new pond looks. Classic is ready now!</p><div class="pondThemeChoices"></div>';collection.appendChild(panel);
+const choices=panel.querySelector('.pondThemeChoices');
+function draw(){const wins=Number(localStorage.getItem('frogWins')||0),current=localStorage.getItem('frogPondTheme')||'classic';document.body.classList.remove('pond-sunset','pond-moonlight','pond-candy');const active=themes.find(t=>t.id===current)||themes[0];if(active.cls)document.body.classList.add(active.cls);choices.innerHTML='';themes.forEach(t=>{const b=document.createElement('button');b.textContent=t.label+(wins<t.need?' 🔒':'');b.disabled=wins<t.need;b.className=current===t.id?'active':'';b.title=t.need?'Unlock at '+t.need+' total wins':'Available';b.addEventListener('click',()=>{localStorage.setItem('frogPondTheme',t.id);draw()});choices.appendChild(b)})}
+draw();new MutationObserver(draw).observe(document.body,{childList:true,subtree:true});
+}
+function confetti(){const bits=['✨','🌸','💧','🪷','⭐'];for(let i=0;i<24;i++){const el=document.createElement('span');el.className='pondConfetti';el.textContent=bits[i%bits.length];el.style.left=(Math.random()*100)+'vw';el.style.animationDelay=(Math.random()*.65)+'s';el.style.fontSize=(14+Math.random()*14)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),3200)}}
+const obs=new MutationObserver(()=>{document.querySelectorAll('.modal').forEach(m=>{const h=m.querySelector('h2');if(h&&h.textContent.includes('You won!')&&!m.dataset.pondConfetti){m.dataset.pondConfetti='1';confetti()}})});obs.observe(document.body,{childList:true,subtree:true});
+document.addEventListener('click',e=>{const card=e.target.closest?.('.card:not(:disabled)');if(!card||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const r=card.getBoundingClientRect(),rip=document.createElement('span');rip.textContent='💧';rip.style.cssText='position:fixed;z-index:10005;pointer-events:none;left:'+(r.left+r.width/2-9)+'px;top:'+(r.top+r.height/2-9)+'px;font-size:18px;animation:pondRipple .55s ease-out forwards';document.body.appendChild(rip);setTimeout(()=>rip.remove(),600)},true);
+const st=document.createElement('style');st.textContent='@keyframes pondRipple{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:translateY(-18px) scale(1.7)}}';document.head.appendChild(st);
+})();
+</script>
 </body></html>
