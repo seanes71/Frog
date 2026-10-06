@@ -46,4 +46,21 @@ document.getElementById('createAccount').onclick=async()=>{msg.textContent='Crea
 document.getElementById('loginAccount').onclick=async()=>{msg.textContent='Logging in…';try{await signInWithEmailAndPassword(auth,email.value.trim(),password.value)}catch(e){msg.textContent=friendly(e)}};
 onAuthStateChanged(auth,async user=>{currentUser=user;if(!user){gate.classList.remove('authHidden');return}gate.classList.add('authHidden');if(sessionStorage.getItem('frogCloudLoaded')!==user.uid){await cloudLoad(user)}else{await cloudSave()}if(!document.getElementById('frogAccountBar')){const bar=document.createElement('div');bar.id='frogAccountBar';bar.className='authUserBar';bar.innerHTML='<span>☁️ Saved</span><button class="authLogout" type="button">Log Out</button>';bar.querySelector('button').onclick=async()=>{sessionStorage.removeItem('frogCloudLoaded');await signOut(auth);location.reload()};document.querySelector('header')?.appendChild(bar)}});
 const originalSet=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){originalSet.call(this,k,v);if(this===localStorage&&saveKeys.includes(k)&&currentUser&&!loadingCloud){clearTimeout(saveTimer);saveTimer=setTimeout(cloudSave,450)}};
-</script></body></html>
+</script><style id="outer-pond-scene">
+body{background:
+radial-gradient(ellipse at 4% 76%,#83cf86 0 28px,transparent 30px),
+radial-gradient(ellipse at 96% 66%,#75c97c 0 34px,transparent 36px),
+radial-gradient(circle at 3% 87%,#ffd6e7 0 7px,#fff5b8 8px 11px,transparent 12px),
+radial-gradient(circle at 97% 27%,#fff0a8 0 6px,#ffb9d0 7px 10px,transparent 11px),
+radial-gradient(ellipse at 8% 18%,transparent 0 28px,#ffffff70 29px 31px,transparent 32px),
+radial-gradient(ellipse at 91% 82%,transparent 0 34px,#ffffff65 35px 37px,transparent 38px),
+linear-gradient(180deg,#bdeff1 0%,#9fe1e4 48%,#b8e8d7 100%)!important;background-attachment:fixed!important}
+#app{background:transparent!important}
+body:before,body:after{content:"";position:fixed;bottom:0;width:76px;height:210px;pointer-events:none;z-index:0;background:
+radial-gradient(ellipse at 20px 38px,#9b643b 0 8px,transparent 9px),
+radial-gradient(ellipse at 48px 74px,#a86d40 0 8px,transparent 9px),
+linear-gradient(78deg,transparent 45%,#4e9b62 46% 50%,transparent 51%) 8px 25px/34px 170px no-repeat,
+linear-gradient(102deg,transparent 45%,#4e9b62 46% 50%,transparent 51%) 34px 50px/34px 150px no-repeat}
+body:before{left:0}body:after{right:0;transform:scaleX(-1)}
+.wrap{position:relative;z-index:1}
+</style></body></html>
