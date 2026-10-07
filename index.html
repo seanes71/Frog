@@ -363,5 +363,18 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
  body.frogPlayMode .collection{display:none!important}
 }
 </style><script id="frog-home-play-v1">
-(()=>{function mark(){const collection=document.querySelector('.layout>aside'),ach=document.getElementById('frogAchievementPanel'),journey=document.querySelector('.difficulty'),shop=document.querySelector('.headerUtilityRow .shop')||document.querySelector('.shop'),showdown=document.getElementById('showdownPanel'),stats=document.querySelector('.topStats'),ad=document.getElementById('frogAdSlot');[collection,ach,journey,shop,showdown,stats,ad].forEach(x=>x&&x.classList.add('homeOnly'));const main=document.querySelector('.layout>main');if(main)main.classList.add('playOnly')}function mode(m){document.body.classList.toggle('frogPlayMode',m==='play');document.body.classList.toggle('frogHomeMode',m!=='play');document.getElementById('frogHomeTab')?.classList.toggle('active',m!=='play');document.getElementById('frogPlayTab')?.classList.toggle('active',m==='play');scrollTo(0,0)}addEventListener('DOMContentLoaded',()=>{mark();document.getElementById('frogHomeTab')?.addEventListener('click',()=>mode('home'));document.getElementById('frogPlayTab')?.addEventListener('click',()=>mode('play'));document.getElementById('soloMode')?.addEventListener('click',()=>mode('play'));document.getElementById('aiMode')?.addEventListener('click',()=>mode('play'))})})();
-</script></body></html>
+(()=>{function mode(m){const play=m==='play';document.body.classList.toggle('frogPlayMode',play);document.body.classList.toggle('frogHomeMode',!play);document.getElementById('frogHomeTab')?.classList.toggle('active',!play);document.getElementById('frogPlayTab')?.classList.toggle('active',play);if(innerWidth<=699){const main=document.querySelector('.layout>main'),aside=document.querySelector('.layout>aside'),ach=document.getElementById('frogAchievementPanel'),journey=document.querySelector('.difficulty'),header=document.querySelector('.topGameHeader');if(main)main.style.setProperty('display',play?'block':'none','important');[aside,ach,journey,header].forEach(x=>x&&x.style.setProperty('display',play?'none':'block','important'));}scrollTo(0,0)}function bind(){document.getElementById('frogHomeTab')?.addEventListener('click',()=>mode('home'));document.getElementById('frogPlayTab')?.addEventListener('click',()=>mode('play'));document.getElementById('soloMode')?.addEventListener('click',()=>mode('play'));document.getElementById('aiMode')?.addEventListener('click',()=>mode('play'));mode('home')}if(document.readyState==='loading')addEventListener('DOMContentLoaded',bind);else bind();new MutationObserver(()=>{if(innerWidth<=699&&document.body.classList.contains('frogPlayMode')){const a=document.getElementById('frogAchievementPanel');if(a)a.style.setProperty('display','none','important')}}).observe(document.body,{childList:true,subtree:true})})();
+</script><style id="frog-mobile-pages-v2">
+@media(max-width:699px){
+ body.frogHomeMode .layout>main{display:none!important}
+ body.frogHomeMode .layout>aside{display:block!important;position:static!important;width:100%!important;max-width:none!important}
+ body.frogHomeMode #frogAchievementPanel{display:block!important;position:static!important;width:100%!important}
+ body.frogHomeMode .difficulty{display:block!important;position:static!important}
+ body.frogPlayMode .topGameHeader,
+ body.frogPlayMode .layout>aside,
+ body.frogPlayMode #frogAchievementPanel,
+ body.frogPlayMode .difficulty,
+ body.frogPlayMode #frogAdSlot{display:none!important}
+ body.frogPlayMode .layout>main{display:block!important;width:100%!important;max-width:none!important}
+}
+</style></body></html>
