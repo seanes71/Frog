@@ -660,8 +660,7 @@ function showRoundFight(n,done){const old=document.querySelector('.frogRoundFigh
 #frogChoirTest:disabled{opacity:.65;cursor:wait}
 </style><script id="frog-choir-real-v25">
 (()=>{
- const CROAK_PRIMARY='https://gfxsounds.com/wp-content/uploads/2022/11/Single-frog-croaking-close-perspective.mp3';
- const CROAK_PROXY='https://api.allorigins.win/raw?url='+encodeURIComponent(CROAK_PRIMARY);
+ const CROAK_PRIMARY='https://upload.wikimedia.org/wikipedia/commons/8/8b/Single_Frog_Croak.oga';
  let ac=null,buffer=null,loading=null,playing=false;
  function ctx(){return ac||(ac=new (window.AudioContext||window.webkitAudioContext)())}
  async function loadCroak(){
@@ -669,7 +668,7 @@ function showRoundFight(n,done){const old=document.querySelector('.frogRoundFigh
    if(loading)return loading;
    loading=(async()=>{
      let lastErr;
-     for(const url of [CROAK_PRIMARY,CROAK_PROXY]){
+     for(const url of [CROAK_PRIMARY]){
        try{
          const r=await fetch(url,{mode:'cors',cache:'force-cache'});
          if(!r.ok)throw Error('frog audio '+r.status);
@@ -699,7 +698,7 @@ function showRoundFight(n,done){const old=document.querySelector('.frogRoundFigh
      [0,4,8].forEach(i=>note(.79,t+i*.42+.12,.055));
      setTimeout(()=>{playing=false;btn.disabled=false;btn.textContent='🐸 Hear Real Frog Choir';},5600);
    }catch(e){
-     playing=false;btn.disabled=false;btn.textContent='🐸 Frog audio unavailable';
+     playing=false;btn.disabled=false;btn.textContent='🐸 Could not load — refresh once';
      console.warn('Real frog choir audio could not load',e);
    }
  }
