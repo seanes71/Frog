@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#082d23">
+<title>Frog Match Mobile</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,sans-serif;background:#082d23;color:#fff}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+#splash{position:fixed;inset:0;z-index:99;background:#061f18;transition:opacity .55s}
+#splash.hide{opacity:0;pointer-events:none}
+#splash img{width:100%;height:100%;object-fit:contain}
+.splashWords{position:absolute;left:0;right:0;bottom:9%;text-align:center;text-shadow:0 4px 8px #000;display:flex;flex-direction:column}
+.splashWords b{font-size:42px;color:#8de85e}.splashWords strong{font-size:28px;color:#ffd743;letter-spacing:.1em}.splashWords small{margin-top:8px;font-weight:800}
+main{min-height:100vh;padding:12px;background:linear-gradient(#082d23,#174b38)}
+.hero{height:220px;border:2px solid #72b95f;border-radius:24px;overflow:hidden;position:relative;background:#061f18}
+.hero img{width:100%;height:100%;object-fit:cover}
+.heroText{position:absolute;left:0;right:0;bottom:0;padding:16px;background:linear-gradient(transparent,rgba(0,0,0,.88))}
+h1{margin:0;color:#8de85e;font-size:34px}.heroText p{margin:2px 0;color:#ffd743;font-weight:800}
+.status{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+.status div{background:#0d3b2e;border:1px solid #6ca865;border-radius:13px;padding:9px 4px;text-align:center;font-size:12px;font-weight:900}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.menu button{min-height:82px;border:1px solid #6ca865;border-radius:16px;background:#0d3b2e;color:#fff;text-align:left;padding:12px;font-size:21px;font-weight:900}
+.menu b,.menu small{display:block}.menu small{font-size:10px;color:#b9d9c3;margin-top:4px}
+.ad{height:78px;margin-top:10px;border:1px dashed #6b9479;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#86a793;font-size:9px;letter-spacing:.12em}.ad small{letter-spacing:0;margin-top:3px}
+</style>
+</head>
+<body>
+<div id="splash"><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog Showdown"><div class="splashWords"><b>FROG MATCH</b><strong>SHOWDOWN</strong><small>Loading the pond… 🐸</small></div></div>
+<main>
+<div class="hero"><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog fighters"><div class="heroText"><h1>FROG MATCH</h1><p>Choose your next hop.</p></div></div>
+<div class="status"><div>🏆 Wins<br><span id="wins">0</span></div><div>🐸 Bank<br><span id="bank">0</span></div><div>🔥 Streak<br><span id="streak">0</span></div></div>
+<div class="menu">
+<button data-page="play">🎮<b>PLAY</b><small>Solo or Vs AI</small></button>
+<button data-page="frogs">🐸<b>MY FROGS</b><small>Choose & collect</small></button>
+<button data-page="journey">🗺️<b>FROG JOURNEY</b><small>Choose your level</small></button>
+<button data-page="powers">⚡<b>POWER SHOP</b><small>Buy & review powers</small></button>
+<button data-page="trophies">🏆<b>TROPHY POND</b><small>Your achievements</small></button>
+<button data-page="showdown">🥊<b>SHOWDOWN</b><small>Your battle arena</small></button>
+<button data-page="help">⚙️<b>HOW TO PLAY</b><small>Rules & settings</small></button>
+</div>
+<div class="ad">ADVERTISEMENT<small>Reserved for future advertiser</small></div>
+</main>
+<script>
+document.getElementById('wins').textContent=localStorage.getItem('frogWins')||0;
+document.getElementById('bank').textContent=localStorage.getItem('frogBank')||0;
+document.getElementById('streak').textContent=localStorage.getItem('frogWinStreak')||0;
+addEventListener('load',()=>setTimeout(()=>{const s=document.getElementById('splash');s.classList.add('hide');setTimeout(()=>s.remove(),600)},1600));
+</script>
+</body></html>
