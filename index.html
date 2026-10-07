@@ -819,24 +819,35 @@ window.frogPondSplash=window.frogPondSplash||function(){};
 (()=>{
  const src='./assets/baranova_n-frog-croak-545869.mp3';
  const pond=document.createElement('audio');
- pond.src=src;pond.loop=true;pond.preload='auto';pond.volume=.42;
- pond.setAttribute('playsinline','');pond.setAttribute('webkit-playsinline','');
- pond.style.display='none';
- let started=false;
- function startPond(){
-   if(started&&!pond.paused)return;
-   pond.muted=false;
-   try{pond.load()}catch{}
-   const p=pond.play();
-   if(p&&p.then)p.then(()=>{started=true}).catch(()=>{started=false});
+ const pondNext=document.createElement('audio');
+ [pond,pondNext].forEach(a=>{a.src=src;a.preload='auto';a.volume=.42;a.setAttribute('playsinline','');a.setAttribute('webkit-playsinline','');a.style.display='none'});
+ let started=false,active=pond,standby=pondNext,loopTimer=0;
+ function scheduleSeamlessLoop(){
+   clearTimeout(loopTimer);
+   const remaining=Math.max(.25,(active.duration||0)-active.currentTime);
+   loopTimer=setTimeout(()=>{
+     if(!started)return;
+     try{standby.currentTime=0}catch{}
+     standby.volume=.42;
+     const p=standby.play();
+     if(p&&p.then)p.then(()=>{
+       setTimeout(()=>{active.pause();try{active.currentTime=0}catch{};const t=active;active=standby;standby=t;scheduleSeamlessLoop()},180);
+     }).catch(()=>{scheduleSeamlessLoop()});
+   },Math.max(100,(remaining-.18)*1000));
  }
- function stopPond(){pond.pause();started=false}
+ function startPond(){
+   if(started&&!active.paused)return;
+   active.muted=false;standby.muted=false;
+   const p=active.play();
+   if(p&&p.then)p.then(()=>{started=true;scheduleSeamlessLoop()}).catch(()=>{started=false});
+ }
+ function stopPond(){clearTimeout(loopTimer);active.pause();standby.pause();started=false}
  function unlock(e){
    startPond();
    if(started){document.removeEventListener('touchend',unlock,true);document.removeEventListener('click',unlock,true)}
  }
  function init(){
-   if(!pond.isConnected)document.body.appendChild(pond);
+   if(!pond.isConnected)document.body.appendChild(pond);if(!pondNext.isConnected)document.body.appendChild(pondNext);
    // iPhone/iPad Safari requires play() to occur directly inside the completed touch gesture.
    document.addEventListener('touchend',unlock,true);
    document.addEventListener('pointerup',unlock,true);
