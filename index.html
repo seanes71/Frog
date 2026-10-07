@@ -788,11 +788,24 @@ window.frogPondSplash=window.frogPondSplash||function(){};
  let pond=null,started=false;
  function startPond(){
    if(started&&pond&&!pond.paused)return;
-   if(!pond){pond=new Audio(src);pond.loop=true;pond.preload='auto';pond.volume=.24;}
-   pond.play().then(()=>{started=true}).catch(()=>{});
+   if(!pond){
+     pond=document.createElement('audio');
+     pond.src=src;
+     pond.loop=true;
+     pond.preload='auto';
+     pond.volume=.42;
+     pond.setAttribute('playsinline','');
+     pond.setAttribute('webkit-playsinline','');
+     document.body.appendChild(pond);
+   }
+   pond.muted=false;
+   const p=pond.play();
+   if(p&&p.then)p.then(()=>{started=true}).catch(e=>console.warn('Pond ambience blocked',e));
  }
  function stopPond(){if(pond){pond.pause();pond.currentTime=0}started=false}
  document.addEventListener('pointerdown',startPond,{capture:true});
+ document.addEventListener('touchstart',startPond,{capture:true,passive:true});
+ document.addEventListener('click',startPond,{capture:true});
  document.addEventListener('keydown',startPond,{capture:true});
  window.frogPondAmbienceStart=startPond;
  window.frogPondAmbienceStop=stopPond;
