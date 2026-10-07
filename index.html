@@ -392,4 +392,25 @@ body.mobileCleanPlay #mobilePlayBar{display:flex;position:sticky;top:0;z-index:6
 <div id="mobilePlayBar"><button id="mobileHomeBtn">← Home</button><b>🐸 FROG MATCH</b><span id="mobilePlayMode"></span></div>
 <script id="clean-mobile-play-rebuild-script">
 (()=>{const q=new URLSearchParams(location.search);if(q.get('mobile')==='1'||localStorage.getItem('frogMobileLaunch')==='1'){document.body.classList.add('mobileCleanPlay');localStorage.removeItem('frogMobileLaunch');const m=q.get('play')||localStorage.getItem('frogGameMode')||'solo';document.getElementById('mobilePlayMode').textContent=m==='ai'?'Vs AI':'Solo';document.getElementById('mobileHomeBtn').onclick=()=>location.href='./mobile.html'}})();
+</script><style id="mobile-home-order-alive-v1">
+@media(max-width:699px){
+body.frogHomeMode .wrap{display:flex!important;flex-direction:column!important}
+body.frogHomeMode .layout>aside{order:1!important}
+body.frogHomeMode .difficulty{order:2!important}
+body.frogHomeMode .topGameHeader{order:3!important}
+body.frogHomeMode #frogAchievementPanel{order:4!important}
+body.frogHomeMode #frogAccountBar{order:99!important;margin:18px 8px 92px!important;justify-content:center!important}
+body.frogHomeMode .authLogout{min-width:150px!important;padding:12px 18px!important}
+body.frogHomeMode .frogFace{animation:pondFrogBreathe 2.8s ease-in-out infinite}
+body.frogHomeMode .frogBtn:nth-child(2n) .frogFace{animation-delay:.7s}
+body.frogHomeMode .frogBtn:nth-child(3n) .frogFace{animation-delay:1.25s}
+body.frogHomeMode .panel{position:relative;overflow:hidden}
+body.frogHomeMode .panel:after{content:"";position:absolute;left:-35%;bottom:-22px;width:170%;height:28px;border-radius:50%;border-top:1px solid rgba(169,238,185,.18);animation:pondRipple 5s ease-in-out infinite;pointer-events:none}
+}
+@keyframes pondFrogBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.025)}}
+@keyframes pondRipple{0%,100%{transform:translateX(-2%) scaleX(.96);opacity:.2}50%{transform:translateX(2%) scaleX(1.02);opacity:.65}}
+@media(prefers-reduced-motion:reduce){body.frogHomeMode .frogFace,body.frogHomeMode .panel:after{animation:none!important}}
+</style>
+<script id="mobile-home-order-alive-v1-script">
+(()=>{if(innerWidth>699)return;const app=document.querySelector('#app .wrap'),aside=document.querySelector('.layout>aside'),journey=document.querySelector('.difficulty'),header=document.querySelector('.topGameHeader');if(app&&aside&&journey&&header){app.insertBefore(aside,app.firstChild);app.insertBefore(journey,aside.nextSibling);app.insertBefore(header,journey.nextSibling)}const moveLogout=()=>{const bar=document.getElementById('frogAccountBar');if(bar&&app&&bar.parentElement!==app)app.appendChild(bar)};moveLogout();new MutationObserver(moveLogout).observe(document.body,{childList:true,subtree:true})})();
 </script></body></html>
