@@ -788,4 +788,33 @@ window.frogPondSplash=window.frogPondSplash||function(){};
  window.frogCardRibbit=(kind='green')=>{window.frogRealCroak?.(kind);};
  try{window.frogMusicStop?.()}catch{}
 })();
-</script></body></html>
+</script><script id="frog-card-splash-v28">
+(()=>{
+  const PIXABAY_PAGE='https://pixabay.com/sound-effects/film-special-effects-water-splash-229315/';
+  // Exact Pixabay effect requested. The page itself is not a stable hotlinkable MP3,
+  // so keep this hook isolated until the licensed MP3 is stored with the game.
+  window.FROG_CARD_SPLASH_SOURCE=PIXABAY_PAGE;
+  function cardSplash(){
+    // Use the pond splash immediately on every deliberate card touch/click.
+    // This replaces silence now; once the exact MP3 is local, only this function changes.
+    try{
+      const A=window.__frogCardSplashCtx||(window.__frogCardSplashCtx=new (window.AudioContext||window.webkitAudioContext)());
+      if(A.state==='suspended')A.resume();
+      const len=Math.floor(A.sampleRate*.34),b=A.createBuffer(1,len,A.sampleRate),d=b.getChannelData(0);
+      for(let i=0;i<len;i++){
+        const x=i/len;
+        d[i]=(Math.random()*2-1)*Math.pow(1-x,3.1)*(0.72+0.28*Math.sin(i*.12));
+      }
+      const s=A.createBufferSource(),f=A.createBiquadFilter(),g=A.createGain(),t=A.currentTime;
+      s.buffer=b;f.type='lowpass';f.frequency.setValueAtTime(1250,t);f.frequency.exponentialRampToValueAtTime(430,t+.3);
+      g.gain.setValueAtTime(.11,t);g.gain.exponentialRampToValueAtTime(.0001,t+.33);
+      s.connect(f).connect(g).connect(A.destination);s.start(t);
+    }catch(e){}
+  }
+  document.addEventListener('pointerdown',e=>{
+    const card=e.target.closest&&e.target.closest('.card');
+    if(card&&!card.classList.contains('matched'))cardSplash();
+  },{capture:true});
+})();
+</script>
+</body></html>
