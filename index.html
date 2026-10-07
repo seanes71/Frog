@@ -74,35 +74,19 @@ body:before{left:0}body:after{right:0;transform:scaleX(-1)}
 </style>
 <script>
 window.frogFight=function(playerWon,done){
- const arena=document.createElement('div');
- arena.className='frogFightArena';
- arena.style.cssText='position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;z-index:2147483647!important;display:block!important;overflow:hidden!important;background:radial-gradient(circle at 50% 30%,#647d55 0,#183529 72%)!important;';
- arena.innerHTML='<div class="frogFightStage"><div class="frogFightTitle">FROG SHOWDOWN<span class="frogFightSub">You vs AI Rival</span></div><div class="frogHealth you"><i></i></div><div class="frogHealth ai"><i></i></div><img class="frogFighter you" src="./assets/player-frog.webp" alt="Player frog"><img class="frogFighter ai" src="./assets/bot-frog.webp" alt="AI frog"><div class="fightImpact">FIGHT!</div><div class="fightSplash">💦</div><div class="fightResult"></div></div>';
- document.documentElement.appendChild(arena);
- const you=arena.querySelector('.frogFighter.you'),ai=arena.querySelector('.frogFighter.ai'),hy=arena.querySelector('.frogHealth.you i'),ha=arena.querySelector('.frogHealth.ai i'),impact=arena.querySelector('.fightImpact'),splash=arena.querySelector('.fightSplash');
- you.style.cssText+='filter:drop-shadow(0 16px 12px rgba(0,0,0,.45))!important;';ai.style.cssText+='filter:drop-shadow(0 16px 12px rgba(0,0,0,.45))!important;';
- you.style.transformOrigin='50% 80%';ai.style.transformOrigin='50% 80%';
- const wait=ms=>new Promise(q=>setTimeout(q,ms));
- const move=(el,frames,ms)=>el.animate(frames,{duration:ms,easing:'cubic-bezier(.22,.8,.25,1)',fill:'forwards'});
- const word=w=>{impact.textContent=w;impact.classList.remove('pop');splash.classList.remove('pop');void impact.offsetWidth;impact.classList.add('pop');splash.classList.add('pop')};
- const shake=()=>arena.animate([{transform:'translate(0)'},{transform:'translate(-12px,6px)'},{transform:'translate(10px,-5px)'},{transform:'translate(0)'}],{duration:180});
- const hit=async(victim,bar,w,pct)=>{word(w);shake();victim.animate([{filter:'brightness(1)'},{filter:'brightness(1.8)'},{filter:'brightness(1)'}],{duration:180});bar.style.width=pct+'%';await wait(260)};
- async function run(){
-  word('FIGHT!');await wait(700);
-  move(you,[{transform:'translate(0,0) rotate(0)'},{transform:'translate(25vw,-110px) rotate(12deg) scale(1.08)'},{transform:'translate(30vw,-10px) rotate(-8deg)'}],620);await wait(430);await hit(ai,ha,'WHAP!',78);
-  move(ai,[{transform:'scaleX(-1) translate(0,0)'},{transform:'scaleX(-1) translate(25vw,-90px) rotate(14deg) scale(1.08)'},{transform:'scaleX(-1) translate(30vw,-5px) rotate(-8deg)'}],620);await wait(430);await hit(you,hy,'SMACK!',76);
-  move(you,[{transform:'translate(30vw,-10px) rotate(-8deg)'},{transform:'translate(38vw,-170px) rotate(30deg) scale(1.12)'},{transform:'translate(31vw,0) rotate(-12deg)'}],650);await wait(450);await hit(ai,ha,'KICK!',51);
-  move(ai,[{transform:'scaleX(-1) translate(30vw,-5px)'},{transform:'scaleX(-1) translate(39vw,-150px) rotate(-28deg) scale(1.12)'},{transform:'scaleX(-1) translate(31vw,0)'}],650);await wait(450);await hit(you,hy,'THUMP!',49);
-  move(you,[{transform:'translate(31vw,0)'},{transform:'translate(18vw,55px) rotate(-70deg) scale(.88)'},{transform:'translate(12vw,70px) rotate(-95deg) scale(.82)'}],520);word('SPLASH!');await wait(520);
-  move(you,[{transform:'translate(12vw,70px) rotate(-95deg) scale(.82)'},{transform:'translate(18vw,20px) rotate(-25deg) scale(.95)'},{transform:'translate(23vw,0) rotate(0) scale(1)'}],650);word('BACK UP!');await wait(600);
-  const winner=playerWon?you:ai,loser=playerWon?ai:you,wbar=playerWon?hy:ha,lbar=playerWon?ha:hy;
-  move(winner,playerWon?[{transform:'translate(23vw,0)'},{transform:'translate(42vw,-190px) rotate(34deg) scale(1.18)'},{transform:'translate(35vw,0) scale(1.1)'}]:[{transform:'scaleX(-1) translate(31vw,0)'},{transform:'scaleX(-1) translate(44vw,-190px) rotate(34deg) scale(1.18)'},{transform:'scaleX(-1) translate(35vw,0) scale(1.1)'}],760);
-  await wait(520);await hit(loser,lbar,'K.O.!',0);
-  move(loser,playerWon?[{transform:'scaleX(-1) translate(31vw,0)'},{transform:'scaleX(-1) translate(-15vw,100px) rotate(105deg) scale(.72)'}]:[{transform:'translate(23vw,0)'},{transform:'translate(-15vw,100px) rotate(-105deg) scale(.72)'}],850);
-  const result=arena.querySelector('.fightResult');result.textContent=playerWon?'YOU WIN!':'AI WINS!';result.style.cssText='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;font:900 clamp(42px,9vw,110px) system-ui;color:white;text-shadow:0 5px 0 #18271d,0 0 24px rgba(0,0,0,.8);';
-  await wait(1500);arena.remove();done();
- }
- Promise.all([you.decode().catch(()=>{}),ai.decode().catch(()=>{})]).then(()=>requestAnimationFrame(()=>run().catch(e=>{console.error(e);arena.remove();done()})));
+ const a=document.createElement('div');a.className='frogFightArena';a.style.cssText='position:fixed!important;inset:0!important;z-index:2147483647!important;overflow:hidden!important;background:radial-gradient(circle at 50% 28%,#78966a,#17372a 72%)!important';
+ a.innerHTML='<style>.spriteFrog{position:absolute;bottom:12%;width:min(30vw,330px);aspect-ratio:1/1;background-image:url("./assets/frog-action-atlas.webp");background-size:1200% 100%;background-repeat:no-repeat;image-rendering:auto;filter:drop-shadow(0 16px 12px #0008);transform-origin:50% 80%}.spriteFrog.p{left:7%}.spriteFrog.b{right:7%;transform:scaleX(-1)}.sfTitle{position:absolute;z-index:9;top:3%;left:50%;transform:translateX(-50%);padding:9px 24px;border:2px solid #86bf78;border-radius:18px;background:#08291fe8;color:#fff;font:900 clamp(22px,4vw,42px) Georgia;white-space:nowrap}.sfWord{position:absolute;z-index:10;left:50%;top:42%;transform:translate(-50%,-50%);font:1000 clamp(44px,9vw,105px) system-ui;color:#ffe13b;text-shadow:5px 5px #b72d20;opacity:0}.sfResult{position:absolute;z-index:11;left:50%;top:52%;transform:translate(-50%,-50%);font:1000 clamp(46px,9vw,112px) system-ui;color:#fff;text-shadow:0 6px #17271d,0 0 25px #000;white-space:nowrap}</style><div class="sfTitle">FROG SHOWDOWN!</div><div class="spriteFrog p"></div><div class="spriteFrog b"></div><div class="sfWord"></div><div class="sfResult"></div>';
+ document.documentElement.appendChild(a);
+ const p=a.querySelector('.spriteFrog.p'),b=a.querySelector('.spriteFrog.b'),w=a.querySelector('.sfWord'),out=a.querySelector('.sfResult');
+ const wait=m=>new Promise(q=>setTimeout(q,m)),frame=(el,n)=>el.style.backgroundPosition=(n*100/11)+'% 0',seq=async(el,arr,ms)=>{for(const n of arr){frame(el,n);await wait(ms)}},word=async t=>{w.textContent=t;w.animate([{opacity:0,transform:'translate(-50%,-50%) scale(.4)'},{opacity:1,transform:'translate(-50%,-50%) scale(1.15)'},{opacity:0}],{duration:430});await wait(300)};
+ frame(p,0);frame(b,0);
+ (async()=>{await wait(650);
+  const m1=p.animate([{transform:'translate(0,0)'},{transform:'translate(28vw,-90px)'},{transform:'translate(31vw,0)'}],{duration:850,fill:'forwards',easing:'ease-in-out'});await seq(p,[1,2,3,4,5,6],105);await m1.finished;await word('WHAP!');
+  const m2=b.animate([{transform:'scaleX(-1) translate(0,0)'},{transform:'scaleX(-1) translate(27vw,-85px)'},{transform:'scaleX(-1) translate(30vw,0)'}],{duration:850,fill:'forwards',easing:'ease-in-out'});await seq(b,[1,2,3,5,6,7],105);await m2.finished;await word('SPLASH!');
+  await Promise.all([seq(p,[5,6,7,8,9,10],110),seq(b,[6,7,8,9,10,3],110)]);await word('BOING!');
+  const winner=playerWon?p:b,loser=playerWon?b:p;await seq(winner,[1,2,3,4,5,6,7],95);await word('K.O.!');await seq(loser,[7,8,9,9,8],130);frame(winner,11);
+  out.textContent=playerWon?'YOU WIN!':'AI WINS!';await wait(1600);a.remove();done();
+ })().catch(e=>{console.error('sprite showdown',e);a.remove();done()});
 }
 </script>
 <style id="mode-pressed-style">
