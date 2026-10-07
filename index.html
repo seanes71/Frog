@@ -155,4 +155,17 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 .fightDock .fightStage .dockYou .fighterImg{transform:translate(12px,-8px) scale(1.12)!important;transform-origin:center center!important}
 .fightDock .fightStage .dockAi .fighterImg{transform:translate(-12px,-8px) scaleX(-1) scale(1.12)!important;transform-origin:center center!important}
 @media(max-width:700px){.fightDock .fightStage{padding:12px 18px 28px!important}.fightDock .fightStage .dockFrog{padding:12px 6px 22px!important}.fightDock .fightStage .fighterImg{height:270px!important;width:205px!important}.fightDock .fightStage .dockYou .fighterImg{transform:translate(7px,-6px) scale(1.08)!important}.fightDock .fightStage .dockAi .fighterImg{transform:translate(-7px,-6px) scaleX(-1) scale(1.08)!important}}
+</style><style id="showdown-facing-feet-v3">
+.fightDock{overflow:hidden!important;min-height:590px!important}
+.fightDock .fightStage{height:455px!important;min-height:455px!important;overflow:visible!important;padding:18px 58px 48px!important;box-sizing:border-box!important}
+.fightDock .dockFrog{height:400px!important;min-width:0!important;padding:0!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.fightDock .fighterImg{height:350px!important;width:285px!important;max-height:none!important;max-width:none!important;object-fit:contain!important;object-position:center center!important}
+.fightDock .dockYou .fighterImg{transform:translate(24px,-18px) scaleX(-1) scale(1.08)!important;transform-origin:center center!important}
+.fightDock .dockAi .fighterImg{transform:translate(-24px,-18px) scaleX(-1) scale(1.08)!important;transform-origin:center center!important}
+.fightDock.fighting .dockYou{animation:none!important}.fightDock.fighting .dockAi{animation:none!important}
+.fightDock.fighting .dockYou .fighterImg{animation:playerFacePunch 1s ease-in-out 3!important}
+.fightDock.fighting .dockAi .fighterImg{animation:rivalFaceHit 1s ease-in-out 3!important}
+@keyframes playerFacePunch{0%,100%{transform:translate(24px,-18px) scaleX(-1) scale(1.08)}45%{transform:translate(54px,-20px) scaleX(-1) scale(1.11) rotate(-5deg)}65%{transform:translate(39px,-18px) scaleX(-1) scale(1.08) rotate(3deg)}}
+@keyframes rivalFaceHit{0%,48%,100%{transform:translate(-24px,-18px) scaleX(-1) scale(1.08)}62%{transform:translate(2px,-12px) scaleX(-1) scale(1.05) rotate(10deg)}}
+@media(max-width:700px){.fightDock{min-height:455px!important}.fightDock .fightStage{height:335px!important;min-height:335px!important;padding:12px 34px 38px!important}.fightDock .dockFrog{height:290px!important}.fightDock .fighterImg{height:260px!important;width:205px!important}.fightDock .dockYou .fighterImg{transform:translate(12px,-12px) scaleX(-1) scale(1.03)!important}.fightDock .dockAi .fighterImg{transform:translate(-12px,-12px) scaleX(-1) scale(1.03)!important}}
 </style></body></html>
