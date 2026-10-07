@@ -99,4 +99,14 @@ fb.onclick=e=>{const b=e.target.closest('[data-frog]');if(!b||b.disabled)return;
 </style>
 <script id="colored-frogs-mobile-fix-v1-script">
 (()=>{document.querySelectorAll('#setupFrogs [data-frog],#mobileFrogs [data-f]').forEach(b=>{const nodes=[...b.childNodes];const emoji=nodes.find(n=>n.nodeType===3&&n.textContent.includes('🐸'));if(emoji)emoji.textContent=emoji.textContent.replace('🐸','')})})();
+</script><style id="real-frog-faces-mobile-v2">
+#setupFrogs [data-frog]::before,#mobileFrogs [data-f]::before{display:none!important}
+#setupFrogs .miniFrog,#mobileFrogs .miniFrog{position:relative;display:block;width:48px;height:39px;margin:0 auto 7px;border-radius:48% 48% 45% 45%;background:#62bd69;box-shadow:inset 0 -5px 0 #0002,0 3px 6px #0004}
+.miniFrog:before,.miniFrog:after{content:"";position:absolute;top:-6px;width:17px;height:17px;border-radius:50%;background:inherit;border:2px solid #fff}.miniFrog:before{left:4px}.miniFrog:after{right:4px}
+.miniFrog i{position:absolute;z-index:2;top:0;width:5px;height:7px;border-radius:50%;background:#172d24}.miniFrog i:first-child{left:12px}.miniFrog i:last-child{right:12px}
+.miniFrog.green{background:#62bd69}.miniFrog.blue{background:#318cff}.miniFrog.purple{background:#a879df}.miniFrog.pink{background:#ff83bd}.miniFrog.gold,.miniFrog.golden{background:#ffd33d}.miniFrog.red{background:#f04444}.miniFrog.rainbow{background:linear-gradient(130deg,#ff4d4d,#ffb52e 22%,#fff04b 38%,#4ed66a 55%,#42b9ff 73%,#a66cff 88%,#ff69b4)}.miniFrog.crystal{background:linear-gradient(135deg,#fff,#b9fbff 20%,#8e9dff 42%,#f4c5ff 65%,#fff 82%);box-shadow:inset -5px -5px 0 #7c8ee866,0 0 9px #8ceaff,0 0 18px #ba8cff}.miniFrog.seer{background:linear-gradient(135deg,#efe4ff,#9c73e8,#6535a8)}.miniFrog.scout{background:linear-gradient(135deg,#d9fbff,#55cde5,#1783a8)}.miniFrog.memory{background:linear-gradient(135deg,#e6edff,#829cff,#4e61b9)}.miniFrog.lucky{background:linear-gradient(135deg,#ffe2f5,#ff7fc9,#bd3e8a)}
+#setupFrogs .setupChoice.selected .miniFrog,#mobileFrogs button.selected .miniFrog{outline:3px solid #fff36b;outline-offset:3px;box-shadow:0 0 0 3px #35e66a,0 0 18px 6px rgba(100,255,115,.9)}
+</style>
+<script id="real-frog-faces-mobile-v2-script">
+(()=>{const paint=()=>document.querySelectorAll('#setupFrogs [data-frog],#mobileFrogs [data-f]').forEach(b=>{if(b.querySelector('.miniFrog'))return;const n=b.dataset.frog||b.dataset.f;const face=document.createElement('span');face.className='miniFrog '+n;face.innerHTML='<i></i><i></i>';b.prepend(face)});paint();new MutationObserver(paint).observe(document.body,{childList:true,subtree:true})})();
 </script></body></html>
