@@ -413,4 +413,24 @@ body.frogHomeMode .panel:after{content:"";position:absolute;left:-35%;bottom:-22
 </style>
 <script id="mobile-home-order-alive-v1-script">
 (()=>{if(innerWidth>699)return;const app=document.querySelector('#app .wrap'),aside=document.querySelector('.layout>aside'),journey=document.querySelector('.difficulty'),header=document.querySelector('.topGameHeader');if(app&&aside&&journey&&header){app.insertBefore(aside,app.firstChild);app.insertBefore(journey,aside.nextSibling);app.insertBefore(header,journey.nextSibling)}const moveLogout=()=>{const bar=document.getElementById('frogAccountBar');if(bar&&app&&bar.parentElement!==app)app.appendChild(bar)};moveLogout();new MutationObserver(moveLogout).observe(document.body,{childList:true,subtree:true})})();
+</script><style id="pond-life-polish-v2">
+@media(max-width:699px){
+.pondFly{position:fixed;z-index:8;width:5px;height:5px;border-radius:50%;background:#f5f0bd;box-shadow:0 0 7px #fff7a6;pointer-events:none;opacity:0;animation:flyDrift var(--flyTime,9s) linear forwards}
+body.frogHomeMode .frogFace.pondBlink{filter:brightness(.78) saturate(1.15)!important;transform:scaleY(.9) translateY(2px)!important}
+body.frogHomeMode .frogFace.pondHappy{animation:frogHappyHop .58s ease!important}
+body.frogHomeMode .frogBtn{transition:transform .2s ease,filter .2s ease}
+body.frogHomeMode .frogBtn:active{transform:scale(.94)}
+body.frogHomeMode .frogFace.selected:before{content:"✨";position:absolute;right:-8px;top:-10px;font-size:13px;animation:selectedSpark 1.7s ease-in-out infinite}
+}
+@keyframes flyDrift{0%{transform:translate(0,0);opacity:0}10%{opacity:.85}35%{transform:translate(38px,-22px)}65%{transform:translate(-18px,-55px)}90%{opacity:.8}100%{transform:translate(45px,-92px);opacity:0}}
+@keyframes frogHappyHop{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-11px) scale(1.07)}65%{transform:translateY(-3px) scale(.98)}}
+@keyframes selectedSpark{0%,100%{transform:scale(.7) rotate(-10deg);opacity:.35}50%{transform:scale(1.15) rotate(12deg);opacity:1}}
+@media(prefers-reduced-motion:reduce){.pondFly,body.frogHomeMode .frogFace.pondHappy,body.frogHomeMode .frogFace.selected:before{animation:none!important}.pondFly{display:none!important}}
+</style>
+<script id="pond-life-polish-v2-script">
+(()=>{if(innerWidth>699||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+const blink=()=>{const frogs=[...document.querySelectorAll('body.frogHomeMode .frogFace')];if(frogs.length){const f=frogs[Math.floor(Math.random()*frogs.length)];f.classList.add('pondBlink');setTimeout(()=>f.classList.remove('pondBlink'),150)}setTimeout(blink,2200+Math.random()*3300)};setTimeout(blink,1800);
+const fly=()=>{if(document.body.classList.contains('frogHomeMode')){const x=document.createElement('i');x.className='pondFly';x.style.left=(8+Math.random()*82)+'%';x.style.top=(45+Math.random()*45)+'%';x.style.setProperty('--flyTime',(7+Math.random()*5)+'s');document.body.appendChild(x);setTimeout(()=>x.remove(),12500)}setTimeout(fly,4800+Math.random()*5200)};setTimeout(fly,3000);
+document.addEventListener('click',e=>{const b=e.target.closest('.frogBtn');if(!b)return;const f=b.querySelector('.frogFace');if(f){f.classList.remove('pondHappy');void f.offsetWidth;f.classList.add('pondHappy');setTimeout(()=>f.classList.remove('pondHappy'),650)}});
+})();
 </script></body></html>
