@@ -639,8 +639,28 @@ if(document.readyState==='loading')addEventListener('DOMContentLoaded',()=>setTi
 (()=>{function setup(){if(innerWidth>699)return;const home=document.getElementById('frogHomeTab'),header=document.querySelector('.topGameHeader'),aside=document.querySelector('.layout>aside'),collection=aside?.querySelector('.collection'),shop=document.querySelector('.headerUtilityRow .shop')||document.querySelector('.shop'),journey=document.querySelector('.difficulty'),ach=document.getElementById('frogAchievementPanel'),main=document.querySelector('.layout>main');if(collection&&shop&&shop.parentElement!==aside)aside.appendChild(shop);if(aside&&ach&&ach.parentElement!==aside)aside.appendChild(ach);let start=document.getElementById('frogMobileStart');if(!start&&aside){start=document.createElement('button');start.id='frogMobileStart';start.type='button';start.textContent='🎮 PLAY';aside.appendChild(start)}
 function view(v){document.body.classList.remove('frogHomeMode','frogPlayMode','frogMobileLanding','frogMobileSetup');if(v==='home'){document.body.classList.add('frogHomeMode','frogMobileLanding');header?.style.setProperty('display','block','important');journey?.style.setProperty('display','none','important');aside?.style.setProperty('display','none','important');main?.style.setProperty('display','none','important')}else if(v==='setup'){document.body.classList.add('frogHomeMode','frogMobileSetup');header?.style.setProperty('display','none','important');journey?.style.setProperty('display','block','important');aside?.style.setProperty('display','flex','important');main?.style.setProperty('display','none','important')}else{document.body.classList.add('frogPlayMode');header?.style.setProperty('display','none','important');journey?.style.setProperty('display','none','important');aside?.style.setProperty('display','none','important');main?.style.setProperty('display','block','important')}home?.classList.toggle('active',v==='home');scrollTo({top:0,behavior:'smooth'})}
 let landingPlay=document.getElementById('frogLandingPlay');if(!landingPlay&&header){landingPlay=document.createElement('button');landingPlay.id='frogLandingPlay';landingPlay.className='btn';landingPlay.textContent='🎮 PLAY';landingPlay.style.cssText='width:100%;min-height:58px;margin-top:12px;font-size:21px;font-weight:1000';header.appendChild(landingPlay)}
-home?.addEventListener('click',e=>{e.stopImmediatePropagation();view('home')},true);landingPlay?.addEventListener('click',()=>view('setup'));start?.addEventListener('click',e=>{e.stopImmediatePropagation();view('play')},true);view('home')}
+home?.addEventListener('click',e=>{e.stopImmediatePropagation();view('home')},true);landingPlay?.addEventListener('click',()=>view('setup'));start?.addEventListener('click',e=>{e.stopImmediatePropagation();window.frogStartingGame?.(()=>view('play'))||view('play')},true);view('home')}
 if(document.readyState==='loading')addEventListener('DOMContentLoaded',()=>setTimeout(setup,30));else setTimeout(setup,30)})();
+</script><style id="frog-starting-game-v32">
+.frogStartingGame{position:fixed;inset:0;z-index:20050;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 42%,rgba(34,104,63,.96),rgba(3,25,19,.98) 68%);color:#fff;text-align:center;opacity:1;transition:opacity .28s ease}
+.frogStartingGame.out{opacity:0}
+.frogStartingGame .startInner{filter:drop-shadow(0 8px 18px #0008)}
+.frogStartingGame .startTitle{font-size:clamp(28px,8vw,54px);font-weight:1000;letter-spacing:.08em;color:#d9ff9b;text-shadow:0 3px 0 #164c28}
+.frogStartingGame .startCount{min-height:1.2em;margin-top:12px;font-size:clamp(72px,25vw,150px);line-height:1;font-weight:1000;color:#fff36b;text-shadow:0 6px 0 #6e6411,0 0 28px rgba(255,243,107,.65);animation:frogCountPop .48s ease both}
+@keyframes frogCountPop{0%{transform:scale(.45);opacity:0}55%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:1}}
+</style>
+<script id="frog-starting-game-v32">
+(()=>{
+ window.frogStartingGame=function(done){
+   const old=document.querySelector('.frogStartingGame');if(old)old.remove();
+   const o=document.createElement('div');o.className='frogStartingGame';
+   o.innerHTML='<div class="startInner"><div class="startTitle">STARTING GAME</div><div class="startCount">3</div></div>';
+   document.body.appendChild(o);const n=o.querySelector('.startCount');
+   const steps=['3','2','1','GO!'];let i=0;
+   const tick=()=>{n.textContent=steps[i];n.style.animation='none';void n.offsetWidth;n.style.animation='frogCountPop .48s ease both';i++;if(i<steps.length)setTimeout(tick,700);else setTimeout(()=>{o.classList.add('out');setTimeout(()=>{o.remove();done?.()},300)},650)};
+   tick();
+ };
+})();
 </script><script id="frog-reward-reveal-v21">
 (()=>{let before=[];try{before=JSON.parse(localStorage.getItem('frogAchievements')||'[]')}catch{}new MutationObserver(()=>{document.querySelectorAll('.frogToast').forEach(t=>{if(t.dataset.rewardReveal)return;t.dataset.rewardReveal='1';if(!t.textContent.includes('Achievement unlocked:'))return;const name=t.textContent.replace(/^.*Achievement unlocked:\s*/,'').replace(/!$/,'');const o=document.createElement('div');o.className='frogRewardReveal';o.innerHTML='<div><span class="rewardIcon">🏆</span><b>REWARD EARNED!</b><p>'+name+'</p><small>It has been added to your trophies on the Home screen.</small></div>';document.body.appendChild(o);setTimeout(()=>o.remove(),2400)})}).observe(document.body,{childList:true,subtree:true})})();
 </script><style id="frog-round-fight-v22">
