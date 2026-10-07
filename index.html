@@ -782,4 +782,20 @@ window.frogPondSplash=window.frogPondSplash||function(){};
  window.frogWrongSound=()=>{window.frogPondSplash?.();};
  try{window.frogMusicStop?.()}catch{}
 })();
-</script></body></html>
+</script><script id="frog-local-pond-loop-v29">
+(()=>{
+ const src='./assets/baranova_n-frog-croak-545869.mp3';
+ let pond=null,started=false;
+ function startPond(){
+   if(started&&pond&&!pond.paused)return;
+   if(!pond){pond=new Audio(src);pond.loop=true;pond.preload='auto';pond.volume=.24;}
+   pond.play().then(()=>{started=true}).catch(()=>{});
+ }
+ function stopPond(){if(pond){pond.pause();pond.currentTime=0}started=false}
+ document.addEventListener('pointerdown',startPond,{capture:true});
+ document.addEventListener('keydown',startPond,{capture:true});
+ window.frogPondAmbienceStart=startPond;
+ window.frogPondAmbienceStop=stopPond;
+})();
+</script>
+</body></html>
