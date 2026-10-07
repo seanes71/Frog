@@ -168,4 +168,12 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 @keyframes playerFacePunch{0%,100%{transform:translate(24px,-18px) scaleX(-1) scale(1.08)}45%{transform:translate(54px,-20px) scaleX(-1) scale(1.11) rotate(-5deg)}65%{transform:translate(39px,-18px) scaleX(-1) scale(1.08) rotate(3deg)}}
 @keyframes rivalFaceHit{0%,48%,100%{transform:translate(-24px,-18px) scaleX(-1) scale(1.08)}62%{transform:translate(2px,-12px) scaleX(-1) scale(1.05) rotate(10deg)}}
 @media(max-width:700px){.fightDock{min-height:455px!important}.fightDock .fightStage{height:335px!important;min-height:335px!important;padding:12px 34px 38px!important}.fightDock .dockFrog{height:290px!important}.fightDock .fighterImg{height:260px!important;width:205px!important}.fightDock .dockYou .fighterImg{transform:translate(12px,-12px) scaleX(-1) scale(1.03)!important}.fightDock .dockAi .fighterImg{transform:translate(-12px,-12px) scaleX(-1) scale(1.03)!important}}
+</style><style id="showdown-orientation-v4">
+/* Preserve each source character's intended inward-facing direction. */
+.fightDock .dockYou .fighterImg{transform:translate(18px,-18px) scale(1.08)!important;transform-origin:center center!important}
+.fightDock .dockAi .fighterImg{transform:translate(-18px,-18px) scaleX(-1) scale(1.08)!important;transform-origin:center center!important}
+.fightDock.fighting .dockYou .fighterImg{animation:playerInwardPunch 1s ease-in-out 3!important}
+.fightDock.fighting .dockAi .fighterImg{animation:rivalInwardHit 1s ease-in-out 3!important}
+@keyframes playerInwardPunch{0%,100%{transform:translate(18px,-18px) scale(1.08)}45%{transform:translate(52px,-20px) scale(1.11) rotate(5deg)}65%{transform:translate(38px,-18px) scale(1.08) rotate(-3deg)}}
+@keyframes rivalInwardHit{0%,48%,100%{transform:translate(-18px,-18px) scaleX(-1) scale(1.08)}62%{transform:translate(-44px,-12px) scaleX(-1) scale(1.05) rotate(-10deg)}}
 </style></body></html>
