@@ -730,6 +730,7 @@ window.frogMusicStop=function(){};
    const a=ctx(),s=a.createBufferSource(),g=a.createGain(),t=a.currentTime+delay;
    s.buffer=croak;s.playbackRate.value=rate;g.gain.value=gain;s.connect(g).connect(a.destination);s.start(t);s.stop(t+dur);
  }
+ window.frogRealCroak=(kind='green')=>{const rates={green:.92,blue:.78,purple:1.04,pink:1.14,golden:.98,gold:.98,red:.72,rainbow:1.18,crystal:1.24,moon:.68,aurora:1.10,prism:1.16,seer:.84,scout:.96,memory:.74,lucky:1.08};playCroak(rates[kind]||.92,.055,.55);};
  function splash(delay=0){
    try{
      const a=ctx(),len=Math.floor(a.sampleRate*.28),b=a.createBuffer(1,len,a.sampleRate),d=b.getChannelData(0);
@@ -769,8 +770,8 @@ window.frogMusicStop=function(){};
  }
  function init(){
    const old=document.getElementById('frogChoirTest');if(old)old.remove();
-   document.addEventListener('pointerdown',arm,{once:true,capture:true});
-   document.addEventListener('keydown',arm,{once:true,capture:true});
+   document.addEventListener('pointerdown',arm,{capture:true});
+   document.addEventListener('keydown',arm,{capture:true});
    watchWins();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
@@ -783,28 +784,8 @@ window.frogPondSplash=window.frogPondSplash||function(){};
 <script id="frog-card-ribbits-v27">
 (()=>{
  const profiles={green:[118,.065],blue:[102,.058],purple:[138,.058],pink:[154,.055],golden:[128,.064],gold:[128,.064],red:[92,.068],rainbow:[166,.052],crystal:[178,.050],moon:[84,.058],aurora:[148,.052],prism:[160,.052],seer:[110,.060],scout:[126,.058],memory:[96,.062],lucky:[144,.056]};
- window.frogCardSplash=()=>{
-  try{
-   const A=window.AudioContext||window.webkitAudioContext,a=new A(),t=a.currentTime;
-   const dur=.46,b=a.createBuffer(1,Math.floor(a.sampleRate*dur),a.sampleRate),d=b.getChannelData(0);
-   for(let i=0;i<d.length;i++){const x=i/a.sampleRate;const env=Math.exp(-x*7.5);d[i]=(Math.random()*2-1)*env*(.55+.45*Math.sin(x*95));}
-   const s=a.createBufferSource(),bp=a.createBiquadFilter(),lp=a.createBiquadFilter(),g=a.createGain();
-   s.buffer=b;bp.type='bandpass';bp.frequency.value=620;bp.Q.value=.55;lp.type='lowpass';lp.frequency.setValueAtTime(1050,t);lp.frequency.exponentialRampToValueAtTime(260,t+dur);
-   g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.032,t+.035);g.gain.exponentialRampToValueAtTime(.012,t+.16);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
-   s.connect(bp).connect(lp).connect(g).connect(a.destination);s.start(t);
-   const o=a.createOscillator(),og=a.createGain();o.type='sine';o.frequency.setValueAtTime(165,t);o.frequency.exponentialRampToValueAtTime(72,t+.22);og.gain.setValueAtTime(.0001,t);og.gain.linearRampToValueAtTime(.018,t+.025);og.gain.exponentialRampToValueAtTime(.0001,t+.3);o.connect(og).connect(a.destination);o.start(t);o.stop(t+.32);
-   setTimeout(()=>a.close(),650);
-  }catch{}
- };
- window.frogCardRibbit=(kind='green')=>{
-  try{
-   const A=window.AudioContext||window.webkitAudioContext,a=new A(),p=profiles[kind]||profiles.green,t=a.currentTime;
-   const o=a.createOscillator(),g=a.createGain(),f=a.createBiquadFilter();
-   o.type='sawtooth';o.frequency.setValueAtTime(p[0]*(.94+Math.random()*.12),t);o.frequency.exponentialRampToValueAtTime(p[0]*.72,t+.105);
-   f.type='lowpass';f.frequency.value=520;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(p[1],t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+.13);
-   o.connect(f).connect(g).connect(a.destination);o.start(t);o.stop(t+.14);setTimeout(()=>a.close(),300);
-  }catch{}
- };
+ window.frogCardSplash=()=>{};
+ window.frogCardRibbit=(kind='green')=>{window.frogRealCroak?.(kind);};
  try{window.frogMusicStop?.()}catch{}
 })();
 </script></body></html>
