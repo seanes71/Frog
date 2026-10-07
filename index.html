@@ -481,4 +481,35 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
    overflow-x:hidden!important;
  }
 }
+</style><style id="achievement-safe-scroll-v16">
+/* Keep achievements in their own fixed-height lane so they cannot overlap Frog Journey. */
+.layout>aside>#frogAchievementPanel{
+ display:block!important;
+ position:relative!important;
+ float:none!important;
+ clear:both!important;
+ width:100%!important;
+ height:104px!important;
+ min-height:104px!important;
+ max-height:104px!important;
+ margin:6px 0 0!important;
+ padding:7px 9px!important;
+ overflow-y:scroll!important;
+ overflow-x:hidden!important;
+ box-sizing:border-box!important;
+ z-index:1!important;
+}
+.layout>aside>#frogAchievementPanel .achievementChips{
+ width:100%!important;
+ height:auto!important;
+ max-height:none!important;
+ overflow:visible!important;
+}
+@media(min-width:700px){
+ .difficulty{
+   clear:both!important;
+   position:relative!important;
+   z-index:1!important;
+ }
+}
 </style></body></html>
