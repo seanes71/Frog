@@ -709,55 +709,70 @@ function showRoundFight(n,done){const old=document.querySelector('.frogRoundFigh
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();
 })();
-</script><style id="frog-pond-audio-v26">
-.frogDanceBuddy{position:fixed;z-index:9996;font-size:42px;pointer-events:none;filter:drop-shadow(0 5px 5px rgba(0,0,0,.35));animation:frogDanceV26 .48s ease-in-out infinite alternate}
-@keyframes frogDanceV26{from{transform:translateY(0) rotate(-10deg) scale(1)}to{transform:translateY(-18px) rotate(10deg) scale(1.12)}}
-</style><script id="frog-pond-audio-v26">
+</script><style id="frog-pond-audio-v27">
+.frogDanceBuddy{position:fixed;z-index:9996;font-size:42px;pointer-events:none;filter:drop-shadow(0 5px 5px rgba(0,0,0,.35));animation:frogDanceV27 .48s ease-in-out infinite alternate}
+@keyframes frogDanceV27{from{transform:translateY(0) rotate(-10deg) scale(1)}to{transform:translateY(-18px) rotate(10deg) scale(1.12)}}
+</style><script id="frog-pond-audio-v27">
 (()=>{
- let pondTimer=0,lastPond=0;
- function audioReady(){return typeof window.frogWinSound==='function'||!!(window.AudioContext||window.webkitAudioContext)}
- function tinySplash(){
+ const CROAK='https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9f/Single_Frog_Croak.oga/Single_Frog_Croak.oga.mp3';
+ let A=null,croak=null,armed=false,timer=0,winBusy=false;
+ const ctx=()=>A||(A=new (window.AudioContext||window.webkitAudioContext)());
+ async function arm(){
+   if(armed)return;
    try{
-     const A=window.AudioContext||window.webkitAudioContext,a=new A(),n=a.createBuffer(1,a.sampleRate*.22,a.sampleRate),d=n.getChannelData(0);
-     for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
-     const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=n;f.type='lowpass';f.frequency.value=900+Math.random()*500;
-     g.gain.setValueAtTime(.035,a.currentTime);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.22);s.connect(f).connect(g).connect(a.destination);s.start();setTimeout(()=>a.close(),500);
+     const a=ctx();if(a.state==='suspended')await a.resume();
+     const r=await fetch(CROAK,{mode:'cors',cache:'force-cache'});if(!r.ok)throw Error(r.status);
+     croak=await a.decodeAudioData(await r.arrayBuffer());armed=true;schedule();
+   }catch(e){console.warn('Pond audio unavailable',e)}
+ }
+ function playCroak(rate=.9,gain=.045,dur=.8,delay=0){
+   if(!armed||!croak)return;
+   const a=ctx(),s=a.createBufferSource(),g=a.createGain(),t=a.currentTime+delay;
+   s.buffer=croak;s.playbackRate.value=rate;g.gain.value=gain;s.connect(g).connect(a.destination);s.start(t);s.stop(t+dur);
+ }
+ function splash(delay=0){
+   try{
+     const a=ctx(),len=Math.floor(a.sampleRate*.28),b=a.createBuffer(1,len,a.sampleRate),d=b.getChannelData(0);
+     for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.8);
+     const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain(),t=a.currentTime+delay;
+     s.buffer=b;f.type='lowpass';f.frequency.value=700+Math.random()*650;g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.0001,t+.27);
+     s.connect(f).connect(g).connect(a.destination);s.start(t);
    }catch{}
  }
- async function pondCroak(){
-   try{
-     const b=document.getElementById('frogChoirTest');
-     if(!b||!b.onclick)return;
-     /* Keep gameplay ambience sparse; use the proven real-croak loader without launching the full song. */
-     const a=window.__frogPondCtx||(window.__frogPondCtx=new (window.AudioContext||window.webkitAudioContext)());
-     if(a.state==='suspended')await a.resume();
-     const url='https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9f/Single_Frog_Croak.oga/Single_Frog_Croak.oga.mp3';
-     window.__frogPondBuffer=window.__frogPondBuffer||await fetch(url,{mode:'cors',cache:'force-cache'}).then(r=>r.arrayBuffer()).then(x=>a.decodeAudioData(x));
-     const s=a.createBufferSource(),g=a.createGain();s.buffer=window.__frogPondBuffer;s.playbackRate.value=.82+Math.random()*.32;g.gain.value=.035;s.connect(g).connect(a.destination);s.start();s.stop(a.currentTime+.7);
-   }catch{}
- }
- function schedulePond(){
-   clearTimeout(pondTimer);
-   pondTimer=setTimeout(async()=>{
-     if(document.body.classList.contains('frogPlayMode')){
-       Math.random()<.62?await pondCroak():tinySplash();
-       if(Math.random()<.24)setTimeout(tinySplash,500+Math.random()*900);
+ function inGame(){return document.body.classList.contains('frogPlayMode')||!!document.querySelector('.card')}
+ function schedule(){
+   clearTimeout(timer);
+   timer=setTimeout(()=>{
+     if(armed&&inGame()&&!winBusy){
+       const r=Math.random();
+       if(r<.55){playCroak(.72+Math.random()*.38,.04,.9);if(Math.random()<.32)playCroak(.62+Math.random()*.25,.026,.8,.45)}
+       else splash();
      }
-     schedulePond();
-   },6500+Math.random()*8500);
+     schedule();
+   },3500+Math.random()*5500);
  }
- function dance(){
-   const spots=[[18,72],[76,68],[30,82],[66,80]];
-   const frogs=spots.map(([x,y],i)=>{const e=document.createElement('div');e.className='frogDanceBuddy';e.textContent='🐸';e.style.left=x+'vw';e.style.top=y+'vh';e.style.animationDelay=(i*.11)+'s';document.body.appendChild(e);return e});
-   setTimeout(()=>frogs.forEach(e=>e.remove()),5600);
-   const choir=document.getElementById('frogChoirTest');if(choir&&!choir.disabled)choir.click();
+ function choir(){
+   if(!armed||winBusy)return;winBusy=true;
+   const a=ctx(),t=a.currentTime+.08,mel=[1,1.122,1.26,1.122,1,1.122,1.26,1.498,1.26,1.122,1];
+   mel.forEach((r,i)=>playCroak(r,.09,i===mel.length-1?1.0:.62,.08+i*.36));
+   [0,3,6,9].forEach(i=>playCroak(.72,.035,.7,.18+i*.36));
+   splash(.35);splash(2.15);splash(3.55);
+   const spots=[[16,70],[77,69],[28,82],[66,81]];
+   const fs=spots.map(([x,y],i)=>{const e=document.createElement('div');e.className='frogDanceBuddy';e.textContent='🐸';e.style.left=x+'vw';e.style.top=y+'vh';e.style.animationDelay=(i*.1)+'s';document.body.appendChild(e);return e});
+   setTimeout(()=>{fs.forEach(e=>e.remove());winBusy=false},5000);
  }
- const mo=new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{
-   if(n.nodeType!==1)return;
-   const t=(n.textContent||'').toUpperCase();
-   if(t.includes('ROUND WON!'))setTimeout(dance,120);
- })));
- function init(){schedulePond();mo.observe(document.body,{childList:true,subtree:true})}
+ function watchWins(){
+   new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{
+     if(n.nodeType!==1)return;
+     if((n.textContent||'').toUpperCase().includes('ROUND WON!'))setTimeout(choir,120);
+   }))).observe(document.body,{childList:true,subtree:true});
+ }
+ function init(){
+   const old=document.getElementById('frogChoirTest');if(old)old.remove();
+   document.addEventListener('pointerdown',arm,{once:true,capture:true});
+   document.addEventListener('keydown',arm,{once:true,capture:true});
+   watchWins();
+ }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script></body></html>
