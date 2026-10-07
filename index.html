@@ -132,4 +132,15 @@ html body .pill{background:#102d23!important;color:#fff!important;border:2px sol
 html body .turn{background:#102d23!important;border-radius:14px!important;padding:10px!important}
 html body .timer{background:#254b39!important;color:#fff!important}
 html body .power{background:#173a2d!important;color:#fff!important;border-color:#668b70!important}
-</style></body></html>
+</style><style id="frog-selection-size-hotfix">
+#frogs .frogBtn{position:relative;z-index:30;pointer-events:auto!important;touch-action:manipulation;min-width:64px;min-height:58px;border-radius:14px}
+#frogs .frogBtn.selected{outline:4px solid #ffd84d;background:#fff7c7;box-shadow:0 0 0 3px #3f7f55,0 5px 14px #0002}
+#frogs .frogFace{pointer-events:none}
+.fightDock .fightStage{min-height:300px!important;overflow:visible!important;align-items:center!important}
+.fightDock .dockFrog{width:44%!important;min-width:190px!important;display:flex!important;justify-content:center!important;align-items:center!important}
+.fightDock .fighterImg{width:220px!important;max-width:100%!important;height:220px!important;object-fit:contain!important;transform:scale(1.25)!important;transform-origin:center bottom!important}
+@media(max-width:700px){.fightDock .fightStage{min-height:240px!important}.fightDock .dockFrog{min-width:140px!important}.fightDock .fighterImg{width:170px!important;height:170px!important;transform:scale(1.18)!important}}
+</style>
+<script id="frog-selection-hotfix">
+(()=>{function sync(){let selected=localStorage.getItem('frogSelected')||'green';document.querySelectorAll('#frogs .frogBtn').forEach(btn=>{const face=btn.querySelector('.frogFace');const on=!!face&&face.classList.contains(selected);btn.classList.toggle('selected',on);btn.setAttribute('aria-pressed',on?'true':'false')});const img=document.querySelector('.dockYou .fighterImg');if(img){const filters={green:'none',blue:'hue-rotate(150deg) saturate(1.35)',purple:'hue-rotate(215deg) saturate(1.35)',pink:'hue-rotate(285deg) saturate(1.4)',red:'hue-rotate(320deg) saturate(1.6)',gold:'hue-rotate(35deg) saturate(1.8)',rainbow:'hue-rotate(70deg) saturate(2)',crystal:'hue-rotate(175deg) saturate(1.2) brightness(1.2)',moon:'grayscale(.35) hue-rotate(190deg) brightness(1.15)',aurora:'hue-rotate(105deg) saturate(1.8)',prism:'hue-rotate(250deg) saturate(1.9)'};img.style.filter=filters[selected]||'none'}}document.addEventListener('click',e=>{const btn=e.target.closest&&e.target.closest('#frogs .frogBtn');if(!btn)return;const face=btn.querySelector('.frogFace');if(!face)return;const names=['green','blue','purple','pink','gold','red','rainbow','crystal','moon','aurora','prism'];const picked=names.find(n=>face.classList.contains(n));if(!picked)return;localStorage.setItem('frogSelected',picked);requestAnimationFrame(sync);setTimeout(sync,50)},true);new MutationObserver(sync).observe(document.getElementById('frogs'),{childList:true,subtree:true});sync()})();
+</script></body></html>
