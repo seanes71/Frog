@@ -39,7 +39,7 @@ h1{margin:0;color:#8de85e;font-size:34px}.heroText p{margin:2px 0;color:#ffd743;
 <div class="hero"><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog fighters"><div class="heroText"><h1>FROG MATCH</h1><p>Choose your next hop.</p></div></div>
 <div class="status"><div>🏆 Wins<br><span id="wins">0</span></div><div>🐸 Bank<br><span id="bank">0</span></div><div>🔥 Streak<br><span id="streak">0</span></div></div>
 <div class="menu">
-<button data-page="play">🎮<b>PLAY</b><small>Solo or Vs AI</small></button>
+<button id="homePlayDirect">🎮<b>PLAY</b><small>Enter the pond</small></button>
 
 <button data-page="powers">⚡<b>POWER SHOP</b><small>Buy & review powers</small></button>
 <button data-page="trophies">🏆<b>TROPHY POND</b><small>Your achievements</small></button>
@@ -143,4 +143,6 @@ function go(n){if(!pages||!main)return;[...main.children].forEach(x=>{if(x!==pag
 document.addEventListener('click',e=>{const menu=e.target.closest('[data-page]');if(menu){e.preventDefault();go(menu.dataset.page);return}if(e.target.closest('.pageBack')){e.preventDefault();go('');return}},true);
 const play=$('#page-play');if(play){const enter=$('#enterPond');if(enter)enter.onclick=()=>{const mode=play.querySelector('[data-mode].selected')?.dataset.mode||localStorage.getItem('frogGameMode')||'solo';localStorage.setItem('frogGameMode',mode);localStorage.setItem('frogMobileLaunch','1');location.assign('./index.html?play='+encodeURIComponent(mode)+'&mobile=1')}}
 const mb=$('#frogMusicBtn');if(mb){let ac=null,clock=null,pos=0;const notes=[261.63,329.63,392,440,392,329.63,293.66,329.63,261.63,329.63,392,493.88,440,392,329.63,293.66];function beep(){if(!ac)return;const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;o.type='triangle';o.frequency.value=notes[pos++%notes.length];g.gain.setValueAtTime(.035,t);g.gain.exponentialRampToValueAtTime(.0001,t+.22);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+.23)}mb.onclick=async()=>{if(clock){clearInterval(clock);clock=null;mb.textContent='🎵 Music Off';mb.setAttribute('aria-pressed','false');return}ac=ac||new (window.AudioContext||window.webkitAudioContext)();await ac.resume();beep();clock=setInterval(beep,285);mb.textContent='🎵 Music On';mb.setAttribute('aria-pressed','true')}}})();
+</script><script id="home-play-direct-v1">
+(()=>{const b=document.getElementById('homePlayDirect');if(!b)return;b.onclick=()=>{localStorage.setItem('frogMobileLaunch','1');location.href='./index.html?mobile=1'};})();
 </script></body></html>
