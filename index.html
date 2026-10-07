@@ -197,4 +197,12 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 .fightDock .fightStage::before{content:""!important;display:block!important;position:absolute!important;inset:0!important;background:url("assets/frog-showdown.jpg?v=bb93cf6") center/100% 100% no-repeat!important;z-index:100!important}
 .fightDock .fightStage::after{display:none!important;content:none!important}
 .fightDock .dockNames,.fightDock .dockHint{position:relative!important;z-index:101!important}
-</style></body></html>
+</style><style id="showdown-direct-img-v3">
+.fightDock{height:auto!important;min-height:0!important;overflow:hidden!important;background:#063a2e!important;padding-bottom:12px!important}
+.fightDock .fightStage{display:block!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;padding:0!important;overflow:hidden!important;background:none!important}
+.fightDock .fightStage::before,.fightDock .fightStage::after{display:none!important;content:none!important}
+.fightDock .showdownApprovedImage{display:block!important;width:100%!important;height:auto!important;max-width:100%!important;object-fit:contain!important;margin:0!important;padding:0!important}
+</style>
+<script id="showdown-direct-img-script">
+(()=>{function installApprovedShowdown(){const stage=document.querySelector('.fightDock .fightStage');if(!stage)return;stage.innerHTML='';const img=document.createElement('img');img.className='showdownApprovedImage';img.src='assets/frog-showdown.jpg?v=direct3';img.alt='Green and brown boxing frogs facing each other in Frog Showdown';stage.appendChild(img)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installApprovedShowdown);else installApprovedShowdown()})();
+</script></body></html>
