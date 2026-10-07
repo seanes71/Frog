@@ -127,4 +127,9 @@ function tone(freq,dur,vol,type='sine'){const o=ctx.createOscillator(),g=ctx.cre
 function tick(){if(!on)return;const root=196,n=melody[step%melody.length],b=bass[Math.floor(step/2)%bass.length];tone(root*Math.pow(2,n/12),.22,.045,'triangle');if(step%2===0)tone(98*Math.pow(2,b/12),.38,.025,'sine');if(step%4===3)tone(784,.055,.012,'sine');step++;timer=setTimeout(tick,285)}
 btn.onclick=()=>{on=!on;btn.textContent=on?'🎵 Music On':'🎵 Music Off';btn.setAttribute('aria-pressed',on);if(on){ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();ctx.resume();tick()}else clearTimeout(timer)};
 })();
+</script><script id="mobile-nav-rescue-v1">
+(()=>{const pages=document.getElementById('mobilePages'),main=document.querySelector('main');if(!pages||!main)return;
+function go(name){[...main.children].forEach(el=>{if(el!==pages)el.style.display=name?'none':''});pages.style.display=name?'block':'none';pages.querySelectorAll('.mobilePage').forEach(el=>el.classList.toggle('active',el.id==='page-'+name));window.scrollTo(0,0)}
+document.addEventListener('click',e=>{const menu=e.target.closest('[data-page]');if(menu){e.preventDefault();go(menu.dataset.page);return}const back=e.target.closest('.pageBack');if(back){e.preventDefault();go('')}});
+})();
 </script></body></html>
