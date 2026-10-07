@@ -296,4 +296,51 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
   .difficulty{transform:none!important;margin-top:0!important}
   .layout{margin-bottom:0!important}
 }
-</style></body></html>
+</style><style id="frog-mobile-v1">
+/* Dedicated phone layout. Desktop rules remain untouched. */
+@media (max-width:699px){
+ html,body{overflow-x:hidden!important}
+ body{font-size:14px!important}
+ .wrap{width:100%!important;max-width:none!important;padding:8px!important;box-sizing:border-box!important}
+ .topGameHeader{display:flex!important;flex-direction:column!important;gap:8px!important}
+ .brandBlock{padding:10px 12px!important;min-height:0!important}
+ .brandBlock h1,h1{font-size:26px!important;line-height:1.05!important}
+ .topStats{position:static!important;transform:none!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important;width:100%!important}
+ .topStats>*{min-width:0!important;padding:7px 3px!important;font-size:11px!important;text-align:center!important}
+ #showdownPanel{width:100%!important;padding:5px!important;box-sizing:border-box!important}
+ .showdownFresh,.showdownFresh img{height:170px!important;max-height:170px!important;width:100%!important;object-fit:contain!important}
+ .headerUtilityRow .shop,.shop{width:100%!important;max-height:210px!important;overflow-y:auto!important;padding:7px!important;box-sizing:border-box!important}
+ #powers{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}
+ .power{margin:0!important;padding:7px!important;min-width:0!important}
+ .power small{font-size:9px!important}
+ .power button{min-height:38px!important}
+ .layout{display:flex!important;flex-direction:column!important;width:100%!important;gap:8px!important;margin:8px 0 0!important}
+ .layout>main{order:1!important;width:100%!important;max-width:none!important;overflow:hidden!important}
+ .layout>aside{order:2!important;position:static!important;left:auto!important;top:auto!important;width:100%!important;max-width:none!important}
+ .layout>aside .collection{height:190px!important;width:100%!important;overflow-y:auto!important;padding:8px!important}
+ .layout>aside #frogShop{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+ #frogAchievementPanel{position:static!important;width:100%!important;height:112px!important;min-height:112px!important;max-height:112px!important;margin:8px 0!important;overflow-y:auto!important;padding:7px!important;box-sizing:border-box!important}
+ #frogAchievementPanel .achievementChips{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+ .difficulty{position:static!important;transform:none!important;width:100%!important;margin:8px 0!important;padding:7px!important;overflow-x:auto!important}
+ .levels{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;min-width:0!important}
+ .level{min-width:0!important;padding:8px 4px!important;font-size:12px!important}
+ .board{display:grid!important;grid-template-columns:repeat(var(--mobile-cols,4),minmax(0,1fr))!important;grid-template-rows:none!important;height:auto!important;max-height:none!important;gap:5px!important;padding:5px!important;width:100%!important;box-sizing:border-box!important;overflow:visible!important}
+ .card{width:100%!important;height:auto!important;min-height:74px!important;max-height:92px!important;aspect-ratio:.68!important;max-width:none!important;font-size:20px!important}
+ .turn{position:sticky!important;top:0!important;z-index:20!important;padding:7px!important}
+ .controls{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+ .controls .btn{width:100%!important;min-height:44px!important;font-size:12px!important}
+ .earnedPowerTray{max-height:105px!important;overflow-y:auto!important}
+ #frogAdSlot{display:none!important}
+ .frogVictoryFight .fightArena{width:96vw!important;height:70vh!important}
+ .fighter{transform:scale(.72);transform-origin:bottom center}
+ .fighterPlayer{left:0!important}.fighterRival{right:0!important}
+}
+@media (max-width:390px){
+ .topStats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #powers{grid-template-columns:1fr!important}
+ .showdownFresh,.showdownFresh img{height:145px!important;max-height:145px!important}
+}
+</style>
+<script id="frog-mobile-grid-v1">
+(()=>{function mobileGrid(){if(innerWidth>699)return;const b=document.getElementById('board');if(!b)return;const n=b.children.length||12;let cols=n<=12?4:n<=18?3:n<=30?5:n<=42?6:7;b.style.setProperty('--mobile-cols',cols)}mobileGrid();addEventListener('resize',mobileGrid);new MutationObserver(mobileGrid).observe(document.getElementById('board')||document.body,{childList:true})})();
+</script></body></html>
