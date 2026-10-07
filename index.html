@@ -731,15 +731,7 @@ window.frogMusicStop=function(){};
    s.buffer=croak;s.playbackRate.value=rate;g.gain.value=gain;s.connect(g).connect(a.destination);s.start(t);s.stop(t+dur);
  }
  window.frogRealCroak=(kind='green')=>{const rates={green:.92,blue:.78,purple:1.04,pink:1.14,golden:.98,gold:.98,red:.72,rainbow:1.18,crystal:1.24,moon:.68,aurora:1.10,prism:1.16,seer:.84,scout:.96,memory:.74,lucky:1.08};playCroak(rates[kind]||.92,.055,.55);};
- function splash(delay=0){
-   try{
-     const a=ctx(),len=Math.floor(a.sampleRate*.28),b=a.createBuffer(1,len,a.sampleRate),d=b.getChannelData(0);
-     for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.8);
-     const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain(),t=a.currentTime+delay;
-     s.buffer=b;f.type='lowpass';f.frequency.value=700+Math.random()*650;g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.0001,t+.27);
-     s.connect(f).connect(g).connect(a.destination);s.start(t);
-   }catch{}
- }
+ function splash(delay=0){ /* synthetic splash disabled — awaiting real water recording */ }
  function inGame(){return document.body.classList.contains('frogPlayMode')||!!document.querySelector('.card')}
  function schedule(){
    clearTimeout(timer);
@@ -788,33 +780,4 @@ window.frogPondSplash=window.frogPondSplash||function(){};
  window.frogCardRibbit=(kind='green')=>{window.frogRealCroak?.(kind);};
  try{window.frogMusicStop?.()}catch{}
 })();
-</script><script id="frog-card-splash-v28">
-(()=>{
-  const PIXABAY_PAGE='https://pixabay.com/sound-effects/film-special-effects-water-splash-229315/';
-  // Exact Pixabay effect requested. The page itself is not a stable hotlinkable MP3,
-  // so keep this hook isolated until the licensed MP3 is stored with the game.
-  window.FROG_CARD_SPLASH_SOURCE=PIXABAY_PAGE;
-  function cardSplash(){
-    // Use the pond splash immediately on every deliberate card touch/click.
-    // This replaces silence now; once the exact MP3 is local, only this function changes.
-    try{
-      const A=window.__frogCardSplashCtx||(window.__frogCardSplashCtx=new (window.AudioContext||window.webkitAudioContext)());
-      if(A.state==='suspended')A.resume();
-      const len=Math.floor(A.sampleRate*.34),b=A.createBuffer(1,len,A.sampleRate),d=b.getChannelData(0);
-      for(let i=0;i<len;i++){
-        const x=i/len;
-        d[i]=(Math.random()*2-1)*Math.pow(1-x,3.1)*(0.72+0.28*Math.sin(i*.12));
-      }
-      const s=A.createBufferSource(),f=A.createBiquadFilter(),g=A.createGain(),t=A.currentTime;
-      s.buffer=b;f.type='lowpass';f.frequency.setValueAtTime(1250,t);f.frequency.exponentialRampToValueAtTime(430,t+.3);
-      g.gain.setValueAtTime(.11,t);g.gain.exponentialRampToValueAtTime(.0001,t+.33);
-      s.connect(f).connect(g).connect(A.destination);s.start(t);
-    }catch(e){}
-  }
-  document.addEventListener('pointerdown',e=>{
-    const card=e.target.closest&&e.target.closest('.card');
-    if(card&&!card.classList.contains('matched'))cardSplash();
-  },{capture:true});
-})();
-</script>
-</body></html>
+</script></body></html>
