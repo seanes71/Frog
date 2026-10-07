@@ -79,14 +79,14 @@ html body .turn{background:#102d23!important;border-radius:14px!important;paddin
 html body .timer{background:#254b39!important;color:#fff!important}
 html body .power{background:#173a2d!important;color:#fff!important;border-color:#668b70!important}
 </style>
-<style id="selected-card-frog-v4">
-.card{position:relative!important}
-.selected-card-frog{position:absolute!important;z-index:4!important;left:50%!important;top:50%!important;width:24px!important;height:19px!important;margin:-10px 0 0 -12px!important;border-radius:48% 48% 44% 44%!important;background:#62bd69!important;box-shadow:inset 0 -2px 0 #0002,0 2px 4px #0004!important;pointer-events:none!important;animation:tinyFrogFloat 1.15s ease-out forwards!important}
+<style id="selected-card-frog-v5">
+.card{position:relative!important;overflow:visible!important}
+.selected-card-frog{position:absolute!important;z-index:999!important;left:50%!important;top:-24px!important;width:24px!important;height:19px!important;margin:0 0 0 -12px!important;border-radius:48% 48% 44% 44%!important;background:#62bd69!important;box-shadow:inset 0 -2px 0 #0002,0 2px 4px #0004!important;pointer-events:none!important;animation:tinyFrogAboveCard 1.15s ease-out forwards!important}
 .selected-card-frog:before,.selected-card-frog:after{content:"";position:absolute!important;top:-5px!important;width:9px!important;height:9px!important;border-radius:50%!important;background:inherit!important;border:1px solid #fff!important}
 .selected-card-frog:before{left:2px!important}.selected-card-frog:after{right:2px!important}
 .selected-card-frog .frogEye{display:none!important}
 .selected-card-frog.blue{background:#318cff!important}.selected-card-frog.purple{background:#a879df!important}.selected-card-frog.pink{background:#ff83bd!important}.selected-card-frog.gold{background:#e5b52e!important}.selected-card-frog.red{background:#e65050!important}.selected-card-frog.rainbow{background:linear-gradient(135deg,#ff5c5c,#ffd75c,#67d879,#5cbcff,#b76cff)!important}.selected-card-frog.crystal{background:#7ee7ff!important}.selected-card-frog.moon{background:#aab7d7!important}.selected-card-frog.aurora{background:linear-gradient(135deg,#5df2b4,#72a7ff,#cf76ff)!important}.selected-card-frog.prism{background:linear-gradient(135deg,#ff6b8a,#ffd75c,#6df2d1,#7f8cff)!important}
-@keyframes tinyFrogFloat{0%{transform:translateY(0) scale(.7);opacity:0}15%{transform:translateY(-4px) scale(1);opacity:1}65%{transform:translateY(-30px) scale(.9);opacity:.9}100%{transform:translateY(-55px) scale(.65);opacity:0}}
+@keyframes tinyFrogAboveCard{0%{transform:translateY(8px) scale(.7);opacity:0}15%{transform:translateY(0) scale(1);opacity:1}65%{transform:translateY(-24px) scale(.9);opacity:.9}100%{transform:translateY(-46px) scale(.65);opacity:0}}
 </style>
 
 <style id="showdown-only-final">
