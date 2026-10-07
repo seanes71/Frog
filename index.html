@@ -442,4 +442,43 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
    overflow:visible!important;
  }
 }
+</style><style id="achievement-aligned-scroll-v15">
+/* Align Pond Achievements with the frog panel and keep the reward list compact/scrollable. */
+.layout>aside>#frogAchievementPanel{
+ width:100%!important;
+ max-width:none!important;
+ height:118px!important;
+ min-height:118px!important;
+ max-height:118px!important;
+ margin:6px 0 0!important;
+ padding:7px 9px!important;
+ overflow-y:auto!important;
+ overflow-x:hidden!important;
+ border-radius:14px!important;
+ box-sizing:border-box!important;
+ scrollbar-gutter:stable!important;
+}
+.layout>aside>#frogAchievementPanel .achievementChips{
+ overflow:visible!important;
+ width:100%!important;
+}
+@media(min-width:700px){
+ .layout>aside{
+   box-sizing:border-box!important;
+ }
+ .layout>aside>#frogAchievementPanel{
+   margin-left:0!important;
+   margin-right:0!important;
+ }
+}
+@media(max-width:699px){
+ body.frogHomeMode .layout>aside>#frogAchievementPanel{
+   width:100%!important;
+   height:118px!important;
+   min-height:118px!important;
+   max-height:118px!important;
+   overflow-y:auto!important;
+   overflow-x:hidden!important;
+ }
+}
 </style></body></html>
