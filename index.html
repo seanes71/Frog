@@ -709,4 +709,55 @@ function showRoundFight(n,done){const old=document.querySelector('.frogRoundFigh
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();
 })();
+</script><style id="frog-pond-audio-v26">
+.frogDanceBuddy{position:fixed;z-index:9996;font-size:42px;pointer-events:none;filter:drop-shadow(0 5px 5px rgba(0,0,0,.35));animation:frogDanceV26 .48s ease-in-out infinite alternate}
+@keyframes frogDanceV26{from{transform:translateY(0) rotate(-10deg) scale(1)}to{transform:translateY(-18px) rotate(10deg) scale(1.12)}}
+</style><script id="frog-pond-audio-v26">
+(()=>{
+ let pondTimer=0,lastPond=0;
+ function audioReady(){return typeof window.frogWinSound==='function'||!!(window.AudioContext||window.webkitAudioContext)}
+ function tinySplash(){
+   try{
+     const A=window.AudioContext||window.webkitAudioContext,a=new A(),n=a.createBuffer(1,a.sampleRate*.22,a.sampleRate),d=n.getChannelData(0);
+     for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);
+     const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=n;f.type='lowpass';f.frequency.value=900+Math.random()*500;
+     g.gain.setValueAtTime(.035,a.currentTime);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.22);s.connect(f).connect(g).connect(a.destination);s.start();setTimeout(()=>a.close(),500);
+   }catch{}
+ }
+ async function pondCroak(){
+   try{
+     const b=document.getElementById('frogChoirTest');
+     if(!b||!b.onclick)return;
+     /* Keep gameplay ambience sparse; use the proven real-croak loader without launching the full song. */
+     const a=window.__frogPondCtx||(window.__frogPondCtx=new (window.AudioContext||window.webkitAudioContext)());
+     if(a.state==='suspended')await a.resume();
+     const url='https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9f/Single_Frog_Croak.oga/Single_Frog_Croak.oga.mp3';
+     window.__frogPondBuffer=window.__frogPondBuffer||await fetch(url,{mode:'cors',cache:'force-cache'}).then(r=>r.arrayBuffer()).then(x=>a.decodeAudioData(x));
+     const s=a.createBufferSource(),g=a.createGain();s.buffer=window.__frogPondBuffer;s.playbackRate.value=.82+Math.random()*.32;g.gain.value=.035;s.connect(g).connect(a.destination);s.start();s.stop(a.currentTime+.7);
+   }catch{}
+ }
+ function schedulePond(){
+   clearTimeout(pondTimer);
+   pondTimer=setTimeout(async()=>{
+     if(document.body.classList.contains('frogPlayMode')){
+       Math.random()<.62?await pondCroak():tinySplash();
+       if(Math.random()<.24)setTimeout(tinySplash,500+Math.random()*900);
+     }
+     schedulePond();
+   },6500+Math.random()*8500);
+ }
+ function dance(){
+   const spots=[[18,72],[76,68],[30,82],[66,80]];
+   const frogs=spots.map(([x,y],i)=>{const e=document.createElement('div');e.className='frogDanceBuddy';e.textContent='🐸';e.style.left=x+'vw';e.style.top=y+'vh';e.style.animationDelay=(i*.11)+'s';document.body.appendChild(e);return e});
+   setTimeout(()=>frogs.forEach(e=>e.remove()),5600);
+   const choir=document.getElementById('frogChoirTest');if(choir&&!choir.disabled)choir.click();
+ }
+ const mo=new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{
+   if(n.nodeType!==1)return;
+   const t=(n.textContent||'').toUpperCase();
+   if(t.includes('ROUND WON!'))setTimeout(dance,120);
+ })));
+ function init(){schedulePond();mo.observe(document.body,{childList:true,subtree:true})}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
 </script></body></html>
