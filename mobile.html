@@ -116,4 +116,15 @@ fb.onclick=e=>{const b=e.target.closest('[data-frog]');if(!b||b.disabled)return;
 </style>
 <script id="real-frog-faces-mobile-v2-script">
 (()=>{const paint=()=>document.querySelectorAll('#setupFrogs [data-frog],#mobileFrogs [data-f]').forEach(b=>{if(b.querySelector('.miniFrog'))return;const n=b.dataset.frog||b.dataset.f;const face=document.createElement('span');face.className='miniFrog '+n;face.innerHTML='<i></i><i></i>';b.prepend(face)});paint();new MutationObserver(paint).observe(document.body,{childList:true,subtree:true})})();
+</script><style id="frog-music-v1">
+#frogMusicBtn{position:fixed;right:12px;bottom:12px;z-index:90;border:1px solid #8bd276;border-radius:999px;background:#0d3b2e;color:#fff;padding:10px 13px;font-weight:900;box-shadow:0 4px 14px #0005}
+</style>
+<button id="frogMusicBtn" type="button" aria-pressed="false">🎵 Music Off</button>
+<script id="frog-music-v1-script">
+(()=>{let ctx,timer,on=false,step=0;const btn=document.getElementById('frogMusicBtn');
+const melody=[0,4,7,9,7,4,2,4,0,4,7,11,9,7,4,2],bass=[0,0,5,5,7,7,5,5];
+function tone(freq,dur,vol,type='sine'){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(0.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(vol,ctx.currentTime+.015);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+dur);o.connect(g).connect(ctx.destination);o.start();o.stop(ctx.currentTime+dur+.03)}
+function tick(){if(!on)return;const root=196,n=melody[step%melody.length],b=bass[Math.floor(step/2)%bass.length];tone(root*Math.pow(2,n/12),.22,.045,'triangle');if(step%2===0)tone(98*Math.pow(2,b/12),.38,.025,'sine');if(step%4===3)tone(784,.055,.012,'sine');step++;timer=setTimeout(tick,285)}
+btn.onclick=()=>{on=!on;btn.textContent=on?'🎵 Music On':'🎵 Music Off';btn.setAttribute('aria-pressed',on);if(on){ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();ctx.resume();tick()}else clearTimeout(timer)};
+})();
 </script></body></html>
