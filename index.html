@@ -556,4 +556,30 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
    box-sizing:border-box!important;
  }
 }
+</style><style id="account-bar-tuck-v19">
+/* Keep account controls available without covering the frog collection. */
+#frogAccountBar{
+ position:fixed!important;
+ right:10px!important;
+ bottom:10px!important;
+ left:auto!important;
+ top:auto!important;
+ z-index:9998!important;
+ opacity:.28!important;
+ transition:opacity .18s ease!important;
+ font-size:10px!important;
+ gap:4px!important;
+ padding:3px 5px!important;
+ border-radius:9px!important;
+ background:rgba(8,45,35,.82)!important;
+}
+#frogAccountBar:hover,#frogAccountBar:focus-within{opacity:1!important}
+#frogAccountBar .authLogout{
+ padding:4px 7px!important;
+ font-size:10px!important;
+ border-radius:8px!important;
+}
+@media(max-width:699px){
+ #frogAccountBar{right:6px!important;bottom:6px!important}
+}
 </style></body></html>
