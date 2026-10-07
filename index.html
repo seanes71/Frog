@@ -64,35 +64,46 @@ linear-gradient(102deg,transparent 45%,#4e9b62 46% 50%,transparent 51%) 34px 50p
 body:before{left:0}body:after{right:0;transform:scaleX(-1)}
 .wrap{position:relative;z-index:1}
 </style><style id="frog-fight-style">
-.frogFightArena{position:fixed;inset:0;z-index:20000;overflow:hidden;background:radial-gradient(circle at 50% 30%,#7ea16d,#18372a 72%);pointer-events:none}
-.frogFightStage{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,#ffffff0d 0 63%,#314e2f 64%,#1d3525 100%)}
-.frogFightStage:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(82deg,transparent 0 90px,#b4d6811c 92px 97px,transparent 99px 155px)}
-.frogFightTitle{position:absolute;z-index:20;top:3%;left:50%;transform:translateX(-50%);padding:10px 26px;border-radius:18px;background:#062f25e8;color:#fff;font-size:clamp(20px,3.6vw,38px);font-weight:1000;text-align:center;white-space:nowrap}.frogFightSub{display:block;font-size:.42em;color:#dff8e6}
-.photoFrog{position:absolute;z-index:5;bottom:7%;width:min(34vw,390px);height:auto;transform-origin:50% 80%;filter:drop-shadow(0 20px 12px #0008) var(--tint)}
-.photoFrog.player{left:2%;animation:pPhoto 8.4s linear forwards}.photoFrog.bot{right:2%;animation:bPhoto 8.4s linear forwards}
-.photoFrog.player.win{animation:pWin 8.4s linear forwards}.photoFrog.player.lose{animation:pLose 8.4s linear forwards}.photoFrog.bot.win{animation:bWin 8.4s linear forwards}.photoFrog.bot.lose{animation:bLose 8.4s linear forwards}
-.hit{position:absolute;z-index:12;left:50%;top:47%;font-size:clamp(48px,10vw,120px);transform:translate(-50%,-50%) scale(0);animation:hits 8.4s steps(1) forwards;text-shadow:0 6px #fff}
-.splash{position:absolute;z-index:9;left:50%;bottom:5%;font-size:70px;opacity:0;animation:splashFight 8.4s linear forwards}
-@keyframes pPhoto{0%{transform:translate(-30vw,0) rotate(-8deg)}10%{transform:translate(12vw,-55px) rotate(8deg) scale(1.08)}20%{transform:translate(22vw,0) rotate(-14deg)}30%{transform:translate(15vw,-100px) rotate(28deg)}40%{transform:translate(24vw,0) rotate(-18deg)}52%{transform:translate(16vw,-65px) rotate(10deg)}64%{transform:translate(25vw,0) rotate(-12deg)}75%,100%{transform:translate(22vw,0)}}
-@keyframes bPhoto{0%{transform:scaleX(-1) translate(-30vw,0) rotate(-8deg)}12%{transform:scaleX(-1) translate(12vw,-35px) rotate(10deg)}22%{transform:scaleX(-1) translate(22vw,0) rotate(-15deg)}33%{transform:scaleX(-1) translate(15vw,-85px) rotate(25deg)}45%{transform:scaleX(-1) translate(24vw,0) rotate(-15deg)}56%{transform:scaleX(-1) translate(17vw,-55px) rotate(12deg)}68%,100%{transform:scaleX(-1) translate(23vw,0)}}
-@keyframes pWin{0%{transform:translate(-30vw,0)}10%{transform:translate(12vw,-55px) rotate(8deg)}20%{transform:translate(22vw,0) rotate(-14deg)}30%{transform:translate(15vw,-100px) rotate(28deg)}40%{transform:translate(24vw,0) rotate(-18deg)}52%{transform:translate(16vw,-65px) rotate(10deg)}64%{transform:translate(25vw,0)}78%{transform:translate(20vw,-70px) rotate(-12deg) scale(1.15)}88%{transform:translate(20vw,0) rotate(10deg) scale(1.15)}100%{transform:translate(20vw,-20px) scale(1.2)}}
-@keyframes bLose{0%{transform:scaleX(-1) translate(-30vw,0)}12%{transform:scaleX(-1) translate(12vw,-35px)}22%{transform:scaleX(-1) translate(22vw,0)}33%{transform:scaleX(-1) translate(15vw,-85px) rotate(25deg)}45%{transform:scaleX(-1) translate(24vw,0)}56%{transform:scaleX(-1) translate(17vw,-55px)}68%{transform:scaleX(-1) translate(23vw,0)}78%{transform:scaleX(-1) translate(-2vw,-70px) rotate(70deg)}100%{transform:scaleX(-1) translate(-24vw,90px) rotate(105deg)}}
-@keyframes bWin{0%{transform:scaleX(-1) translate(-30vw,0)}12%{transform:scaleX(-1) translate(12vw,-35px)}22%{transform:scaleX(-1) translate(22vw,0)}33%{transform:scaleX(-1) translate(15vw,-85px)}45%{transform:scaleX(-1) translate(24vw,0)}56%{transform:scaleX(-1) translate(17vw,-55px)}68%{transform:scaleX(-1) translate(23vw,0)}82%{transform:scaleX(-1) translate(20vw,-70px) rotate(-12deg) scale(1.15)}100%{transform:scaleX(-1) translate(20vw,-15px) scale(1.2)}}
-@keyframes pLose{0%{transform:translate(-30vw,0)}10%{transform:translate(12vw,-55px)}20%{transform:translate(22vw,0)}30%{transform:translate(15vw,-100px)}40%{transform:translate(24vw,0)}52%{transform:translate(16vw,-65px)}64%{transform:translate(25vw,0)}78%{transform:translate(-2vw,-70px) rotate(-70deg)}100%{transform:translate(-24vw,90px) rotate(-105deg)}}
-@keyframes hits{0%,11%{transform:translate(-50%,-50%) scale(0)}12%{transform:translate(-50%,-50%) scale(1)}15%{transform:translate(-50%,-50%) scale(0)}22%{transform:translate(-50%,-50%) scale(1.2)}25%{transform:translate(-50%,-50%) scale(0)}34%{transform:translate(-50%,-50%) scale(1)}37%{transform:translate(-50%,-50%) scale(0)}45%{transform:translate(-50%,-50%) scale(1.3)}48%{transform:translate(-50%,-50%) scale(0)}57%{transform:translate(-50%,-50%) scale(1)}60%,100%{transform:translate(-50%,-50%) scale(0)}}
-@keyframes splashFight{0%,18%{opacity:0;transform:translateX(-50%) scale(.4)}24%,65%{opacity:1;transform:translateX(-50%) translateY(-70px) scale(1.3)}85%,100%{opacity:0;transform:translateX(-50%) translateY(-20px)}}
-@media(max-width:700px){.photoFrog{width:48vw}.frogFightTitle{white-space:normal;width:78vw}}
+.frogFightArena{position:fixed;inset:0;z-index:20000;background:#10281f;overflow:hidden;pointer-events:none}
+.frogFightStage{position:absolute;inset:0;background:radial-gradient(circle at 50% 28%,#75916a,#173427 70%);overflow:hidden}
+.frogFightStage:after{content:"";position:absolute;left:0;right:0;bottom:0;height:32%;background:linear-gradient(#425c3699,#1d3727);box-shadow:inset 0 20px 40px #0004}
+.frogFightTitle{position:absolute;z-index:30;top:2.5%;left:50%;transform:translateX(-50%);background:#052d23e8;border:2px solid #5ea77c;border-radius:18px;color:#fff;padding:9px 24px;font-size:clamp(19px,3vw,36px);font-weight:1000;text-align:center;white-space:nowrap}.frogFightSub{display:block;font-size:.42em;color:#dff8e6}
+.frogHealth{position:absolute;z-index:25;top:12%;width:31%;height:22px;border:4px solid #f4e4bd;border-radius:8px;background:#191919;box-shadow:0 4px 10px #0008;overflow:hidden}.frogHealth.you{left:4%}.frogHealth.ai{right:4%}.frogHealth i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#2cc966,#e7e62d,#ef3f32);transition:width .3s}.frogHealth.ai i{margin-left:auto}
+.frogFighter{position:absolute;z-index:8;bottom:8%;width:min(42vw,500px);height:min(62vh,560px);object-fit:cover;object-position:center;clip-path:ellipse(42% 47% at 50% 52%);filter:drop-shadow(0 20px 14px #0009) saturate(1.15);will-change:transform,filter}
+.frogFighter.you{left:-4%}.frogFighter.ai{right:-4%;transform:scaleX(-1)}
+.frogFighter.hitFlash{filter:drop-shadow(0 20px 14px #0009) brightness(1.7) saturate(1.8)}
+.fightImpact{position:absolute;z-index:18;left:50%;top:48%;font-size:clamp(54px,10vw,120px);transform:translate(-50%,-50%) scale(0);text-shadow:0 6px #fff}
+.fightImpact.pop{animation:impactPop .24s ease-out}.fightSplash{position:absolute;z-index:17;left:50%;bottom:7%;font-size:70px;opacity:0}.fightSplash.pop{animation:splashPop .55s ease-out}
+@keyframes impactPop{0%{transform:translate(-50%,-50%) scale(.2) rotate(-15deg)}55%{transform:translate(-50%,-50%) scale(1.25) rotate(8deg)}100%{transform:translate(-50%,-50%) scale(0)}}@keyframes splashPop{0%{opacity:0;transform:translate(-50%,30px) scale(.3)}35%{opacity:1;transform:translate(-50%,-55px) scale(1.3)}100%{opacity:0;transform:translate(-50%,-85px) scale(.8)}}
+@media(max-width:700px){.frogFighter{width:58vw;height:48vh}.frogFighter.you{left:-15%}.frogFighter.ai{right:-15%}.frogFightTitle{white-space:normal;width:78vw}.frogHealth{top:16%;width:36%}}
 </style>
 <script>
 window.frogFight=function(playerWon,done){
- const tint={green:'',blue:'hue-rotate(105deg) saturate(1.35)',purple:'hue-rotate(165deg) saturate(1.35)',pink:'hue-rotate(225deg) saturate(1.35)',gold:'hue-rotate(315deg) saturate(1.6)',red:'hue-rotate(265deg) saturate(1.6)',teal:'hue-rotate(75deg) saturate(1.25)',orange:'hue-rotate(300deg) saturate(1.4)',mint:'hue-rotate(55deg) saturate(.9)',lavender:'hue-rotate(175deg) saturate(.8)',coral:'hue-rotate(275deg) saturate(1.2)',black:'grayscale(.8) brightness(.55)',crystal:'hue-rotate(90deg) saturate(.7) brightness(1.25)',moon:'hue-rotate(145deg) saturate(.7)',aurora:'hue-rotate(65deg) saturate(1.1)',prism:'hue-rotate(190deg) saturate(1.5)',rainbow:'saturate(1.8)'};
- const pc=localStorage.getItem('frogSelected')||'green';
  const arena=document.createElement('div');arena.className='frogFightArena';
- const p='https://toppng.com/uploads/preview/frog-11523133958i7wirnr2vy.png', b='https://toppng.com/uploads/preview/frog-1152313434024hxd7974j.png';
- arena.innerHTML='<div class="frogFightStage"><div class="frogFightTitle">🐸 FROG SHOWDOWN! 🥊<span class="frogFightSub">Your frog vs '+opponentName+' — FIGHT!</span></div><img class="photoFrog player '+(playerWon?'win':'lose')+'" style="--tint:'+(tint[pc]||'')+'" src="'+p+'" alt=""><img class="photoFrog bot '+(!playerWon?'win':'lose')+'" src="'+b+'" alt=""><div class="hit">💥</div><div class="splash">💦💨💦</div></div>';
+ const img1='/Frog/assets/frog-fight-1.jpg',img2='/Frog/assets/frog-fight-2.jpg';
+ arena.innerHTML='<div class="frogFightStage"><div class="frogFightTitle">🐸 FROG SHOWDOWN! 🥊<span class="frogFightSub">Your frog vs '+opponentName+' — FIGHT!</span></div><div class="frogHealth you"><i></i></div><div class="frogHealth ai"><i></i></div><img class="frogFighter you" src="'+img1+'" alt=""><img class="frogFighter ai" src="'+img2+'" alt=""><div class="fightImpact">💥</div><div class="fightSplash">💦💨💦</div></div>';
  document.body.appendChild(arena);
- [1000,1850,2750,3650,4700,5700].forEach(t=>setTimeout(()=>arena.animate([{transform:'translate(0)'},{transform:'translate(-14px,8px)'},{transform:'translate(12px,-7px)'},{transform:'translate(0)'}],{duration:180}),t));
- setTimeout(()=>{arena.remove();done()},8600)
+ const you=arena.querySelector('.frogFighter.you'),ai=arena.querySelector('.frogFighter.ai'),hy=arena.querySelector('.frogHealth.you i'),ha=arena.querySelector('.frogHealth.ai i'),impact=arena.querySelector('.fightImpact'),splash=arena.querySelector('.fightSplash');
+ let yh=100,ah=100;
+ const anim=(el,k,d=520)=>el.animate(k,{duration:d,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'});
+ const boom=(victim,who)=>{impact.classList.remove('pop');splash.classList.remove('pop');void impact.offsetWidth;impact.classList.add('pop');splash.classList.add('pop');victim.classList.add('hitFlash');setTimeout(()=>victim.classList.remove('hitFlash'),160);arena.animate([{transform:'translate(0)'},{transform:'translate(-13px,7px)'},{transform:'translate(11px,-8px)'},{transform:'translate(0)'}],{duration:190});if(who==='you'){ah=Math.max(0,ah-18);ha.style.width=ah+'%'}else{yh=Math.max(0,yh-18);hy.style.width=yh+'%'}};
+ const wait=ms=>new Promise(r=>setTimeout(r,ms));
+ async function run(){
+  await wait(500);
+  anim(you,[{transform:'translateX(0) rotate(-5deg)'},{transform:'translate(34vw,-90px) rotate(18deg) scale(1.08)'},{transform:'translate(28vw,0) rotate(-8deg)'}],700);await wait(480);boom(ai,'you');
+  await wait(320);anim(ai,[{transform:'scaleX(-1) translateX(0)'},{transform:'scaleX(-1) translate(30vw,-70px) rotate(18deg)'},{transform:'scaleX(-1) translate(24vw,0)'}],650);await wait(430);boom(you,'ai');
+  await wait(300);anim(you,[{transform:'translate(28vw,0)'},{transform:'translate(35vw,-140px) rotate(35deg)'},{transform:'translate(30vw,0) rotate(-15deg)'}],620);await wait(400);boom(ai,'you');
+  await wait(260);anim(ai,[{transform:'scaleX(-1) translate(24vw,0)'},{transform:'scaleX(-1) translate(33vw,-115px) rotate(-28deg)'},{transform:'scaleX(-1) translate(27vw,0)'}],620);await wait(420);boom(you,'ai');
+  await wait(260);anim(you,[{transform:'translate(30vw,0)'},{transform:'translate(37vw,-65px) rotate(-22deg) scale(1.12)'},{transform:'translate(31vw,0)'}],500);await wait(340);boom(ai,'you');
+  await wait(220);anim(ai,[{transform:'scaleX(-1) translate(27vw,0)'},{transform:'scaleX(-1) translate(35vw,-55px) rotate(24deg)'},{transform:'scaleX(-1) translate(29vw,0)'}],500);await wait(340);boom(you,'ai');
+  await wait(250);
+  const winner=playerWon?you:ai, loser=playerWon?ai:you, wh=playerWon?'you':'ai';
+  if(playerWon){ah=20;ha.style.width='20%'}else{yh=20;hy.style.width='20%'};
+  anim(winner,playerWon?[{transform:'translate(31vw,0)'},{transform:'translate(40vw,-160px) rotate(32deg) scale(1.15)'},{transform:'translate(34vw,0) scale(1.12)'}]:[{transform:'scaleX(-1) translate(29vw,0)'},{transform:'scaleX(-1) translate(40vw,-160px) rotate(32deg) scale(1.15)'},{transform:'scaleX(-1) translate(34vw,0) scale(1.12)'}],700);await wait(470);boom(loser,wh);
+  if(playerWon){ha.style.width='0%';anim(loser,[{transform:'scaleX(-1) translate(29vw,0)'},{transform:'scaleX(-1) translate(-12vw,80px) rotate(100deg) scale(.8)'}],850)}else{hy.style.width='0%';anim(loser,[{transform:'translate(31vw,0)'},{transform:'translate(-12vw,80px) rotate(-100deg) scale(.8)'}],850)}
+  await wait(900);impact.textContent='K.O.!';impact.classList.remove('pop');void impact.offsetWidth;impact.classList.add('pop');await wait(900);arena.remove();done();
+ }
+ run();
 }
 </script><style id="mode-pressed-style">
 #soloMode[aria-pressed="true"],#aiMode[aria-pressed="true"]{background:#35a85f!important;color:#fff!important;border:2px solid #1f7d45!important}
