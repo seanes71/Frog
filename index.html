@@ -180,7 +180,8 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 .frogAdSlot .adPlaceholder small{font-size:10px!important;margin-top:3px!important}
 }
 @media(max-width:999px), (max-height:649px){.frogAdSlot{display:none!important}}
-</style><style id="mode-button-state-v1">
-#soloMode.modeActive,#aiMode.modeActive{background:#3fd35b!important;color:#fff!important;border:2px solid #b9ff9e!important;box-shadow:0 0 0 2px rgba(69,255,105,.2),0 0 16px rgba(69,255,105,.65),0 4px 0 #1e7f3c!important;filter:brightness(1.08)!important}
-#soloMode[aria-pressed="false"],#aiMode[aria-pressed="false"]{opacity:.82!important}
+<style id="mode-button-state-v2">
+.controls #soloMode.modeActive,.controls #aiMode.modeActive{background:#ffd83d!important;color:#173326!important;border:3px solid #fff3a0!important;box-shadow:0 0 0 3px #45d96b,0 0 22px #8cff70,0 5px 0 #997400!important;filter:none!important;transform:translateY(-2px)!important}
+.controls #soloMode.modeActive::after,.controls #aiMode.modeActive::after{content:" ✓ ON";font-size:11px;font-weight:1000;margin-left:5px}
+.controls #soloMode:not(.modeActive),.controls #aiMode:not(.modeActive){background:#244c3c!important;color:#fff!important;border:2px solid #628c75!important;box-shadow:0 4px 0 #173c2e!important;opacity:.82!important;filter:none!important}
 </style></body></html>
