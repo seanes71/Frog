@@ -176,44 +176,9 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 .fightDock.fighting .dockAi .fighterImg{animation:rivalInwardHit 1s ease-in-out 3!important}
 @keyframes playerInwardPunch{0%,100%{transform:translate(18px,-18px) scale(1.08)}45%{transform:translate(52px,-20px) scale(1.11) rotate(5deg)}65%{transform:translate(38px,-18px) scale(1.08) rotate(-3deg)}}
 @keyframes rivalInwardHit{0%,48%,100%{transform:translate(-18px,-18px) scaleX(-1) scale(1.08)}62%{transform:translate(-44px,-12px) scaleX(-1) scale(1.05) rotate(-10deg)}}
-</style><style id="approved-showdown-final">
-.fightDock{min-height:535px!important;position:relative!important;overflow:hidden!important;background:#063a2e!important}
-.fightDock .fightStage{height:405px!important;min-height:405px!important;margin-top:4px!important;background:url("assets/frog-showdown.jpg?v=50b02d0") center center/contain no-repeat!important;overflow:hidden!important;padding:0!important}
-.fightDock .fightStage .dockFrog,.fightDock .fightStage .dockVs{display:none!important}
-.fightDock .dockNames{position:relative!important;z-index:4!important;margin-top:2px!important}
-.fightDock .dockHint{position:relative!important;z-index:4!important}
-@media(max-width:700px){.fightDock{min-height:420px!important}.fightDock .fightStage{height:300px!important;min-height:300px!important}}
-</style><style id="showdown-image-render-fix">
-.fightDock{min-height:560px!important;overflow:hidden!important;background:#063a2e!important}
-.fightDock .fightStage{display:block!important;position:relative!important;width:100%!important;height:420px!important;min-height:420px!important;margin:0!important;padding:0!important;overflow:hidden!important;background:#063a2e url("assets/frog-showdown.jpg?v=9069e42") center center/cover no-repeat!important}
-.fightDock .fightStage::after{content:"";position:absolute!important;inset:0!important;background:transparent!important;pointer-events:none!important}
-.fightDock .fightStage .dockFrog,.fightDock .fightStage .dockVs{display:none!important}
-@media(max-width:700px){.fightDock{min-height:430px!important}.fightDock .fightStage{height:315px!important;min-height:315px!important;background-size:cover!important}}
-</style><style id="showdown-hard-reset-v2">
-.fightDock{min-height:0!important;height:auto!important;overflow:visible!important;background:#063a2e!important}
-.fightDock>h2{margin-bottom:12px!important}
-.fightDock .fightStage{display:block!important;position:relative!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:2.04/1!important;margin:0!important;padding:0!important;overflow:visible!important;background:none!important}
-.fightDock .fightStage .dockFrog,.fightDock .fightStage .dockVs{display:none!important}
-.fightDock .fightStage::before{content:""!important;display:block!important;position:absolute!important;inset:0!important;background:url("assets/frog-showdown.jpg?v=bb93cf6") center/100% 100% no-repeat!important;z-index:100!important}
-.fightDock .fightStage::after{display:none!important;content:none!important}
-.fightDock .dockNames,.fightDock .dockHint{position:relative!important;z-index:101!important}
-</style><style id="showdown-direct-img-v3">
-.fightDock{height:auto!important;min-height:0!important;overflow:hidden!important;background:#063a2e!important;padding-bottom:12px!important}
-.fightDock .fightStage{display:block!important;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;padding:0!important;overflow:hidden!important;background:none!important}
-.fightDock .fightStage::before,.fightDock .fightStage::after{display:none!important;content:none!important}
-.fightDock .showdownApprovedImage{display:block!important;width:100%!important;height:auto!important;max-width:100%!important;object-fit:contain!important;margin:0!important;padding:0!important}
 </style>
-<script id="showdown-direct-img-script">
-(()=>{function installApprovedShowdown(){const stage=document.querySelector('.fightDock .fightStage');if(!stage)return;stage.innerHTML='';const img=document.createElement('img');img.className='showdownApprovedImage';img.src='assets/frog-showdown.jpg?v=direct3';img.alt='Green and brown boxing frogs facing each other in Frog Showdown';stage.appendChild(img)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installApprovedShowdown);else installApprovedShowdown()})();
-</script><style id="showdown-nuclear-fix-v4">
-.fightDock{display:block!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;background:#063a2e!important}
-.fightDock .fightStage{display:block!important;position:relative!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;overflow:visible!important;background:none!important;padding:0!important;margin:0!important}
-.fightDock .fightStage>*:not(.showdownApprovedImage){display:none!important}
-.fightDock .showdownApprovedImage{position:static!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;object-fit:contain!important;object-position:center!important;clip:auto!important;clip-path:none!important;transform:none!important;margin:0!important;padding:0!important;background:#063a2e!important}
-</style>
-<script id="showdown-nuclear-script-v4">
-(()=>{function fix(){const stage=document.querySelector('.fightDock .fightStage');if(!stage)return;let img=stage.querySelector('.showdownApprovedImage');if(!img){stage.replaceChildren();img=new Image();img.className='showdownApprovedImage';stage.appendChild(img)}img.onload=()=>{stage.style.setProperty('height',img.getBoundingClientRect().width*(img.naturalHeight/img.naturalWidth)+'px','important');stage.style.setProperty('min-height','0','important');stage.style.setProperty('max-height','none','important')};img.src='assets/frog-showdown.jpg?v=22935da4';}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();setTimeout(fix,500)})();
-</script><style id="showdown-clean-rebuild-v5">
+
+<style id="showdown-clean-rebuild-v5">
 .fightDock.showdownClean{display:block!important;position:relative!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:hidden!important;background:#063a2e!important;padding:10px!important}
 .fightDock.showdownClean>h2{margin:0 0 10px!important}
 .fightDock.showdownClean>.approvedShowdown{display:block!important;position:static!important;width:100%!important;height:auto!important;max-width:100%!important;max-height:none!important;min-height:0!important;object-fit:contain!important;object-position:center!important;margin:0!important;padding:0!important;border:0!important;clip:auto!important;clip-path:none!important;transform:none!important}
