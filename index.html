@@ -776,56 +776,13 @@ function showRoundFight(n,done){const old=document.querySelector('.frogRoundFigh
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script><script id="frog-casino-pond-audio-v26">
-(()=>{
- let a=null,master=null,music=null,amb=null,started=false,musicTimer=null,splashTimer=null,step=0;
- const AC=window.AudioContext||window.webkitAudioContext;
- function init(){
-   if(!AC)return null;
-   if(!a)a=new AC();
-   if(a.state==='suspended')a.resume();
-   if(!master){master=a.createGain();master.gain.value=.72;master.connect(a.destination);
-     music=a.createGain();music.gain.value=.10;music.connect(master);
-     amb=a.createGain();amb.gain.value=.22;amb.connect(master);}
-   return a;
- }
- function ping(freq,when,dur=.16,vol=.055,type='sine'){
-   const x=init();if(!x)return;const o=x.createOscillator(),g=x.createGain();
-   o.type=type;o.frequency.setValueAtTime(freq,when);g.gain.setValueAtTime(.0001,when);
-   g.gain.exponentialRampToValueAtTime(vol,when+.012);g.gain.exponentialRampToValueAtTime(.0001,when+dur);
-   o.connect(g).connect(music);o.start(when);o.stop(when+dur+.03);
- }
- function casinoTick(){
-   if(!started)return;const x=init(),t=x.currentTime+.02;
-   const chords=[[261.63,329.63,392],[293.66,369.99,440],[329.63,415.3,493.88],[293.66,369.99,440]];
-   const ch=chords[Math.floor(step/4)%chords.length],n=ch[step%3];
-   ping(n,t,.20,.042,'sine');if(step%4===0)ping(ch[0]/2,t,.34,.026,'triangle');
-   if(step%8===6)ping(n*2,t+.11,.12,.028,'sine');
-   step++;musicTimer=setTimeout(casinoTick,360);
- }
- function splash(){
-   const x=init();if(!x)return;const t=x.currentTime,b=x.createBuffer(1,Math.floor(x.sampleRate*.42),x.sampleRate),d=b.getChannelData(0);
-   for(let i=0;i<d.length;i++){const e=Math.exp(-i/(x.sampleRate*.105));d[i]=(Math.random()*2-1)*e;}
-   const s=x.createBufferSource(),lp=x.createBiquadFilter(),g=x.createGain();
-   s.buffer=b;lp.type='lowpass';lp.frequency.setValueAtTime(1500,t);lp.frequency.exponentialRampToValueAtTime(330,t+.38);
-   g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16,t+.018);g.gain.exponentialRampToValueAtTime(.0001,t+.40);
-   s.connect(lp).connect(g).connect(amb);s.start(t);
-   ping(95,t+.02,.18,.045,'sine');
- }
- function scheduleSplash(){
-   if(!started)return;clearTimeout(splashTimer);
-   splashTimer=setTimeout(()=>{splash();scheduleSplash()},5000+Math.random()*9000);
- }
- function start(){
-   if(started)return;started=true;init();casinoTick();setTimeout(splash,1100);scheduleSplash();
- }
- document.addEventListener('pointerdown',start,{once:true,capture:true});
- document.addEventListener('keydown',start,{once:true,capture:true});
- window.frogPondSplash=splash;
-})();
+/* Disabled: this legacy casino/techno loop was starting on the first mobile tap.
+   Pond ambience and card ribbits are handled by the newer frog audio scripts. */
+window.frogPondSplash=window.frogPondSplash||function(){};
 </script>
 <script id="frog-card-ribbits-v27">
 (()=>{
- const profiles={green:[118,.038],blue:[102,.034],purple:[138,.034],pink:[154,.032],golden:[128,.038],gold:[128,.038],red:[92,.04],rainbow:[166,.03],crystal:[178,.028],moon:[84,.032],aurora:[148,.03],prism:[160,.03],seer:[110,.034],scout:[126,.033],memory:[96,.035],lucky:[144,.033]};
+ const profiles={green:[118,.065],blue:[102,.058],purple:[138,.058],pink:[154,.055],golden:[128,.064],gold:[128,.064],red:[92,.068],rainbow:[166,.052],crystal:[178,.050],moon:[84,.058],aurora:[148,.052],prism:[160,.052],seer:[110,.060],scout:[126,.058],memory:[96,.062],lucky:[144,.056]};
  window.frogCardRibbit=(kind='green')=>{
   try{
    const A=window.AudioContext||window.webkitAudioContext,a=new A(),p=profiles[kind]||profiles.green,t=a.currentTime;
