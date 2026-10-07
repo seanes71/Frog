@@ -205,4 +205,12 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 </style>
 <script id="showdown-direct-img-script">
 (()=>{function installApprovedShowdown(){const stage=document.querySelector('.fightDock .fightStage');if(!stage)return;stage.innerHTML='';const img=document.createElement('img');img.className='showdownApprovedImage';img.src='assets/frog-showdown.jpg?v=direct3';img.alt='Green and brown boxing frogs facing each other in Frog Showdown';stage.appendChild(img)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installApprovedShowdown);else installApprovedShowdown()})();
+</script><style id="showdown-nuclear-fix-v4">
+.fightDock{display:block!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;background:#063a2e!important}
+.fightDock .fightStage{display:block!important;position:relative!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;overflow:visible!important;background:none!important;padding:0!important;margin:0!important}
+.fightDock .fightStage>*:not(.showdownApprovedImage){display:none!important}
+.fightDock .showdownApprovedImage{position:static!important;display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;object-fit:contain!important;object-position:center!important;clip:auto!important;clip-path:none!important;transform:none!important;margin:0!important;padding:0!important;background:#063a2e!important}
+</style>
+<script id="showdown-nuclear-script-v4">
+(()=>{function fix(){const stage=document.querySelector('.fightDock .fightStage');if(!stage)return;let img=stage.querySelector('.showdownApprovedImage');if(!img){stage.replaceChildren();img=new Image();img.className='showdownApprovedImage';stage.appendChild(img)}img.onload=()=>{stage.style.setProperty('height',img.getBoundingClientRect().width*(img.naturalHeight/img.naturalWidth)+'px','important');stage.style.setProperty('min-height','0','important');stage.style.setProperty('max-height','none','important')};img.src='assets/frog-showdown.jpg?v=22935da4';}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();setTimeout(fix,500)})();
 </script></body></html>
