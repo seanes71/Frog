@@ -79,4 +79,24 @@ let level=+(localStorage.getItem('frogDifficulty')||0);const levels=[['Easy',12]
 let mode=localStorage.getItem('frogGameMode')||'solo';const summary=document.getElementById('setupSummary');function paint(){fb.querySelectorAll('[data-frog]').forEach(b=>b.classList.toggle('selected',b.dataset.frog===frog));lb.querySelectorAll('[data-level]').forEach(b=>b.classList.toggle('selected',+b.dataset.level===level));page.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===mode));summary.textContent=frog.toUpperCase()+' FROG • '+levels[level][0].toUpperCase()+' • '+(mode==='ai'?'VS AI':'SOLO')}paint();
 fb.onclick=e=>{const b=e.target.closest('[data-frog]');if(!b||b.disabled)return;frog=b.dataset.frog;localStorage.setItem('frogSelected',frog);paint()};lb.onclick=e=>{const b=e.target.closest('[data-level]');if(!b)return;level=+b.dataset.level;localStorage.setItem('frogDifficulty',level);paint()};page.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;localStorage.setItem('frogGameMode',mode);paint()});document.getElementById('enterPond').onclick=()=>{localStorage.setItem('frogSelected',frog);localStorage.setItem('frogDifficulty',level);localStorage.setItem('frogGameMode',mode);localStorage.setItem('frogMobileLaunch','1');location.href='./index.html?play='+mode+'&mobile=1'};
 })();
+</script><style id="colored-frogs-mobile-fix-v1">
+#setupFrogs [data-frog],#mobileFrogs [data-f]{position:relative;overflow:hidden}
+#setupFrogs [data-frog]::before,#mobileFrogs [data-f]::before{content:"🐸";display:block;font-size:34px;line-height:1.05;margin-bottom:3px}
+#setupFrogs [data-frog],#mobileFrogs [data-f]{--frogTint:#65cf62}
+#setupFrogs [data-frog="green"],#mobileFrogs [data-f="green"]{--frogTint:#61d05e}
+#setupFrogs [data-frog="blue"],#mobileFrogs [data-f="blue"]{--frogTint:#3799ff}
+#setupFrogs [data-frog="purple"],#mobileFrogs [data-f="purple"]{--frogTint:#a26ee8}
+#setupFrogs [data-frog="pink"],#mobileFrogs [data-f="pink"]{--frogTint:#ff75b6}
+#setupFrogs [data-frog="golden"],#mobileFrogs [data-f="golden"]{--frogTint:#ffd348}
+#setupFrogs [data-frog="red"],#mobileFrogs [data-f="red"]{--frogTint:#f14c50}
+#setupFrogs [data-frog="crystal"],#mobileFrogs [data-f="crystal"]{--frogTint:#d8c8ff}
+#setupFrogs [data-frog="seer"],#mobileFrogs [data-f="seer"]{--frogTint:#b18cff}
+#setupFrogs [data-frog="scout"],#mobileFrogs [data-f="scout"]{--frogTint:#6ed8ff}
+#setupFrogs [data-frog="memory"],#mobileFrogs [data-f="memory"]{--frogTint:#8ca9ff}
+#setupFrogs [data-frog="lucky"],#mobileFrogs [data-f="lucky"]{--frogTint:#ff87dc}
+#setupFrogs [data-frog]:not([data-frog="rainbow"])::before,#mobileFrogs [data-f]:not([data-f="rainbow"])::before{filter:drop-shadow(0 0 7px var(--frogTint));background:var(--frogTint);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 0 var(--frogTint)}
+#setupFrogs [data-frog="rainbow"]::before,#mobileFrogs [data-f="rainbow"]::before{background:linear-gradient(90deg,#ff5b5b,#ffd84f,#5de66f,#55b9ff,#bd70ff,#ff75b6);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 7px #fff)}
+</style>
+<script id="colored-frogs-mobile-fix-v1-script">
+(()=>{document.querySelectorAll('#setupFrogs [data-frog],#mobileFrogs [data-f]').forEach(b=>{const nodes=[...b.childNodes];const emoji=nodes.find(n=>n.nodeType===3&&n.textContent.includes('🐸'));if(emoji)emoji.textContent=emoji.textContent.replace('🐸','')})})();
 </script></body></html>
