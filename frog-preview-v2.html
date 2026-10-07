@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#082d23">
+<title>Frog Match Mobile</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,sans-serif;background:#082d23;color:#fff}
+body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+#splash{position:fixed;inset:0;z-index:99;background:#061f18;transition:opacity .55s}
+#splash.hide{opacity:0;pointer-events:none}
+#splash img{width:100%;height:100%;object-fit:contain}
+.splashWords{position:absolute;left:0;right:0;bottom:9%;text-align:center;text-shadow:0 4px 8px #000;display:flex;flex-direction:column}
+.splashWords b{font-size:42px;color:#8de85e}.splashWords strong{font-size:28px;color:#ffd743;letter-spacing:.1em}.splashWords small{margin-top:8px;font-weight:800}
+main{min-height:100vh;padding:12px;background:linear-gradient(#082d23,#174b38)}
+.hero{height:220px;border:2px solid #72b95f;border-radius:24px;overflow:hidden;position:relative;background:#061f18}
+.hero img{width:100%;height:100%;object-fit:cover}
+.heroText{position:absolute;left:0;right:0;bottom:0;padding:16px;background:linear-gradient(transparent,rgba(0,0,0,.88))}
+h1{margin:0;color:#8de85e;font-size:34px}.heroText p{margin:2px 0;color:#ffd743;font-weight:800}
+.status{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+.status div{background:#0d3b2e;border:1px solid #6ca865;border-radius:13px;padding:9px 4px;text-align:center;font-size:12px;font-weight:900}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.menu button{min-height:82px;border:1px solid #6ca865;border-radius:16px;background:#0d3b2e;color:#fff;text-align:left;padding:12px;font-size:21px;font-weight:900}
+.menu b,.menu small{display:block}.menu small{font-size:10px;color:#b9d9c3;margin-top:4px}
+.ad{height:78px;margin-top:10px;border:1px dashed #6b9479;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#86a793;font-size:9px;letter-spacing:.12em}.ad small{letter-spacing:0;margin-top:3px}
+</style>
+<style id="mobile-page-nav">#mobilePages{min-height:100vh}.mobilePage{display:none;padding:12px}.mobilePage.active{display:block}.mobilePage h2{font-size:26px}.pageBack,.pageAction,#mobileFrogs button,#mobileJourney button{border:1px solid #6ca865;border-radius:14px;background:#0d3b2e;color:#fff;padding:12px;font-weight:900}.pageAction{display:block;width:100%;min-height:62px;margin:10px 0;background:#2a8f4c;font-size:18px}.mobilePage img{width:100%;max-height:420px;object-fit:contain;border-radius:18px}#mobileFrogs,#mobileJourney{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mobileFrogs button.selected,#mobileJourney button.selected{outline:3px solid #fff36b;box-shadow:0 0 15px #55ee70}</style><style id="mobile-shop-trophies-v1">.pageBank{margin:10px 0;padding:10px;border:1px solid #6ca865;border-radius:14px;background:#0d3b2e;font-weight:900}.mobileShopGrid,.mobileTrophyGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.powerTile,.trophyTile{border:1px solid #6ca865;border-radius:15px;background:#0d3b2e;color:#fff;padding:10px;min-height:92px;text-align:center}.powerTile b,.powerTile small,.trophyTile b,.trophyTile small{display:block}.powerTile small,.trophyTile small{margin-top:4px;color:#bdd8c5}.powerTile button{margin-top:8px;border:0;border-radius:10px;padding:8px 10px;background:#49c85b;color:#082d23;font-weight:1000}.powerTile button:disabled{background:#526c5d;color:#cbd7cf}.trophyTile.locked{opacity:.45}.trophyTile.earned{border-color:#ffe25d;background:#5c4d18;box-shadow:0 0 14px rgba(255,226,93,.5)}.trophyTile.earned small{color:#ffe25d;font-weight:900}</style><style id="frog-color-force-v3">
+.miniFrog{background:#62bd69!important}
+.miniFrog.blue{background:#318cff!important}.miniFrog.purple{background:#a879df!important}.miniFrog.pink{background:#ff83bd!important}.miniFrog.golden,.miniFrog.gold{background:#ffd33d!important}.miniFrog.red{background:#f04444!important}
+.miniFrog.rainbow{background:linear-gradient(130deg,#ff4d4d 0%,#ffb52e 22%,#fff04b 38%,#4ed66a 55%,#42b9ff 73%,#a66cff 88%,#ff69b4 100%)!important}
+.miniFrog.crystal{background:linear-gradient(135deg,#fff,#b9fbff 20%,#8e9dff 42%,#f4c5ff 65%,#fff 82%)!important}
+.miniFrog.seer{background:#9c73e8!important}.miniFrog.scout{background:#55cde5!important}.miniFrog.memory{background:#829cff!important}.miniFrog.lucky{background:#ff7fc9!important}
+.miniFrog.blue:before,.miniFrog.blue:after{background:#318cff!important}.miniFrog.purple:before,.miniFrog.purple:after{background:#a879df!important}.miniFrog.pink:before,.miniFrog.pink:after{background:#ff83bd!important}.miniFrog.golden:before,.miniFrog.golden:after{background:#ffd33d!important}.miniFrog.red:before,.miniFrog.red:after{background:#f04444!important}
+</style></head>
+<body>
+<div id="splash"><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog Showdown"><div class="splashWords"><b>FROG MATCH</b><strong>SHOWDOWN</strong><small>Loading the pond… 🐸</small></div></div>
+<main>
+<div class="hero"><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog fighters"><div class="heroText"><h1>FROG MATCH</h1><p>Choose your next hop.</p></div></div>
+<div class="status"><div>🏆 Wins<br><span id="wins">0</span></div><div>🐸 Bank<br><span id="bank">0</span></div><div>🔥 Streak<br><span id="streak">0</span></div></div>
+<div class="menu">
+<button data-page="play">🎮<b>PLAY</b><small>Solo or Vs AI</small></button>
+<button data-page="frogs">🐸<b>MY FROGS</b><small>Choose & collect</small></button>
+
+<button data-page="powers">⚡<b>POWER SHOP</b><small>Buy & review powers</small></button>
+<button data-page="trophies">🏆<b>TROPHY POND</b><small>Your achievements</small></button>
+<button data-page="showdown">🥊<b>SHOWDOWN</b><small>Your battle arena</small></button>
+<button data-page="help">⚙️<b>HOW TO PLAY</b><small>Rules & settings</small></button>
+</div>
+<div class="ad">ADVERTISEMENT<small>Reserved for future advertiser</small></div>
+<section id="mobilePages" style="display:none">
+<section class="mobilePage" id="page-play"><button class="pageBack">← Home</button><h2>🎮 Play</h2><button class="pageAction" id="mobileSolo">🐸 Play Solo</button><button class="pageAction" id="mobileAI">🤖 Play vs AI</button></section>
+<section class="mobilePage" id="page-frogs"><button class="pageBack">← Home</button><h2>🐸 My Frogs</h2><p>Choose the frog you want to take into your next game.</p><div id="mobileFrogs"></div></section>
+<section class="mobilePage" id="page-journey"><button class="pageBack">← Home</button><h2>🗺️ Frog Journey</h2><p>Choose the difficulty for your next pond.</p><div id="mobileJourney"></div></section>
+<section class="mobilePage" id="page-powers"><button class="pageBack">← Home</button><h2>⚡ Power Shop</h2><p>Buy powers with Froggy Points. Purchased powers are saved for your games.</p><div class="pageBank">🐸 Bank: <b id="mobileBank">0</b></div><div id="mobilePowers" class="mobileShopGrid"></div></section>
+<section class="mobilePage" id="page-trophies"><button class="pageBack">← Home</button><h2>🏆 Trophy Pond</h2><p>Earn trophies as you win, build streaks, and conquer harder ponds.</p><div id="mobileTrophies" class="mobileTrophyGrid"></div></section>
+<section class="mobilePage" id="page-showdown"><button class="pageBack">← Home</button><h2>🥊 Showdown</h2><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog Showdown"></section>
+<section class="mobilePage" id="page-help"><button class="pageBack">← Home</button><h2>⚙️ How to Play</h2><p>Choose a frog and Journey level, then match identical cards to earn Froggy Points and unlock rewards.</p></section>
+</section></main>
+<script>
+document.getElementById('wins').textContent=localStorage.getItem('frogWins')||0;
+document.getElementById('bank').textContent=localStorage.getItem('frogBank')||0;
+document.getElementById('streak').textContent=localStorage.getItem('frogWinStreak')||0;
+addEventListener('load',()=>setTimeout(()=>{const s=document.getElementById('splash');s.classList.add('hide');setTimeout(()=>s.remove(),600)},1600));
+</script>
+<script id="mobile-page-nav-script">
+(()=>{const main=document.querySelector('main'),pages=document.getElementById('mobilePages');function openPage(n){[...main.children].forEach(x=>{if(x!==pages)x.style.display=n?'none':''});pages.style.display=n?'block':'none';pages.querySelectorAll('.mobilePage').forEach(x=>x.classList.toggle('active',x.id==='page-'+n));scrollTo(0,0)}document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));document.querySelectorAll('.pageBack').forEach(b=>b.addEventListener('click',()=>openPage('')));
+const fs=['green','blue','purple','pink','golden','red','rainbow','crystal','seer','scout','memory','lucky'];let sel=localStorage.getItem('frogSelected')||'green';const fg=document.getElementById('mobileFrogs');fg.innerHTML=fs.map(f=>'<button data-f="'+f+'" class="'+(f===sel?'selected':'')+'"><span class="miniFrog '+f+'"><i></i><i></i></span>'+f.toUpperCase()+'</button>').join('');fg.addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;sel=b.dataset.f;localStorage.setItem('frogSelected',sel);fg.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b))});
+const lv=[['Easy',12],['Beginner',18],['Medium',24],['Tricky',30],['Hard',36],['Expert',42],['Master',48],['Ultimate',52]];let li=+(localStorage.getItem('frogDifficulty')||0);const j=document.getElementById('mobileJourney');j.innerHTML=lv.map((x,i)=>'<button data-l="'+i+'" class="'+(i===li?'selected':'')+'">'+x[0]+'<br><small>'+x[1]+' cards</small></button>').join('');j.addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(!b)return;li=+b.dataset.l;localStorage.setItem('frogDifficulty',li);j.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b))});
+function launch(m){localStorage.setItem('frogGameMode',m);localStorage.setItem('frogMobileLaunch','1');location.href='./index.html?play='+m+'&mobile=1'}document.getElementById('mobileSolo').onclick=()=>launch('solo');document.getElementById('mobileAI').onclick=()=>launch('ai')})();
+</script><script id="mobile-shop-trophies-v1-script">
+(()=>{const powers=[['feast','🍽️','Feast',50,'Add 3 frogs to your score.'],['vision','👁️','Vision',60,'Peek at 2 hidden cards.'],['shield','🛡️','Shield',70,'Block a Bot match.'],['double','✖️2','Double',80,'Earn +2 extra on a match.'],['freeze','❄️','Freeze',90,'Skip the Bot’s next turn.'],['snatch','🐸','Snatch',100,'Steal up to 3 Bot frogs.']];let inv={};try{inv=JSON.parse(localStorage.getItem('frogPowerInventory')||'{}')}catch(e){}const box=document.getElementById('mobilePowers'),bankEl=document.getElementById('mobileBank');function bank(){return +(localStorage.getItem('frogBank')||0)}function renderP(){bankEl.textContent=bank();box.innerHTML=powers.map(p=>'<div class="powerTile"><div style="font-size:25px">'+p[1]+'</div><b>'+p[2]+'</b><small>'+p[4]+'</small><button data-buy="'+p[0]+'" '+(bank()<p[3]?'disabled':'')+'>Buy '+p[3]+' 🐸</button><small>Owned: '+(inv[p[0]]||0)+'</small></div>').join('')}box.addEventListener('click',e=>{const b=e.target.closest('[data-buy]');if(!b)return;const p=powers.find(x=>x[0]===b.dataset.buy);let cash=bank();if(!p||cash<p[3])return;cash-=p[3];localStorage.setItem('frogBank',cash);inv[p[0]]=(inv[p[0]]||0)+1;localStorage.setItem('frogPowerInventory',JSON.stringify(inv));renderP();document.getElementById('bank').textContent=cash});
+const names=['First Win','Hot Hopper','Pond Regular','Frog Legend','Brave Jumper','Pond Champion','Leap Master','Fly Catcher','Unfroggettable','Master Hopper','Lily Pad Legend','Pond Royalty','Croak Star','Hop Streak Hero','Ultimate Frog','Frog Hall of Fame'],need=[1,3,5,10,12,15,18,20,22,25,27,30,32,35,40,50],wins=+(localStorage.getItem('frogWins')||0);document.getElementById('mobileTrophies').innerHTML=names.map((n,i)=>'<div class="trophyTile '+(wins>=need[i]?'earned':'locked')+'"><div style="font-size:25px">🏆</div><b>'+n+'</b><small>'+(wins>=need[i]?'EARNED!':'Win goal: '+need[i])+'</small></div>').join('');renderP()})();
+</script><script id="mobile-state-compat-v2">
+(()=>{const owned=(()=>{try{return JSON.parse(localStorage.getItem('frogColors')||'["green"]')}catch(e){return['green']}})();const frogBox=document.getElementById('mobileFrogs');if(frogBox){frogBox.querySelectorAll('[data-f]').forEach(b=>{const power=['seer','scout','memory','lucky'].includes(b.dataset.f);const unlocked=owned.includes(b.dataset.f)||power;b.disabled=!unlocked;b.style.opacity=unlocked?'1':'.38';if(!unlocked)b.innerHTML+=' <small>Locked</small>'})}
+const achievementKeys=(()=>{try{return JSON.parse(localStorage.getItem('frogAchievements')||'[]')}catch(e){return[]}})();const trophyBox=document.getElementById('mobileTrophies');if(trophyBox&&Array.isArray(achievementKeys)&&achievementKeys.length){const legacy=['first','streak3','wins5','wins10','hard','extreme','wins15','wins20','streak5','master','legend','champion','wins30','streak10','ultimate','wins50'];trophyBox.querySelectorAll('.trophyTile').forEach((el,i)=>{if(achievementKeys.includes(legacy[i])){el.classList.remove('locked');el.classList.add('earned');const s=el.querySelector('small');if(s)s.textContent='EARNED!'}})}
+})();
+</script><style id="guided-play-setup-v1">
+#page-play{padding-bottom:24px}.playStep{background:#0d3b2e;border:1px solid #6ca865;border-radius:18px;padding:13px;margin:10px 0}.playStep h3{margin:0 0 9px;color:#fff36b}.setupGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.setupChoice{min-height:58px;border:1px solid #6ca865;border-radius:13px;background:#123f31;color:#fff;padding:8px;font-weight:900}.setupChoice.selected{outline:3px solid #fff36b;box-shadow:0 0 14px #55ee70}.setupChoice:disabled{opacity:.35}.modeGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.modePick{min-height:66px;border:1px solid #6ca865;border-radius:14px;background:#123f31;color:#fff;font-size:17px;font-weight:900}.modePick.selected{outline:3px solid #fff36b;background:#246b3d}.enterPond{width:100%;min-height:64px;margin-top:12px;border:2px solid #fff36b;border-radius:17px;background:#49c85b;color:#082d23;font-size:20px;font-weight:1000}.setupSummary{text-align:center;color:#cfe5d5;font-weight:800}
+</style>
+<script id="guided-play-setup-v1-script">
+(()=>{const page=document.getElementById('page-play');if(!page)return;page.innerHTML='<button class="pageBack">← Home</button><h2>🎮 Get Ready to Play</h2><div class="playStep"><h3>1. Pick Your Frog</h3><div id="setupFrogs" class="setupGrid"></div></div><div class="playStep"><h3>2. Pick Your Level</h3><div id="setupLevels" class="setupGrid"></div></div><div class="playStep"><h3>3. Choose Your Game</h3><div class="modeGrid"><button class="modePick" data-mode="solo">🐸<br>SOLO</button><button class="modePick" data-mode="ai">🤖<br>VS AI</button></div></div><div id="setupSummary" class="setupSummary"></div><button id="enterPond" class="enterPond">PLAY →</button>';
+page.querySelector('.pageBack').onclick=()=>{const pages=document.getElementById('mobilePages'),main=document.querySelector('main');[...main.children].forEach(x=>{if(x!==pages)x.style.display=''});pages.style.display='none';page.classList.remove('active');scrollTo(0,0)};
+let owned;try{owned=JSON.parse(localStorage.getItem('frogColors')||'["green"]')}catch(e){owned=['green']}let frog=localStorage.getItem('frogSelected')||'green';const all=['green','blue','purple','pink','golden','red','rainbow','crystal','seer','scout','memory','lucky'];const fb=document.getElementById('setupFrogs');fb.innerHTML=all.map(x=>{const power=['seer','scout','memory','lucky'].includes(x),ok=owned.includes(x)||power;return '<button class="setupChoice '+(x===frog?'selected':'')+'" data-frog="'+x+'" '+(ok?'':'disabled')+'><span class="miniFrog '+x+'"><i></i><i></i></span>'+x.toUpperCase()+'</button>'}).join('');
+let level=+(localStorage.getItem('frogDifficulty')||0);const levels=[['Easy',12],['Beginner',18],['Medium',24],['Tricky',30],['Hard',36],['Expert',42],['Master',48],['Ultimate',52]],lb=document.getElementById('setupLevels');lb.innerHTML=levels.map((x,i)=>'<button class="setupChoice '+(i===level?'selected':'')+'" data-level="'+i+'">'+x[0]+'<br><small>'+x[1]+' cards</small></button>').join('');
+let mode=localStorage.getItem('frogGameMode')||'solo';const summary=document.getElementById('setupSummary');function paint(){fb.querySelectorAll('[data-frog]').forEach(b=>b.classList.toggle('selected',b.dataset.frog===frog));lb.querySelectorAll('[data-level]').forEach(b=>b.classList.toggle('selected',+b.dataset.level===level));page.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===mode));summary.textContent=frog.toUpperCase()+' FROG • '+levels[level][0].toUpperCase()+' • '+(mode==='ai'?'VS AI':'SOLO')}paint();
+fb.onclick=e=>{const b=e.target.closest('[data-frog]');if(!b||b.disabled)return;frog=b.dataset.frog;localStorage.setItem('frogSelected',frog);paint()};lb.onclick=e=>{const b=e.target.closest('[data-level]');if(!b)return;level=+b.dataset.level;localStorage.setItem('frogDifficulty',level);paint()};page.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;localStorage.setItem('frogGameMode',mode);paint()});document.getElementById('enterPond').onclick=()=>{localStorage.setItem('frogSelected',frog);localStorage.setItem('frogDifficulty',level);localStorage.setItem('frogGameMode',mode);localStorage.setItem('frogMobileLaunch','1');location.href='./index.html?play='+mode+'&mobile=1'};
+})();
+</script><style id="colored-frogs-mobile-fix-v1">
+#setupFrogs [data-frog],#mobileFrogs [data-f]{position:relative;overflow:hidden}
+#setupFrogs [data-frog]::before,#mobileFrogs [data-f]::before{content:"🐸";display:block;font-size:34px;line-height:1.05;margin-bottom:3px}
+#setupFrogs [data-frog],#mobileFrogs [data-f]{--frogTint:#65cf62}
+#setupFrogs [data-frog="green"],#mobileFrogs [data-f="green"]{--frogTint:#61d05e}
+#setupFrogs [data-frog="blue"],#mobileFrogs [data-f="blue"]{--frogTint:#3799ff}
+#setupFrogs [data-frog="purple"],#mobileFrogs [data-f="purple"]{--frogTint:#a26ee8}
+#setupFrogs [data-frog="pink"],#mobileFrogs [data-f="pink"]{--frogTint:#ff75b6}
+#setupFrogs [data-frog="golden"],#mobileFrogs [data-f="golden"]{--frogTint:#ffd348}
+#setupFrogs [data-frog="red"],#mobileFrogs [data-f="red"]{--frogTint:#f14c50}
+#setupFrogs [data-frog="crystal"],#mobileFrogs [data-f="crystal"]{--frogTint:#d8c8ff}
+#setupFrogs [data-frog="seer"],#mobileFrogs [data-f="seer"]{--frogTint:#b18cff}
+#setupFrogs [data-frog="scout"],#mobileFrogs [data-f="scout"]{--frogTint:#6ed8ff}
+#setupFrogs [data-frog="memory"],#mobileFrogs [data-f="memory"]{--frogTint:#8ca9ff}
+#setupFrogs [data-frog="lucky"],#mobileFrogs [data-f="lucky"]{--frogTint:#ff87dc}
+#setupFrogs [data-frog]:not([data-frog="rainbow"])::before,#mobileFrogs [data-f]:not([data-f="rainbow"])::before{filter:drop-shadow(0 0 7px var(--frogTint));background:var(--frogTint);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 0 var(--frogTint)}
+#setupFrogs [data-frog="rainbow"]::before,#mobileFrogs [data-f="rainbow"]::before{background:linear-gradient(90deg,#ff5b5b,#ffd84f,#5de66f,#55b9ff,#bd70ff,#ff75b6);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 7px #fff)}
+</style>
+<script id="colored-frogs-mobile-fix-v1-script">
+(()=>{document.querySelectorAll('#setupFrogs [data-frog],#mobileFrogs [data-f]').forEach(b=>{const nodes=[...b.childNodes];const emoji=nodes.find(n=>n.nodeType===3&&n.textContent.includes('🐸'));if(emoji)emoji.textContent=emoji.textContent.replace('🐸','')})})();
+</script><style id="real-frog-faces-mobile-v2">
+#setupFrogs [data-frog]::before,#mobileFrogs [data-f]::before{display:none!important}
+#setupFrogs .miniFrog,#mobileFrogs .miniFrog{position:relative;display:block;width:48px;height:39px;margin:0 auto 7px;border-radius:48% 48% 45% 45%;background:#62bd69;box-shadow:inset 0 -5px 0 #0002,0 3px 6px #0004}
+.miniFrog:before,.miniFrog:after{content:"";position:absolute;top:-6px;width:17px;height:17px;border-radius:50%;background:inherit;border:2px solid #fff}.miniFrog:before{left:4px}.miniFrog:after{right:4px}
+.miniFrog i{position:absolute;z-index:2;top:0;width:5px;height:7px;border-radius:50%;background:#172d24}.miniFrog i:first-child{left:12px}.miniFrog i:last-child{right:12px}
+.miniFrog.green{background:#62bd69}.miniFrog.blue{background:#318cff}.miniFrog.purple{background:#a879df}.miniFrog.pink{background:#ff83bd}.miniFrog.gold,.miniFrog.golden{background:#ffd33d}.miniFrog.red{background:#f04444}.miniFrog.rainbow{background:linear-gradient(130deg,#ff4d4d,#ffb52e 22%,#fff04b 38%,#4ed66a 55%,#42b9ff 73%,#a66cff 88%,#ff69b4)}.miniFrog.crystal{background:linear-gradient(135deg,#fff,#b9fbff 20%,#8e9dff 42%,#f4c5ff 65%,#fff 82%);box-shadow:inset -5px -5px 0 #7c8ee866,0 0 9px #8ceaff,0 0 18px #ba8cff}.miniFrog.seer{background:linear-gradient(135deg,#efe4ff,#9c73e8,#6535a8)}.miniFrog.scout{background:linear-gradient(135deg,#d9fbff,#55cde5,#1783a8)}.miniFrog.memory{background:linear-gradient(135deg,#e6edff,#829cff,#4e61b9)}.miniFrog.lucky{background:linear-gradient(135deg,#ffe2f5,#ff7fc9,#bd3e8a)}
+#setupFrogs .setupChoice.selected .miniFrog,#mobileFrogs button.selected .miniFrog{outline:3px solid #fff36b;outline-offset:3px;box-shadow:0 0 0 3px #35e66a,0 0 18px 6px rgba(100,255,115,.9)}
+</style>
+<script id="real-frog-faces-mobile-v2-script">
+(()=>{const paint=()=>document.querySelectorAll('#setupFrogs [data-frog],#mobileFrogs [data-f]').forEach(b=>{if(b.querySelector('.miniFrog'))return;const n=b.dataset.frog||b.dataset.f;const face=document.createElement('span');face.className='miniFrog '+n;face.innerHTML='<i></i><i></i>';b.prepend(face)});paint();new MutationObserver(paint).observe(document.body,{childList:true,subtree:true})})();
+</script><style id="frog-music-v1">
+#frogMusicBtn{position:fixed;right:12px;bottom:12px;z-index:90;border:1px solid #8bd276;border-radius:999px;background:#0d3b2e;color:#fff;padding:10px 13px;font-weight:900;box-shadow:0 4px 14px #0005}
+</style>
+<button id="frogMusicBtn" type="button" aria-pressed="false">🎵 Music Off</button>
+<script id="frog-music-v1-script">
+(()=>{let ctx,timer,on=false,step=0;const btn=document.getElementById('frogMusicBtn');
+const melody=[0,4,7,9,7,4,2,4,0,4,7,11,9,7,4,2],bass=[0,0,5,5,7,7,5,5];
+function tone(freq,dur,vol,type='sine'){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(0.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(vol,ctx.currentTime+.015);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+dur);o.connect(g).connect(ctx.destination);o.start();o.stop(ctx.currentTime+dur+.03)}
+function tick(){if(!on)return;const root=196,n=melody[step%melody.length],b=bass[Math.floor(step/2)%bass.length];tone(root*Math.pow(2,n/12),.22,.045,'triangle');if(step%2===0)tone(98*Math.pow(2,b/12),.38,.025,'sine');if(step%4===3)tone(784,.055,.012,'sine');step++;timer=setTimeout(tick,285)}
+btn.onclick=()=>{on=!on;btn.textContent=on?'🎵 Music On':'🎵 Music Off';btn.setAttribute('aria-pressed',on);if(on){ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();ctx.resume();tick()}else clearTimeout(timer)};
+})();
+</script></body></html>
