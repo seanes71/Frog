@@ -782,31 +782,35 @@ window.frogPondSplash=window.frogPondSplash||function(){};
  window.frogWrongSound=()=>{window.frogPondSplash?.();};
  try{window.frogMusicStop?.()}catch{}
 })();
-</script><script id="frog-local-pond-loop-v29">
+</script><script id="frog-local-pond-loop-v30">
 (()=>{
  const src='./assets/baranova_n-frog-croak-545869.mp3';
- let pond=null,started=false;
+ const pond=document.createElement('audio');
+ pond.src=src;pond.loop=true;pond.preload='auto';pond.volume=.42;
+ pond.setAttribute('playsinline','');pond.setAttribute('webkit-playsinline','');
+ pond.style.display='none';
+ let started=false;
  function startPond(){
-   if(started&&pond&&!pond.paused)return;
-   if(!pond){
-     pond=document.createElement('audio');
-     pond.src=src;
-     pond.loop=true;
-     pond.preload='auto';
-     pond.volume=.42;
-     pond.setAttribute('playsinline','');
-     pond.setAttribute('webkit-playsinline','');
-     document.body.appendChild(pond);
-   }
+   if(started&&!pond.paused)return;
    pond.muted=false;
+   try{pond.load()}catch{}
    const p=pond.play();
-   if(p&&p.then)p.then(()=>{started=true}).catch(e=>console.warn('Pond ambience blocked',e));
+   if(p&&p.then)p.then(()=>{started=true}).catch(()=>{started=false});
  }
- function stopPond(){if(pond){pond.pause();pond.currentTime=0}started=false}
- document.addEventListener('pointerdown',startPond,{capture:true});
- document.addEventListener('touchstart',startPond,{capture:true,passive:true});
- document.addEventListener('click',startPond,{capture:true});
- document.addEventListener('keydown',startPond,{capture:true});
+ function stopPond(){pond.pause();started=false}
+ function unlock(e){
+   startPond();
+   if(started){document.removeEventListener('touchend',unlock,true);document.removeEventListener('click',unlock,true)}
+ }
+ function init(){
+   if(!pond.isConnected)document.body.appendChild(pond);
+   // iPhone/iPad Safari requires play() to occur directly inside the completed touch gesture.
+   document.addEventListener('touchend',unlock,true);
+   document.addEventListener('pointerup',unlock,true);
+   document.addEventListener('click',unlock,true);
+   document.addEventListener('keydown',unlock,true);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  window.frogPondAmbienceStart=startPond;
  window.frogPondAmbienceStop=stopPond;
 })();
