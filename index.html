@@ -377,4 +377,19 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
  body.frogPlayMode #frogAdSlot{display:none!important}
  body.frogPlayMode .layout>main{display:block!important;width:100%!important;max-width:none!important}
 }
-</style></body></html>
+</style><style id="clean-mobile-play-rebuild">
+@media(max-width:699px){
+body.mobileCleanPlay .top,body.mobileCleanPlay .topStats,body.mobileCleanPlay aside,body.mobileCleanPlay .difficulty,body.mobileCleanPlay .frogAchievement,body.mobileCleanPlay #frogAchievementPanel,body.mobileCleanPlay #frogAdSlot,body.mobileCleanPlay .superPowers,body.mobileCleanPlay .showdown,body.mobileCleanPlay .shop{display:none!important}
+body.mobileCleanPlay .wrap{padding:8px!important}
+body.mobileCleanPlay main,body.mobileCleanPlay .layout,body.mobileCleanPlay .game,body.mobileCleanPlay .gamePanel{width:100%!important;max-width:none!important;margin:0!important;position:static!important;transform:none!important}
+body.mobileCleanPlay .board{margin-top:8px!important}
+#mobilePlayBar{display:none}
+body.mobileCleanPlay #mobilePlayBar{display:flex;position:sticky;top:0;z-index:60;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;background:#082d23;border-bottom:1px solid #69a965}
+#mobilePlayBar button{border:1px solid #7ec46d;border-radius:10px;background:#0d3b2e;color:#fff;padding:9px 11px;font-weight:900}
+#mobilePlayBar b{color:#fff36b}
+}
+</style>
+<div id="mobilePlayBar"><button id="mobileHomeBtn">← Home</button><b>🐸 FROG MATCH</b><span id="mobilePlayMode"></span></div>
+<script id="clean-mobile-play-rebuild-script">
+(()=>{const q=new URLSearchParams(location.search);if(q.get('mobile')==='1'||localStorage.getItem('frogMobileLaunch')==='1'){document.body.classList.add('mobileCleanPlay');localStorage.removeItem('frogMobileLaunch');const m=q.get('play')||localStorage.getItem('frogGameMode')||'solo';document.getElementById('mobilePlayMode').textContent=m==='ai'?'Vs AI':'Solo';document.getElementById('mobileHomeBtn').onclick=()=>location.href='./mobile.html'}})();
+</script></body></html>
