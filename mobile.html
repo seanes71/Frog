@@ -25,7 +25,7 @@ h1{margin:0;color:#8de85e;font-size:34px}.heroText p{margin:2px 0;color:#ffd743;
 .menu b,.menu small{display:block}.menu small{font-size:10px;color:#b9d9c3;margin-top:4px}
 .ad{height:78px;margin-top:10px;border:1px dashed #6b9479;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#86a793;font-size:9px;letter-spacing:.12em}.ad small{letter-spacing:0;margin-top:3px}
 </style>
-</head>
+<style id="mobile-page-nav">#mobilePages{min-height:100vh}.mobilePage{display:none;padding:12px}.mobilePage.active{display:block}.mobilePage h2{font-size:26px}.pageBack,.pageAction,#mobileFrogs button,#mobileJourney button{border:1px solid #6ca865;border-radius:14px;background:#0d3b2e;color:#fff;padding:12px;font-weight:900}.pageAction{display:block;width:100%;min-height:62px;margin:10px 0;background:#2a8f4c;font-size:18px}.mobilePage img{width:100%;max-height:420px;object-fit:contain;border-radius:18px}#mobileFrogs,#mobileJourney{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mobileFrogs button.selected,#mobileJourney button.selected{outline:3px solid #fff36b;box-shadow:0 0 15px #55ee70}</style></head>
 <body>
 <div id="splash"><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog Showdown"><div class="splashWords"><b>FROG MATCH</b><strong>SHOWDOWN</strong><small>Loading the pond… 🐸</small></div></div>
 <main>
@@ -41,11 +41,24 @@ h1{margin:0;color:#8de85e;font-size:34px}.heroText p{margin:2px 0;color:#ffd743;
 <button data-page="help">⚙️<b>HOW TO PLAY</b><small>Rules & settings</small></button>
 </div>
 <div class="ad">ADVERTISEMENT<small>Reserved for future advertiser</small></div>
-</main>
+<section id="mobilePages" style="display:none">
+<section class="mobilePage" id="page-play"><button class="pageBack">← Home</button><h2>🎮 Play</h2><button class="pageAction" id="mobileSolo">🐸 Play Solo</button><button class="pageAction" id="mobileAI">🤖 Play vs AI</button></section>
+<section class="mobilePage" id="page-frogs"><button class="pageBack">← Home</button><h2>🐸 My Frogs</h2><p>Choose the frog you want to take into your next game.</p><div id="mobileFrogs"></div></section>
+<section class="mobilePage" id="page-journey"><button class="pageBack">← Home</button><h2>🗺️ Frog Journey</h2><p>Choose the difficulty for your next pond.</p><div id="mobileJourney"></div></section>
+<section class="mobilePage" id="page-powers"><button class="pageBack">← Home</button><h2>⚡ Power Shop</h2><p>Your powers and shop will live here.</p></section>
+<section class="mobilePage" id="page-trophies"><button class="pageBack">← Home</button><h2>🏆 Trophy Pond</h2><p>Your earned and locked achievements will live here.</p></section>
+<section class="mobilePage" id="page-showdown"><button class="pageBack">← Home</button><h2>🥊 Showdown</h2><img src="assets/frog-showdown-final.jpg?v=bd4523f" alt="Frog Showdown"></section>
+<section class="mobilePage" id="page-help"><button class="pageBack">← Home</button><h2>⚙️ How to Play</h2><p>Choose a frog and Journey level, then match identical cards to earn Froggy Points and unlock rewards.</p></section>
+</section></main>
 <script>
 document.getElementById('wins').textContent=localStorage.getItem('frogWins')||0;
 document.getElementById('bank').textContent=localStorage.getItem('frogBank')||0;
 document.getElementById('streak').textContent=localStorage.getItem('frogWinStreak')||0;
 addEventListener('load',()=>setTimeout(()=>{const s=document.getElementById('splash');s.classList.add('hide');setTimeout(()=>s.remove(),600)},1600));
 </script>
-</body></html>
+<script id="mobile-page-nav-script">
+(()=>{const main=document.querySelector('main'),pages=document.getElementById('mobilePages');function openPage(n){[...main.children].forEach(x=>{if(x!==pages)x.style.display=n?'none':''});pages.style.display=n?'block':'none';pages.querySelectorAll('.mobilePage').forEach(x=>x.classList.toggle('active',x.id==='page-'+n));scrollTo(0,0)}document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));document.querySelectorAll('.pageBack').forEach(b=>b.addEventListener('click',()=>openPage('')));
+const fs=['green','blue','purple','pink','golden','red','rainbow','crystal','seer','scout','memory','lucky'];let sel=localStorage.getItem('frogSelected')||'green';const fg=document.getElementById('mobileFrogs');fg.innerHTML=fs.map(f=>'<button data-f="'+f+'" class="'+(f===sel?'selected':'')+'">🐸<br>'+f.toUpperCase()+'</button>').join('');fg.addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(!b)return;sel=b.dataset.f;localStorage.setItem('frogSelected',sel);fg.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b))});
+const lv=[['Easy',12],['Beginner',18],['Medium',24],['Tricky',30],['Hard',36],['Expert',42],['Master',48],['Ultimate',52]];let li=+(localStorage.getItem('frogLevel')||0);const j=document.getElementById('mobileJourney');j.innerHTML=lv.map((x,i)=>'<button data-l="'+i+'" class="'+(i===li?'selected':'')+'">'+x[0]+'<br><small>'+x[1]+' cards</small></button>').join('');j.addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(!b)return;li=+b.dataset.l;localStorage.setItem('frogLevel',li);j.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b))});
+function launch(m){localStorage.setItem('frogGameMode',m);location.href='./index.html?play='+m}document.getElementById('mobileSolo').onclick=()=>launch('solo');document.getElementById('mobileAI').onclick=()=>launch('ai')})();
+</script></body></html>
