@@ -502,9 +502,9 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 <style id="showdown-only-final">
 #showdownPanel{display:block;box-sizing:border-box;width:100%;overflow:visible;background:#063a2e;padding:10px;border:2px solid #6da86f;border-radius:20px}
 #showdownPanel h2{margin:0 0 8px;text-align:center}
-#showdownArena{position:relative;width:100%;height:210px;overflow:hidden;border-radius:14px;background:radial-gradient(circle at 50% 30%,#1a725b 0,#084436 52%,#03271f 100%)}
-.showdownFighter{position:absolute;bottom:8px;width:46%;height:190px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 7px 5px #0007)}
-.playerCartoon{left:0}.rivalCartoon{right:0}
+#showdownArena{position:relative;width:100%;height:250px;overflow:visible;border-radius:14px;background:radial-gradient(circle at 50% 30%,#1a725b 0,#084436 52%,#03271f 100%)}
+.showdownFighter{position:absolute;bottom:10px;width:43%;height:225px;object-fit:contain;object-position:center;filter:drop-shadow(0 7px 5px #0007)}
+.playerCartoon{left:3%}.rivalCartoon{right:3%}
 .showdownVS{position:absolute;z-index:4;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-7deg);font:900 34px/1 system-ui;color:#ffd84d;text-shadow:3px 3px 0 #9d3026,0 0 12px #ffb82e}
 .fightImpact{display:none;position:absolute;z-index:6;left:50%;top:34%;transform:translate(-50%,-50%) rotate(-8deg);font:900 28px/1 system-ui;color:#fff16b;text-shadow:3px 3px 0 #a52b24}
 #showdownPanel.fighting .playerCartoon{animation:playerRealFight 3.2s ease-in-out both}
@@ -514,7 +514,7 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
 @keyframes rivalRealFight{0%,100%{transform:translate(0,0) rotate(0)}30%{transform:translate(-30px,-4px) rotate(-4deg)}43%{transform:translate(-3px,0)}67%{transform:translate(-34px,-5px) rotate(5deg)}79%{transform:translate(-2px,0)}}
 @keyframes impactReal{0%,16%,25%,31%,49%,57%,68%,76%,83%,100%{opacity:0}17%,24%,50%,56%,77%,82%{opacity:1}}
 #showdownPanel .dockNames{display:flex;justify-content:space-between;gap:10px;margin-top:8px}#showdownPanel .dockNames b{flex:1;text-align:center}#showdownPanel .dockHint{margin:8px 0 0;text-align:center}
-@media(max-width:600px){#showdownArena{height:175px}.showdownFighter{height:158px;width:48%}.showdownVS{font-size:28px}}
+@media(max-width:600px){#showdownArena{height:230px}.showdownFighter{height:205px;width:43%}.playerCartoon{left:3%}.rivalCartoon{right:3%}.showdownVS{font-size:28px}}
 </style><style id="earned-powerups-v1">
 .earnedPowerTray{margin:12px 0 4px;padding:10px;border:1px solid #5e9d70;border-radius:14px;background:#07382e}
 .earnedPowerTitle{display:block;font-size:12px;letter-spacing:.06em;margin-bottom:7px;color:#d9f5d8}
