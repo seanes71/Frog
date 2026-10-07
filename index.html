@@ -775,4 +775,52 @@ function showRoundFight(n,done){const old=document.querySelector('.frogRoundFigh
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
-</script></body></html>
+</script><script id="frog-casino-pond-audio-v26">
+(()=>{
+ let a=null,master=null,music=null,amb=null,started=false,musicTimer=null,splashTimer=null,step=0;
+ const AC=window.AudioContext||window.webkitAudioContext;
+ function init(){
+   if(!AC)return null;
+   if(!a)a=new AC();
+   if(a.state==='suspended')a.resume();
+   if(!master){master=a.createGain();master.gain.value=.72;master.connect(a.destination);
+     music=a.createGain();music.gain.value=.10;music.connect(master);
+     amb=a.createGain();amb.gain.value=.22;amb.connect(master);}
+   return a;
+ }
+ function ping(freq,when,dur=.16,vol=.055,type='sine'){
+   const x=init();if(!x)return;const o=x.createOscillator(),g=x.createGain();
+   o.type=type;o.frequency.setValueAtTime(freq,when);g.gain.setValueAtTime(.0001,when);
+   g.gain.exponentialRampToValueAtTime(vol,when+.012);g.gain.exponentialRampToValueAtTime(.0001,when+dur);
+   o.connect(g).connect(music);o.start(when);o.stop(when+dur+.03);
+ }
+ function casinoTick(){
+   if(!started)return;const x=init(),t=x.currentTime+.02;
+   const chords=[[261.63,329.63,392],[293.66,369.99,440],[329.63,415.3,493.88],[293.66,369.99,440]];
+   const ch=chords[Math.floor(step/4)%chords.length],n=ch[step%3];
+   ping(n,t,.20,.042,'sine');if(step%4===0)ping(ch[0]/2,t,.34,.026,'triangle');
+   if(step%8===6)ping(n*2,t+.11,.12,.028,'sine');
+   step++;musicTimer=setTimeout(casinoTick,360);
+ }
+ function splash(){
+   const x=init();if(!x)return;const t=x.currentTime,b=x.createBuffer(1,Math.floor(x.sampleRate*.42),x.sampleRate),d=b.getChannelData(0);
+   for(let i=0;i<d.length;i++){const e=Math.exp(-i/(x.sampleRate*.105));d[i]=(Math.random()*2-1)*e;}
+   const s=x.createBufferSource(),lp=x.createBiquadFilter(),g=x.createGain();
+   s.buffer=b;lp.type='lowpass';lp.frequency.setValueAtTime(1500,t);lp.frequency.exponentialRampToValueAtTime(330,t+.38);
+   g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16,t+.018);g.gain.exponentialRampToValueAtTime(.0001,t+.40);
+   s.connect(lp).connect(g).connect(amb);s.start(t);
+   ping(95,t+.02,.18,.045,'sine');
+ }
+ function scheduleSplash(){
+   if(!started)return;clearTimeout(splashTimer);
+   splashTimer=setTimeout(()=>{splash();scheduleSplash()},5000+Math.random()*9000);
+ }
+ function start(){
+   if(started)return;started=true;init();casinoTick();setTimeout(splash,1100);scheduleSplash();
+ }
+ document.addEventListener('pointerdown',start,{once:true,capture:true});
+ document.addEventListener('keydown',start,{once:true,capture:true});
+ window.frogPondSplash=splash;
+})();
+</script>
+</body></html>
