@@ -62,4 +62,20 @@ document.getElementById('createAccount').onclick=async()=>{msg.textContent='Crea
 document.getElementById('loginAccount').onclick=async()=>{msg.textContent='Logging in…';try{await signInWithEmailAndPassword(auth,email.value.trim(),password.value)}catch(e){msg.textContent=friendly(e)}};
 onAuthStateChanged(auth,async user=>{currentUser=user;if(!user){gate.classList.remove('authHidden');return}gate.classList.add('authHidden');if(sessionStorage.getItem('frogCloudLoaded')!==user.uid){await cloudLoad(user)}else{await cloudSave()}if(!document.getElementById('frogAccountBar')){const bar=document.createElement('div');bar.id='frogAccountBar';bar.className='authUserBar';bar.innerHTML='<span>☁️ Saved</span><button class="authLogout" type="button">Log Out</button>';bar.querySelector('button').onclick=async()=>{sessionStorage.removeItem('frogCloudLoaded');await signOut(auth);location.reload()};document.querySelector('header')?.appendChild(bar)}});
 const originalSet=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){originalSet.call(this,k,v);if(this===localStorage&&saveKeys.includes(k)&&currentUser&&!loadingCloud){clearTimeout(saveTimer);saveTimer=setTimeout(cloudSave,450)}};
-</script></body></html>
+</script><style id="dark-theme-final-override">
+html body{background:#173b2b!important;color:#f7f3dc!important}
+html body #app{background:radial-gradient(circle at 50% 12%,#66865a 0,#31553d 36%,#173b2b 80%)!important}
+html body .panel{background:linear-gradient(145deg,#173c2d,#102a20)!important;border:2px solid #79a96f!important;color:#fff!important}
+html body .difficulty{background:linear-gradient(145deg,#173c2d,#102a20)!important}
+html body .difficulty h2,html body .turn strong,html body .shop h2,html body .collection h2{color:#fff!important}
+html body .difficulty p,html body .shop p,html body .collection p,html body .log{color:#c8d7bf!important}
+html body .level{background:#193d31!important;color:#fff!important;border:2px solid #607b69!important}
+html body .level small{color:#d6e3d2!important}
+html body .level.active{background:linear-gradient(#61cc4b,#2b963b)!important;color:#fff!important;border-color:#d8ffad!important}
+html body .level.active small{color:#fff!important}
+html body .board{background:#092e22!important;border:2px solid #72ad68!important}
+html body .pill{background:#102d23!important;color:#fff!important;border:2px solid #789d76!important}
+html body .turn{background:#102d23!important;border-radius:14px!important;padding:10px!important}
+html body .timer{background:#254b39!important;color:#fff!important}
+html body .power{background:#173a2d!important;color:#fff!important;border-color:#668b70!important}
+</style></body></html>
