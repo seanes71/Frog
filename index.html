@@ -796,7 +796,6 @@ window.frogPondSplash=window.frogPondSplash||function(){};
 <script id="frog-card-result-audio-v31">
 (()=>{
  const happySrc='./assets/Happy%20Frog%20sound.mp3';
- const splashSrc='./assets/Splashing%20Water.mp3';
  function play(src,rate=1,volume=.85){
    try{
      const a=new Audio(src);
@@ -811,8 +810,8 @@ window.frogPondSplash=window.frogPondSplash||function(){};
  window.frogCardSplash=()=>{};
  window.frogCardRibbit=()=>{};
  window.frogCorrectSound=()=>play(happySrc,2,.9);
- window.frogWrongSound=()=>play(splashSrc,1,.9);
- window.frogPondSplash=window.frogWrongSound;
+ window.frogWrongSound=()=>{};
+ window.frogPondSplash=()=>{};
  try{window.frogMusicStop?.()}catch{}
 })();
 </script><script id="frog-local-pond-loop-v30">
