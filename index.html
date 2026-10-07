@@ -125,10 +125,12 @@ html body .power{background:#173a2d!important;color:#fff!important;border-color:
  .difficulty>p{display:none!important}
  .levels{grid-template-columns:repeat(8,1fr)!important;gap:4px!important}
  .level{padding:4px 3px!important}
- .layout{display:grid!important;grid-template-columns:minmax(0,1fr) 250px!important;gap:8px!important;margin-top:6px!important}
+ .layout{display:grid!important;grid-template-columns:minmax(0,1fr) 250px!important;gap:8px!important;margin-top:6px!important;width:100%!important;box-sizing:border-box!important;align-items:start!important}
+ .layout>main{min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;overflow:hidden!important}
+ .layout>aside{min-width:0!important;width:250px!important;max-width:250px!important;box-sizing:border-box!important}
  main.panel{padding:7px!important}
  .turn{padding:5px 7px!important;margin-bottom:5px!important}
- .board{gap:5px!important;padding:5px!important}
+ .board{gap:5px!important;padding:5px!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;overflow:hidden!important}
  .card{min-height:52px!important}
  aside .collection{padding:7px!important}
  .collection h2{font-size:14px!important}
