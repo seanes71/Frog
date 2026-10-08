@@ -155,3 +155,14 @@ body.playing .board{grid-template-columns:repeat(var(--cols,4),var(--card-width,
 body.playing .card{width:var(--card-width,50px);height:var(--card-height,70px);aspect-ratio:5/7;padding:2px;font-size:var(--card-icon,28px)}
 body.playing .card-word{font-size:var(--card-wordText,10px);gap:3px}
 body.playing .card-word span{font-size:var(--card-wordIcon,24px)}
+
+/* Extend the original sky and pond beneath all controls. Only scenery stretches;
+   the original fighter image keeps one uniform scale and its complete silhouettes. */
+body.home-fit .pond-shell{height:var(--visible-height,100svh);background:none}
+body.home-fit .pond-shell::before,body.home-fit .pond-shell::after{content:'';position:absolute;left:0;right:0;z-index:-1;pointer-events:none;background-image:url('assets/pond-boxing-v4.png');background-repeat:no-repeat}
+body.home-fit .pond-shell::before{top:0;height:52%;background-size:100% 750%;background-position:center top}
+body.home-fit .pond-shell::after{top:48%;bottom:0;background-size:100% 400%;background-position:center bottom}
+body.home-fit .corner-pond,body.home-fit .pond-fighters{background:transparent;border-radius:0}
+body.home-fit .pond-fighters img{height:min(270cqh,150cqw);width:auto;transform:translate(-50%,-39%);mask-image:linear-gradient(transparent,black 6%,black 58%,transparent 72%)}
+body.home-fit .game-bubbles button{color:#133b25;text-shadow:0 1px 2px #fff,0 0 5px #fff}
+button:active{filter:brightness(1.08)}

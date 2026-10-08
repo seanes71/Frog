@@ -45,3 +45,14 @@ test('home keeps Rival and Solo bars and gives four other destinations circular 
 
 test('spoken countdown follows actual audio time, including delayed playback and stalls',()=>{const h=setup();h.click('practice');h.click('start',{id:'solo'});h.run('countdownAudio.currentTime=0;countdownAudio.onplaying();');assert.equal(h.get('#modal-content .count').textContent,'3');assert.equal(h.get('#modal').open,true);for(const [time,label] of [[1.4,'2'],[1.4,'2'],[2.5,'1'],[3.9,'GO!']]){h.run(`countdownAudio.currentTime=${time};countdownAudio.ontimeupdate();`);assert.equal(h.get('#modal-content .count').textContent,label);assert.equal(h.get('#modal').open,true);}h.run('countdownAudio.onended();');assert.equal(h.get('#modal').open,false);assert.equal(h.get('#timer').textContent,'∞');});
 test('leaving during countdown disables stale audio callbacks',()=>{const h=setup();h.click('practice');h.click('start',{id:'solo'});h.run('countdownAudio.onplaying();');const ended=h.run('countdownAudio.onended');h.click('home');ended();assert.equal(h.run('match'),null);assert.equal(h.get('#home').hidden,false);assert.equal(h.get('#modal').open,false);});
+
+test('card taps reuse buttons and request geometry only when the board size changes',()=>{
+ const h=setup();h.click('practice');h.click('start',{id:'solo'});h.advance(4);
+ const board=h.get('#board'),cards=Array.from({length:12},()=>({className:'card',disabled:false,innerHTML:'🪷',label:'',getAttribute(){return this.label;},setAttribute(k,v){this.label=v;}}));
+ board.querySelectorAll=()=>cards;let layouts=0;h.context.window.frogFitBoard=()=>layouts++;
+ h.run('renderBoard()');const before=board.innerHTML;
+ h.click('card',{index:'0'});
+ assert.equal(board.innerHTML,before,'tap does not rebuild the board');
+ assert.notEqual(cards[0].innerHTML,'🪷');assert.equal(layouts,0);
+ h.run("match=new Match({mode:'solo',cards:18});renderBoard()");assert.equal(layouts,1);
+});
