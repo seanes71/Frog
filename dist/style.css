@@ -692,3 +692,9 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 /* Large, easy-to-read word search letters on phone and desktop. */
 #wordsearch-grid .search-cell{font-size:clamp(19px,5.5vw,28px)!important;font-weight:1000!important;color:#092f3c!important;text-shadow:none!important;line-height:1!important}
 @media(max-width:370px){#wordsearch-grid .search-cell{font-size:clamp(17px,5.4vw,24px)!important}}
+
+/* Repair oversized letters: keep every bubble in its own grid cell, including 25-word puzzles. */
+.puzzle-board-space.search-scroll{display:block!important;overflow-x:auto!important;overflow-y:visible!important;max-width:100%!important;min-width:0!important;min-height:0!important;-webkit-overflow-scrolling:touch}
+#wordsearch-grid{display:grid!important;width:100%!important;min-width:0!important;max-width:100%!important;grid-template-columns:repeat(var(--search-size),minmax(0,1fr))!important;grid-auto-rows:auto!important;gap:2px!important;align-items:stretch!important;justify-items:stretch!important;overflow:visible!important}
+#wordsearch-grid .search-cell{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;min-height:0!important;max-width:100%!important;aspect-ratio:1/1!important;padding:0!important;margin:0!important;white-space:nowrap!important;overflow:hidden!important;font-size:clamp(10px,calc((100vw - 85px)/var(--search-size)*.69),22px)!important;line-height:1!important;letter-spacing:-.025em!important;flex-shrink:1!important}
+@media(min-width:500px){#wordsearch-grid .search-cell{font-size:clamp(11px,calc(400px/var(--search-size)*.7),22px)!important}}
