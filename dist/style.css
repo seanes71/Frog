@@ -400,3 +400,28 @@ body.home-fit .bottom-nav button span,body.hub-fit .bottom-nav button span{font-
   .hub-grid,.fighter-grid,.brain-card-grid,.brain-menu-grid{min-width:0;max-width:100%}
   .hub-grid>*,.fighter-grid>*,.brain-card-grid>*,.brain-menu-grid>*{min-width:0}
 }
+
+/* Restore fully opaque cards in the original progressive matching game.
+   This changes appearance only; keep scoring, stages, and matched-card behavior. */
+body.playing #board .card:not(.face):not(.matched){
+  background:#24674c!important;
+  background-image:linear-gradient(145deg,#398c69 0%,#236d53 54%,#174f40 100%)!important;
+  border-color:#c6e9a6!important;
+  opacity:1!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+body.playing #board .card.face:not(.matched){
+  background:#fff7dd!important;
+  background-image:linear-gradient(165deg,#fffdf0,#f3ebd2)!important;
+  opacity:1!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+body.playing #board .card.matched{
+  background:#c6e7a3!important;
+  background-image:linear-gradient(145deg,#e4f6c1,#a5d48c)!important;
+  opacity:1!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
