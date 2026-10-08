@@ -751,3 +751,20 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object{background:transparent!important;border:0!important;box-shadow:none!important;width:clamp(40px,12%,62px)!important;height:clamp(40px,12%,62px)!important;font-size:clamp(29px,8vw,43px)!important;text-shadow:0 2px 3px #133a3066!important;filter:drop-shadow(0 2px 2px #163c3566)!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object.located{opacity:.32!important;filter:grayscale(.4)!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object:focus-visible{outline:3px solid #fff!important;border-radius:50%!important}
+
+/* Word Search phone layout: reserve screen space for BOTH grid and all target words. */
+@media(max-width:600px){
+ #hub:has(#wordsearch-grid){height:calc(var(--visible-height,100dvh) - 240px)!important;max-height:calc(var(--visible-height,100dvh) - 240px)!important;min-height:0!important;overflow-y:auto!important;overflow-x:hidden!important;padding:0 0 6px!important;scrollbar-width:thin}
+ #hub-content:has(#wordsearch-grid){height:100%!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:0 0 6px!important}
+ #hub-content:has(#wordsearch-grid) .panel.puzzle-stage{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:flex!important;flex-direction:column!important;gap:4px!important;padding:7px 8px!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage > h3:first-child{font-size:15px!important;line-height:1.15!important;margin:0!important}
+ #hub-content:has(#wordsearch-grid) .tabs{gap:4px!important;margin:0!important}
+ #hub-content:has(#wordsearch-grid) .tabs .button{font-size:11px!important;min-height:28px!important;padding:3px 5px!important}
+ #hub-content:has(#wordsearch-grid) #wordsearch-feedback{font-size:11px!important;line-height:1.2!important;min-height:0!important;margin:2px 0!important;padding:5px 7px!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-board-space{display:block!important;flex:none!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;padding:0!important}
+ #wordsearch-grid{--ws-cell:clamp(15px,calc((min(100vw,500px) - 92px) / var(--search-size)),33px)!important;grid-template-columns:repeat(var(--search-size),minmax(0,1fr))!important;grid-template-rows:repeat(var(--search-size),auto)!important;gap:2px!important;width:100%!important;max-width:100%!important;height:auto!important;padding:4px!important;box-sizing:border-box!important}
+ #wordsearch-grid > button.search-cell{width:100%!important;height:auto!important;aspect-ratio:1!important;font-size:clamp(10px,calc(190px / var(--search-size)),17px)!important;font-weight:700!important}
+ #hub-content:has(#wordsearch-grid) .wordsearch-list-heading{font-size:15px!important;line-height:1.1!important;margin:5px 0 1px!important}
+ #wordsearch-words{display:flex!important;flex-wrap:wrap!important;gap:3px!important;margin:0!important;padding:0!important}
+ #wordsearch-words span{font-size:10px!important;line-height:1.1!important;padding:3px 5px!important;border-radius:7px!important;letter-spacing:0!important}
+}
