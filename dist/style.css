@@ -227,3 +227,7 @@ body.home-fit .game-logo.faceoff-logo{height:clamp(80px,24vw,110px);margin:14px 
 .topbar .avatar .frog-portrait.illustrated-frog{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;overflow:hidden;border-radius:50%;flex:1 1 auto}
 .topbar .avatar .frog-portrait .frog-art{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-width:100%!important;min-height:100%!important;background-image:url("assets/pond-boxing-v4.png")!important;background-repeat:no-repeat!important;background-size:240% 320%!important;background-position:18% 34%!important;opacity:1!important;visibility:visible!important}
 .topbar .avatar .frog-portrait .frog-art.purple-art{background-position:90% 38%!important}
+
+/* Blue Splash: keep selected frog visible in the player badge and color it blue. */
+.topbar .avatar[data-selected-frog="blue"] .frog-portrait,.topbar .avatar .frog-portrait.blue{display:block!important;visibility:visible!important;opacity:1!important}
+.topbar .avatar[data-selected-frog="blue"] .frog-art,.topbar .avatar .frog-portrait.blue .frog-art{display:block!important;visibility:visible!important;opacity:1!important;filter:hue-rotate(155deg) saturate(1.7)!important;background-image:url('assets/pond-boxing-v4.png')!important;background-position:18% 34%!important}
