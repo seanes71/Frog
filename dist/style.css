@@ -262,3 +262,20 @@ body.home-fit .game-bubbles button>span{width:44px!important;height:42px!importa
 .home-screen .brain-home-grid button{min-height:54px!important;padding:3px 4px!important;border-radius:22px 16px 23px 15px / 16px 22px 16px 20px!important;color:#fffde9!important;text-shadow:0 2px 2px #261307,0 0 7px #ffe6a8!important;font-size:clamp(11px,2.8vw,14px)!important}
 .home-screen .brain-home-grid button span{font-size:17px!important}
 @media(max-width:390px){body.home-fit .game-bubbles button{min-height:72px!important}body.home-fit .game-bubbles button>span{width:36px!important;height:35px!important;font-size:21px!important}.home-screen .brain-home-grid button{min-height:47px!important}}
+
+/* Illustrated wood plaque asset shared by every home game button. */
+body.home-fit .play-bars .play-button,body.home-fit .play-bars .solo-main,
+body.home-fit .game-bubbles button,.home-screen .brain-home-grid button{
+background:#955e32 url("./assets/storybook-log-v1.svg") center / 100% 100% no-repeat!important;
+border:0!important;border-radius:24px!important;box-shadow:none!important;
+color:#fffde9!important;text-shadow:0 2px 3px #2d1608,0 0 8px #3c1b06!important;
+transition:transform .12s ease,filter .12s ease!important;
+}
+body.home-fit .play-bars .play-button:before,body.home-fit .play-bars .solo-main:before,
+body.home-fit .game-bubbles button:before{display:none!important}
+body.home-fit .play-bars .play-button:active,body.home-fit .play-bars .solo-main:active,
+body.home-fit .game-bubbles button:active,.home-screen .brain-home-grid button:active{transform:translateY(2px) scale(.985)!important;filter:brightness(1.1)!important}
+body.home-fit .game-bubbles button>span{background:transparent!important;border:0!important;box-shadow:none!important}
+body.home-fit .play-bars .play-button,body.home-fit .play-bars .solo-main{width:86%!important;min-height:54px!important}
+body.home-fit .game-bubbles button{min-height:83px!important}
+.home-screen .brain-home-grid button{min-height:57px!important}
