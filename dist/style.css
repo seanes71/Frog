@@ -249,3 +249,16 @@ body.home-fit .play-bars .solo-main small{color:#ffefd2!important;}
 .home-screen .brain-home-grid button span{font-size:19px;line-height:1}
 .home-screen .brain-home-grid button b{font-weight:900}
 @media(max-height:700px){.home-screen .brain-home-grid{gap:4px;margin:5px auto}.home-screen .brain-home-grid button{min-height:45px;padding:2px}.home-screen .brain-home-grid button span{font-size:15px}}
+
+/* Compact storybook log plaques: brighter lettering and smaller footprints. */
+body.home-fit .play-bars{gap:6px!important}
+body.home-fit .play-bars .play-button,body.home-fit .play-bars .solo-main{width:86%!important;max-width:560px!important;margin-left:auto!important;margin-right:auto!important;min-height:50px!important;padding:5px 10px!important;border-radius:24px 18px 24px 18px / 18px 23px 17px 22px!important;font-size:clamp(18px,4.7vw,25px)!important;color:#fffbe7!important;text-shadow:0 2px 2px #241405,0 0 8px #f9d688!important}
+body.home-fit .play-bars .solo-main small{font-size:11px!important;color:#fff9e5!important}
+body.home-fit .game-bubbles{gap:5px!important;padding-left:4%!important;padding-right:4%!important}
+body.home-fit .game-bubbles button{min-height:80px!important;padding:3px 2px!important;border-radius:20px 14px 19px 15px / 15px 20px 14px 20px!important}
+body.home-fit .game-bubbles button>b{color:#fffde9!important;text-shadow:0 2px 2px #261307,0 0 6px #ffe6a8!important;font-size:clamp(10px,2.65vw,13px)!important}
+body.home-fit .game-bubbles button>span{width:44px!important;height:42px!important;font-size:25px!important}
+.home-screen .brain-home-grid{width:86%!important;gap:6px!important;margin:6px auto 9px!important}
+.home-screen .brain-home-grid button{min-height:54px!important;padding:3px 4px!important;border-radius:22px 16px 23px 15px / 16px 22px 16px 20px!important;color:#fffde9!important;text-shadow:0 2px 2px #261307,0 0 7px #ffe6a8!important;font-size:clamp(11px,2.8vw,14px)!important}
+.home-screen .brain-home-grid button span{font-size:17px!important}
+@media(max-width:390px){body.home-fit .game-bubbles button{min-height:72px!important}body.home-fit .game-bubbles button>span{width:36px!important;height:35px!important;font-size:21px!important}.home-screen .brain-home-grid button{min-height:47px!important}}
