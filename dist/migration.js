@@ -1,4 +1,4 @@
-import {freshProfile,loadProfile,STAGES,FIGHTERS,POWERS} from './engine.js?v=mobile-1';
+import {freshProfile,loadProfile,STAGES,FIGHTERS,POWERS} from './engine.js?v=starter-shop-11';
 export const MOBILE_KEY='frog-showdown-mobile-v2';
 export function migrateLegacy(data={}){
  if(data.frogShowdownV2)return loadProfile(typeof data.frogShowdownV2==='string'?data.frogShowdownV2:JSON.stringify(data.frogShowdownV2));

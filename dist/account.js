@@ -1,5 +1,5 @@
 import {MOBILE_KEY,migrateLegacy} from './migration.js?v=mobile-1';
-import {loadProfile} from './engine.js?v=mobile-1';
+import {loadProfile} from './engine.js?v=starter-shop-11';
 const config={apiKey:'AIzaSyCLTTGdeAKK5PILI4NHILlr0mqhSfivx0A',authDomain:'frog-match.firebaseapp.com',projectId:'frog-match',storageBucket:'frog-match.firebasestorage.app',messagingSenderId:'321187855188',appId:'1:321187855188:web:5a9766609c7bda9ccde6c1'};
 const dialog=document.querySelector('#account-dialog'),message=document.querySelector('#account-message'),email=document.querySelector('#account-email'),password=document.querySelector('#account-password');
 let auth,db,api,user=null,timer=null,loading=false,cloudReady=false,session=0;
