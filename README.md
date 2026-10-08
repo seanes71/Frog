@@ -1,4 +1,4 @@
-# Frog Showdown Mobile
+# Froggy Faceoff Mobile
 
 Full matching, solo, puzzle and nature-learning game. Includes original mobile melody, pond sounds, match effect and audible 3-2-1 countdown. Music and effects can be controlled independently. Standalone home-screen installation and offline local play are supported after loading.
 
