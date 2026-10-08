@@ -96,3 +96,8 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 .frog-trail-pads{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-content:center!important;min-height:200px}
 .frog-trail-scene:has(.frog-trail-pad:nth-child(7)) .frog-trail-pads{gap:7px!important;padding:10px 8px 4px!important}
 .frog-trail-scene:has(.frog-trail-pad:nth-child(7)) .frog-trail-pad.brain-pad{width:clamp(58px,17vw,86px)!important;height:clamp(58px,17vw,86px)!important}
+
+/* Readable victory celebration before the next automatic frog trail. */
+.frog-trail-win-banner{position:absolute;z-index:9;inset:0;display:flex;align-items:center;justify-content:center;padding:15px;text-align:center;font-size:clamp(29px,8vw,48px);font-weight:1000;color:#fffbea;text-shadow:0 3px 3px #23532a,0 0 13px #23532a;background:#103d4da8;animation:frog-win-pop .32s ease-out both;pointer-events:none}
+@keyframes frog-win-pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.frog-trail-win-banner{animation:none}}
