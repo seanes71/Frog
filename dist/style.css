@@ -386,3 +386,7 @@ body.playing #board .card.face:not(.matched){background:#fff9e6!important;backgr
 body.playing #board .card.face:not(.matched) .card-word{font-size:clamp(13px,3.7vw,22px)!important}
 body.playing #board .card.matched{visibility:hidden!important;pointer-events:none!important;opacity:0!important;box-shadow:none!important}
 body.playing .scoreboard>div:first-child strong{color:#d4ff79!important}
+
+/* Pond Memory only: bigger revealed symbols and truly empty matched positions. */
+.brain-card-grid .brain-card.brain-revealed{font-size:clamp(42px,11vw,76px)!important;background:#fff9e8!important;opacity:1!important}
+.brain-card-grid .brain-card.brain-matched{visibility:hidden!important;pointer-events:none!important}
