@@ -425,3 +425,30 @@ body.playing #board .card.matched{
   -webkit-backdrop-filter:none!important;
   backdrop-filter:none!important;
 }
+
+/* All match-card states, including disabled rival-turn cards: never translucent. */
+body.playing #board button.card,
+body.playing #board button.card:disabled,
+body.playing #board button.card.face,
+body.playing #board button.card.matched{
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+body.playing #board button.card:not(.face):not(.matched),
+body.playing #board button.card:not(.face):not(.matched):disabled{
+  background-color:#226b52!important;
+  background-image:linear-gradient(155deg,#3e9775,#1b5949)!important;
+}
+body.playing #board button.card.face,
+body.playing #board button.card.face:disabled{
+  background-color:#fff7dd!important;
+  background-image:linear-gradient(165deg,#fffef4,#f0e8cf)!important;
+}
+body.playing #board button.card.matched,
+body.playing #board button.card.matched:disabled{
+  background-color:#c4e6a2!important;
+  background-image:linear-gradient(145deg,#e0f5be,#a1d188)!important;
+}
