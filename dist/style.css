@@ -677,3 +677,14 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 @keyframes pond-ripple{from{opacity:.9;transform:scale(.3)}to{opacity:0;transform:scale(3.4)}}
 @keyframes pond-droplet{from{opacity:1;transform:rotate(var(--a)) translateY(0) scale(1)}to{opacity:0;transform:rotate(var(--a)) translateY(-23px) scale(.5)}}
 @media(prefers-reduced-motion:reduce){#wordsearch-grid .search-cell{transition:none!important}#wordsearch-grid .wordsearch-splash{display:none!important}}
+
+/* Clear, high-contrast bubble letters and readable target words on iPhone. */
+#wordsearch-grid{width:100%!important;max-width:100%!important;gap:2px!important;padding:5px!important}
+#wordsearch-grid .search-cell{font-family:ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif!important;font-size:clamp(14px,4.1vw,21px)!important;font-weight:1000!important;letter-spacing:0!important;line-height:1!important;color:#12333e!important;text-shadow:0 1px 0 #ffffff!important;background:radial-gradient(circle at 30% 18%,#ffffff 0%,#ffffff 30%,#d4f6f5 100%)!important;border:1.5px solid #70bfc7!important;border-radius:35%!important;box-shadow:inset 0 1px 2px #fff,0 1px 1px #236e7938!important}
+#wordsearch-grid .search-cell.selecting{color:#082f55!important;background:radial-gradient(circle at 30% 18%,#ffffff,#8ae0fa 60%,#31b6df)!important}
+#wordsearch-grid .search-cell.found{color:#123e32!important;background:radial-gradient(circle at 30% 18%,#ffffff,#8de7bb 65%,#39c89c)!important}
+.wordsearch-list-heading{font-size:clamp(19px,5vw,24px)!important;font-weight:1000!important;color:#174d31!important;margin:16px 0 9px!important}
+#wordsearch-words{gap:8px!important}
+#wordsearch-words span{font-size:clamp(14px,3.8vw,18px)!important;font-weight:1000!important;letter-spacing:.015em!important;line-height:1.2!important;padding:9px 11px!important;color:#26391f!important;background:#fffefa!important;border:2px solid #c5aa6d!important;border-radius:15px!important;box-shadow:0 2px 0 #b89e6338!important}
+#wordsearch-words span.found{color:#22583c!important;background:#d3f2d8!important;border-color:#69ae81!important;opacity:1!important;text-decoration:line-through!important;text-decoration-thickness:2px!important}
+@media(max-width:370px){#wordsearch-grid .search-cell{font-size:clamp(12px,4vw,17px)!important}#wordsearch-words span{font-size:14px!important;padding:7px 8px!important}}
