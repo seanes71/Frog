@@ -706,3 +706,11 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 .pond-hidden-object.located{opacity:.35;box-shadow:inset 0 0 0 3px #b9f8bf}
 .pond-hidden-object:focus-visible{outline:3px solid #fff;outline-offset:2px}
 @media(prefers-reduced-motion:reduce){.pond-hidden-object{transition:none}}
+
+/* Word Search ONLY: give the actual letter puzzle full-size square cells. */
+.panel.puzzle-stage:has(#wordsearch-grid){display:flex!important;flex-direction:column!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+.panel.puzzle-stage:has(#wordsearch-grid) .puzzle-board-space{display:block!important;flex:none!important;width:100%!important;height:auto!important;max-height:none!important;overflow:visible!important;padding:0!important}
+#wordsearch-grid{box-sizing:border-box!important;display:grid!important;grid-template-columns:repeat(var(--search-size),minmax(0,1fr))!important;grid-template-rows:repeat(var(--search-size),auto)!important;grid-auto-flow:row!important;align-content:start!important;justify-content:stretch!important;width:100%!important;height:auto!important;max-height:none!important;min-width:0!important;overflow:visible!important;gap:2px!important}
+#wordsearch-grid > button.search-cell{box-sizing:border-box!important;position:relative!important;display:grid!important;place-items:center!important;float:none!important;grid-column:auto!important;grid-row:auto!important;min-width:0!important;min-height:0!important;width:100%!important;height:auto!important;aspect-ratio:1!important;line-height:1!important;padding:0!important;margin:0!important;font-size:clamp(13px,calc(70vw / var(--search-size)),24px)!important;font-weight:900!important;letter-spacing:0!important;text-align:center!important;overflow:hidden!important}
+#wordsearch-words span{font-size:14px!important;padding:6px 9px!important;font-weight:850!important}
+@media(min-width:500px){#wordsearch-grid > button.search-cell{font-size:clamp(13px,calc(370px / var(--search-size)),24px)!important}}
