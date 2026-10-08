@@ -3,7 +3,7 @@ function seeded(n){let x=n>>>0;return ()=>{x=(1664525*x+1013904223)>>>0;return x
 function shuffle(a,rng){for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 export function wordSearchDifficulty(level){
  const count=Math.min(25,10+2*(Math.max(1,level)-1));
- const size=count<=12?13:count<=16?15:count<=20?17:count<=24?19:20;
+ const size=count<=10?10:count<=12?11:count<=14?12:count<=16?13:count<=18?14:count<=20?15:count<=22?16:count<=24?17:18;
  const dirs=level<=2?[[0,1],[1,0],[1,1]]:level<=5?[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0]]:[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]];
  return {size,count,dirs,name:level<=2?'Pond Beginner':level<=5?'Reed Explorer':'Nature Navigator',instructions:'Drag across each word to find it.'};
 }
