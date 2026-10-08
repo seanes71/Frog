@@ -1,24 +1,7 @@
-# Frog Match
+# Frog Showdown Mobile
 
-Frog Match is a cute competitive matching-card game.
+Full matching, solo, puzzle and nature-learning game. Includes original mobile melody, pond sounds, match effect and audible 3-2-1 countdown. Music and effects can be controlled independently. Standalone home-screen installation and offline local play are supported after loading.
 
-## Current build
-- Solo play against a 23-year-old Bot
-- 15-second turns
-- Easy, Medium, Hard, and Extreme stages
-- Froggy Points bank
-- Super Powers
-- Regular colored frogs
-- Magical frog rewards from Hard and Extreme wins
-- Phone-friendly PWA foundation
-- Offline caching after first load
+Legacy bank, frogs, powers and stage migrate on the same browser origin. Accounts retain the existing Firebase project; domain authorization and live sign-in/cloud-save must be verified before customer release. Paid subscriptions, ads and school licensing are not connected.
 
-## Phone
-Once this repository is hosted over HTTPS, open the site on a phone and use the browser's Add to Home Screen option.
-
-## Roadmap
-- Original custom animal artwork
-- Stronger bot polish
-- Real online multiplayer
-- Native iPhone and Android packaging
-- App Store and Google Play release
+The Oct 8 mobile Turning Point branch remains the rollback point.
