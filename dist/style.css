@@ -298,7 +298,7 @@ background:repeating-linear-gradient(174deg,transparent 0 8px,#5a341f25 9px 10px
 box-shadow:0 0 0 3px #4b9f43,inset 0 2px 0 #fff1b0,0 4px 0 #4b2c1a!important;
 }
 body.hub-fit .fighter-card.selected:after{content:"✓ Selected";display:block;color:#fffbd4;font-size:12px;font-weight:900;text-shadow:0 2px 3px #37200c}
-body.hub-fit .fighter-card .frog-art,body.hub-fit .fighter-card .frog-portrait,body.hub-fit .fighter-card img{filter:none}
+
 body.hub-fit .panel .tabs .button,body.hub-fit .page-heading .back,body.hub-fit .panel .actions .button{
 background:var(--frog-log-grain)!important;color:#fff9e8!important;border:2px solid #d7a76a!important;border-radius:17px!important;
 box-shadow:inset 0 2px 0 #f0c98c88,inset 0 -3px 0 #4b2a1c99,0 3px 0 #40291c!important;text-shadow:0 2px 3px #351e10!important
@@ -327,3 +327,19 @@ body.hub-fit .fighter-card:nth-child(9n + 7){--fighter-tint:#4eaaa1}
 body.hub-fit .fighter-card:nth-child(9n + 8){--fighter-tint:#7c8dd0}
 body.hub-fit .fighter-card:nth-child(9n){--fighter-tint:#b77c4c}
 body.hub-fit .fighter-card.selected{border:4px solid #ffe277!important;background:repeating-linear-gradient(174deg,transparent 0 8px,#4e301b27 9px 10px,transparent 12px 21px),linear-gradient(160deg,color-mix(in srgb,var(--fighter-tint),white 37%),var(--fighter-tint) 58%,color-mix(in srgb,var(--fighter-tint),#37221b 48%))!important}
+
+/* Restore colored frog art; preserve inline hue-rotation on fighter portraits. */
+body .pond-shell .bottom-nav{bottom:max(22px,env(safe-area-inset-bottom))!important;padding:5px 7px 7px!important}
+body .pond-shell .bottom-nav button{min-height:62px!important;max-height:70px!important;padding:4px 2px 5px!important;overflow:visible!important;font-size:clamp(10px,2.6vw,13px)!important}
+body .pond-shell .bottom-nav button span{font-size:22px!important}
+body.hub-fit .fighter-card[data-id="green"]{--fighter-tint:#399d4c}
+body.hub-fit .fighter-card[data-id="blue"]{--fighter-tint:#388ed8}
+body.hub-fit .fighter-card[data-id="purple"]{--fighter-tint:#9160d1}
+body.hub-fit .fighter-card[data-id="pink"]{--fighter-tint:#df6ca6}
+body.hub-fit .fighter-card[data-id="gold"],body.hub-fit .fighter-card[data-id="trail-gold"]{--fighter-tint:#e0b638}
+body.hub-fit .fighter-card[data-id="red"]{--fighter-tint:#cb4e48}
+body.hub-fit .fighter-card[data-id="rainbow"]{--fighter-tint:#a36bd6}
+body.hub-fit .fighter-card[data-id="crystal"]{--fighter-tint:#53b9c8}
+body.hub-fit .fighter-card[data-id]{background:repeating-linear-gradient(174deg,transparent 0 8px,#3e261c20 9px 10px,transparent 12px 21px),linear-gradient(160deg,color-mix(in srgb,var(--fighter-tint),white 30%),var(--fighter-tint) 58%,color-mix(in srgb,var(--fighter-tint),#29211d 36%))!important}
+body.hub-fit .fighter-card.selected{outline:3px solid #ffe57b!important;outline-offset:-6px!important}
+body.hub-fit .fighter-card.selected:after{content:none!important}
