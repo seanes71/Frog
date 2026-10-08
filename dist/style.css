@@ -263,3 +263,21 @@ body.home-fit .game-bubbles button>span{width:44px!important;height:42px!importa
 .home-screen .brain-home-grid button span{font-size:17px!important}
 @media(max-width:390px){body.home-fit .game-bubbles button{min-height:72px!important}body.home-fit .game-bubbles button>span{width:36px!important;height:35px!important;font-size:21px!important}.home-screen .brain-home-grid button{min-height:47px!important}}
 
+
+/* Unified woodland design system: every interactive button across game, hub, shop,
+   collection, powers, rewards, settings and dialogs. Keep home layouts unchanged. */
+:root{--frog-log-grain:repeating-linear-gradient(174deg,transparent 0 8px,#5a341f2a 9px 10px,transparent 12px 21px),repeating-linear-gradient(94deg,transparent 0 23px,#e6b97826 25px 27px,transparent 29px 48px),linear-gradient(180deg,#e3b778 0%,#b47c43 16%,#945e30 36%,#a56d38 56%,#7a4726 82%,#56341f 100%);--frog-log-border:#d9a767;--frog-log-text:#fff9e8}
+.pond-shell button:not(.brain-card):not(.brain-pad):not(.search-cell):not(.crossword-cell):not(.memory-card):not(.card):not(.match-card):not(.flip-card):not(.play-button):not(.solo-main):not(.game-bubbles button):not(.brain-home-grid button):not(.bottom-nav button):not(.avatar):not(.wallet):not(.gear),
+.pond-shell .bottom-nav button,.pond-shell .gear,.pond-shell .wallet{
+background:var(--frog-log-grain)!important;color:var(--frog-log-text)!important;
+border:2px solid var(--frog-log-border)!important;border-radius:15px!important;
+box-shadow:inset 0 2px 0 #f0c98c88,inset 0 -3px 0 #4b2a1c99,0 3px 0 #40291c!important;
+text-shadow:0 1px 3px #351e10!important;
+}
+.pond-shell button:not(:disabled):active{filter:brightness(1.13)}
+.pond-shell button:focus-visible{outline:3px solid #ffeb86!important;outline-offset:3px}
+.pond-shell .bottom-nav button.active{outline:2px solid #ffe58a!important;outline-offset:-4px;background:linear-gradient(180deg,#e5b96d,#b9823c 48%,#82512a)!important;color:#fff!important}
+.pond-shell .bottom-nav button{font-size:inherit!important}
+.pond-shell .gear{border-radius:16px!important}
+.pond-shell .wallet{border-radius:24px!important}
+.pond-shell button:disabled{opacity:.48!important}
