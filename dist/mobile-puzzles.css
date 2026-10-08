@@ -44,3 +44,7 @@
 #wordsearch-words{flex:0 0 auto!important;max-height:none!important;overflow:visible!important;gap:5px!important;padding-bottom:4px!important}
 #wordsearch-words span{font-size:12px!important;padding:5px 7px!important}
 @media(max-height:740px){#hub:has(#wordsearch-grid){height:calc(var(--visible-height,100dvh) - 210px)!important}#hub-content:has(#wordsearch-grid) .panel.puzzle-stage{padding:7px!important;gap:4px!important}}
+
+/* Let the existing app shell determine the actual area above bottom navigation. */
+body.hub-fit #hub:has(#wordsearch-grid){height:100%!important;min-height:0!important;max-height:100%!important;grid-template-rows:42px minmax(0,1fr)!important;align-self:stretch!important}
+body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;height:100%!important;max-height:100%!important}
