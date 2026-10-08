@@ -48,3 +48,8 @@
 /* Let the existing app shell determine the actual area above bottom navigation. */
 body.hub-fit #hub:has(#wordsearch-grid){height:100%!important;min-height:0!important;max-height:100%!important;grid-template-rows:42px minmax(0,1fr)!important;align-self:stretch!important}
 body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;height:100%!important;max-height:100%!important}
+
+/* Stable touch-drag board: never allow browser pan, scroll anchoring, or focus-scroll on letter contact. */
+#hub:has(#wordsearch-grid),#hub-content:has(#wordsearch-grid),#hub-content:has(#wordsearch-grid) .puzzle-stage,#hub-content:has(#wordsearch-grid) .puzzle-board-space,#wordsearch-grid,#wordsearch-grid .search-cell{overscroll-behavior:contain!important;overflow-anchor:none!important}
+#hub-content:has(#wordsearch-grid) .puzzle-board-space,#wordsearch-grid,#wordsearch-grid .search-cell{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+#wordsearch-grid .search-cell{outline-offset:-2px!important}
