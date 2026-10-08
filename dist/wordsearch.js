@@ -1,7 +1,12 @@
 import {WORDS} from './crossword.js?v=mobile-1';
 function seeded(n){let x=n>>>0;return ()=>{x=(1664525*x+1013904223)>>>0;return x/4294967296;};}
 function shuffle(a,rng){for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-export function wordSearchDifficulty(level){if(level<=3)return {size:8,count:5,dirs:[[0,1],[1,0]],name:'Pond Beginner',instructions:'Words run left to right or top to bottom.'};if(level<=7)return {size:10,count:7,dirs:[[0,1],[1,0],[1,1]],name:'Reed Explorer',instructions:'Look across, down, and diagonally down-right.'};if(level<=12)return {size:12,count:9,dirs:[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0]],name:'Forest Finder',instructions:'Some words run backwards. Diagonals are included.'};return {size:14,count:12,dirs:[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]],name:'Nature Navigator',instructions:'Words can run in all eight directions. Each puzzle is a fresh challenge.'};}
+export function wordSearchDifficulty(level){
+ const count=Math.min(25,10+2*(Math.max(1,level)-1));
+ const size=count<=12?13:count<=16?15:count<=20?17:count<=24?19:20;
+ const dirs=level<=2?[[0,1],[1,0],[1,1]]:level<=5?[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0]]:[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]];
+ return {size,count,dirs,name:level<=2?'Pond Beginner':level<=5?'Reed Explorer':'Nature Navigator',instructions:'Drag across each word to find it.'};
+}
 export function createWordSearch(level=1,wordPool=WORDS){const d=wordSearchDifficulty(level),rng=seeded(level*13007+173),grid=Array.from({length:d.size},()=>Array(d.size).fill('')),pool=shuffle([...wordPool].filter(x=>x[0].length<=d.size),rng).sort((a,b)=>(a[3]||0)-(b[3]||0)).map(x=>x[0]),placed=[];
  for(const word of pool){const candidates=[];for(let r=0;r<d.size;r++)for(let c=0;c<d.size;c++)for(const [dr,dc] of d.dirs){const er=r+dr*(word.length-1),ec=c+dc*(word.length-1);if(er<0||ec<0||er>=d.size||ec>=d.size)continue;let ok=true,cross=0;for(let i=0;i<word.length;i++){const old=grid[r+dr*i][c+dc*i];if(old&&old!==word[i]){ok=false;break;}if(old)cross++;}if(ok)candidates.push({r,c,dr,dc,cross});}if(!candidates.length)continue;shuffle(candidates,rng);const best=candidates.reduce((a,b)=>a.cross>=b.cross?a:b);for(let i=0;i<word.length;i++)grid[best.r+best.dr*i][best.c+best.dc*i]=word[i];placed.push({word,...best});if(placed.length===d.count)break;}
  const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ';for(let r=0;r<d.size;r++)for(let c=0;c<d.size;c++)if(!grid[r][c])grid[r][c]=alphabet[Math.floor(rng()*alphabet.length)];return {level,...d,grid,words:placed.map(x=>x.word),placements:placed};}
