@@ -164,6 +164,8 @@ function searchCellAt(x,y){return document.elementFromPoint(x,y)?.closest?.('.se
 document.addEventListener('pointerdown',e=>{
  const cell=e.target.closest?.('.search-cell');
  if(!cell||!searchPuzzle||(e.pointerType==='mouse'&&e.button!==0))return;
+ // Prevent iOS from scrolling or moving focus when the player starts a word drag.
+ if(e.cancelable)e.preventDefault();
  searchPointerId=e.pointerId;
  draggingSearch=true;searchDragged=false;
  searchDragEnd=[Number(cell.dataset.row),Number(cell.dataset.col)];
@@ -171,6 +173,7 @@ document.addEventListener('pointerdown',e=>{
 });
 document.addEventListener('pointermove',e=>{
  if(!draggingSearch||!searchPuzzle||e.pointerId!==searchPointerId)return;
+ if(e.cancelable)e.preventDefault();
  const cell=searchCellAt(e.clientX,e.clientY);
  if(!cell||!document.getElementById('wordsearch-grid')?.contains(cell))return;
  const end=[Number(cell.dataset.row),Number(cell.dataset.col)];
