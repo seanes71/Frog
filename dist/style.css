@@ -213,3 +213,32 @@ body.home-fit .play-bars .solo-main small{color:#ffebc5!important;}
 
 /* Brain Boost stays within Explore Pond; never adds home-screen buttons. */
 .brain-suite{padding:12px!important;text-align:center}.brain-menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.brain-menu-grid .button{min-height:54px;padding:8px 5px;font-size:14px;white-space:normal}.brain-levels{display:flex;gap:5px;justify-content:center;margin:4px 0 12px}.brain-levels .button{font-size:12px;min-height:42px;padding:6px;flex:1}.brain-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:10px auto}.brain-card{aspect-ratio:3/4;min-width:0;border:3px solid #e8c88d;border-radius:12px;background:linear-gradient(#80c8b7,#337d86);font-size:clamp(22px,7vw,34px);color:#fff}.brain-numbers{font-size:clamp(17px,5vw,25px);font-weight:900;background:#fff2ca;border-radius:12px;padding:16px 3px;color:#26462f}.brain-scene{height:190px;border:4px solid #dfc184;border-radius:18px;background:linear-gradient(#a3dcf2 0 40%,#7dc482 41% 64%,#3b9fa6 65%);position:relative;overflow:hidden;margin:12px 0}.brain-scene span{position:absolute;font-size:37px}.brain-pads{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.brain-pad{min-height:72px;background:#64a65d;border:3px solid #e0d996;border-radius:50%;font-size:35px}.brain-pad.lit{background:#ffdb65}
+
+/* Carved woodland logs — textured bark, natural edges and wood grain, not flat bars. */
+body.home-fit .play-bars .play-button,body.home-fit .play-bars .solo-main,
+body.home-fit .game-bubbles button{
+position:relative!important;
+border:4px ridge #b17a3e!important;
+border-radius:34px 25px 31px 24px / 19px 25px 20px 25px!important;
+background:
+repeating-linear-gradient(174deg,transparent 0 8px,#5a341f2a 9px 10px,transparent 12px 21px),
+repeating-linear-gradient(94deg,transparent 0 23px,#e6b97826 25px 27px,transparent 29px 48px),
+linear-gradient(180deg,#e3b778 0%,#b47c43 16%,#945e30 36%,#a56d38 56%,#7a4726 82%,#56341f 100%)!important;
+box-shadow:inset 0 3px 1px #f3d79a99,inset 0 -5px 0 #43271499,0 5px 0 #3c281c,0 8px 8px #16341b88!important;
+color:#fff7dc!important;
+text-shadow:0 2px 2px #3d2414,0 0 5px #40230e!important;
+-webkit-text-stroke:0!important;
+}
+body.home-fit .play-bars .play-button:before,body.home-fit .play-bars .solo-main:before,
+body.home-fit .game-bubbles button:before{
+content:"";position:absolute;inset:3px;pointer-events:none;
+border:1px solid #f2ce9366;border-radius:inherit;
+}
+body.home-fit .game-bubbles button{border-radius:23px 17px 21px 15px / 18px 22px 15px 21px!important;padding:4px 3px!important;}
+body.home-fit .game-bubbles button>span{
+border:2px solid #e5b878!important;border-radius:12px 9px 13px 10px!important;
+background:radial-gradient(ellipse at 30% 24%,#f5d8a1,#be8a50 62%,#86532c)!important;
+box-shadow:inset 0 1px 4px #66401e,0 2px 0 #4a2b1c!important;
+}
+body.home-fit .game-bubbles button>b{background:transparent!important;color:#fff7df!important;box-shadow:none!important;}
+body.home-fit .play-bars .solo-main small{color:#ffefd2!important;}
