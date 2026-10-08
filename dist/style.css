@@ -457,3 +457,16 @@ body.playing #board button.card.matched:disabled{
 #modal .dance:has(.victory-fighters){display:flex!important;flex-direction:column!important;align-items:center!important;gap:5px!important;width:100%!important;max-width:100%!important}
 #modal .dance .victory-fighters{display:block;width:min(100%,310px);height:125px;flex:none;background:url('assets/pond-boxing-v4.png') center 47%/100% auto no-repeat;border-radius:16px}
 @media(max-width:390px){#modal .dance .victory-fighters{height:108px}}
+
+/* Home layout: Rival/Solo as matching wood tiles, Journey as full-width bar. */
+body.home-fit .home-screen .play-bars,
+.home-screen .play-bars{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;width:96%!important;margin:3px auto!important}
+body.home-fit .home-screen .play-bars>button,
+.home-screen .play-bars>button{width:100%!important;max-width:none!important;margin:0!important;min-width:0!important;min-height:76px!important;height:auto!important;padding:8px 5px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;border-radius:19px!important;font-size:clamp(13px,3.5vw,19px)!important;line-height:1.1!important}
+.home-screen .play-bars>button>span{font-size:clamp(22px,6vw,32px)!important;line-height:1!important}
+.home-screen .play-bars>button>b{font-size:inherit!important;color:#fff7dd!important;text-shadow:0 2px 2px #39200c!important}
+.home-screen .journey-bar{display:flex!important;align-items:center!important;justify-content:center!important;gap:12px!important;width:96%!important;min-height:46px!important;margin:3px auto!important;padding:6px 12px!important;border:3px solid #edcc8c!important;border-radius:18px!important;background:linear-gradient(#c99553,#86502c 75%,#613819)!important;box-shadow:inset 0 2px 3px #ffe0a3,0 4px 0 #472915!important;color:#fff9e7!important;font-weight:900!important;font-size:clamp(16px,4vw,21px)!important;text-shadow:0 2px 2px #432408!important}
+.home-screen .journey-bar span{font-size:23px!important}
+.home-screen .game-bubbles{grid-template-columns:repeat(3,minmax(0,1fr))!important;width:96%!important;margin:4px auto!important;gap:6px!important}
+body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
+@media(max-height:720px){body.home-fit .home-screen .play-bars>button{min-height:62px!important}.home-screen .journey-bar{min-height:40px!important}.home-screen .game-bubbles button{min-height:60px!important}}
