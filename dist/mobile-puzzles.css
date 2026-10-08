@@ -91,3 +91,8 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.pond-find-scene) .brain-suite>.button:last-child{flex:none!important;min-height:34px!important;padding:5px!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object{width:clamp(29px,8vw,42px)!important;height:clamp(29px,8vw,42px)!important;font-size:clamp(24px,6.3vw,34px)!important;background:transparent!important;border:0!important;box-shadow:none!important;text-shadow:0 1px 2px #15392177!important;filter:drop-shadow(0 2px 2px #123d2970)!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object.located{opacity:.32!important}
+
+/* Growing lily-pad trails: three tidy columns through nine pads. */
+.frog-trail-pads{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-content:center!important;min-height:200px}
+.frog-trail-scene:has(.frog-trail-pad:nth-child(7)) .frog-trail-pads{gap:7px!important;padding:10px 8px 4px!important}
+.frog-trail-scene:has(.frog-trail-pad:nth-child(7)) .frog-trail-pad.brain-pad{width:clamp(58px,17vw,86px)!important;height:clamp(58px,17vw,86px)!important}
