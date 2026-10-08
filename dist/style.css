@@ -651,3 +651,10 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 #wordsearch-grid,.search-grid .search-cell{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
 #wordsearch-grid .search-cell.selecting{background:#ffdd72!important;color:#3e2c10!important;box-shadow:inset 0 0 0 2px #d59b20!important}
 #wordsearch-grid .search-cell.found{background:#9bdfa2!important;color:#164c24!important;box-shadow:inset 0 0 0 2px #469e56!important}
+
+/* Word-search target list always visible beneath puzzle, even at 25 words. */
+.wordsearch-list-heading{margin:14px 0 5px!important;font-size:18px!important;color:#245a36!important}
+#wordsearch-words{display:flex!important;flex-wrap:wrap!important;gap:7px!important;justify-content:flex-start!important;margin:6px 0 16px!important}
+#wordsearch-words span{font-size:13px!important;padding:6px 9px!important}
+#wordsearch-words span.found{text-decoration:line-through!important;opacity:.7!important}
+#wordsearch-grid .search-cell{min-width:0!important;min-height:0!important;font-size:clamp(9px,2.8vw,16px)!important}
