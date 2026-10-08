@@ -304,3 +304,26 @@ background:var(--frog-log-grain)!important;color:#fff9e8!important;border:2px so
 box-shadow:inset 0 2px 0 #f0c98c88,inset 0 -3px 0 #4b2a1c99,0 3px 0 #40291c!important;text-shadow:0 2px 3px #351e10!important
 }
 body.hub-fit .panel .tabs .button:disabled{opacity:.43!important}
+
+/* One consistent four-column, two-row home game grid. */
+body.home-fit .home-screen .game-bubbles{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px 5px!important;width:96%!important;margin:6px auto 9px!important;padding:0!important;align-items:stretch!important}
+body.home-fit .home-screen .game-bubbles button{width:100%!important;min-width:0!important;min-height:79px!important;max-width:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;padding:6px 2px!important;border:3px solid #dca869!important;border-radius:19px 16px 19px 15px!important;background:var(--frog-log-grain)!important;box-shadow:inset 0 2px 0 #f2d09b,inset 0 -4px 0 #48281a,0 3px 0 #43291a!important;color:#fff9e9!important}
+body.home-fit .home-screen .game-bubbles button>span{width:37px!important;height:35px!important;flex-shrink:0!important;font-size:21px!important;line-height:1!important;display:grid!important;place-items:center!important;border:2px solid #e5bc82!important;border-radius:10px!important;background:linear-gradient(#e6c48f,#a36a3a)!important;box-shadow:inset 0 1px 2px #6a4122!important}
+body.home-fit .home-screen .game-bubbles button>b{font-size:clamp(9px,2.3vw,12px)!important;line-height:1.12!important;text-align:center!important;white-space:normal!important;overflow-wrap:normal!important;color:#fffbea!important;text-shadow:0 2px 3px #2c180b!important}
+@media(max-width:360px){body.home-fit .home-screen .game-bubbles{gap:4px!important}body.home-fit .home-screen .game-bubbles button{min-height:75px!important}body.home-fit .home-screen .game-bubbles button>b{font-size:9px!important}}
+/* Navigation: keep labels inside their own boxes, not below the dock. */
+.pond-shell .bottom-nav{align-items:stretch!important;gap:5px!important;padding:6px 7px max(9px,env(safe-area-inset-bottom))!important;box-sizing:border-box!important}
+.pond-shell .bottom-nav button{min-width:0!important;min-height:67px!important;height:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;padding:5px 2px 7px!important;line-height:1.08!important;font-size:clamp(10px,2.8vw,13px)!important;overflow:hidden!important;white-space:normal!important}
+.pond-shell .bottom-nav button span{font-size:clamp(20px,5vw,25px)!important;line-height:1.15!important;flex-shrink:0!important}
+/* Fighter collection: color fills each complete wooden portrait frame. */
+body.hub-fit .fighter-card{--fighter-tint:#629a4c;background:repeating-linear-gradient(174deg,transparent 0 8px,#4e301b27 9px 10px,transparent 12px 21px),linear-gradient(160deg,color-mix(in srgb,var(--fighter-tint),white 37%),var(--fighter-tint) 58%,color-mix(in srgb,var(--fighter-tint),#37221b 48%))!important}
+body.hub-fit .fighter-card:nth-child(9n + 1){--fighter-tint:#439d48}
+body.hub-fit .fighter-card:nth-child(9n + 2){--fighter-tint:#388cd5}
+body.hub-fit .fighter-card:nth-child(9n + 3){--fighter-tint:#9561cf}
+body.hub-fit .fighter-card:nth-child(9n + 4){--fighter-tint:#df75a7}
+body.hub-fit .fighter-card:nth-child(9n + 5){--fighter-tint:#d5a72d}
+body.hub-fit .fighter-card:nth-child(9n + 6){--fighter-tint:#c85047}
+body.hub-fit .fighter-card:nth-child(9n + 7){--fighter-tint:#4eaaa1}
+body.hub-fit .fighter-card:nth-child(9n + 8){--fighter-tint:#7c8dd0}
+body.hub-fit .fighter-card:nth-child(9n){--fighter-tint:#b77c4c}
+body.hub-fit .fighter-card.selected{border:4px solid #ffe277!important;background:repeating-linear-gradient(174deg,transparent 0 8px,#4e301b27 9px 10px,transparent 12px 21px),linear-gradient(160deg,color-mix(in srgb,var(--fighter-tint),white 37%),var(--fighter-tint) 58%,color-mix(in srgb,var(--fighter-tint),#37221b 48%))!important}
