@@ -4,7 +4,7 @@ import {Match,freshProfile,loadProfile,claimWelcomeBonus,leagueFor,settle,STAGES
 import {CHAPTERS,LESSONS,JOURNEY_CARDS,journeyState,nextLesson,journeyProgress,recordLearning} from './journey.js?v=mobile-1';
 import {createCrossword,checkCrossword,crosswordState,awardCrossword,WORDS} from './crossword.js?v=mobile-1';
 import {collectionPageUnlocked,highestCollectionPage} from './catalog.js?v=mobile-1';
-import {createWordSearch,wordSearchState,wordSearchDifficulty,selectionPath,wordFromSelection,awardWordSearch} from './wordsearch.js?v=mobile-1';
+import {createWordSearch,wordSearchState,wordSearchDifficulty,selectionPath,wordFromSelection,awardWordSearch} from './wordsearch.js?v=clear-words-64';
 const $=s=>document.querySelector(s),KEY=MOBILE_KEY;
 let profileKey=KEY;let p;try{p=deviceProfile(localStorage);localStorage.setItem(profileKey,JSON.stringify(p));}catch{p=freshProfile();}
 let collectionPage=0;
