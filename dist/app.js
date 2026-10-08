@@ -139,6 +139,10 @@ document.addEventListener('pointerdown',()=>{startAmbience();},{passive:true});
 document.addEventListener('keydown',()=>{startAmbience();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){stopMusic();audio?.pause();audioStarted=false;if(match&&!match.done){home();toast('Your next match will start fresh.');}}});
 addEventListener('pageshow',e=>{if(e.persisted)home();});addEventListener('resize',()=>{if(match)renderBoard();});
+/* Remove obsolete home navigation from older cached HTML as well. */
+document.querySelectorAll('.game-bubbles button[data-action="explore"],.game-bubbles button').forEach(button=>{
+  if(button.dataset.action==='explore'||button.textContent.trim().toLowerCase()==='pond games')button.remove();
+});
 sync();show('home');welcomeGift();if(new URLSearchParams(location.search).get('open')==='brain'){setTimeout(()=>brainMenu(),250);}
 
 addEventListener('frog-account-profile',e=>{profileKey=e.detail.key;p=loadProfile(JSON.stringify(e.detail.profile));home();welcomeGift();if(new URLSearchParams(location.search).get('open')==='brain')setTimeout(brainMenu,350);});
