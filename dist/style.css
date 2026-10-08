@@ -483,8 +483,8 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 #modal .dance:has(.victory-fighters)>.frog-portrait{display:none!important}
 #modal .dance .victory-fighters{display:flex!important;flex-direction:row!important;align-items:flex-end!important;justify-content:center!important;gap:20px!important;width:100%!important;height:160px!important;background:none!important;overflow:visible!important;border-radius:0!important}
 #modal .dance .victory-fighters>.frog-portrait{display:block!important;position:relative!important;flex:0 0 125px!important;width:125px!important;height:150px!important;max-width:43%!important;transform:none!important;clip-path:none!important;border-radius:0!important;overflow:visible!important}
-#modal .dance .victory-fighters>.frog-portrait:first-child{transform:rotate(-7deg)!important}
-#modal .dance .victory-fighters>.frog-portrait:last-child{transform:rotate(7deg)!important}
+#modal .dance .victory-fighters>.frog-portrait:first-child{transform:rotate(-7deg)}
+#modal .dance .victory-fighters>.frog-portrait:last-child{transform:rotate(7deg)}
 @media(max-width:390px){#modal .dance .victory-fighters{height:140px!important;gap:12px!important}#modal .dance .victory-fighters>.frog-portrait{height:135px!important}}
 
 /* Victory cartoon fight: lunge, punch, counter-kick, knockdown, recover. */
