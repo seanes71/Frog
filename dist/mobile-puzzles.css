@@ -112,3 +112,16 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.frog-trail-scene) .frog-trail-pads{height:100%!important;box-sizing:border-box!important;align-content:center!important}
 #hub-content:has(.frog-trail-scene) #frog-trail-status{flex:0 0 auto!important;margin:2px!important;font-size:12px!important}
 #hub-content:has(.frog-trail-scene) .brain-suite>.button:last-child{flex:0 0 auto!important;min-height:35px!important;padding:5px!important;margin:0!important}
+
+/* Natural wildlife silhouettes integrated into the real pond photograph. */
+#hub-content:has(.pond-find-scene) .pond-natural-object{display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:clamp(42px,12vw,63px)!important;height:clamp(42px,12vw,63px)!important;padding:0!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;text-shadow:none!important;filter:drop-shadow(1px 2px 1px #102d1e60) saturate(.77)!important;opacity:.94!important;transform:translate(-50%,-50%) rotate(var(--creature-tilt,0deg))!important}
+#hub-content:has(.pond-find-scene) .pond-natural-object .pond-wildlife-art{width:100%!important;height:100%!important;display:block!important;overflow:visible!important}
+#hub-content:has(.pond-find-scene) .pond-natural-object:nth-child(3n){--creature-tilt:-12deg}
+#hub-content:has(.pond-find-scene) .pond-natural-object:nth-child(4n){--creature-tilt:11deg}
+#hub-content:has(.pond-find-scene) .pond-natural-object.located{opacity:.24!important;filter:grayscale(.7)!important}
+#hub-content:has(.pond-find-scene) .pond-natural-object:active{transform:translate(-50%,-50%) scale(1.08)!important}
+#hub-content:has(.pond-find-scene) .brain-suite:has(.pond-find-scene) .pond-discovery-win{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:12px;background:#123d3eaa;color:#fffbea;text-shadow:0 3px 4px #123e30;font-size:clamp(30px,8vw,48px);font-weight:1000;pointer-events:none;animation:frog-win-pop .35s ease-out}
+#hub-content:has(.pond-find-scene) .brain-suite .pond-natural-object:focus-visible{outline:3px solid #fff!important;outline-offset:2px!important}
+#hub-content:has(.pond-find-scene) .brain-suite:has(.pond-find-scene) .pond-natural-object{transition:opacity .25s,filter .25s!important}
+#hub-content:has(.pond-find-scene) .brain-suite:has(.pond-find-scene) .pond-natural-object:has(svg){-webkit-tap-highlight-color:transparent}
+#hub-content:has(.pond-find-scene) .pond-find-scene:has(.pond-discovery-win) .pond-natural-object{pointer-events:none!important}
