@@ -470,3 +470,11 @@ body.home-fit .home-screen .play-bars>button,
 .home-screen .game-bubbles{grid-template-columns:repeat(3,minmax(0,1fr))!important;width:96%!important;margin:4px auto!important;gap:6px!important}
 body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 @media(max-height:720px){body.home-fit .home-screen .play-bars>button{min-height:62px!important}.home-screen .journey-bar{min-height:40px!important}.home-screen .game-bubbles button{min-height:60px!important}}
+
+/* Ordered home menu: eight matching wood tiles, three across, then Frog Journey bar. */
+.home-screen .game-bubbles{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;width:96%!important;margin:7px auto!important;align-items:stretch!important}
+.home-screen .game-bubbles button{width:100%!important;min-width:0!important;min-height:79px!important;opacity:1!important}
+.home-screen .game-bubbles button:disabled{cursor:default!important;filter:saturate(.7)!important;opacity:1!important}
+.home-screen .game-bubbles button b small{display:block!important;font-size:9px!important;line-height:1.2!important;color:#fff4c8!important}
+.home-screen .journey-bar{width:96%!important;margin:4px auto 9px!important;flex:none!important}
+@media(max-width:360px){.home-screen .game-bubbles{gap:4px!important}.home-screen .game-bubbles button>b{font-size:10px!important}}
