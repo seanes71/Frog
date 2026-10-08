@@ -235,3 +235,13 @@ body.home-fit .game-logo.faceoff-logo{height:clamp(80px,24vw,110px);margin:14px 
 /* Blue Splash badge: avoid stacking two hue rotations, which turns blue back to green. */
 .topbar .avatar[data-selected-frog="blue"] .frog-portrait.blue{filter:hue-rotate(130deg)!important}
 .topbar .avatar[data-selected-frog="blue"] .frog-portrait.blue .frog-art{filter:none!important}
+
+/* Selected fighter badge: toolbar specificity previously suppressed fighter colors. */
+.topbar .avatar[data-selected-frog="green"] .frog-portrait{filter:none!important}
+.topbar .avatar[data-selected-frog="blue"] .frog-portrait{filter:hue-rotate(130deg)!important}
+.topbar .avatar[data-selected-frog="purple"] .frog-portrait{filter:hue-rotate(210deg)!important}
+.topbar .avatar[data-selected-frog="pink"] .frog-portrait{filter:hue-rotate(260deg)!important}
+.topbar .avatar[data-selected-frog="gold"] .frog-portrait{filter:sepia(1) saturate(4)!important}
+.topbar .avatar[data-selected-frog="red"] .frog-portrait{filter:hue-rotate(290deg)!important}
+.topbar .avatar[data-selected-frog="rainbow"] .frog-portrait{filter:hue-rotate(100deg) saturate(3)!important}
+.topbar .avatar .frog-portrait .frog-art{filter:none!important}
