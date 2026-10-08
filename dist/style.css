@@ -359,3 +359,23 @@ body.hub-fit .fighter-card[data-id="red"] .frog-portrait{filter:hue-rotate(290de
 body.hub-fit .fighter-card[data-id="gold"] .frog-portrait{filter:sepia(1) saturate(4)!important}
 body.hub-fit .fighter-card[data-id="purple"] .frog-portrait{filter:none!important}
 body.hub-fit .fighter-card[data-id="green"] .frog-portrait{filter:none!important}
+
+/* Mobile browser safe area: never clip the navigation row at viewport bottom. */
+body.home-fit .pond-shell,body.hub-fit .pond-shell{
+height:var(--visible-height,100dvh)!important;
+max-height:var(--visible-height,100dvh)!important;
+box-sizing:border-box!important;
+grid-template-rows:36px minmax(0,1fr) 78px!important;
+padding-bottom:max(14px,env(safe-area-inset-bottom))!important;
+row-gap:5px!important;
+}
+body.home-fit .bottom-nav,body.hub-fit .bottom-nav{
+height:64px!important;min-height:64px!important;
+align-self:start!important;overflow:visible!important;
+box-sizing:border-box!important;
+}
+body.home-fit .bottom-nav button,body.hub-fit .bottom-nav button{
+height:52px!important;min-height:52px!important;max-height:52px!important;
+padding:2px 2px 4px!important;overflow:hidden!important;
+}
+body.home-fit .bottom-nav button span,body.hub-fit .bottom-nav button span{font-size:19px!important}
