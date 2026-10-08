@@ -242,3 +242,10 @@ box-shadow:inset 0 1px 4px #66401e,0 2px 0 #4a2b1c!important;
 }
 body.home-fit .game-bubbles button>b{background:transparent!important;color:#fff7df!important;box-shadow:none!important;}
 body.home-fit .play-bars .solo-main small{color:#ffefd2!important;}
+
+/* Four actual playable brain games on the home screen: compact carved-log buttons. */
+.home-screen .brain-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:9px auto 12px;width:min(94%,440px);position:relative;z-index:3}
+.home-screen .brain-home-grid button{min-width:0;min-height:58px;padding:5px 3px;display:flex;align-items:center;justify-content:center;gap:5px;flex-direction:column;border:3px ridge #a16c38;border-radius:26px 19px 25px 18px / 16px 22px 17px 22px;background:repeating-linear-gradient(174deg,transparent 0 8px,#5a341f30 9px 10px,transparent 12px 21px),repeating-linear-gradient(95deg,transparent 0 23px,#e6b97826 25px 27px,transparent 29px 48px),linear-gradient(180deg,#dfb274,#a06c39 36%,#86522e 72%,#56341f);box-shadow:inset 0 2px 1px #f3d79a99,inset 0 -4px 0 #43271499,0 3px 0 #3c281c,0 5px 7px #16341b88;color:#fff7dc;text-shadow:0 2px 2px #3d2414;font:900 clamp(10px,2.7vw,14px)/1.1 system-ui,sans-serif;cursor:pointer}
+.home-screen .brain-home-grid button span{font-size:19px;line-height:1}
+.home-screen .brain-home-grid button b{font-weight:900}
+@media(max-height:700px){.home-screen .brain-home-grid{gap:4px;margin:5px auto}.home-screen .brain-home-grid button{min-height:45px;padding:2px}.home-screen .brain-home-grid button span{font-size:15px}}
