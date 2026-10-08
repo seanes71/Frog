@@ -2,13 +2,13 @@ import {WORDS} from './crossword.js?v=mobile-1';
 function seeded(n){let x=n>>>0;return ()=>{x=(1664525*x+1013904223)>>>0;return x/4294967296;};}
 function shuffle(a,rng){for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 export function wordSearchDifficulty(level){
- const count=Math.min(25,10+2*(Math.max(1,level)-1));
- const size=count<=10?9:count<=12?10:count<=14?11:count<=16?12:count<=18?13:count<=20?14:count<=22?15:count<=24?16:17;
+ const count=10;
+ const size=9;
  const dirs=level<=2?[[0,1],[1,0],[1,1]]:level<=5?[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0]]:[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]];
  return {size,count,dirs,name:level<=2?'Pond Beginner':level<=5?'Reed Explorer':'Nature Navigator',instructions:'Drag across each word to find it.'};
 }
 const EASY_WORDS=['FROG','POND','LILY','LEAF','FISH','DUCK','EGG','RAIN','REED','TOAD','MOSS','ROCK','TREE','BIRD','BUG','FLY','SEED','WATER','GREEN','GRASS','SNAIL','SHELL','MUD','SUN','NEST','WING','ROOT','BLOOM','STEM','RIVER'].map(w=>[w,'Nature word',0,0]);
-export function createWordSearch(level=1,wordPool=WORDS){const d=wordSearchDifficulty(level),rng=seeded(level*13007+173),grid=Array.from({length:d.size},()=>Array(d.size).fill('')),pool=shuffle([...(level<=3?EASY_WORDS:[]),...(wordPool||WORDS)].filter(x=>x[0].length<=d.size&&x[0].length>=3),rng).sort((a,b)=>(a[3]||0)-(b[3]||0)).map(x=>x[0]).filter((w,i,a)=>a.indexOf(w)===i),placed=[];
+export function createWordSearch(level=1,wordPool=WORDS){const d=wordSearchDifficulty(level),rng=seeded(level*13007+173),grid=Array.from({length:d.size},()=>Array(d.size).fill('')),pool=shuffle([...EASY_WORDS,...(wordPool||WORDS)].filter(x=>x[0].length<=d.size&&x[0].length>=3),rng).sort((a,b)=>(a[3]||0)-(b[3]||0)).map(x=>x[0]).filter((w,i,a)=>a.indexOf(w)===i),placed=[];
  for(const word of pool){const candidates=[];for(let r=0;r<d.size;r++)for(let c=0;c<d.size;c++)for(const [dr,dc] of d.dirs){const er=r+dr*(word.length-1),ec=c+dc*(word.length-1);if(er<0||ec<0||er>=d.size||ec>=d.size)continue;let ok=true,cross=0;for(let i=0;i<word.length;i++){const old=grid[r+dr*i][c+dc*i];if(old&&old!==word[i]){ok=false;break;}if(old)cross++;}if(ok)candidates.push({r,c,dr,dc,cross});}if(!candidates.length)continue;shuffle(candidates,rng);const best=candidates.reduce((a,b)=>a.cross>=b.cross?a:b);for(let i=0;i<word.length;i++)grid[best.r+best.dr*i][best.c+best.dc*i]=word[i];placed.push({word,...best});if(placed.length===d.count)break;}
  const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ';for(let r=0;r<d.size;r++)for(let c=0;c<d.size;c++)if(!grid[r][c])grid[r][c]=alphabet[Math.floor(rng()*alphabet.length)];return {level,...d,grid,words:placed.map(x=>x.word),placements:placed};}
 export function selectionPath(puzzle,start,end){if(!start||!end)return [];const [r,c]=start,[er,ec]=end;if([r,c,er,ec].some(x=>!Number.isInteger(x)||x<0||x>=puzzle.size))return [];const dy=er-r,dx=ec-c;if(dy!==0&&dx!==0&&Math.abs(dy)!==Math.abs(dx))return [];const len=Math.max(Math.abs(dy),Math.abs(dx))+1;if(len<2)return [];return Array.from({length:len},(_,i)=>[r+Math.sign(dy)*i,c+Math.sign(dx)*i]);}
