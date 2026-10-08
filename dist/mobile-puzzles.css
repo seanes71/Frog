@@ -57,14 +57,14 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 /* User-selected photographic pond, with the existing illustrated pond as fallback
    until Froggy_Pond_Photo.jpg is added to dist/assets. */
 #hub-content:has(.pond-find-scene) .pond-find-scene{
- background-image:url('assets/IMG_3100.jpeg')!important;
+ background-image:url('assets/IMG_4108.jpeg')!important;
  background-position:center center!important;
  background-repeat:no-repeat!important;
  background-size:cover!important;
 }
 
 /* The uploaded photograph is the actual playable hidden-object backdrop. */
-#hub-content:has(.pond-find-scene) .pond-find-scene{background-image:url('assets/IMG_3100.jpeg')!important;background-size:cover!important;background-position:center!important}
+#hub-content:has(.pond-find-scene) .pond-find-scene{background-image:url('assets/IMG_4108.jpeg')!important;background-size:cover!important;background-position:center!important}
 #hub-content:has(.pond-find-scene) .pond-find-scene img[src*="hidden-pond-scene.svg"]{opacity:0!important}
 
 /* Follow That Frog: a colorful animated lily-pad trail, designed for touch screens. */
@@ -87,7 +87,7 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.pond-find-scene) .brain-suite .brain-levels{flex:none!important;margin:0!important;gap:4px!important}
 #hub-content:has(.pond-find-scene) .brain-suite h3{flex:none!important;font-size:clamp(16px,4vw,21px)!important;line-height:1.1!important;margin:1px!important}
 #hub-content:has(.pond-find-scene) .brain-suite p{flex:none!important;font-size:12px!important;line-height:1.15!important;margin:1px!important}
-#hub-content:has(.pond-find-scene) .pond-find-scene{display:block!important;position:relative!important;box-sizing:border-box!important;flex:1 1 auto!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;margin:3px 0!important;border-width:3px!important;border-radius:16px!important;background-image:url('assets/IMG_3100.jpeg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important;overflow:hidden!important}
+#hub-content:has(.pond-find-scene) .pond-find-scene{display:block!important;position:relative!important;box-sizing:border-box!important;flex:1 1 auto!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;margin:3px 0!important;border-width:3px!important;border-radius:16px!important;background-image:url('assets/IMG_4108.jpeg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important;overflow:hidden!important}
 #hub-content:has(.pond-find-scene) .brain-suite>.button:last-child{flex:none!important;min-height:34px!important;padding:5px!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object{width:clamp(29px,8vw,42px)!important;height:clamp(29px,8vw,42px)!important;font-size:clamp(24px,6.3vw,34px)!important;background:transparent!important;border:0!important;box-shadow:none!important;text-shadow:0 1px 2px #15392177!important;filter:drop-shadow(0 2px 2px #123d2970)!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object.located{opacity:.32!important}
