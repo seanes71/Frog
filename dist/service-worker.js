@@ -1,5 +1,5 @@
-const CACHE='frog-showdown-mobile-v2';
-const FILES=['./','./index.html','./mobile.html','./style.css?v=full-frogs-2','./app.js?v=mobile-1','./engine.js?v=mobile-1','./journey.js?v=mobile-1','./catalog.js?v=mobile-1','./crossword.js?v=mobile-1','./wordsearch.js?v=mobile-1','./curriculum.js?v=mobile-1','./migration.js?v=mobile-1','./account.js?v=mobile-1','./manifest.webmanifest','./icon.svg','./icons/icon-192.png','./icons/icon-512.png','./assets/pond-boxing-v4.png','./assets/happy-frog.mp3','./assets/pond-croak.mp3'];
+const CACHE='frog-showdown-mobile-v3';
+const FILES=['./','./index.html','./mobile.html','./style.css?v=full-frogs-2','./app.js?v=pond-audio-3','./engine.js?v=mobile-1','./journey.js?v=mobile-1','./catalog.js?v=mobile-1','./crossword.js?v=mobile-1','./wordsearch.js?v=mobile-1','./curriculum.js?v=mobile-1','./migration.js?v=mobile-1','./account.js?v=mobile-1','./manifest.webmanifest','./icon.svg','./icons/icon-192.png','./icons/icon-512.png','./assets/pond-boxing-v4.png','./assets/happy-frog.mp3','./assets/pond-croak.mp3'];
 const paths=new Set(FILES.map(path=>new URL(path,self.location.href).pathname));
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('frog-showdown-mobile-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
