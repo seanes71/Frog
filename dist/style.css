@@ -658,3 +658,22 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 #wordsearch-words span{font-size:13px!important;padding:6px 9px!important}
 #wordsearch-words span.found{text-decoration:line-through!important;opacity:.7!important}
 #wordsearch-grid .search-cell{min-width:0!important;min-height:0!important;font-size:clamp(9px,2.8vw,16px)!important}
+
+/* Bubbly pond-water word search: soft continuous-feeling selection and tiny splash. */
+#wordsearch-grid{position:relative!important;gap:1px!important;padding:5px!important;background:linear-gradient(145deg,#a6e8e7,#63b9d1 58%,#8eddd5)!important;border:2px solid #6dc9cf!important;border-radius:19px!important;box-shadow:inset 0 2px 9px #ffffff99,0 4px 12px #175b6a24!important}
+#wordsearch-grid .search-cell{position:relative!important;z-index:1;border:1px solid #c2eaf0!important;border-radius:38%!important;background:radial-gradient(circle at 30% 19%,#ffffff 0%,#f5fffc 31%,#dcf5ee 70%,#bde7e3 100%)!important;color:#164b58!important;box-shadow:inset 0 2px 3px #ffffffaa,0 1px 2px #287b8730!important;transition:background .12s ease,box-shadow .12s ease,transform .12s ease!important}
+#wordsearch-grid .search-cell.selecting{background:radial-gradient(circle at 25% 22%,#f8ffff,#9cecfb 42%,#3bb8e1 100%)!important;border-color:#1a9fce!important;border-radius:42%!important;color:#073f66!important;transform:scale(1.035)!important;box-shadow:inset 0 2px 5px #ffffffa8,0 0 0 1px #51d5ed,0 0 9px #36c8f8aa!important;z-index:2}
+#wordsearch-grid .search-cell.found{background:radial-gradient(circle at 30% 20%,#f2fff7,#a2f1ca 46%,#48c6a4 100%)!important;border-color:#2ba989!important;border-radius:42%!important;color:#11513d!important;box-shadow:inset 0 2px 5px #ffffffbb,0 0 0 1px #7ddfbb!important}
+#wordsearch-grid .search-cell.found.selecting{background:radial-gradient(circle at 30% 20%,#fff,#a2eaf9 50%,#4bc8e8)!important}
+#wordsearch-grid .wordsearch-splash{position:absolute;z-index:7;pointer-events:none;width:0;height:0;overflow:visible}
+#wordsearch-grid .wordsearch-splash:before{content:"";position:absolute;width:12px;height:12px;left:-6px;top:-6px;border:3px solid #4acde9;border-radius:50%;animation:pond-ripple .55s ease-out forwards}
+#wordsearch-grid .wordsearch-splash i{position:absolute;width:5px;height:9px;border-radius:70% 70% 60% 60%;background:linear-gradient(#e9ffff,#27bfe4);left:-2px;top:-4px;transform-origin:50% 18px;animation:pond-droplet .6s ease-out forwards}
+#wordsearch-grid .wordsearch-splash i:nth-child(1){--a:0deg}
+#wordsearch-grid .wordsearch-splash i:nth-child(2){--a:60deg}
+#wordsearch-grid .wordsearch-splash i:nth-child(3){--a:120deg}
+#wordsearch-grid .wordsearch-splash i:nth-child(4){--a:180deg}
+#wordsearch-grid .wordsearch-splash i:nth-child(5){--a:240deg}
+#wordsearch-grid .wordsearch-splash i:nth-child(6){--a:300deg}
+@keyframes pond-ripple{from{opacity:.9;transform:scale(.3)}to{opacity:0;transform:scale(3.4)}}
+@keyframes pond-droplet{from{opacity:1;transform:rotate(var(--a)) translateY(0) scale(1)}to{opacity:0;transform:rotate(var(--a)) translateY(-23px) scale(.5)}}
+@media(prefers-reduced-motion:reduce){#wordsearch-grid .search-cell{transition:none!important}#wordsearch-grid .wordsearch-splash{display:none!important}}
