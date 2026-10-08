@@ -248,3 +248,8 @@ body.home-fit .game-logo.faceoff-logo{height:clamp(80px,24vw,110px);margin:14px 
 
 /* Froggy Brain Boost uses the existing pond theme and accessible tap targets. */
 .brain-panel{text-align:center}.brain-panel h3{font-size:clamp(22px,5vw,30px)}.brain-stats{display:flex;justify-content:space-around;gap:12px;margin:12px 0}.brain-setting{display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;margin:12px 0}.brain-setting input{width:22px;height:22px}.brain-display{font-size:20px;font-weight:800;min-height:52px;margin:14px 0}.brain-objects,.brain-choices{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:16px 0}.brain-object,.brain-choice{display:grid;place-items:center;font-size:clamp(35px,10vw,58px);min-width:70px;min-height:78px;border:3px solid #8dca73;border-radius:20px;background:#e8ffda}.brain-choice{cursor:pointer;touch-action:manipulation}.brain-choice:focus-visible{outline:4px solid #175a99}.brain-panel>.button{margin-top:10px}
+
+/* Brain Boost is a distinct, visible home option without squeezing the four original pond bubbles. */
+body.home-fit .home-screen .brain-home-launch{display:flex!important;align-items:center;justify-content:center;gap:10px;flex:none;min-height:48px;width:calc(100% - 24px);margin:3px auto 6px;border:3px solid #fff3b0;border-radius:20px;background:linear-gradient(180deg,#fef4a2,#ffc95d);color:#234d24;font-size:clamp(15px,4vw,21px);font-weight:900;box-shadow:0 4px 0 #936b30;cursor:pointer;touch-action:manipulation;position:relative;z-index:3}
+body.home-fit .home-screen .brain-home-launch:focus-visible{outline:4px solid #145cb3;outline-offset:2px}
+@media(max-height:760px){body.home-fit .home-screen .brain-home-launch{min-height:42px;margin:1px auto 4px}}
