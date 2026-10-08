@@ -79,3 +79,15 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 @keyframes frog-trail-hop{from{transform:translateY(5px) scale(.94)}to{transform:translateY(-13px) scale(1.07)}}@keyframes frog-water-drift{to{transform:translateY(12px)}}
 @media(max-width:390px){.frog-trail-scene{min-height:230px}.frog-trail-pads{gap:6px;padding:15px 7px 3px}.frog-trail-pad.brain-pad{width:clamp(65px,21vw,90px)!important;height:clamp(65px,21vw,90px)!important}.frog-trail-ripples{letter-spacing:6px}}
 @media(prefers-reduced-motion:reduce){.frog-trail-water,.frog-trail-pad .frog-trail-visitor{animation:none!important}}
+
+/* Photo-first hidden-object game: reclaim the screen for the photograph. */
+#hub:has(.pond-find-scene){overflow:hidden!important}
+#hub-content:has(.pond-find-scene){height:100%!important;max-height:100%!important;min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important}
+#hub-content:has(.pond-find-scene) .panel.brain-suite{box-sizing:border-box!important;display:flex!important;flex-direction:column!important;flex:1 1 auto!important;height:100%!important;min-height:0!important;max-height:100%!important;overflow:hidden!important;padding:6px!important;gap:3px!important}
+#hub-content:has(.pond-find-scene) .brain-suite .brain-levels{flex:none!important;margin:0!important;gap:4px!important}
+#hub-content:has(.pond-find-scene) .brain-suite h3{flex:none!important;font-size:clamp(16px,4vw,21px)!important;line-height:1.1!important;margin:1px!important}
+#hub-content:has(.pond-find-scene) .brain-suite p{flex:none!important;font-size:12px!important;line-height:1.15!important;margin:1px!important}
+#hub-content:has(.pond-find-scene) .pond-find-scene{display:block!important;position:relative!important;box-sizing:border-box!important;flex:1 1 auto!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;margin:3px 0!important;border-width:3px!important;border-radius:16px!important;background-image:url('assets/IMG_3100.jpeg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important;overflow:hidden!important}
+#hub-content:has(.pond-find-scene) .brain-suite>.button:last-child{flex:none!important;min-height:34px!important;padding:5px!important}
+#hub-content:has(.pond-find-scene) .pond-hidden-object{width:clamp(29px,8vw,42px)!important;height:clamp(29px,8vw,42px)!important;font-size:clamp(24px,6.3vw,34px)!important;background:transparent!important;border:0!important;box-shadow:none!important;text-shadow:0 1px 2px #15392177!important;filter:drop-shadow(0 2px 2px #123d2970)!important}
+#hub-content:has(.pond-find-scene) .pond-hidden-object.located{opacity:.32!important}
