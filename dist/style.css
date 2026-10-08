@@ -615,3 +615,34 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 @keyframes frog-stagger-stars{0%,51%,100%{opacity:0}61%,76%{opacity:1;transform:rotate(20deg)}}
 @media(prefers-reduced-motion:reduce){#modal .frog-fight-stage *{animation:none!important}}
 #modal .dance.still .frog-fight-stage *,body.reduce-motion #modal .frog-fight-stage *{animation:none!important}
+
+/* Combat spacing correction: bring fighters within actual glove-to-body range.
+   Keep opponent facing left, and place hit bursts at the receiver's torso. */
+#modal .fight-green{left:4%!important;animation:frog-green-close-fight 6.2s ease-in-out infinite!important}
+#modal .fight-purple{right:4%!important;animation:frog-purple-close-fight 6.2s ease-in-out infinite!important}
+#modal .fight-splash{left:57%!important;top:43%!important}
+@keyframes frog-green-close-fight{
+0%,9%{transform:translateX(0) rotate(-3deg)}
+17%,22%{transform:translateX(45px) rotate(-7deg)}
+29%{transform:translateX(17px) rotate(-3deg)}
+38%{transform:translateX(12px) rotate(-14deg)}
+47%{transform:translateX(24px) rotate(2deg)}
+55%,59%{transform:translateX(53px) translateY(-7px) rotate(-11deg)}
+65%{transform:translateX(25px)}
+75%{transform:translateX(20px) translateY(-12px)}
+84%{transform:translateX(20px)}
+92%{transform:translateX(20px) translateY(-12px)}
+100%{transform:translateX(0) rotate(-3deg)}
+}
+@keyframes frog-purple-close-fight{
+0%,9%{transform:translateX(0) rotate(3deg)}
+17%{transform:translateX(-18px) rotate(3deg)}
+22%{transform:translateX(12px) rotate(20deg)}
+29%{transform:translateX(-6px) rotate(5deg)}
+38%{transform:translateX(-45px) rotate(-9deg)}
+47%{transform:translateX(5px) rotate(13deg)}
+55%{transform:translateX(-14px) rotate(26deg)}
+64%,78%{transform:translateX(17px) translateY(30px) rotate(82deg)}
+89%{transform:translateX(5px) rotate(14deg)}
+100%{transform:translateX(0) rotate(3deg)}
+}
