@@ -128,14 +128,52 @@ function checkPuzzle(){if(!puzzle)return;const state=crosswordState(p),checks=ch
 document.addEventListener('input',e=>{if(e.target.id==='bank-search'){const query=e.target.value;learningBank(query);const input=$('#bank-search');input.focus();input.setSelectionRange?.(query.length,query.length);return;}const key=e.target.dataset?.crossCell;if(!key||!puzzle)return;const letter=e.target.value.toUpperCase().replace(/[^A-Z]/g,'').slice(-1);e.target.value=letter;const state=crosswordState(p);if(letter)state.letters[key]=letter;else delete state.letters[key];save();if(letter&&activeEntry){const keys=activeEntry.word.split('').map((_,i)=>(activeEntry.r+(activeEntry.dir==='down'?i:0))+','+(activeEntry.c+(activeEntry.dir==='across'?i:0))),idx=keys.indexOf(key);if(idx>=0&&idx<keys.length-1)$(`[data-cross-cell="${keys[idx+1]}"]`)?.focus();}});
 document.addEventListener('focusin',e=>{const key=e.target.dataset?.crossCell;if(!key||!puzzle)return;const [r,c]=key.split(',').map(Number),cell=puzzle.cells.get(key);if(!cell)return;const belongs=activeEntry&&activeEntry.word.split('').some((_,i)=>activeEntry.r+(activeEntry.dir==='down'?i:0)===r&&activeEntry.c+(activeEntry.dir==='across'?i:0)===c);if(!belongs)selectClue(cell.across??cell.down,false);});
 document.addEventListener('keydown',e=>{const key=e.target.dataset?.crossCell;if(!key||!puzzle)return;let [r,c]=key.split(',').map(Number);const dirs={ArrowLeft:[0,-1],ArrowRight:[0,1],ArrowUp:[-1,0],ArrowDown:[1,0]};if(!dirs[e.key])return;e.preventDefault();const [dr,dc]=dirs[e.key];do{r+=dr;c+=dc;}while(r>=0&&c>=0&&r<puzzle.rows&&c<puzzle.cols&&!puzzle.cells.has(r+','+c));$(`[data-cross-cell="${r},${c}"]`)?.focus();});
-function wordSearch(){if(puzzleLearningState(p).pending){puzzleCheck();return;}stopTimers();match=null;series=null;activeLesson=null;season=null;puzzle=null;searchStart=null;draggingSearch=false;document.body.classList.remove('theme-halloween','theme-winter');const state=wordSearchState(p);const plan=puzzlePlan(p,'wordsearch');searchPuzzle=createWordSearch(state.level,vocabularyPool(plan));searchPuzzle.plan=plan;save();state.found=state.found.filter(w=>searchPuzzle.words.includes(w));openHub('Nature Word Search',`<div class="panel puzzle-stage"><h3>Puzzle ${state.level} · ${searchPuzzle.name}</h3><div class="tabs"><button class="button secondary" data-action="puzzle-discovery">Discovery</button><button class="button secondary" data-action="search-words">Words</button><button class="button secondary" data-action="wordsearch-hint">Clue</button></div><p id="wordsearch-feedback" aria-live="polite">Tap a word’s first letter, then its last letter. Find ${searchPuzzle.words.length} nature words.</p><div class="puzzle-board-space search-scroll"><div id="wordsearch-grid" class="search-grid" style="--search-size:${searchPuzzle.size}">${searchPuzzle.grid.map((row,r)=>row.map((letter,c)=>`<button class="search-cell" data-action="search-cell" data-row="${r}" data-col="${c}" aria-label="Row ${r+1}, column ${c+1}">${letter}</button>`).join('')).join('')}</div></div><div id="wordsearch-words" class="search-words" hidden></div></div>`,'rewards');paintSearch();}
+function wordSearch(){if(puzzleLearningState(p).pending){puzzleCheck();return;}stopTimers();match=null;series=null;activeLesson=null;season=null;puzzle=null;searchStart=null;draggingSearch=false;document.body.classList.remove('theme-halloween','theme-winter');const state=wordSearchState(p);const plan=puzzlePlan(p,'wordsearch');searchPuzzle=createWordSearch(state.level,vocabularyPool(plan));searchPuzzle.plan=plan;save();state.found=state.found.filter(w=>searchPuzzle.words.includes(w));openHub('Nature Word Search',`<div class="panel puzzle-stage"><h3>Puzzle ${state.level} · ${searchPuzzle.name}</h3><div class="tabs"><button class="button secondary" data-action="puzzle-discovery">Discovery</button><button class="button secondary" data-action="search-words">Words</button><button class="button secondary" data-action="wordsearch-hint">Clue</button></div><p id="wordsearch-feedback" aria-live="polite">Drag your finger from a word’s first letter to its last, or tap both ends. Find ${searchPuzzle.words.length} nature words.</p><div class="puzzle-board-space search-scroll"><div id="wordsearch-grid" class="search-grid" style="--search-size:${searchPuzzle.size}">${searchPuzzle.grid.map((row,r)=>row.map((letter,c)=>`<button class="search-cell" data-action="search-cell" data-row="${r}" data-col="${c}" aria-label="Row ${r+1}, column ${c+1}">${letter}</button>`).join('')).join('')}</div></div><div id="wordsearch-words" class="search-words" hidden></div></div>`,'rewards');paintSearch();}
 function paintSearch(highlight=[]){if(!searchPuzzle)return;const state=wordSearchState(p),keys=new Set(highlight.map(([r,c])=>r+','+c)),foundCells=new Set();searchPuzzle.placements.filter(x=>state.found.includes(x.word)).forEach(x=>x.word.split('').forEach((_,i)=>foundCells.add((x.r+x.dr*i)+','+(x.c+x.dc*i))));document.querySelectorAll('.search-cell').forEach(b=>{const key=b.dataset.row+','+b.dataset.col;b.classList.toggle('found',foundCells.has(key));b.classList.toggle('selecting',keys.has(key));});$('#wordsearch-words').innerHTML=searchPuzzle.words.map(w=>`<span class="${state.found.includes(w)?'found':''}">${state.found.includes(w)?'✓ ':''}${w}</span>`).join('');}
 function selectSearchCell(r,c){if(ignoreSearchClick){ignoreSearchClick=false;return;}if(!searchPuzzle)return;if(!searchStart){searchStart=[r,c];paintSearch([searchStart]);$('#wordsearch-feedback').textContent='Now tap the last letter of the word.';return;}if(searchStart[0]===r&&searchStart[1]===c){searchStart=null;paintSearch();$('#wordsearch-feedback').textContent='Selection cleared. Pick a new starting letter.';return;}completeSearchSelection([r,c]);}
 function completeSearchSelection(end){if(!searchPuzzle||!searchStart)return;const word=wordFromSelection(searchPuzzle,searchStart,end);searchStart=null;const state=wordSearchState(p);if(!word){paintSearch();$('#wordsearch-feedback').textContent='That is not one of the hidden words. Try another straight line.';return;}if(state.found.includes(word)){$('#wordsearch-feedback').textContent=`${word} is already found.`;paintSearch();return;}state.found.push(word);playCorrect();save();paintSearch();$('#wordsearch-feedback').textContent=`${word} found! ${VOCABULARY.find(v=>v.word===word)?.clue||''} ${state.found.length} / ${searchPuzzle.words.length} words.`;const reward=awardWordSearch(p,searchPuzzle);if(reward){beginPuzzleCheck(p,'wordsearch',searchPuzzle);save();const next=wordSearchDifficulty(reward.nextLevel);modal(`<div class="dance">${portrait(fighter())}</div><h2>NATURE WORDS FOUND!</h2><p>+${reward.currency} frogs</p><p>Next: Puzzle ${reward.nextLevel} · ${next.name}<br>${next.size} × ${next.size} · ${next.count} words</p><div class="actions"><button class="button secondary" data-action="home">Home</button><button class="button" data-action="puzzle-check">Bonus Discovery · +Frogs</button><button class="button secondary" data-action="skip-puzzle-check">Keep Playing</button></div>`);}}
-document.addEventListener('pointerdown',e=>{const b=e.target.closest?.('.search-cell');if(!b||!searchPuzzle||e.pointerType!=='mouse'||e.button!==0)return;searchPendingStart=searchStart;draggingSearch=true;searchDragged=false;searchDragEnd=[Number(b.dataset.row),Number(b.dataset.col)];searchStart=[...searchDragEnd];paintSearch([searchStart]);});
-document.addEventListener('pointermove',e=>{if(!draggingSearch||!searchPuzzle)return;const b=e.target.closest?.('.search-cell');if(!b)return;const end=[Number(b.dataset.row),Number(b.dataset.col)];if(end[0]!==searchStart[0]||end[1]!==searchStart[1])searchDragged=true;searchDragEnd=end;paintSearch(selectionPath(searchPuzzle,searchStart,end));});
-document.addEventListener('pointerup',e=>{if(!draggingSearch)return;draggingSearch=false;if(searchDragged){completeSearchSelection(searchDragEnd);ignoreSearchClick=!!e.target.closest?.('.search-cell');}else{searchStart=searchPendingStart;paintSearch(searchStart?[searchStart]:[]);}});
-document.addEventListener('pointercancel',()=>{draggingSearch=false;searchStart=null;paintSearch();});
+/* Pointer Events support mouse, pen and iPhone finger dragging across cells. */
+let searchPointerId=null;
+function searchCellAt(x,y){return document.elementFromPoint(x,y)?.closest?.('.search-cell')||null;}
+document.addEventListener('pointerdown',e=>{
+ const cell=e.target.closest?.('.search-cell');
+ if(!cell||!searchPuzzle||(e.pointerType==='mouse'&&e.button!==0))return;
+ searchPointerId=e.pointerId;
+ searchPendingStart=searchStart;
+ draggingSearch=true;searchDragged=false;
+ searchDragEnd=[Number(cell.dataset.row),Number(cell.dataset.col)];
+ searchStart=[...searchDragEnd];paintSearch([searchStart]);
+});
+document.addEventListener('pointermove',e=>{
+ if(!draggingSearch||!searchPuzzle||e.pointerId!==searchPointerId)return;
+ const cell=searchCellAt(e.clientX,e.clientY);
+ if(!cell||!document.getElementById('wordsearch-grid')?.contains(cell))return;
+ const end=[Number(cell.dataset.row),Number(cell.dataset.col)];
+ if(end[0]!==searchStart[0]||end[1]!==searchStart[1])searchDragged=true;
+ searchDragEnd=end;
+ paintSearch(selectionPath(searchPuzzle,searchStart,end));
+});
+document.addEventListener('pointerup',e=>{
+ if(!draggingSearch||e.pointerId!==searchPointerId)return;
+ draggingSearch=false;searchPointerId=null;
+ const cell=searchCellAt(e.clientX,e.clientY);
+ if(cell&&document.getElementById('wordsearch-grid')?.contains(cell)){
+  const end=[Number(cell.dataset.row),Number(cell.dataset.col)];
+  if(end[0]!==searchStart[0]||end[1]!==searchStart[1]){searchDragged=true;searchDragEnd=end;}
+ }
+ if(searchDragged){
+  ignoreSearchClick=true;
+  completeSearchSelection(searchDragEnd);
+  setTimeout(()=>{ignoreSearchClick=false;},0);
+ }else{
+  searchStart=searchPendingStart;
+  paintSearch(searchStart?[searchStart]:[]);
+ }
+});
+document.addEventListener('pointercancel',e=>{
+ if(!draggingSearch||e.pointerId!==searchPointerId)return;
+ draggingSearch=false;searchPointerId=null;searchStart=null;paintSearch();
+});
 function settings(){modal(`<h2>Pond Settings</h2><button class="button secondary wide" data-action="account">Account & Cloud Save</button><p class="muted" id="account-status">${window.frogAccountStatus||'Saved on this device'}</p><label class="switch-row">Pond background sounds<input type="checkbox" id="music-setting" ${p.settings.music!==false?'checked':''}></label><label class="switch-row">Frog sounds<input type="checkbox" id="sound-setting" ${p.settings.sound?'checked':''}></label><label class="switch-row">Celebration movement<input type="checkbox" id="motion-setting" ${p.settings.motion?'checked':''}></label><p class="muted">Progress saves on this device. Your original game and Turning Point backups are separate.</p><div class="actions"><button class="button" data-action="save-settings">Done</button></div>`);}
 function startMusic(){startAmbience();}
 function stopMusic(){audio?.pause();audioStarted=false;}
