@@ -156,13 +156,24 @@ body.playing .card{width:var(--card-width,50px);height:var(--card-height,70px);a
 body.playing .card-word{font-size:var(--card-wordText,10px);gap:3px}
 body.playing .card-word span{font-size:var(--card-wordIcon,24px)}
 
-/* Extend the original sky and pond beneath all controls. Only scenery stretches;
-   the original fighter image keeps one uniform scale and its complete silhouettes. */
-body.home-fit .pond-shell{height:var(--visible-height,100svh);background:none}
-body.home-fit .pond-shell::before,body.home-fit .pond-shell::after{content:'';position:absolute;left:0;right:0;z-index:-1;pointer-events:none;background-image:url('assets/pond-boxing-v4.png');background-repeat:no-repeat}
-body.home-fit .pond-shell::before{top:0;height:52%;background-size:100% 750%;background-position:center top}
-body.home-fit .pond-shell::after{top:48%;bottom:0;background-size:100% 400%;background-position:center bottom}
+
+/* A continuous scenery-only backdrop; original fighters retain their source pixels. */
+body.home-fit .pond-shell{height:var(--visible-height,100svh);background:url('assets/pond-scenery-v1.png') center center/cover no-repeat}
+body.home-fit .pond-shell::before,body.home-fit .pond-shell::after{content:none}
 body.home-fit .corner-pond,body.home-fit .pond-fighters{background:transparent;border-radius:0}
-body.home-fit .pond-fighters img{height:min(270cqh,150cqw);width:auto;transform:translate(-50%,-39%);mask-image:linear-gradient(transparent,black 6%,black 58%,transparent 72%)}
+body.home-fit .pond-fighters{mask-image:linear-gradient(transparent,black 6%,black 94%,transparent),linear-gradient(90deg,transparent,black 4%,black 96%,transparent);mask-composite:intersect}
+body.home-fit .pond-fighters img{height:min(270cqh,150cqw);width:auto;transform:translate(-50%,-39%);mask-image:none}
 body.home-fit .game-bubbles button{color:#133b25;text-shadow:0 1px 2px #fff,0 0 5px #fff}
 button:active{filter:brightness(1.08)}
+
+/* Crisp, opaque controls keep every destination legible against pond scenery. */
+body.home-fit .play-button{background:#6dd925;color:#153d19;-webkit-text-stroke:0;text-shadow:none;border:3px solid #fff5ad;box-shadow:0 3px 0 #174721}
+body.home-fit .solo-main{background:#1977aa;color:#fff;text-shadow:none;border:3px solid #e2f7ff;box-shadow:0 3px 0 #123e58}
+body.home-fit .solo-main small{color:#fff}
+body.home-fit .game-bubbles button{color:#143d26;text-shadow:none}
+body.home-fit .game-bubbles button>span{background:#c6ec79;border:3px solid #fff7bf;box-shadow:0 0 0 2px #17482b,0 4px 0 #17482b}
+body.home-fit .game-bubbles button:nth-child(2)>span{background:#ffda70}
+body.home-fit .game-bubbles button:nth-child(3)>span{background:#91dafa}
+body.home-fit .game-bubbles button:nth-child(4)>span{background:#c6a7ee}
+body.home-fit .game-bubbles button>b{background:#fff6d4;border-radius:5px;padding:0 3px;box-shadow:0 1px 0 #305037;font-weight:900}
+body.home-fit .bottom-nav{background:#fff1cb;border:2px solid #fff8e4;box-shadow:0 0 0 1px #305037}
