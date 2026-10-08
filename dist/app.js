@@ -87,10 +87,11 @@ function brainPad(i){
   const label=document.getElementById('frog-trail-progress');if(label)label.textContent=`Your hops: ${brain.entered.length} / ${brain.sequence.length}`;
   if(brain.entered.length===brain.sequence.length){
    brain.busy=true;
-   const el=document.getElementById('brain-instruction');if(el)el.textContent='🎉 Wow! Great job! 🐸';
-   const status=document.getElementById('frog-trail-status');if(status)status.textContent='Get ready for the next lily-pad trail!';
+   const el=document.getElementById('brain-instruction');if(el)el.textContent='🎉 Great job! 🐸';
+   const status=document.getElementById('frog-trail-status');if(status)status.textContent='Next level coming up!';
+   const scene=document.querySelector('.frog-trail-scene');if(scene){const banner=document.createElement('div');banner.className='frog-trail-win-banner';banner.setAttribute('role','status');banner.textContent='🎉 Great job! 🐸';scene.append(banner);}
    brain.followStage++;
-   brain.timeout=setTimeout(()=>{if(brain.mode==='follow')brainRound();},1450);
+   brain.timeout=setTimeout(()=>{if(brain.mode==='follow')brainRound();},2200);
   }
  }
 }
