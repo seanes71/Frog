@@ -139,7 +139,7 @@ document.addEventListener('pointerdown',()=>{startAmbience();},{passive:true});
 document.addEventListener('keydown',()=>{startAmbience();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){stopMusic();audio?.pause();audioStarted=false;if(match&&!match.done){home();toast('Your next match will start fresh.');}}});
 addEventListener('pageshow',e=>{if(e.persisted)home();});addEventListener('resize',()=>{if(match)renderBoard();});
-sync();show('home');welcomeGift();
+sync();show('home');welcomeGift();if(new URLSearchParams(location.search).get('open')==='brain'){setTimeout(()=>brainMenu(),250);}
 
 addEventListener('frog-account-profile',e=>{profileKey=e.detail.key;p=loadProfile(JSON.stringify(e.detail.profile));home();welcomeGift();});
 
