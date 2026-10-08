@@ -70,3 +70,82 @@ body.home-fit .bottom-nav button span{font-size:21px}
  body.home-fit .league-preview{min-height:32px}
  body.home-fit .bottom-nav button{min-height:36px;display:flex;justify-content:center;gap:8px}
 }
+/* Four pond buttons leave the full fighters clear in the center. */
+body.home-fit .pond-shell{background:linear-gradient(#9bdfef,#6fcbbd 60%,#3b9b84);grid-template-rows:36px minmax(0,1fr) 54px}
+body.home-fit .home-screen{display:flex;flex-direction:column;gap:8px;min-height:0}
+body.home-fit .game-logo{margin:4px 0;font-size:clamp(30px,9vw,46px)}
+.corner-pond{position:relative;flex:1;min-height:0;border-radius:22px;background:#72c9c0;overflow:hidden;isolation:isolate}
+.pond-fighters{position:absolute;inset:76px 0 78px;container-type:size;overflow:hidden;background:#9bdfef}
+.pond-fighters img{position:absolute;height:min(307cqh,150cqw);width:auto;max-width:none;left:50%;top:50%;transform:translate(-50%,-39%)}
+.corner-pond:before,.corner-pond:after{content:'';position:absolute;left:0;right:0;height:80px;z-index:-1;background:url('assets/pond-boxing-v4.png') center top/100% auto no-repeat}
+.corner-pond:before{top:0}.corner-pond:after{bottom:0;background-position:center bottom}
+.pond-choice{position:absolute;width:calc(50% - 16px);max-width:190px;min-height:58px;padding:6px 8px;display:grid;place-items:center;gap:2px;border:2px solid #fff0ae;border-radius:18px;background:linear-gradient(#fff6dc,#efca88);color:#315a28;font-size:clamp(13px,3.7vw,17px);box-shadow:0 4px 0 #927047}
+.pond-choice span{font-size:21px}.rival-choice{left:8px;top:8px;background:linear-gradient(#aaff54,#56c433);border-color:#e9ffb0}.solo-choice{right:8px;top:8px;background:linear-gradient(#a2eaff,#57b7dd);border-color:#d8faff}.explore-choice{left:8px;bottom:8px}.journey-choice{right:8px;bottom:8px}
+@media(orientation:landscape) and (max-height:600px){body.home-fit .home-screen{display:flex;gap:4px}body.home-fit .game-logo{font-size:26px;line-height:.85;margin:0}.pond-fighters{inset:0 130px}.pond-choice{width:118px;min-height:54px;font-size:13px}.corner-pond:before,.corner-pond:after{height:100%;width:130px;background-size:auto 100%}.corner-pond:after{left:auto;right:0}}
+/* Fixed app frame, with content pages and navigation inside it. */
+body.hub-fit .pond-shell,body.playing .pond-shell{height:var(--visible-height,100svh);min-height:0;max-width:720px;margin:0 auto;border:0;border-radius:0;padding:max(8px,env(safe-area-inset-top)) 12px max(6px,env(safe-area-inset-bottom));overflow:hidden;display:grid;gap:6px;background-position:center top}
+body.hub-fit .pond-shell{grid-template-rows:36px minmax(0,1fr) 54px;max-width:500px}
+body.hub-fit .topbar .avatar,body.hub-fit .topbar .gear{height:36px;width:36px;font-size:22px;border-width:2px}
+body.hub-fit .wallet{font-size:16px;padding:5px 12px}
+body.hub-fit .bottom-nav{position:static;transform:none;width:100%;padding:3px 4px;border-radius:14px}
+body.hub-fit .bottom-nav button{min-height:44px;font-size:11px;padding:2px;gap:0}
+body.hub-fit .bottom-nav button span{font-size:21px}
+body.hub-fit .hub-screen{min-height:0;padding:0;display:grid;grid-template-rows:42px minmax(0,1fr);gap:4px}
+body.hub-fit .page-heading{margin:0;gap:10px}
+body.hub-fit .page-heading h2{font-size:22px}
+body.hub-fit .page-heading .back{min-height:36px;padding:4px 12px}
+#hub-content{min-height:0}
+.paged-content{position:relative;height:100%;min-height:0;overflow:hidden}
+.screen-page{margin:0;width:100%;max-height:var(--page-space);padding:10px 12px;border-radius:16px;box-shadow:none}
+.screen-page h3{font-size:18px;margin:4px 0 7px}.screen-page p{font-size:14px;line-height:1.4;margin:7px 0}
+.screen-page .grid{gap:8px;margin:8px 0}.screen-page .fighter-card{min-height:104px;padding:7px;gap:3px;font-size:13px}.screen-page .fighter-card .illustrated-frog{width:56px;height:63px}
+.screen-page .button{min-height:38px;padding:7px 10px;font-size:14px}.screen-page .tabs{gap:6px;margin:7px 0}.screen-page .power-row,.screen-page .trail-row,.screen-page .league-row{padding:10px 0}.screen-page .bank-fact{padding:8px 0}
+.screen-pager{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:8px;height:44px;background:#fff8e9;border:2px solid #ffe8b3;border-radius:13px;padding:3px 6px}
+.screen-pager .button{font-size:13px;padding:5px 9px;min-height:34px}.screen-pager span{font-weight:800;font-size:13px}
+/* Puzzle grids fit both dimensions, with clue lists on their own pages. */
+.puzzle-stage{height:100%;min-height:0;margin:0;padding:10px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.puzzle-stage h3{margin:0;font-size:17px}.puzzle-stage .tabs{margin:0;gap:5px;flex:none}.puzzle-stage .tabs .button{font-size:12px;padding:5px 6px;min-height:36px}
+.puzzle-stage .current-clue,.puzzle-stage #wordsearch-feedback,.puzzle-stage #crossword-feedback{flex:none;min-height:0;margin:0;padding:6px;font-size:13px;line-height:1.3}
+.puzzle-stage #crossword-feedback:empty{display:none}
+.puzzle-board-space{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:2px;overflow:hidden}
+.cross-grid{grid-template-columns:repeat(var(--cross-cols),var(--puzzle-cell,20px));grid-template-rows:repeat(var(--cross-rows),var(--puzzle-cell,20px));gap:0;min-width:0!important;border-width:2px;flex:none}
+.cross-cell,.cross-block{min-width:0;aspect-ratio:auto}.cross-cell{border:1px solid #ddd}.cross-cell input{font-size:clamp(10px,calc(var(--puzzle-cell,20px)*.6),20px);padding:5px 0 0}.cross-cell small{font-size:clamp(6px,calc(var(--puzzle-cell,20px)*.3),10px)}
+.search-grid{grid-template-columns:repeat(var(--search-size),var(--puzzle-cell,22px));grid-template-rows:repeat(var(--search-size),var(--puzzle-cell,22px));gap:0;padding:2px;min-width:0!important;flex:none}
+.search-cell{min-width:0;min-height:0;aspect-ratio:auto;font-size:clamp(10px,calc(var(--puzzle-cell,22px)*.6),22px);border-radius:3px}
+/* The matching board uses the remaining screen height rather than fixed card proportions. */
+body.playing .pond-shell{grid-template-rows:minmax(0,1fr)}
+body.playing .game-screen{height:100%;min-height:0;padding:0;display:grid;grid-template-rows:36px 58px auto minmax(0,1fr) 40px;gap:6px}
+body.playing .game-header{padding:0}.game-header .back{min-height:34px}.game-header .gear{width:34px;height:34px}
+body.playing .scoreboard{margin:0;padding:5px;border-radius:15px}.scoreboard strong{font-size:25px}.clock b{font-size:23px}
+body.playing .turn-message{margin:0;min-height:30px;padding:6px;font-size:13px}
+body.playing .board{height:100%;min-height:0;max-height:none;margin:0;padding:6px;gap:5px;grid-template-rows:repeat(var(--rows,3),minmax(0,1fr));width:100%}
+body.playing .card{aspect-ratio:auto;max-height:none;height:100%;min-height:0;font-size:clamp(16px,4vw,30px);border-radius:8px}
+body.playing .card-word{font-size:10px}.card-word span{font-size:19px}
+body.playing .game-powers{margin:0}.game-powers .button{min-height:36px}
+dialog[open]{max-height:calc(var(--visible-height,100svh) - 20px);padding:12px;overflow:hidden}
+#modal-content.paged-content{height:calc(var(--page-space) + 46px);text-align:center}
+#modal-content .screen-page{border:0;background:transparent;padding:0;box-shadow:none;text-align:center}
+#modal-content .screen-page .actions{margin-top:10px}
+#modal-content .screen-page .dance .illustrated-frog{width:70px;height:78px}
+#account-dialog{font-size:14px}#account-dialog h2{font-size:23px}#account-dialog label{margin:7px 0}#account-dialog input{padding:8px}#account-dialog .actions{margin-top:10px;gap:6px}#account-dialog .button{min-height:36px;font-size:13px;padding:6px 10px}
+@media(orientation:landscape) and (max-height:600px){body.hub-fit .pond-shell{max-width:900px;grid-template-rows:34px minmax(0,1fr) 44px}body.hub-fit .bottom-nav button{min-height:36px;display:flex;justify-content:center;gap:8px}body.hub-fit .hub-screen{grid-template-rows:34px minmax(0,1fr)}body.hub-fit .page-heading h2{font-size:20px}body.playing .game-screen{grid-template-rows:32px 46px auto minmax(0,1fr) 36px;gap:4px}.puzzle-stage{display:grid;grid-template-columns:1fr 2fr;grid-template-rows:24px auto minmax(0,1fr) auto}.puzzle-stage .puzzle-board-space{grid-column:2;grid-row:1 / 5}.puzzle-stage .tabs{display:flex;flex-wrap:wrap}.screen-page p{margin:5px 0}}
+
+/* Three recognizable games, with nature adventures above the fighters. */
+body.home-fit .home-screen{gap:6px}
+.pond-adventures{display:flex;gap:8px;flex:none;justify-content:center}.pond-adventures .button{flex:1;min-height:38px;padding:5px 7px;font-size:12px;border-radius:17px;max-width:220px}
+body.home-fit .corner-pond{background:transparent;border-radius:18px}
+body.home-fit .pond-fighters{inset:0;background:#9bdfef;border-radius:18px}
+.corner-pond:before,.corner-pond:after{display:none}
+.game-bubbles{display:flex;justify-content:space-evenly;gap:8px;flex:none;padding:4px 0}
+.game-bubbles button{border:0;background:transparent;display:grid;gap:4px;justify-items:center;font-size:12px;color:#173e2a;min-width:75px;padding:0}
+.game-bubbles button>span{width:58px;height:58px;border:3px solid #fff4b8;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#e9f7a2,#84cb45);font-size:28px;box-shadow:0 4px 0 #4b8235}
+.game-bubbles button:nth-child(2)>span{background:linear-gradient(#fff2ad,#eec058)}.game-bubbles button:nth-child(3)>span{background:linear-gradient(#b4efff,#54b7d8)}
+body.hub-fit,body.playing{height:var(--visible-height,100svh);min-height:0;overflow:hidden}
+@media(orientation:landscape) and (max-height:600px){body.home-fit .home-screen{display:grid;grid-template-columns:minmax(0,1fr) 240px;grid-template-rows:48px minmax(0,1fr);gap:4px 12px}body.home-fit .game-logo{grid-column:1;grid-row:1}.pond-adventures{grid-column:2;grid-row:1;align-items:center}.pond-adventures .button{min-height:38px;font-size:11px}.corner-pond{grid-column:1;grid-row:2}.game-bubbles{grid-column:2;grid-row:2;flex-wrap:wrap;align-self:center;gap:14px 8px}.game-bubbles button>span{height:50px;width:50px;font-size:25px}}
+
+/* Rival and Solo remain bars; the four other adventures use circular buttons. */
+.play-bars{display:grid;gap:6px;flex:none}.game-bubbles button{min-width:0;flex:1;font-size:10px}.game-bubbles button>span{width:42px;height:42px;font-size:23px}.game-bubbles{gap:4px;padding:3px 0}
+body.home-fit .play-bars .solo-main{min-height:40px;font-size:19px}
+@media(orientation:landscape) and (max-height:600px){body.home-fit .home-screen{display:grid;grid-template-columns:minmax(0,1fr) 270px;grid-template-rows:48px minmax(0,1fr) auto;gap:4px 12px}.corner-pond{grid-column:1;grid-row:2 / 4}.play-bars{grid-column:2;grid-row:2;align-self:end}.game-bubbles{grid-column:2;grid-row:3;flex-wrap:nowrap;align-self:start;gap:4px}.game-bubbles button>span{height:38px;width:38px;font-size:22px}.game-bubbles button{font-size:10px}.play-bars .play-button{font-size:21px;min-height:38px}.play-bars .solo-main{min-height:36px!important;font-size:17px!important}}
+
+#account-content.paged-content{height:calc(var(--page-space) + 46px)}#account-content .screen-page{border:0;background:transparent;padding:0;text-align:left}#account-content .screen-pager{text-align:center}
