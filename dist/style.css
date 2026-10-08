@@ -379,3 +379,10 @@ height:52px!important;min-height:52px!important;max-height:52px!important;
 padding:2px 2px 4px!important;overflow:hidden!important;
 }
 body.home-fit .bottom-nav button span,body.hub-fit .bottom-nav button span{font-size:19px!important}
+
+/* Match cards: opaque backs and faces, larger revealed artwork, empty matched slots. */
+body.playing #board .card:not(.matched):not(.face){background:#226a57!important;background-image:linear-gradient(145deg,#348c74,#145a4d)!important;opacity:1!important;backdrop-filter:none!important}
+body.playing #board .card.face:not(.matched){background:#fff9e6!important;background-image:linear-gradient(160deg,#fffef4,#f1e7ca)!important;border-color:#fff5c5!important;opacity:1!important;backdrop-filter:none!important;color:#24573a!important;font-size:clamp(29px,7vw,53px)!important;text-shadow:none!important}
+body.playing #board .card.face:not(.matched) .card-word{font-size:clamp(13px,3.7vw,22px)!important}
+body.playing #board .card.matched{visibility:hidden!important;pointer-events:none!important;opacity:0!important;box-shadow:none!important}
+body.playing .scoreboard>div:first-child strong{color:#d4ff79!important}
