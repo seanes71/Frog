@@ -185,3 +185,16 @@ body.home-fit .game-logo.faceoff-logo{height:clamp(64px,18vw,84px);margin:4px 0;
 
 /* Slightly wider logo within the existing title space. */
 .faceoff-logo img{transform:scaleX(1.12);transform-origin:center}
+
+/* Colorful pond adventures with strong, readable lettering. */
+.pond-adventure-menu{background:#fffdf3!important;color:#233d31}
+.pond-adventure-menu .muted{color:#405449}
+.pond-adventure-menu .button{color:#18392d!important;text-shadow:none!important;border:2px solid #315d48!important;box-shadow:0 3px 0 #315d48!important;background:#b9ec83!important;font-weight:900}
+.pond-adventure-menu [data-action="healthy-pond"]{background:#91e0d3!important}
+.pond-adventure-menu [data-action="crossword"]{background:#d7c2fa!important}
+.pond-adventure-menu [data-action="wordsearch"]{background:#ffe28a!important}
+.pond-adventure-menu [data-action="bank"]{background:#ffc1b2!important}
+.pond-adventure-menu [data-action="journey"]{background:#b5dcff!important}
+.pond-adventure-menu .learning-pace summary{background:#e4f0d1;color:#244532;border:2px solid #628255;box-shadow:0 2px 0 #628255}
+
+.pond-adventure-menu .screen-page{background:#fffdf3!important}.adventure-choice{margin:8px 0}.adventure-choice p{margin:5px 0 0;font-size:13px;line-height:1.3}
