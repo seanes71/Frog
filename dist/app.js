@@ -27,7 +27,7 @@ function setNav(tab){document.querySelectorAll('.bottom-nav button').forEach(b=>
 function home(){if(searchPuzzle){wordSearchState(p).found=[];save();}stopTimers();searchPuzzle=null;searchStart=null;draggingSearch=false;puzzle=null;activeEntry=null;activeLesson=null;lessonAnswered=false;match=null;series=null;season=null;$('#modal').close();show('home');setNav('home');document.body.classList.remove('theme-halloween','theme-winter');sync();startAmbience();}
 function modal(html){$('#modal-content').innerHTML=html;if(!$('#modal').open)$('#modal').showModal();}
 function dismiss(){ $('#modal').close(); }
-function openHub(title,content,tab){dismiss();show('hub');setNav(tab);$('#hub-title').textContent=title;$('#hub-content').classList.toggle('pond-adventure-menu',title==='Explore the Pond');$('#hub-content').innerHTML=content;}
+function openHub(title,content,tab){dismiss();show('hub');setNav(tab);$('#hub-title').textContent=title;$('#hub-content').classList.toggle('pond-adventure-menu',title==='Explore the Pond');$('#hub-content').innerHTML=content;const h=$('#hub-content');h.scrollTop=0;const hub=$('#hub');hub.scrollTop=0;requestAnimationFrame(()=>{h.scrollTop=0;hub.scrollTop=0;});}
 /* Four optional pond brain games, reachable from Explore Pond. */
 let brain={mode:'memory',level:'gentle',cards:[],open:[],matched:[],busy:false,sequence:[],entered:[],answer:0,objects:[],missing:0,timeout:null,found:[],target:0,round:0};
 const brainPool=['🐸','🐢','🦋','🐟','🪷','🐞','🦆','🍄','🌻','🐌','🦀','🪲','🐝'];
