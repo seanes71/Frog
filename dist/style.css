@@ -281,3 +281,26 @@ text-shadow:0 1px 3px #351e10!important;
 .pond-shell .gear{border-radius:16px!important}
 .pond-shell .wallet{border-radius:24px!important}
 .pond-shell button:disabled{opacity:.48!important}
+
+/* Fighter collection: carved wood portrait frames, bright labels, clear selection. */
+body.hub-fit .fighter-card{
+background:var(--frog-log-grain)!important;
+border:3px solid #d7a76a!important;
+border-radius:20px 16px 21px 17px!important;
+box-shadow:inset 0 2px 0 #f4d396,inset 0 -5px 0 #49291c,0 4px 0 #4b2c1a!important;
+color:#fff9e6!important;text-shadow:0 2px 3px #2c180c!important;
+padding:10px 5px!important;gap:5px!important;
+}
+body.hub-fit .fighter-card b,body.hub-fit .fighter-card small{color:#fff9e6!important;text-shadow:0 2px 3px #2c180c,0 0 5px #37200c!important;overflow-wrap:anywhere}
+body.hub-fit .fighter-card.selected{
+border:4px solid #ffe277!important;
+background:repeating-linear-gradient(174deg,transparent 0 8px,#5a341f25 9px 10px,transparent 12px 21px),linear-gradient(180deg,#e2bf6c,#98703c 55%,#68411e)!important;
+box-shadow:0 0 0 3px #4b9f43,inset 0 2px 0 #fff1b0,0 4px 0 #4b2c1a!important;
+}
+body.hub-fit .fighter-card.selected:after{content:"✓ Selected";display:block;color:#fffbd4;font-size:12px;font-weight:900;text-shadow:0 2px 3px #37200c}
+body.hub-fit .fighter-card .frog-art,body.hub-fit .fighter-card .frog-portrait,body.hub-fit .fighter-card img{filter:none}
+body.hub-fit .panel .tabs .button,body.hub-fit .page-heading .back,body.hub-fit .panel .actions .button{
+background:var(--frog-log-grain)!important;color:#fff9e8!important;border:2px solid #d7a76a!important;border-radius:17px!important;
+box-shadow:inset 0 2px 0 #f0c98c88,inset 0 -3px 0 #4b2a1c99,0 3px 0 #40291c!important;text-shadow:0 2px 3px #351e10!important
+}
+body.hub-fit .panel .tabs .button:disabled{opacity:.43!important}
