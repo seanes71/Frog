@@ -526,3 +526,30 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 }
 @media(prefers-reduced-motion:reduce){#modal .dance .victory-fighters>.frog-portrait,#modal .dance .victory-fighters:after{animation:none!important}#modal .dance .victory-fighters:after{display:none!important}}
 @media(max-width:390px){#modal .dance .victory-fighters{height:145px!important}#modal .dance .victory-fighters>.frog-portrait{flex-basis:115px!important;width:115px!important;height:133px!important}}
+
+/* Actual articulated frog victory cartoon — no photo tiles. */
+#modal .dance:has(.frog-fight-stage){display:block!important;width:100%!important;max-width:100%!important;height:220px!important;overflow:hidden!important}
+#modal .frog-fight-stage{height:215px;width:min(100%,350px);position:relative;margin:0 auto;overflow:hidden;border-radius:20px;background:radial-gradient(ellipse at 50% 95%,#b5eb9b 0%,#5abeb4 39%,#b9e7f6 75%,#e6faff 100%);border:2px solid #b8dc9c}
+#modal .frog-fight-stage:before{content:"";position:absolute;left:6%;right:6%;bottom:8px;height:28px;border-radius:50%;background:#409c63;box-shadow:0 5px 0 #27765b}
+#modal .fight-character{position:absolute;bottom:15px;width:46%;height:183px;transform-origin:50% 90%;will-change:transform}
+#modal .fight-character svg{width:100%;height:100%;overflow:visible}
+#modal .fight-green{left:0;animation:fight-green-move 5.6s ease-in-out infinite}
+#modal .fight-purple{right:0;animation:fight-purple-move 5.6s ease-in-out infinite}
+#modal .fight-purple .frog-rig{transform:scaleX(-1);transform-origin:50% 50%}
+#modal .frog-arm,#modal .frog-leg{transform-box:fill-box;transform-origin:50% 12%}
+#modal .fight-green .front-arm{animation:fight-punch 5.6s ease-in-out infinite}
+#modal .fight-green .front-leg{animation:fight-kick 5.6s ease-in-out infinite}
+#modal .fight-purple .front-arm{animation:fight-counter 5.6s ease-in-out infinite}
+#modal .fight-purple .front-leg{animation:fight-purple-kick 5.6s ease-in-out infinite}
+#modal .fight-splash{position:absolute;top:35%;left:45%;font-size:42px;z-index:5;opacity:0;animation:fight-splash 5.6s ease-in-out infinite}
+#modal .fight-stars{position:absolute;right:9%;top:9%;font-size:20px;opacity:0;animation:fight-stars 5.6s ease-in-out infinite}
+@keyframes fight-green-move{0%,8%{transform:translateX(-17px)}19%{transform:translateX(19px) rotate(-6deg)}31%{transform:translateX(27px) rotate(4deg)}42%{transform:translateX(15px)}52%{transform:translateX(33px) translateY(-12px) rotate(-12deg)}64%{transform:translateX(14px)}75%{transform:translateY(-16px)}81%{transform:translateY(0)}88%{transform:translateY(-13px)}100%{transform:translateX(-17px)}}
+@keyframes fight-purple-move{0%,8%{transform:translateX(17px)}19%{transform:translateX(-15px)}30%{transform:translateX(-19px) rotate(12deg)}40%{transform:translateX(6px)}52%{transform:translateX(-16px) rotate(22deg)}63%{transform:translateX(19px) translateY(28px) rotate(78deg)}76%{transform:translateX(19px) translateY(28px) rotate(78deg)}88%{transform:translateX(10px) rotate(20deg)}100%{transform:translateX(17px)}}
+@keyframes fight-punch{0%,12%,31%,100%{transform:rotate(0)}19%{transform:rotate(-88deg) translateY(-13px)}25%{transform:rotate(-20deg)}40%{transform:rotate(-78deg)}46%{transform:rotate(0)}}
+@keyframes fight-kick{0%,43%,66%,100%{transform:rotate(0)}51%{transform:rotate(-80deg) translateY(-13px)}59%{transform:rotate(-25deg)}}
+@keyframes fight-counter{0%,25%,48%,100%{transform:rotate(0)}32%{transform:rotate(82deg) translateY(-10px)}39%{transform:rotate(20deg)}}
+@keyframes fight-purple-kick{0%,25%,45%,100%{transform:rotate(0)}33%{transform:rotate(40deg)}}
+@keyframes fight-splash{0%,15%,23%,36%,47%,100%{opacity:0;transform:scale(.3)}18%,41%,53%{opacity:1;transform:scale(1.2)}20%,44%,57%{opacity:0;transform:scale(1.5)}}
+@keyframes fight-stars{0%,51%,100%{opacity:0}60%,76%{opacity:1;transform:rotate(14deg)}}
+#modal .dance.still .frog-fight-stage *,body.reduce-motion #modal .frog-fight-stage *{animation:none!important}
+@media(prefers-reduced-motion:reduce){#modal .frog-fight-stage *{animation:none!important}}
