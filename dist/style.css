@@ -343,3 +343,19 @@ body.hub-fit .fighter-card[data-id="crystal"]{--fighter-tint:#53b9c8}
 body.hub-fit .fighter-card[data-id]{background:repeating-linear-gradient(174deg,transparent 0 8px,#3e261c20 9px 10px,transparent 12px 21px),linear-gradient(160deg,color-mix(in srgb,var(--fighter-tint),white 30%),var(--fighter-tint) 58%,color-mix(in srgb,var(--fighter-tint),#29211d 36%))!important}
 body.hub-fit .fighter-card.selected{outline:3px solid #ffe57b!important;outline-offset:-6px!important}
 body.hub-fit .fighter-card.selected:after{content:none!important}
+
+/* Correct the fixed-height grid regression: dock occupies its own row. */
+body.home-fit .pond-shell,body.hub-fit .pond-shell{grid-template-rows:36px minmax(0,1fr) 72px!important;padding-bottom:8px!important}
+body.home-fit .bottom-nav,body.hub-fit .bottom-nav{position:static!important;transform:none!important;bottom:auto!important;align-self:stretch!important;height:68px!important;min-height:0!important;width:100%!important;margin:0!important;padding:4px!important;overflow:hidden!important}
+body.home-fit .bottom-nav button,body.hub-fit .bottom-nav button{height:58px!important;min-height:0!important;max-height:58px!important;padding:3px 2px!important;overflow:hidden!important;font-size:11px!important}
+body.home-fit .bottom-nav button span,body.hub-fit .bottom-nav button span{font-size:21px!important}
+body.home-fit .pond-shell{background-color:#3c9c83!important;background-size:cover!important}
+body.home-fit .home-screen{min-height:0!important;overflow:auto!important;scrollbar-width:none}
+body.home-fit .home-screen::-webkit-scrollbar{display:none}
+/* Portraits must inherit the correct color transformation, including CSS overrides. */
+body.hub-fit .fighter-card[data-id="blue"] .frog-portrait{filter:hue-rotate(130deg) saturate(1.25)!important}
+body.hub-fit .fighter-card[data-id="pink"] .frog-portrait{filter:hue-rotate(260deg) saturate(1.25)!important}
+body.hub-fit .fighter-card[data-id="red"] .frog-portrait{filter:hue-rotate(290deg) saturate(1.25)!important}
+body.hub-fit .fighter-card[data-id="gold"] .frog-portrait{filter:sepia(1) saturate(4)!important}
+body.hub-fit .fighter-card[data-id="purple"] .frog-portrait{filter:none!important}
+body.hub-fit .fighter-card[data-id="green"] .frog-portrait{filter:none!important}
