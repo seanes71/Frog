@@ -1,0 +1,24 @@
+/* Dedicated mobile layouts: avoid the historical word-search overrides. */
+#hub:has(#wordsearch-grid),#hub:has(.pond-find-scene){overflow:hidden!important;padding-bottom:0!important}
+#hub-content:has(#wordsearch-grid),#hub-content:has(.pond-find-scene){height:100%!important;max-height:100%!important;min-height:0!important;overflow:hidden!important;padding-bottom:0!important}
+#hub-content:has(#wordsearch-grid) .panel.puzzle-stage{box-sizing:border-box!important;height:100%!important;min-height:0!important;max-height:100%!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;padding:8px!important;gap:5px!important}
+#hub-content:has(#wordsearch-grid) .puzzle-stage>h3:first-child{font-size:15px!important;flex:none!important}
+#hub-content:has(#wordsearch-grid) .puzzle-stage .tabs{flex:none!important;gap:4px!important}
+#hub-content:has(#wordsearch-grid) .puzzle-stage .tabs .button{font-size:11px!important;min-height:30px!important;padding:3px!important}
+#hub-content:has(#wordsearch-grid) #wordsearch-feedback{flex:none!important;font-size:12px!important;line-height:1.2!important;padding:5px!important;margin:0!important}
+#hub-content:has(#wordsearch-grid) .puzzle-board-space{flex:1 1 auto!important;min-height:0!important;max-height:none!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important}
+#wordsearch-grid{--ws-cell:var(--puzzle-cell,28px)!important;box-sizing:border-box!important;display:grid!important;grid-template-columns:repeat(var(--search-size),var(--puzzle-cell,28px))!important;grid-template-rows:repeat(var(--search-size),var(--puzzle-cell,28px))!important;grid-auto-rows:var(--puzzle-cell,28px)!important;width:max-content!important;max-width:100%!important;height:max-content!important;max-height:100%!important;min-height:0!important;padding:4px!important;gap:2px!important;overflow:hidden!important;margin:auto!important}
+#wordsearch-grid>button.search-cell{box-sizing:border-box!important;width:var(--puzzle-cell,28px)!important;height:var(--puzzle-cell,28px)!important;min-width:0!important;min-height:0!important;max-height:none!important;aspect-ratio:1!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:clamp(11px,calc(var(--puzzle-cell,28px)*.54),20px)!important;font-weight:750!important;line-height:1!important;padding:0!important;margin:0!important;border-radius:8px!important}
+#hub-content:has(#wordsearch-grid) .wordsearch-list-heading{font-size:14px!important;flex:none!important;margin:1px 0!important}
+#wordsearch-words{box-sizing:border-box!important;flex:0 1 auto!important;min-height:0!important;max-height:125px!important;overflow-y:auto!important;display:flex!important;flex-wrap:wrap!important;gap:4px!important;margin:0!important;padding:1px!important}
+#wordsearch-words span{font-size:11px!important;font-weight:700!important;padding:3px 5px!important;border-radius:7px!important;line-height:1.1!important}
+/* A complete landscape-ish illustrated pond on one phone screen. */
+#hub-content:has(.pond-find-scene){overflow-y:auto!important;overscroll-behavior:contain!important}
+#hub-content:has(.pond-find-scene) .brain-suite{height:auto!important;max-height:none!important;padding:7px!important;overflow:visible!important}
+#hub-content:has(.pond-find-scene) .brain-suite h3{font-size:20px!important;margin:5px 0!important}
+#hub-content:has(.pond-find-scene) .brain-suite p{font-size:13px!important;margin:4px 0!important}
+#hub-content:has(.pond-find-scene) .brain-levels{margin:0 0 5px!important}
+#hub-content:has(.pond-find-scene) .brain-levels .button{min-height:32px!important;padding:4px!important;font-size:12px!important}
+#hub-content:has(.pond-find-scene) .pond-find-scene{box-sizing:border-box!important;width:100%!important;max-width:500px!important;min-height:0!important;height:auto!important;max-height:calc(100dvh - 385px)!important;aspect-ratio:4/3!important;margin:7px auto!important;border-width:3px!important;background-size:100% 100%!important;overflow:hidden!important}
+#hub-content:has(.pond-find-scene) .pond-hidden-object{width:clamp(28px,9%,44px)!important;height:clamp(28px,9%,44px)!important;font-size:clamp(23px,6vw,32px)!important;filter:drop-shadow(0 1px 2px #164b3766)!important}
+@media(max-height:690px){#hub-content:has(.pond-find-scene) .pond-find-scene{max-height:calc(100dvh - 325px)!important}}
