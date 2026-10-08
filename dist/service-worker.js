@@ -1,6 +1,6 @@
-const CACHE='frog-showdown-mobile-v20';
-const FILES=['./','./index.html','./mobile.html','./style.css?v=brain-visible-20','./app.js?v=brain-visible-20','./screen-fit.js?v=touch-stability-18','./card-layout.js?v=cards-8','./engine.js?v=starter-shop-11','./journey.js?v=mobile-1','./catalog.js?v=mobile-1','./crossword.js?v=mobile-1','./wordsearch.js?v=mobile-1','./curriculum.js?v=mobile-1','./migration.js?v=mobile-1','./account.js?v=mobile-1','./manifest.webmanifest','./icon.svg','./icons/icon-192.png','./icons/icon-512.png','./assets/pond-boxing-v4.png','./assets/pond-scenery-v1.png','./assets/froggy-faceoff-logo-v1.png','./assets/countdown-voice.mp3','./assets/happy-frog.mp3','./assets/pond-croak.mp3'];
-const paths=new Set(FILES.map(path=>new URL(path,self.location.href).pathname));
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('frog-showdown-mobile-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',event=>{const url=new URL(event.request.url);if(event.request.method!=='GET'||url.origin!==self.location.origin||!paths.has(url.pathname))return;event.respondWith(fetch(event.request).then(response=>{if(response.ok&&!response.redirected){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}return response;}).catch(()=>caches.match(event.request,{ignoreSearch:true})));});
+const CACHE='frog-faceoff-checkpoint-v25';
+const FILES=['./style.css?v=wood-checkpoint-25','./app.js?v=wood-checkpoint-25','./screen-fit.js?v=wood-checkpoint-25'];
+self.addEventListener('install',event=>event.waitUntil(self.skipWaiting()));
+self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('frog-showdown-mobile-')||k.startsWith('frog-faceoff-checkpoint-')).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+// Network-first HTML: never serve an old home page or obsolete Brain Boost bar.
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;if(req.mode==='navigate'||req.destination==='document'){event.respondWith(fetch(req,{cache:'no-store'}).catch(()=>new Response('Please reconnect and refresh Froggy Faceoff.',{status:503,headers:{'Content-Type':'text/plain'}})));}});
