@@ -149,3 +149,9 @@ body.home-fit .play-bars .solo-main{min-height:40px;font-size:19px}
 @media(orientation:landscape) and (max-height:600px){body.home-fit .home-screen{display:grid;grid-template-columns:minmax(0,1fr) 270px;grid-template-rows:48px minmax(0,1fr) auto;gap:4px 12px}.corner-pond{grid-column:1;grid-row:2 / 4}.play-bars{grid-column:2;grid-row:2;align-self:end}.game-bubbles{grid-column:2;grid-row:3;flex-wrap:nowrap;align-self:start;gap:4px}.game-bubbles button>span{height:38px;width:38px;font-size:22px}.game-bubbles button{font-size:10px}.play-bars .play-button{font-size:21px;min-height:38px}.play-bars .solo-main{min-height:36px!important;font-size:17px!important}}
 
 #account-content.paged-content{height:calc(var(--page-space) + 46px)}#account-content .screen-page{border:0;background:transparent;padding:0;text-align:left}#account-content .screen-pager{text-align:center}
+
+/* Familiar playing-card proportions, centered without stretching. */
+body.playing .board{grid-template-columns:repeat(var(--cols,4),var(--card-width,50px));grid-template-rows:repeat(var(--rows,3),var(--card-height,70px));place-content:center}
+body.playing .card{width:var(--card-width,50px);height:var(--card-height,70px);aspect-ratio:5/7;padding:2px;font-size:var(--card-icon,28px)}
+body.playing .card-word{font-size:var(--card-wordText,10px);gap:3px}
+body.playing .card-word span{font-size:var(--card-wordIcon,24px)}
