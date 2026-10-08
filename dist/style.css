@@ -725,3 +725,11 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 #wordsearch-words{gap:5px!important;margin:4px 0 10px!important}
 #wordsearch-words span{font-size:12px!important;padding:5px 7px!important;font-weight:800!important;line-height:1.15!important;border-width:1px!important;border-radius:10px!important}
 #hub-content:has(#wordsearch-grid) .wordsearch-list-heading{font-size:19px!important;margin:8px 0 2px!important}
+
+/* Find It at the Pond: one intact, scrollable playable scene. */
+#hub:has(.pond-find-scene){overflow-y:auto!important;min-height:0!important}
+#hub-content:has(.pond-find-scene){height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;display:block!important}
+#hub-content:has(.pond-find-scene) .brain-suite{height:auto!important;max-height:none!important;overflow:visible!important;padding:12px!important}
+#hub-content:has(.pond-find-scene) .pond-find-scene{display:block!important;position:relative!important;box-sizing:border-box!important;width:100%!important;min-height:320px!important;max-height:none!important;aspect-ratio:4/5!important;margin:12px auto!important;overflow:hidden!important;background:linear-gradient(#b0f4fc22,#0b69743d),radial-gradient(ellipse at 50% 78%,#3bacc2 0 36%,#76c5a2 64%,#b4dd85 100%)!important}
+#hub-content:has(.pond-find-scene) .pond-hidden-object{display:flex!important;visibility:visible!important;opacity:1!important;z-index:4!important;background:#ffffff38!important;border:1px solid #ffffffa8!important;box-shadow:0 2px 6px #0d545b66!important}
+#hub-content:has(.pond-find-scene) .pond-hidden-object.located{opacity:.35!important}
