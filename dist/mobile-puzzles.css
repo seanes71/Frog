@@ -57,8 +57,12 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 /* User-selected photographic pond, with the existing illustrated pond as fallback
    until Froggy_Pond_Photo.jpg is added to dist/assets. */
 #hub-content:has(.pond-find-scene) .pond-find-scene{
- background-image:url('assets/Froggy_Pond_Photo.jpg'),url('assets/hidden-pond-scene.svg')!important;
+ background-image:url('assets/IMG_3100.jpeg')!important;
  background-position:center center!important;
  background-repeat:no-repeat!important;
  background-size:cover!important;
 }
+
+/* The uploaded photograph is the actual playable hidden-object backdrop. */
+#hub-content:has(.pond-find-scene) .pond-find-scene{background-image:url('assets/IMG_3100.jpeg')!important;background-size:cover!important;background-position:center!important}
+#hub-content:has(.pond-find-scene) .pond-find-scene img[src*="hidden-pond-scene.svg"]{opacity:0!important}
