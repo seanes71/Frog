@@ -203,3 +203,6 @@ body.home-fit .game-logo.faceoff-logo{height:clamp(64px,18vw,84px);margin:4px 0;
 
 /* Portrait crop includes both eyes and the whole face, without stretching. */
 .topbar .avatar .frog-art{border-radius:50%;background-size:300% 450%;background-position:28.5% 24.5%}.topbar .avatar .frog-art.purple-art{background-position:72.5% 27.5%}
+
+/* Keep accessible focus rings within clipped, fitted page boundaries. */
+button:focus-visible{outline:3px solid #145de0;outline-offset:-5px}
