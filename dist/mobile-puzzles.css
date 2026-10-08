@@ -22,3 +22,13 @@
 #hub-content:has(.pond-find-scene) .pond-find-scene{box-sizing:border-box!important;width:100%!important;max-width:500px!important;min-height:0!important;height:auto!important;max-height:calc(100dvh - 385px)!important;aspect-ratio:4/3!important;margin:7px auto!important;border-width:3px!important;background-size:100% 100%!important;overflow:hidden!important}
 #hub-content:has(.pond-find-scene) .pond-hidden-object{width:clamp(28px,9%,44px)!important;height:clamp(28px,9%,44px)!important;font-size:clamp(23px,6vw,32px)!important;filter:drop-shadow(0 1px 2px #164b3766)!important}
 @media(max-height:690px){#hub-content:has(.pond-find-scene) .pond-find-scene{max-height:calc(100dvh - 325px)!important}}
+
+/* Keep the finding game's title, controls and target in view; no inherited scroll offset. */
+#hub:has(.pond-find-scene){overflow:hidden!important;scroll-behavior:auto!important}
+#hub-content:has(.pond-find-scene){overflow-y:auto!important;overflow-x:hidden!important;scroll-behavior:auto!important;overscroll-behavior:contain!important;height:100%!important;min-height:0!important}
+#hub-content:has(.pond-find-scene) .brain-suite{display:flex!important;flex-direction:column!important;gap:4px!important;padding:8px!important;min-height:0!important}
+#hub-content:has(.pond-find-scene) .brain-suite .brain-levels{order:0!important;flex:none!important}
+#hub-content:has(.pond-find-scene) .brain-suite h3{order:1!important;flex:none!important;font-size:17px!important;margin:2px!important}
+#hub-content:has(.pond-find-scene) .brain-suite p{order:2!important;flex:none!important;font-size:12px!important;margin:1px!important}
+#hub-content:has(.pond-find-scene) .pond-find-scene{order:3!important;flex:none!important;aspect-ratio:4/3!important;max-height:min(47dvh,390px)!important;margin:4px auto!important}
+#hub-content:has(.pond-find-scene) .brain-suite>.button{order:5!important;flex:none!important;min-height:32px!important;padding:5px!important}
