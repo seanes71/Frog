@@ -65,7 +65,7 @@ function renderBoard(){
  if(geometryChanged){board.style.setProperty('--cols',cols);board.style.setProperty('--rows',Math.ceil(count/cols));if(board.dataset)board.dataset.layout=signature;}
  const states=match.deck.map((c,i)=>{
   const shown=c.matched||match.revealed.includes(i)||peek.includes(i);
-  return {className:`card ${shown?'face':''} ${c.matched?'matched':''}`,disabled:!!(c.matched||match.turn!=='you'||match.lock||$('#modal').open),label:c.matched?'Matched':shown?`Card ${i+1}: ${c.value}`:`Hidden card ${i+1}`,html:shown?(c.value.includes('|')?`<span class="card-word"><span>${c.value.split('|')[0]}</span>${c.value.split('|')[1]}</span>`:c.value):'🪷'};
+  return {className:`card ${shown?'face':''} ${c.matched?'matched':''}`,disabled:!!(c.matched||match.turn!=='you'||match.lock||$('#modal').open),label:c.matched?'Matched':shown?`Card ${i+1}: ${c.value}`:`Hidden card ${i+1}`,html:c.matched?'':shown?(c.value.includes('|')?`<span class="card-word"><span>${c.value.split('|')[0]}</span>${c.value.split('|')[1]}</span>`:c.value):'🪷'};
  });
  const cards=board.querySelectorAll?.('.card');
  if(cards?.length===count){
@@ -74,7 +74,7 @@ function renderBoard(){
  if(geometryChanged)window.frogFitBoard?.();
 }
 
-function renderScores(){$('#you-score').textContent=match.scores.you;$('#rival-score').textContent=match.mode==='solo'?match.deck.filter(c=>!c.matched).length/2:match.scores.rival;$('#series-score').textContent=match.mode==='solo'?`${match.deck.length} cards`: `${series.you}–${series.rivalWins} · Best of 3`;}
+function renderScores(){$('#you-score').textContent=match.mode==='solo'?match.deck.filter(c=>c.matched).length/2:match.scores.you;$('#rival-score').textContent=match.mode==='solo'?match.deck.filter(c=>!c.matched).length/2:match.scores.rival;$('#series-score').textContent=match.mode==='solo'?`${match.deck.length} cards`: `${series.you}–${series.rivalWins} · Best of 3`;}
 function powerUnavailable(id){if(!match||match.turn!=='you'||match.lock||match.done||$('#modal').open)return true;if(['freeze','clock','safe','shield','snatch'].includes(id)&&match.mode==='solo')return true;if(['double','freeze','safe','shield','harvest'].includes(id)&&match[id])return true;if(id==='snatch'&&match.scores.rival===0)return true;if(id==='echo'&&match.echo>0)return true;if(id==='shuffle'&&match.revealed.length)return true;if(id==='recall'&&match.lastMismatch.filter(i=>!match.deck[i].matched&&!match.revealed.includes(i)).length===0)return true;return false;}
 function powerChoices(){return POWERS.filter(f=>p.inventory[f.id]>0).map(f=>`<button class="button wide ${f.id==='vision'?'blue':''}" data-action="use-power" data-id="${f.id}" ${powerUnavailable(f.id)?'disabled':''}>${f.icon} ${f.name} · ${p.inventory[f.id]} owned</button>`).join('')||'<p>Buy powers from Home to bring them into a match.</p>';}
 function renderPowers(){$('#game-powers').innerHTML=`<button class="button" data-action="match-powers" ${!match||match.turn!=='you'||match.lock||match.done?'disabled':''}>⚡ Your Super Powers</button>`;}
