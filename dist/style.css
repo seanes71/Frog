@@ -486,3 +486,43 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 #modal .dance .victory-fighters>.frog-portrait:first-child{transform:rotate(-7deg)!important}
 #modal .dance .victory-fighters>.frog-portrait:last-child{transform:rotate(7deg)!important}
 @media(max-width:390px){#modal .dance .victory-fighters{height:140px!important;gap:12px!important}#modal .dance .victory-fighters>.frog-portrait{height:135px!important}}
+
+/* Victory cartoon fight: lunge, punch, counter-kick, knockdown, recover. */
+#modal .dance .victory-fighters{position:relative!important;overflow:visible!important;isolation:isolate!important;height:170px!important;gap:3px!important;align-items:flex-end!important}
+#modal .dance .victory-fighters>.frog-portrait{transform-origin:50% 88%!important;will-change:transform!important;animation-duration:5.8s!important;animation-timing-function:ease-in-out!important;animation-iteration-count:infinite!important}
+#modal .dance:not(.still) .victory-fighters>.frog-portrait:first-child{animation-name:frog-battle-left!important}
+#modal .dance:not(.still) .victory-fighters>.frog-portrait:last-child{animation-name:frog-battle-right!important}
+#modal .dance .victory-fighters:after{content:"💥";position:absolute;left:50%;top:27%;font-size:45px;z-index:4;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.3);animation:frog-battle-impact 5.8s ease-in-out infinite}
+@keyframes frog-battle-left{
+0%,7%{transform:translateX(-32px) rotate(-8deg) scale(1)}
+16%{transform:translateX(7px) rotate(5deg) scale(1.08)}
+23%{transform:translateX(38px) rotate(20deg) scale(1.1)}
+28%{transform:translateX(12px) rotate(-14deg)}
+38%{transform:translateX(4px) rotate(-5deg)}
+46%{transform:translateX(12px) rotate(13deg)}
+53%{transform:translateX(-18px) rotate(-30deg)}
+60%{transform:translateX(-24px) translateY(25px) rotate(-72deg)}
+68%{transform:translateX(-25px) translateY(28px) rotate(-80deg)}
+79%{transform:translateX(-24px) translateY(3px) rotate(-15deg)}
+90%,100%{transform:translateX(-32px) rotate(-8deg)}
+}
+@keyframes frog-battle-right{
+0%,7%{transform:translateX(32px) rotate(8deg)}
+16%{transform:translateX(13px) rotate(-6deg)}
+23%{transform:translateX(6px) rotate(-18deg)}
+28%{transform:translateX(30px) rotate(18deg)}
+38%{transform:translateX(23px) rotate(8deg)}
+46%{transform:translateX(-15px) rotate(-23deg) scale(1.09)}
+53%{transform:translateX(-31px) rotate(-25deg) scale(1.08)}
+60%{transform:translateX(6px) rotate(14deg)}
+68%{transform:translateX(16px) rotate(8deg)}
+79%{transform:translateX(24px) rotate(8deg)}
+90%,100%{transform:translateX(32px) rotate(8deg)}
+}
+@keyframes frog-battle-impact{
+0%,17%,25%,43%,49%,100%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(-20deg)}
+20%,46%{opacity:1;transform:translate(-50%,-50%) scale(1.15) rotate(10deg)}
+23%,48%{opacity:.65;transform:translate(-50%,-50%) scale(.85) rotate(-10deg)}
+}
+@media(prefers-reduced-motion:reduce){#modal .dance .victory-fighters>.frog-portrait,#modal .dance .victory-fighters:after{animation:none!important}#modal .dance .victory-fighters:after{display:none!important}}
+@media(max-width:390px){#modal .dance .victory-fighters{height:145px!important}#modal .dance .victory-fighters>.frog-portrait{flex-basis:115px!important;width:115px!important;height:133px!important}}
