@@ -206,3 +206,12 @@ body.home-fit .game-logo.faceoff-logo{height:clamp(64px,18vw,84px);margin:4px 0;
 
 /* Keep accessible focus rings within clipped, fitted page boundaries. */
 button:focus-visible{outline:3px solid #145de0;outline-offset:-5px}
+
+/* Bring the title closer to the fighters, with a larger readable wordmark. */
+body.home-fit .game-logo.faceoff-logo{height:clamp(80px,24vw,110px);margin:14px 0 -2px;position:relative;z-index:2}
+/* Full-body portraits use a proportional, wider view of the original artwork. */
+.topbar .avatar{display:flex;align-items:center;justify-content:center;box-shadow:0 2px 0 #174161}
+.topbar .avatar .frog-art{background-size:140% 210%;background-position:0% 28%;border-radius:50%}
+.topbar .avatar .frog-art.purple-art{background-position:100% 31%}
+@media(orientation:landscape) and (max-height:600px){body.home-fit .game-logo.faceoff-logo{height:46px;margin:2px 0 0}}
+@media(max-height:560px) and (orientation:portrait){body.home-fit .game-logo.faceoff-logo{height:76px;margin-top:8px}}
