@@ -231,3 +231,7 @@ body.home-fit .game-logo.faceoff-logo{height:clamp(80px,24vw,110px);margin:14px 
 /* Blue Splash: keep selected frog visible in the player badge and color it blue. */
 .topbar .avatar[data-selected-frog="blue"] .frog-portrait,.topbar .avatar .frog-portrait.blue{display:block!important;visibility:visible!important;opacity:1!important}
 .topbar .avatar[data-selected-frog="blue"] .frog-art,.topbar .avatar .frog-portrait.blue .frog-art{display:block!important;visibility:visible!important;opacity:1!important;filter:hue-rotate(155deg) saturate(1.7)!important;background-image:url('assets/pond-boxing-v4.png')!important;background-position:18% 34%!important}
+
+/* Blue Splash badge: avoid stacking two hue rotations, which turns blue back to green. */
+.topbar .avatar[data-selected-frog="blue"] .frog-portrait.blue{filter:hue-rotate(130deg)!important}
+.topbar .avatar[data-selected-frog="blue"] .frog-portrait.blue .frog-art{filter:none!important}
