@@ -78,7 +78,7 @@ function brainChanged(){
   const ordered=spots.map((_,j)=>spots[(j+startAt)%spots.length]);
   const chosen=ordered.find(p=>used.every(q=>Math.hypot(p[0]-q[0],(p[1]-q[1])*1.15)>15))||ordered[0];
   used.push(chosen);
-  const size=brain.level==='challenge'?46:brain.level==='standard'?56:68;
+  const size=brain.level==='challenge'?27:brain.level==='standard'?34:42;
   const found=brain.found.includes(i);
   return `<button type="button" class="pond-hidden-object pond-png-creature ${found?'located':''}" style="left:${chosen[0]}%;top:${chosen[1]}%;--pond-animal-size:${size}px" data-action="brain-find" data-id="${i}" aria-label="${animal.name}" ${found?'disabled':''}><img src="${animal.src}" alt="" draggable="false" loading="eager"></button>`;
  }).join('');
