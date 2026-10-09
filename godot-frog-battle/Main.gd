@@ -19,6 +19,8 @@ var status: Label
 var score_label: Label
 var moves_label: Label
 var touch_index = -1
+var pointer_down = -1
+var pointer_origin = Vector2.ZERO
 var touch_origin = Vector2.ZERO
 
 func _ready():
@@ -90,7 +92,10 @@ func _create_tile(i):
 	face.offset_bottom = -3
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(PALETTE[cells[i]])
-	style.set_corner_radius_all(100)
+	style.corner_radius_top_left = 100
+	style.corner_radius_top_right = 100
+	style.corner_radius_bottom_left = 100
+	style.corner_radius_bottom_right = 100
 	style.shadow_color = Color(0, 0, 0, 0.25)
 	style.shadow_size = 3
 	face.add_theme_stylebox_override("panel", style)
@@ -108,6 +113,7 @@ func _create_tile(i):
 
 func _refresh():
 	for tile in tiles:
+		board.remove_child(tile)
 		tile.queue_free()
 	tiles.clear()
 	for i in range(N * N):
@@ -127,8 +133,14 @@ func _tile_input(i, event):
 			var start = touch_index
 			touch_index = -1
 			_gesture(start, event.position - touch_origin)
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		_select(i)
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			pointer_down = i
+			pointer_origin = event.global_position
+		elif pointer_down >= 0:
+			var start = pointer_down
+			pointer_down = -1
+			_gesture(start, event.global_position - pointer_origin)
 
 func _gesture(i, delta):
 	if delta.length() < 18:
