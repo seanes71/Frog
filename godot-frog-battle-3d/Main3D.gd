@@ -221,7 +221,7 @@ func _screen_to_cell(point):
 		return -1
 	return r*N+c
 
-func _unhandled_input(event):
+func _input(event):
 	if busy or ended:
 		return
 	if event is InputEventScreenTouch:
@@ -290,12 +290,14 @@ func _swap(a,b):
 		busy=false
 		status.text="No match. Try another!"
 		return
+	var tmp_piece=pieces[a]
+	pieces[a]=pieces[b]
+	pieces[b]=tmp_piece
 	var count=await _resolve(matched,current)
 	if current!=version:
 		return
 	score+=count*10
 	moves+=1
-	_refresh()
 	_update()
 	if score>=GOAL or moves>=MAX_MOVES:
 		ended=true
@@ -310,24 +312,42 @@ func _resolve(matched,current):
 		if matched.is_empty() or current!=version:
 			break
 		total+=matched.size()
-		var tween=create_tween().set_parallel(true)
+		var pop=create_tween().set_parallel(true)
 		for i in matched:
-			tween.tween_property(pieces[i],"scale",Vector3.ZERO,0.18)
-		await tween.finished
+			pop.tween_property(pieces[i],"scale",Vector3.ZERO,0.22).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		await pop.finished
 		if current!=version:
 			return total
 		for i in matched:
+			pieces[i].queue_free()
+			pieces[i]=null
 			cells[i]=-1
-		for c in range(N):
-			var kept=[]
-			for r in range(N-1,-1,-1):
-				if cells[r*N+c]>=0:
-					kept.append(cells[r*N+c])
-			for r in range(N-1,-1,-1):
-				var offset=N-1-r
-				cells[r*N+c]=kept[offset] if offset<kept.size() else rng.randi_range(0,5)
-		_refresh()
+		var fall=create_tween().set_parallel(true)
+		for col in range(N):
+			var target_row=N-1
+			for row in range(N-1,-1,-1):
+				var old_index=row*N+col
+				if cells[old_index]<0:
+					continue
+				var new_index=target_row*N+col
+				if new_index!=old_index:
+					cells[new_index]=cells[old_index]
+					pieces[new_index]=pieces[old_index]
+					cells[old_index]=-1
+					pieces[old_index]=null
+					fall.tween_property(pieces[new_index],"position",_pos(new_index),0.32).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+				target_row-=1
+			for row in range(target_row,-1,-1):
+				var index=row*N+col
+				cells[index]=rng.randi_range(0,5)
+				pieces[index]=_make_piece(index)
+				pieces[index].position=_pos(index)+Vector3(0,3.0+float(target_row-row)*0.5,0)
+				fall.tween_property(pieces[index],"position",_pos(index),0.4).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		await fall.finished
+		if current!=version:
+			return total
 		matched=_matches()
 	if not _has_move():
 		_fresh()
+		_refresh()
 	return total
