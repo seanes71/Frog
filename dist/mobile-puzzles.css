@@ -151,3 +151,8 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.pond-find-scene) .pond-clue-board h3{font-size:clamp(18px,4.5vw,24px)!important;font-weight:900!important}
 #hub-content:has(.pond-find-scene) .pond-clue-board p{font-size:clamp(11px,2.8vw,13px)!important}
 #hub-content:has(.pond-find-scene)>.pond-immersive-shell>.pond-find-scene{flex:1 1 auto!important;min-height:0!important;max-height:none!important;margin:1px 0!important;border-radius:8px!important}
+
+/* Uploaded individual animal illustrations, retaining tappable targets. */
+#hub-content:has(.pond-find-scene) .pond-image-creature{width:clamp(48px,14vw,72px)!important;height:clamp(48px,14vw,72px)!important;overflow:visible!important;filter:drop-shadow(0 2px 2px #183c2350)!important}
+#hub-content:has(.pond-find-scene) .pond-image-creature img{width:100%!important;height:100%!important;object-fit:contain!important;display:block!important;pointer-events:none!important}
+#hub-content:has(.pond-find-scene) .pond-image-creature.located{opacity:.22!important}
