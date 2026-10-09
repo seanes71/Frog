@@ -127,7 +127,7 @@ function brainPad(i){
    brain.busy=true;
    const el=document.getElementById('brain-instruction');if(el)el.textContent='🎉 You did it! 🐸';
    const status=document.getElementById('frog-trail-status');if(status)status.textContent='Next set coming up!';
-   const scene=document.querySelector('.frog-trail-scene');if(scene){const banner=document.createElement('div');banner.className='frog-trail-win-banner';banner.setAttribute('role','status');const cheers=['GOOD!','GREAT!','FABULOUS!','WONDERFUL!','SUPER!','AMAZING!','BRILLIANT!','FANTASTIC!','EXCELLENT!'];banner.textContent=cheers[Math.floor(Math.random()*cheers.length)];scene.append(banner);}
+   const scene=document.querySelector('.frog-trail-scene');if(scene){const banner=document.createElement('div');banner.className='frog-trail-win-banner';banner.setAttribute('role','status');const cheers=['GOOD!','GREAT!','FABULOUS!','WONDERFUL!','SUPER!','AMAZING!','BRILLIANT!','FANTASTIC!','EXCELLENT!'];banner.textContent=cheers[(brain.followStage-1)%cheers.length];scene.append(banner);}
    brain.followStage++;
    brain.timeout=setTimeout(()=>{if(brain.mode==='follow')brainRound();},1150);
   }
