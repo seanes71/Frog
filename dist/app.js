@@ -42,9 +42,13 @@ function startFollowWithVoice(){
  const launch=()=>{if(!valid())return;brain.timeout=null;brainRound();};
  if(!p.settings.sound){brain.timeout=setTimeout(launch,900);return;}
  const voice=new Audio('assets/countdown-voice.mp3');voice.preload='auto';voice.volume=.9;
- let completed=false;let watchdog=null;
- const finish=()=>{if(completed)return;completed=true;clearTimeout(watchdog);voice.pause();launch();};
- voice.ontimeupdate=()=>{if(!valid()){voice.pause();return;}const t=voice.currentTime||0;display.textContent=t>=3.768?'GO!':t>=2.416?'1':t>=1.335?'2':'3';};
+ let completed=false;let watchdog=null;let animationFrame=null;
+ const stopFrames=()=>{if(animationFrame!==null)cancelAnimationFrame(animationFrame);animationFrame=null;};
+ const finish=()=>{if(completed)return;completed=true;clearTimeout(watchdog);stopFrames();voice.pause();launch();};
+ const paint=()=>{if(!valid()){stopFrames();voice.pause();return;}const t=voice.currentTime||0;display.textContent=t>=3.768?'GO!':t>=2.416?'1':t>=1.335?'2':'3';};
+ const frame=()=>{if(completed||!valid()){stopFrames();return;}paint();animationFrame=requestAnimationFrame(frame);};
+ voice.ontimeupdate=paint;
+ voice.onplaying=()=>{if(!valid())return;paint();if(animationFrame===null)animationFrame=requestAnimationFrame(frame);};
  voice.onended=finish;voice.onerror=finish;
  watchdog=setTimeout(finish,5800);
  voice.play().catch(finish);
