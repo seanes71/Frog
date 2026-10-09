@@ -185,3 +185,7 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.pond-animal-game) .pond-png-creature:focus-visible{outline:3px solid #fff8b0!important;outline-offset:2px!important;border-radius:8px!important}
 @media(max-width:390px){#hub-content:has(.pond-animal-game) .pond-png-creature{width:min(var(--pond-animal-size,56px),13vw)!important;height:min(var(--pond-animal-size,56px),13vw)!important}}
 @media(prefers-reduced-motion:reduce){#hub-content:has(.pond-animal-game) .pond-png-creature{transition:none!important}}
+
+/* Smaller hidden wildlife, while retaining a comfortable 44px touch target. */
+#hub-content:has(.pond-animal-game) .pond-hidden-object.pond-png-creature{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;filter:none!important}
+#hub-content:has(.pond-animal-game) .pond-png-creature img{width:var(--pond-animal-size,23px)!important;height:var(--pond-animal-size,23px)!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;filter:drop-shadow(0 1px 1px #173b2b77)!important}
