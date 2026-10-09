@@ -118,7 +118,7 @@ function brainPad(i){
  if(btn){btn.classList.add('lit','hopping');setTimeout(()=>btn.classList.remove('lit','hopping'),400);}
  brain.entered.push(i);
  if(brain.sequence[brain.entered.length-1]!==i){
-  brain.busy=true;const el=document.getElementById('brain-instruction');if(el)el.textContent='Oops! Froggy splashed! 💦';
+  brain.busy=true;const scene=document.querySelector('.frog-trail-scene');if(scene){const sign=document.createElement('div');sign.className='frog-trail-croak-sign';sign.setAttribute('role','status');sign.setAttribute('aria-label','Croak! Try again');sign.textContent='CROAK!';scene.append(sign);}const el=document.getElementById('brain-instruction');if(el)el.textContent='Oops! Froggy splashed! 💦';
   const status=document.getElementById('frog-trail-status');if(status)status.textContent='Watch the trail again and give it another try.';
   brain.timeout=setTimeout(()=>brainRound(),1100);
  }else{
