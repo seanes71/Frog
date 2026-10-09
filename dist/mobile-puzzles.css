@@ -156,3 +156,7 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.pond-find-scene) .pond-image-creature{width:clamp(48px,14vw,72px)!important;height:clamp(48px,14vw,72px)!important;overflow:visible!important;filter:drop-shadow(0 2px 2px #183c2350)!important}
 #hub-content:has(.pond-find-scene) .pond-image-creature img{width:100%!important;height:100%!important;object-fit:contain!important;display:block!important;pointer-events:none!important}
 #hub-content:has(.pond-find-scene) .pond-image-creature.located{opacity:.22!important}
+
+/* Soften imperfect source image cutout edges rather than showing hard squares. */
+#hub-content:has(.pond-find-scene) .pond-image-creature{width:var(--creature-size,60px)!important;height:var(--creature-size,60px)!important;transform:translate(-50%,-50%)!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#hub-content:has(.pond-find-scene) .pond-image-creature img{-webkit-mask-image:radial-gradient(ellipse 49% 49% at center,#000 53%,transparent 100%)!important;mask-image:radial-gradient(ellipse 49% 49% at center,#000 53%,transparent 100%)!important}
