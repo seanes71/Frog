@@ -139,3 +139,8 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.pond-find-scene) .brain-suite h3,#hub-content:has(.pond-find-scene) .brain-suite p{background:#fff8e7eb!important;text-align:center!important;border-radius:9px!important;padding:2px 4px!important}
 #hub-content:has(.pond-find-scene) .pond-find-scene{flex:1 1 auto!important;width:100%!important;max-width:100%!important;min-height:0!important;max-height:none!important;height:auto!important;aspect-ratio:auto!important;margin:2px 0!important;border:2px solid #f6dc8d!important;border-radius:12px!important;background-size:100% 100%!important}
 #hub-content:has(.pond-find-scene) .brain-suite>.button:last-child{margin:2px 0!important;min-height:36px!important}
+
+/* Standalone pond scene: no inherited .panel framing. */
+#hub-content:has(.pond-find-scene)>.pond-immersive-shell{display:flex!important;flex-direction:column!important;box-sizing:border-box!important;flex:1 1 auto!important;height:100%!important;min-height:0!important;max-height:100%!important;width:100%!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;gap:3px!important}
+#hub-content:has(.pond-find-scene)>.pond-immersive-shell>.pond-find-scene{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;margin:2px 0!important;background-image:url('assets/IMG_4108.jpeg')!important;background-size:100% 100%!important}
+#hub-content:has(.pond-find-scene)>.pond-immersive-shell>.button:last-child{flex:0 0 auto!important;min-height:38px!important;margin:2px 0!important}
