@@ -125,3 +125,10 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub-content:has(.pond-find-scene) .brain-suite:has(.pond-find-scene) .pond-natural-object{transition:opacity .25s,filter .25s!important}
 #hub-content:has(.pond-find-scene) .brain-suite:has(.pond-find-scene) .pond-natural-object:has(svg){-webkit-tap-highlight-color:transparent}
 #hub-content:has(.pond-find-scene) .pond-find-scene:has(.pond-discovery-win) .pond-natural-object{pointer-events:none!important}
+
+/* Cartoon pond: show the entire approved illustration without cropping on phones. */
+#hub-content:has(.pond-find-scene) .pond-find-scene{background-size:contain!important;background-position:center center!important;background-color:#168eaa!important;aspect-ratio:1376/1139!important;min-height:0!important;max-height:100%!important}
+#hub-content:has(.pond-find-scene) .panel.brain-suite{padding:5px!important;gap:2px!important}
+#hub-content:has(.pond-find-scene) .brain-suite h3{margin:0!important}
+#hub-content:has(.pond-find-scene) .brain-suite p{margin:0!important}
+@media(max-width:600px){#hub-content:has(.pond-find-scene) .pond-find-scene{background-size:100% 100%!important;border-width:2px!important;border-radius:12px!important;margin:2px 0!important}#hub-content:has(.pond-find-scene) .brain-suite .brain-levels .button{padding:5px 3px!important;min-height:35px!important}#hub-content:has(.pond-find-scene) .panel.brain-suite{padding:4px!important}}
