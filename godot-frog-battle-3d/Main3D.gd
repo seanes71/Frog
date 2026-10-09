@@ -36,11 +36,11 @@ func _build_world():
 	environment.environment = env
 	add_child(environment)
 	camera = Camera3D.new()
-	camera.position = Vector3(0, 10.5, 13)
-	camera.look_at(Vector3.ZERO)
-	camera.fov = 45
-	camera.current = true
 	add_child(camera)
+	camera.position = Vector3(0, 10.5, 13)
+	camera.look_at(Vector3.ZERO, Vector3.UP)
+	camera.fov = 55
+	camera.make_current()
 	var light = DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-55, -30, -20)
 	light.light_energy = 1.4
@@ -71,8 +71,9 @@ func _build_hud():
 	var layer = CanvasLayer.new()
 	add_child(layer)
 	var ui = Control.new()
-	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	layer.add_child(ui)
+	ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	ui.mouse_filter = Control.MOUSE_FILTER_PASS
 	var title = Label.new()
 	title.text = "Frog Match Battle 3D"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
