@@ -36,7 +36,7 @@ function brainBoost(mode='memory'){brainClear();brain.mode=mode;if(mode==='follo
 function brainMenu(){brainClear();home();}
 function brainFrame(title,inner){openHub(title,`<div class="${brain.mode==='changed'?'brain-suite pond-immersive-shell':'panel brain-suite'}"><div class="brain-levels">${[['gentle','Gentle'],['standard','Standard'],['challenge','Challenge']].map(([id,name])=>`<button class="button ${brain.level===id?'':'secondary'}" data-action="brain-level" data-id="${id}">${name}</button>`).join('')}</div>${inner}<button class="button secondary wide" data-action="home">Back to Home</button></div>`,'home');}
 function brainWin(msg){brainFrame('Great Job!',`<h3>🎉 ${msg}</h3><button class="button wide" data-action="brain-again">Play Again</button>`);}
-function brainRound(){brainClear();if(brain.mode==='memory'){const pairs=brain.level==='gentle'?3:brain.level==='standard'?5:8;const icons=brainPool.slice(0,pairs);brain.cards=[...icons,...icons];for(let i=brain.cards.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[brain.cards[i],brain.cards[j]]=[brain.cards[j],brain.cards[i]];}brain.open=[];brain.matched=[];brain.busy=false;brainMemory();}else if(brain.mode==='numbers'){let step=brain.level==='gentle'?1+Math.floor(Math.random()*3):brain.level==='standard'?2+Math.floor(Math.random()*6):4+Math.floor(Math.random()*9);let start=1+Math.floor(Math.random()*12);let gap=1+Math.floor(Math.random()*4);brain.answer=start+step*gap;let pattern=Array.from({length:5},(_,i)=>i===gap?'❓':start+step*i);let options=[brain.answer,brain.answer+step,Math.max(0,brain.answer-step)].sort(()=>Math.random()-.5);brainFrame('Froggy Number Challenge',`<h3>Find the missing number</h3><p class="brain-numbers">${pattern.join(' · ')}</p><div class="brain-menu-grid">${options.map(n=>`<button class="button" data-action="brain-number" data-id="${n}">${n}</button>`).join('')}</div><p id="brain-hint" aria-live="polite"></p>`);}else if(brain.mode==='changed'){brain.round++;const count=Math.min(9,(brain.level==='gentle'?4:brain.level==='standard'?6:8)+Math.floor((brain.pondStage-1)/2));const pool=pondIntegratedReady?pondIntegratedTargets.map(t=>t.icon):['🐸','🐢','🐟','🦋','🦆','🪷','🦉','🐿️','🐦','🪻'];const previous=brain.objects.join('|');let fresh=pool.slice();for(let tries=0;tries<8;tries++){fresh=pool.slice().sort(()=>Math.random()-.5);if(fresh.slice(0,count).join('|')!==previous)break;}brain.objects=fresh.slice(0,count);brain.found=[];brain.target=0;brainChanged();}else{brain.sequence=Array.from({length:Math.min(10,(brain.level==='gentle'?3:brain.level==='standard'?4:6)+Math.floor((brain.followStage-1)/2))},()=>Math.floor(Math.random()*Math.min(9,(brain.level==='gentle'?4:brain.level==='standard'?5:6)+Math.floor((brain.followStage-1)/2))));brain.entered=[];brain.busy=true;brainFollow();}}
+function brainRound(){brainClear();if(brain.mode==='memory'){const pairs=brain.level==='gentle'?3:brain.level==='standard'?5:8;const icons=brainPool.slice(0,pairs);brain.cards=[...icons,...icons];for(let i=brain.cards.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[brain.cards[i],brain.cards[j]]=[brain.cards[j],brain.cards[i]];}brain.open=[];brain.matched=[];brain.busy=false;brainMemory();}else if(brain.mode==='numbers'){let step=brain.level==='gentle'?1+Math.floor(Math.random()*3):brain.level==='standard'?2+Math.floor(Math.random()*6):4+Math.floor(Math.random()*9);let start=1+Math.floor(Math.random()*12);let gap=1+Math.floor(Math.random()*4);brain.answer=start+step*gap;let pattern=Array.from({length:5},(_,i)=>i===gap?'❓':start+step*i);let options=[brain.answer,brain.answer+step,Math.max(0,brain.answer-step)].sort(()=>Math.random()-.5);brainFrame('Froggy Number Challenge',`<h3>Find the missing number</h3><p class="brain-numbers">${pattern.join(' · ')}</p><div class="brain-menu-grid">${options.map(n=>`<button class="button" data-action="brain-number" data-id="${n}">${n}</button>`).join('')}</div><p id="brain-hint" aria-live="polite"></p>`);}else if(brain.mode==='changed'){brain.round++;const count=Math.min(9,(brain.level==='gentle'?4:brain.level==='standard'?6:8)+Math.floor((brain.pondStage-1)/2));const pool=['🐸','🐢','🐟','🦋','🦆','🪷','🦉','🐿️','🐦','🪻'];const previous=brain.objects.join('|');let fresh=pool.slice();for(let tries=0;tries<8;tries++){fresh=pool.slice().sort(()=>Math.random()-.5);if(fresh.slice(0,count).join('|')!==previous)break;}brain.objects=fresh.slice(0,count);brain.found=[];brain.target=0;brainChanged();}else{brain.sequence=Array.from({length:Math.min(10,(brain.level==='gentle'?3:brain.level==='standard'?4:6)+Math.floor((brain.followStage-1)/2))},()=>Math.floor(Math.random()*Math.min(9,(brain.level==='gentle'?4:brain.level==='standard'?5:6)+Math.floor((brain.followStage-1)/2))));brain.entered=[];brain.busy=true;brainFollow();}}
 function brainMemory(){brainFrame('Froggy Memory Training',`<h3>Find the matching pairs</h3><p>${brain.matched.length/2} of ${brain.cards.length/2} pairs</p><div class="brain-card-grid">${brain.cards.map((icon,i)=>`<button class="brain-card ${brain.matched.includes(i)?"brain-matched":""} ${brain.open.includes(i)?"brain-revealed":""}" data-action="brain-card" data-id="${i}" aria-label="Memory card ${i+1}">${brain.matched.includes(i)?'':brain.open.includes(i)?icon:'🌿'}</button>`).join('')}</div>`);}
 function brainCard(i){if(brain.busy||brain.open.includes(i)||brain.matched.includes(i)||!brain.cards[i])return;brain.open.push(i);brainMemory();if(brain.open.length===2){brain.busy=true;let [a,b]=brain.open;if(brain.cards[a]===brain.cards[b]){brain.matched.push(a,b);brain.open=[];brain.busy=false;if(brain.matched.length===brain.cards.length)brainWin('All pairs matched!');else brainMemory();}else brain.timeout=setTimeout(()=>{brain.open=[];brain.busy=false;brainMemory();},1200);}}
 /* Hand-drawn vector wildlife: transparent, naturally shaded, not floating emoji. */
@@ -52,23 +52,6 @@ const pondWildlife={
 '🐝':'<ellipse cx="49" cy="55" rx="27" ry="19" fill="#a58d42" stroke="#3b3926" stroke-width="3"/><path d="M42 37V73M58 37V73" stroke="#3b3926" stroke-width="9"/><ellipse cx="35" cy="34" rx="15" ry="10" fill="#c4d3c5" opacity=".7" transform="rotate(-25 35 34)"/><ellipse cx="65" cy="34" rx="15" ry="10" fill="#c4d3c5" opacity=".7" transform="rotate(25 65 34)"/>'
 };
 function pondCreature(icon){return '<svg class="pond-wildlife-art" viewBox="0 0 100 100" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">'+(pondWildlife[icon]||pondWildlife['🐸'])+'</svg>';}
-/* Integrated illustration: the artwork itself contains the creatures; only transparent hit areas are overlaid. */
-let pondIntegratedReady=false;
-const pondIntegratedArt='assets/pond-find-integrated.png';
-const pondIntegratedTargets=[
- {icon:'🐸',name:'frog',x:43,y:84,w:13,h:18},
- {icon:'🐢',name:'turtle',x:16,y:67,w:16,h:16},
- {icon:'🐟',name:'fish',x:54,y:66,w:11,h:12},
- {icon:'🦆',name:'duck',x:69,y:72,w:12,h:14},
- {icon:'🦋',name:'butterfly',x:61,y:9,w:13,h:14},
- {icon:'🐞',name:'ladybug',x:8,y:47,w:10,h:10},
- {icon:'🐝',name:'bee',x:92,y:16,w:13,h:13},
- {icon:'🐿️',name:'squirrel',x:11,y:24,w:18,h:22},
- {icon:'🐦',name:'cardinal',x:42,y:17,w:13,h:17},
- {icon:'🪷',name:'water lily',x:31,y:83,w:14,h:13},
- {icon:'🪲',name:'dragonfly',x:75,y:57,w:15,h:13}
-];
-{const art=new Image();art.onload=()=>{pondIntegratedReady=true;if(brain.mode==='changed')brainRound();};art.src=pondIntegratedArt;}
 const pondArtLibrary={
  '🐸':[4113,4114,4115,4116,4117,4118,4136],
  '🐢':[4119,4120],
@@ -93,24 +76,16 @@ const pondHabitats={
  '🐦':[[21,27],[39,36],[73,36]],
  '🪻':[[14,70],[35,68],[84,64]]
 };
-function brainIntegratedChanged(){
- const icons=brain.objects.map((icon,i)=>{
-  const t=pondIntegratedTargets.find(item=>item.icon===icon);
-  if(!t)return '';
-  return `<button type="button" class="pond-integrated-target ${brain.found.includes(i)?'located':''}" style="left:${t.x}%;top:${t.y}%;width:${t.w}%;height:${t.h}%" data-action="brain-find" data-id="${i}" aria-label="Find ${t.name}" ${brain.found.includes(i)?'disabled':''}></button>`;
- }).join('');
- const target=brain.objects[brain.target];
- brainFrame('Find It at the Pond!',`<div class="pond-clue-board"><h3>🔎 Find the ${pondObjectName(target)}!</h3><p class="muted">Level ${brain.pondStage} · ${brain.found.length} of ${brain.objects.length} found</p><p id="brain-hint" aria-live="polite">Tap the animal you find in the pond picture!</p></div><div class="pond-find-scene pond-integrated-scene" role="group" aria-label="Find the animals hidden in the illustrated pond"><div class="pond-integrated-canvas"><img src="${pondIntegratedArt}" alt="Illustrated pond with hidden animals" draggable="false">${icons}</div></div>`);
-}
 function brainChanged(){
- if(pondIntegratedReady)return brainIntegratedChanged();
+ // Each round selects new habitat locations, keeping animals apart and clues accurate.
+ const used=[];
  const icons=brain.objects.map((icon,i)=>{
   const habitats=pondHabitats[icon]||pondHabitats['🐸'];
-  const [x,y]=habitats[(brain.round+i)%habitats.length];
-  const variants=pondArtLibrary[icon]||pondArtLibrary['🐸'];
-  const imageId=variants[(brain.round+i)%variants.length];
-  const size=brain.level==='challenge'?48:brain.level==='standard'?55:64;
-  return `<button type="button" class="pond-hidden-object pond-natural-object pond-image-creature ${brain.found.includes(i)?'located':''}" style="left:${x}%;top:${y}%;--creature-size:${size}px" data-action="brain-find" data-id="${i}" aria-label="${pondObjectName(icon)}" ${brain.found.includes(i)?'disabled':''}><img src="IMG_${imageId}.png" alt="" draggable="false" loading="eager"></button>`;
+  const order=habitats.map((p,j)=>({p,j})).sort((a,b)=>((a.j+brain.round*3+i*5)%habitats.length)-((b.j+brain.round*3+i*5)%habitats.length));
+  const pick=order.find(({p})=>used.every(q=>Math.hypot(p[0]-q[0],(p[1]-q[1])*1.3)>14))||order[0];
+  const [x,y]=pick.p;used.push(pick.p);
+  const size=brain.level==='challenge'?31:brain.level==='standard'?39:48;
+  return `<button type="button" class="pond-hidden-object pond-emoji-creature ${brain.found.includes(i)?'located':''}" style="left:${x}%;top:${y}%;--pond-emoji-size:${size}px" data-action="brain-find" data-id="${i}" aria-label="${pondObjectName(icon)}" ${brain.found.includes(i)?'disabled':''}><span aria-hidden="true">${icon}</span></button>`;
  }).join('');
  const target=brain.objects[brain.target];
  brainFrame('Find It at the Pond!',`<div class="pond-clue-board"><h3>🔎 Find the ${pondObjectName(target)}!</h3><p class="muted">Level ${brain.pondStage} · ${brain.found.length} of ${brain.objects.length} found</p><p id="brain-hint" aria-live="polite">Look closely among the leaves, branches, water and shoreline!</p></div><div class="pond-find-scene" style="background-image:url('assets/IMG_4108.jpeg?v=pond-4108-direct')!important;background-size:cover!important;background-position:center!important" role="group" aria-label="Hidden objects in the pond">${icons}</div>`);
