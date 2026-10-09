@@ -83,7 +83,7 @@ function brainChanged(){
   return `<button type="button" class="pond-hidden-object pond-png-creature ${found?'located':''}" style="left:${chosen[0]}%;top:${chosen[1]}%;--pond-animal-size:${size}px" data-action="brain-find" data-id="${i}" aria-label="${animal.name}" ${found?'disabled':''}><img src="${animal.src}" alt="" draggable="false" loading="eager"></button>`;
  }).join('');
  const target=brain.objects[brain.target];
- brainFrame('Find It at the Pond!',`<div class="pond-clue-board"><h3>🔎 Find the ${pondObjectName(target)}!</h3><p class="muted">Level ${brain.pondStage} · ${brain.found.length} of ${brain.objects.length} found</p><p id="brain-hint" aria-live="polite">Look closely among the leaves, branches, water and shoreline!</p></div><div class="pond-find-scene pond-animal-game" style="background-image:url('assets/IMG_4108.jpeg')!important" role="group" aria-label="Find the hidden animals in the pond">${icons}</div>`);
+ brainFrame('Find Nature!',`<div class="pond-clue-board"><h3>🔎 Find the ${pondObjectName(target)}!</h3><p class="muted">Level ${brain.pondStage} · ${brain.found.length} of ${brain.objects.length} found</p><p id="brain-hint" aria-live="polite">Look closely among the leaves, branches, water and shoreline!</p></div><div class="pond-find-scene pond-animal-game" style="background-image:url('assets/IMG_4108.jpeg')!important" role="group" aria-label="Find the hidden animals in the pond">${icons}</div>`);
 }
 function brainFind(i){
  if(brain.mode!=='changed'||brain.found.includes(i))return;
