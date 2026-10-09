@@ -52,13 +52,34 @@ const pondWildlife={
 '🐝':'<ellipse cx="49" cy="55" rx="27" ry="19" fill="#a58d42" stroke="#3b3926" stroke-width="3"/><path d="M42 37V73M58 37V73" stroke="#3b3926" stroke-width="9"/><ellipse cx="35" cy="34" rx="15" ry="10" fill="#c4d3c5" opacity=".7" transform="rotate(-25 35 34)"/><ellipse cx="65" cy="34" rx="15" ry="10" fill="#c4d3c5" opacity=".7" transform="rotate(25 65 34)"/>'
 };
 function pondCreature(icon){return '<svg class="pond-wildlife-art" viewBox="0 0 100 100" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">'+(pondWildlife[icon]||pondWildlife['🐸'])+'</svg>';}
+const pondArtLibrary={
+ '🐸':[4113,4114,4115,4116,4117,4118,4136],
+ '🐢':[4119,4120],
+ '🐟':[4121,4122,4123,4124],
+ '🦋':[4129,4130],
+ '🦆':[4125,4126],
+ '🐞':[4137,4138],
+ '🪷':[4139,4140,4141],
+ '🐌':[4133,4134],
+ '🐝':[4127,4128],
+ '🍄':[4135],
+ '🌻':[4137,4138],
+ '🦀':[4121,4122],
+ '🪲':[4131,4132]
+};
 function brainChanged(){
  const spots=[[17,33],[40,27],[73,33],[84,53],[18,61],[48,56],[70,73],[30,81],[84,83],[55,40],[10,76],[62,23],[37,65]];
  const shift=(brain.round*5+brain.pondStage*3)%spots.length;
- const icons=brain.objects.map((icon,i)=>{const [x,y]=spots[(i*7+shift)%spots.length];return `<button type="button" class="pond-hidden-object pond-natural-object ${brain.found.includes(i)?'located':''}" style="left:${x}%;top:${y}%" data-action="brain-find" data-id="${i}" aria-label="${pondObjectName(icon)}" ${brain.found.includes(i)?'disabled':''}>${pondCreature(icon)}</button>`;}).join('');
+ const icons=brain.objects.map((icon,i)=>{
+  const [x,y]=spots[(i*7+shift)%spots.length];
+  const variants=pondArtLibrary[icon]||pondArtLibrary['🐸'];
+  const imageId=variants[(brain.round+i)%variants.length];
+  return `<button type="button" class="pond-hidden-object pond-natural-object pond-image-creature ${brain.found.includes(i)?'located':''}" style="left:${x}%;top:${y}%" data-action="brain-find" data-id="${i}" aria-label="${pondObjectName(icon)}" ${brain.found.includes(i)?'disabled':''}><img src="IMG_${imageId}.png" alt="" draggable="false" loading="eager"></button>`;
+ }).join('');
  const target=brain.objects[brain.target];
  brainFrame('Find It at the Pond!',`<div class="pond-clue-board"><h3>🔎 Find the ${pondObjectName(target)}!</h3><p class="muted">Level ${brain.pondStage} · ${brain.found.length} of ${brain.objects.length} found</p><p id="brain-hint" aria-live="polite">Look closely among the leaves, branches, water and shoreline!</p></div><div class="pond-find-scene" style="background-image:url('assets/IMG_4108.jpeg?v=pond-4108-direct')!important;background-size:cover!important;background-position:center!important" role="group" aria-label="Hidden objects in the pond">${icons}</div>`);
 }
+
 function pondObjectName(icon){return ({'🐸':'frog','🐢':'turtle','🦋':'butterfly','🐟':'fish','🪷':'water lily','🐞':'ladybug','🦆':'duck','🍄':'mushroom','🌻':'sunflower','🐌':'snail','🦀':'crab','🪲':'beetle','🐝':'bee'})[icon]||'pond visitor';}
 function brainFind(i){
  if(brain.mode!=='changed'||brain.found.includes(i))return;
