@@ -89,7 +89,7 @@ function brainFind(i){
  if(brain.mode!=='changed'||brain.found.includes(i))return;
  if(i!==brain.target){const hint=document.getElementById('brain-hint');if(hint)hint.textContent='Not that one! Look for the '+pondObjectName(brain.objects[brain.target])+'.';return;}
  brain.found.push(i);playCorrect();
- if(brain.found.length===brain.objects.length){brain.busy=true;const scene=document.querySelector('.pond-find-scene');if(scene){const banner=document.createElement('div');banner.className='pond-discovery-win';banner.setAttribute('role','status');banner.textContent='🎉 Great job! 🐸';scene.append(banner);}brain.pondStage++;brain.timeout=setTimeout(()=>{if(brain.mode==='changed')brainRound();},2300);return;}
+ if(brain.found.length===brain.objects.length){brain.busy=true;const scene=document.querySelector('.pond-find-scene');if(scene){const banner=document.createElement('div');banner.className='pond-discovery-win';banner.setAttribute('role','status');const cheers=['GOOD!','GREAT!','FABULOUS!','WONDERFUL!','SUPER!','AMAZING!','BRILLIANT!','FANTASTIC!','EXCELLENT!'];banner.textContent=cheers[Math.floor(Math.random()*cheers.length)];scene.append(banner);}brain.pondStage++;brain.timeout=setTimeout(()=>{if(brain.mode==='changed')brainRound();},2300);return;}
  brain.target=brain.objects.findIndex((_,j)=>!brain.found.includes(j));brainChanged();
 }
 function brainFollow(){
@@ -125,11 +125,11 @@ function brainPad(i){
   const label=document.getElementById('frog-trail-progress');if(label)label.textContent=`Your hops: ${brain.entered.length} / ${brain.sequence.length}`;
   if(brain.entered.length===brain.sequence.length){
    brain.busy=true;
-   const el=document.getElementById('brain-instruction');if(el)el.textContent='🎉 Great job! 🐸';
-   const status=document.getElementById('frog-trail-status');if(status)status.textContent='Next level coming up!';
+   const el=document.getElementById('brain-instruction');if(el)el.textContent='🎉 You did it! 🐸';
+   const status=document.getElementById('frog-trail-status');if(status)status.textContent='Next set coming up!';
    const scene=document.querySelector('.frog-trail-scene');if(scene){const banner=document.createElement('div');banner.className='frog-trail-win-banner';banner.setAttribute('role','status');banner.textContent='🎉 Great job! 🐸';scene.append(banner);}
    brain.followStage++;
-   brain.timeout=setTimeout(()=>{if(brain.mode==='follow')brainRound();},2200);
+   brain.timeout=setTimeout(()=>{if(brain.mode==='follow')brainRound();},1150);
   }
  }
 }
