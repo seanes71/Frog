@@ -57,7 +57,7 @@ function brainChanged(){
  const shift=(brain.round*5+brain.pondStage*3)%spots.length;
  const icons=brain.objects.map((icon,i)=>{const [x,y]=spots[(i*7+shift)%spots.length];return `<button type="button" class="pond-hidden-object pond-natural-object ${brain.found.includes(i)?'located':''}" style="left:${x}%;top:${y}%" data-action="brain-find" data-id="${i}" aria-label="${pondObjectName(icon)}" ${brain.found.includes(i)?'disabled':''}>${pondCreature(icon)}</button>`;}).join('');
  const target=brain.objects[brain.target];
- brainFrame('Find It at the Pond!',`<h3>🔎 Find the ${pondObjectName(target)}!</h3><p class="muted">Level ${brain.pondStage} · ${brain.found.length} of ${brain.objects.length} found</p><div class="pond-find-scene" role="group" aria-label="Hidden objects in the pond">${icons}</div><p id="brain-hint" aria-live="polite">Look closely among the leaves, branches, water and shoreline!</p>`);
+ brainFrame('Find It at the Pond!',`<h3>🔎 Find the ${pondObjectName(target)}!</h3><p class="muted">Level ${brain.pondStage} · ${brain.found.length} of ${brain.objects.length} found</p><div class="pond-find-scene" style="background-image:url('assets/IMG_4108.jpeg?v=pond-4108-direct')!important;background-size:cover!important;background-position:center!important" role="group" aria-label="Hidden objects in the pond">${icons}</div><p id="brain-hint" aria-live="polite">Look closely among the leaves, branches, water and shoreline!</p>`);
 }
 function pondObjectName(icon){return ({'🐸':'frog','🐢':'turtle','🦋':'butterfly','🐟':'fish','🪷':'water lily','🐞':'ladybug','🦆':'duck','🍄':'mushroom','🌻':'sunflower','🐌':'snail','🦀':'crab','🪲':'beetle','🐝':'bee'})[icon]||'pond visitor';}
 function brainFind(i){
