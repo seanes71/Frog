@@ -23,7 +23,7 @@ The Godot game already returns to `../mobile.html`; the added `‹ Faceoff` cont
 4. Clone this branch and run:
 
    ```bash
-   R15_EXPORT_DIR="/absolute/path/to/R15/build/web" ./mobile-v130/deploy-mobile-only.sh
+   R15_EXPORT_DIR="/absolute/path/to/R15/build/web" bash ./mobile-v130/deploy-mobile-only.sh
    ```
 
 5. The script checks the export, preserves any existing local game folder, copies the R15 Web export into `dist/froggy-match-frenzy/`, adds the Faceoff return control, and prepares a Firebase Hosting config for the existing `froggy-faceoff-mobile` site.
