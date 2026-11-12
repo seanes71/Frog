@@ -779,3 +779,20 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 .fighter-card .real-frog-pair .fighter-boy,.fighter-card .real-frog-pair .fighter-girl{width:50%;height:100%;object-fit:contain;object-position:center bottom;}
 .fighter-card b{font-size:16px;line-height:1.15;}
 .fighter-card small{font-size:12px;line-height:1.2;}
+
+/* Froggy Fashion Boutique — simple single-character preview layout */
+.boutique-frog{display:flex!important;align-items:center;justify-content:center;width:100%;height:100%;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+.boutique-frog img{display:block;width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center bottom}
+.avatar .boutique-frog{width:42px;height:48px;overflow:hidden!important}
+.selected-avatar .boutique-frog{width:56px;height:64px;overflow:hidden!important}
+.boutique-panel{display:grid;gap:12px}
+.boutique-genders,.boutique-departments{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.boutique-genders .button{min-width:112px}
+.boutique-departments .button{min-width:calc(50% - 8px);flex:1 1 42%}
+.boutique-hero{display:flex;align-items:center;justify-content:center;gap:14px;min-height:210px;padding:12px;border-radius:18px;background:linear-gradient(145deg,#fff5df,#f4d7a6);border:2px solid #d5ad69}
+.boutique-hero .boutique-frog{width:145px;height:190px;flex:0 0 145px}
+.boutique-hero>div{display:grid;gap:5px}
+.boutique-hero b{font-size:19px;color:#684820}
+.boutique-hero small{font-size:13px;color:#725b3b}
+.boutique-coming{padding:16px;border:1px solid #dfc18e;border-radius:14px;background:#fffaf0;text-align:center;color:#624a2d}
+.boutique-coming p{line-height:1.45}
