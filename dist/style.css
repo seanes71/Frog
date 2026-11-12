@@ -770,8 +770,12 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 }
 
 /* Real Froggy Match Frenzy character portraits in Fighters */
-.real-frog-pair{display:flex!important;align-items:flex-end;justify-content:center;gap:0;overflow:hidden;background:transparent!important;border-radius:0!important;}
+.real-frog-pair{display:flex!important;align-items:flex-end;justify-content:center;gap:0;overflow:visible;background:transparent!important;border-radius:0!important;}
 .real-frog-pair .fighter-boy,.real-frog-pair .fighter-girl{display:block;width:50%;height:100%;min-width:0;object-fit:contain;object-position:center bottom;}
-.avatar .real-frog-pair{width:35px;height:35px;}
-.selected-avatar .real-frog-pair{width:50px;height:55px;}
-.fighter-card .real-frog-pair{width:76px;height:86px;}
+.avatar .real-frog-pair{width:35px;height:35px;overflow:hidden;}
+.selected-avatar .real-frog-pair{width:50px;height:55px;overflow:hidden;}
+.fighter-card{min-height:250px!important;padding:10px 8px 12px!important;gap:7px!important;}
+.fighter-card .real-frog-pair{width:100%;height:178px;min-height:178px;}
+.fighter-card .real-frog-pair .fighter-boy,.fighter-card .real-frog-pair .fighter-girl{width:50%;height:100%;object-fit:contain;object-position:center bottom;}
+.fighter-card b{font-size:16px;line-height:1.15;}
+.fighter-card small{font-size:12px;line-height:1.2;}
