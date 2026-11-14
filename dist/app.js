@@ -168,7 +168,7 @@ const FASHION_ITEMS=[
 {id:'red-frog-kicks',name:'Red Frog Kicks',category:'Shoes',price:55,kind:'shoes',tone:'#c9363b',accent:'#e9c65d',detail:'Red shoes with gold frog-pad badges'},
 {id:'blonde-wave',name:'Blonde Stage Waves',category:'Hair & Accessories',price:0,kind:'hair',tone:'#efc65d',accent:'#fff0a6',detail:'Soft blonde waves with a gold clip'},
 {id:'vegas-bow',name:'Vegas Bow',category:'Hair & Accessories',price:25,kind:'accessory',tone:'#e84d88',accent:'#f5d16a',detail:'Satin bow with gold center'}];
-function fashionState(){p.fashion ||= {unlocked:['vegas-cards','card-ruffle','blue-overalls','pink-heart-high-tops','blonde-wave'],equipped:{outfit:'',top:'card-ruffle',bottom:'blue-overalls',shoes:'pink-heart-high-tops',hair:'blonde-wave',accessory:''}};p.fashion.unlocked ||= ['vegas-cards','blonde-wave'];p.fashion.equipped ||= {};if(!p.fashion.equipped.shoes||p.fashion.equipped.shoes==='gold-high-tops')p.fashion.equipped.shoes='pink-heart-high-tops';return p.fashion;}
+function fashionState(){p.fashion ||= {unlocked:['vegas-cards','card-ruffle','blue-overalls','pink-heart-high-tops','blonde-wave'],equipped:{outfit:'',top:'card-ruffle',bottom:'blue-overalls',shoes:'pink-heart-high-tops',hair:'blonde-wave',accessory:''}};p.fashion.unlocked ||= ['vegas-cards','blonde-wave'];p.fashion.equipped ||= {};if(!p.fashion.unlocked.includes('pink-heart-high-tops'))p.fashion.unlocked.push('pink-heart-high-tops');if(!p.fashion.equipped.shoes||p.fashion.equipped.shoes==='gold-high-tops')p.fashion.equipped.shoes='pink-heart-high-tops';return p.fashion;}
 function fashionSvg(){
  if(boutiqueGender!=='girl')return '';
  const f=fashionState(),get=id=>FASHION_ITEMS.find(x=>x.id===id);
