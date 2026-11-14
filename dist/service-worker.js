@@ -1,5 +1,5 @@
-const CACHE='frog-faceoff-fashion-house-v4';
-const FILES=['./style.css?v=fashion-house-3','./app.js?v=fashion-house-3','./screen-fit.js?v=remove-frog-page-86'];
+const CACHE='frog-faceoff-fashion-house-v5';
+const FILES=['./style.css?v=fashion-house-4','./app.js?v=fashion-house-4','./screen-fit.js?v=remove-frog-page-86'];
 self.addEventListener('install',event=>event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('frog-showdown-mobile-')||k.startsWith('frog-faceoff-checkpoint-')).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 // Network-first HTML: never serve an old home page or obsolete Brain Boost bar.
