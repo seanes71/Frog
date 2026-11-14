@@ -170,6 +170,7 @@ const FASHION_ITEMS=[
 {id:'vegas-bow',name:'Vegas Bow',category:'Hair & Accessories',price:25,kind:'accessory',tone:'#e84d88',accent:'#f5d16a',detail:'Satin bow with gold center'}];
 function fashionState(){p.fashion ||= {unlocked:['vegas-cards','card-ruffle','blue-overalls','pink-heart-high-tops','blonde-wave'],equipped:{outfit:'',top:'card-ruffle',bottom:'blue-overalls',shoes:'pink-heart-high-tops',hair:'blonde-wave',accessory:''}};p.fashion.unlocked ||= ['vegas-cards','blonde-wave'];p.fashion.equipped ||= {};if(!p.fashion.unlocked.includes('pink-heart-high-tops'))p.fashion.unlocked.push('pink-heart-high-tops');if(!p.fashion.equipped.shoes||p.fashion.equipped.shoes==='gold-high-tops')p.fashion.equipped.shoes='pink-heart-high-tops';return p.fashion;}
 function fashionSvg(){
+ if(boutiqueGender!=='girl')return '';
  const f=fashionState(),get=id=>FASHION_ITEMS.find(x=>x.id===id),pick=slot=>get(fashionTryOn[slot]||f.equipped[slot]);
  const outfit=pick('outfit'),top=outfit&&outfit.id!=='vegas-cards'?outfit:pick('top'),bottom=outfit&&outfit.id!=='vegas-cards'?outfit:pick('bottom'),shoes=pick('shoes'),accessory=pick('accessory');
  const topAlt=top&&top.id!=='card-ruffle',bottomAlt=bottom&&bottom.id!=='blue-overalls',shoeAlt=shoes&&shoes.id!=='pink-heart-high-tops',bow=accessory&&accessory.id==='vegas-bow';
