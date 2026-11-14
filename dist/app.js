@@ -1,4 +1,4 @@
-import {FROGGY_BOY_ART,FROGGY_GIRL_ART} from './fighter-art.js?v=real-frog-portraits-1';
+import {FROGGY_BOY_ART,FROGGY_GIRL_ART} from './fighter-art.js?v=real-frog-portraits-2';
 import {MOBILE_KEY,deviceProfile} from './migration.js?v=mobile-1';
 import {VOCABULARY,puzzleLearningState,puzzlePlan,vocabularyPool,beginPuzzleCheck,answerPuzzleCheck,CYCLE_STAGES,selectCycleStage,learningPrompt} from './curriculum.js?v=mobile-1';
 import {Match,freshProfile,loadProfile,claimWelcomeBonus,leagueFor,settle,STAGES,STAGE_UNLOCKS,TRAIL,LEAGUES,FIGHTERS,POWERS,stageAvailable} from './engine.js?v=fashion-house-1';
