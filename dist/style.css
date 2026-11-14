@@ -809,3 +809,13 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 .fashion-swatch{position:relative;display:grid;place-items:center;min-height:106px;border-radius:11px;background:radial-gradient(circle at 50% 25%,#fff,#f0dfc9 75%);overflow:hidden}.swatch-garment{display:grid;place-items:center;width:58px;height:66px;color:var(--item-accent);font-size:22px;background:var(--item-tone);border:3px solid var(--item-accent);border-radius:17px 17px 9px 9px;box-shadow:0 5px 0 #00000014}.swatch-garment.bottom{height:48px;border-radius:5px 5px 12px 12px;clip-path:polygon(0 0,100% 0,94% 100%,55% 88%,48% 100%,5% 100%)}.swatch-garment.shoes{height:30px;border-radius:8px 16px 8px 8px}.swatch-garment.hair,.swatch-garment.accessory{height:48px;border-radius:50%}.fashion-swatch i{position:absolute;bottom:4px;right:5px;font-size:20px;font-style:normal}
 .fashion-item-info{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}.fashion-item-info b{font-size:12px;line-height:1.15;color:#493247}.fashion-item-info small{font-size:10px;line-height:1.25;color:#786b66}.fashion-item-info strong{font-size:11px;color:#8b5c21;margin-top:auto}.fashion-item-info .button{font-size:10px;padding:6px 9px;min-height:30px}.boutique-footnote{font-size:10px;line-height:1.4;color:#81736b;text-align:center}
 @media(max-width:440px){.fashion-grid{grid-template-columns:1fr}.fashion-item{grid-template-columns:88px minmax(0,1fr)}.boutique-stage{grid-template-columns:minmax(0,1fr) 43%;min-height:250px}.fashion-doll{height:245px}.boutique-stage-copy h3{font-size:19px}}
+
+
+/* Boutique preview correction: show the approved frog artwork cleanly; no misaligned costume overlay. */
+.boutique-stage{grid-template-columns:minmax(0,44%) minmax(0,56%);min-height:340px;padding:14px 8px 0 18px;background:linear-gradient(145deg,#fffaf0 0%,#f5e4c5 58%,#ead1a5 100%);border:1px solid #d7b779;box-shadow:inset 0 0 0 3px #fff9ed,0 10px 26px #4c35191c}
+.boutique-stage:before{height:34px;bottom:-12px;background:linear-gradient(90deg,#c5a16c,#e2c99f,#c5a16c);opacity:.38}
+.boutique-stage-copy{padding-top:20px}
+.fashion-doll{height:320px;min-width:0;display:flex;align-items:flex-end;justify-content:center}
+.fashion-doll img{position:relative;inset:auto;display:block;width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 7px #49351d25)}
+.fashion-overlay{display:none!important}
+@media(max-width:440px){.boutique-stage{grid-template-columns:minmax(0,42%) minmax(0,58%);min-height:330px}.fashion-doll{height:310px}.boutique-stage-copy h3{font-size:19px}}
