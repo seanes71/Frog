@@ -872,3 +872,16 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
  .fashion-grid{grid-template-columns:1fr}
  .fashion-item{grid-template-columns:86px minmax(0,1fr)}
 }
+
+
+/* Boutique repair: restore the try-on layer and draw garment silhouettes in the catalog. */
+.fashion-overlay{display:block!important;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;z-index:2;pointer-events:none;overflow:visible}
+.fashion-doll img{z-index:1}
+.fashion-doll .fashion-overlay{z-index:2}
+.fashion-swatch{display:flex;align-items:center;justify-content:center;min-height:98px;height:98px;padding:5px;border-radius:13px;background:radial-gradient(ellipse at 35% 18%,#fff 0%,#fff7e7 45%,#ead4e6 100%);border:1px solid #e5c6dc;overflow:hidden}
+.fashion-product-art{display:block;width:100%;height:100%;max-width:100%;max-height:100%;filter:drop-shadow(0 5px 3px #4a2c4a28)}
+.fashion-swatch .swatch-garment,.fashion-swatch>i{display:none!important}
+.fashion-empty{grid-column:1/-1;margin:0;padding:22px 14px;text-align:center;border:1px dashed #c8a4c8;border-radius:14px;background:#fff8f4;color:#6c4b71;font-size:12px}
+.boutique-stage.boy-stage{background:radial-gradient(ellipse at 70% 24%,#fff3c9 0%,#f4d98e 34%,#68417e 75%,#3e285b 100%)}
+.boy-fashion-overlay{mix-blend-mode:normal}
+@media(max-width:440px){.fashion-swatch{min-height:106px;height:106px}.fashion-product-art{max-width:100%;max-height:100%}}
