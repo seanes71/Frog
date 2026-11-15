@@ -267,7 +267,7 @@ body.home-fit .game-bubbles button>span{width:44px!important;height:42px!importa
 /* Unified woodland design system: every interactive button across game, hub, shop,
    collection, powers, rewards, settings and dialogs. Keep home layouts unchanged. */
 :root{--frog-log-grain:repeating-linear-gradient(174deg,transparent 0 8px,#5a341f2a 9px 10px,transparent 12px 21px),repeating-linear-gradient(94deg,transparent 0 23px,#e6b97826 25px 27px,transparent 29px 48px),linear-gradient(180deg,#e3b778 0%,#b47c43 16%,#945e30 36%,#a56d38 56%,#7a4726 82%,#56341f 100%);--frog-log-border:#d9a767;--frog-log-text:#fff9e8}
-.pond-shell button:not(.brain-card):not(.brain-pad):not(.search-cell):not(.crossword-cell):not(.memory-card):not(.card):not(.match-card):not(.flip-card):not(.play-button):not(.solo-main):not(.game-bubbles button):not(.brain-home-grid button):not(.bottom-nav button):not(.avatar):not(.wallet):not(.gear),
+.pond-shell button:not(.brain-card):not(.brain-pad):not(.search-cell):not(.crossword-cell):not(.memory-card):not(.card):not(.match-card):not(.flip-card):not(.play-button):not(.solo-main):not(.game-bubbles button):not(.brain-home-grid button):not(.bottom-nav button):not(.avatar):not(.wallet):not(.gear):not(#hub-content:has(.boutique-stage) button):not(#hub-content:has(.boutique-gold-house) button),
 .pond-shell .bottom-nav button,.pond-shell .gear,.pond-shell .wallet{
 background:var(--frog-log-grain)!important;color:var(--frog-log-text)!important;
 border:2px solid var(--frog-log-border)!important;border-radius:15px!important;
@@ -797,14 +797,422 @@ body.home-fit .home-screen .game-bubbles button{min-height:67px!important}
 .boutique-coming{padding:16px;border:1px solid #dfc18e;border-radius:14px;background:#fffaf0;text-align:center;color:#624a2d}
 .boutique-coming p{line-height:1.45}
 
+
 /* Boutique showroom */
 .boutique-panel{gap:15px}.boutique-topline{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#8a5b21;font-size:10px;letter-spacing:1.5px;font-weight:900}.boutique-topline b{font-size:12px;letter-spacing:0;background:#fff3d4;padding:8px 11px;border-radius:999px;color:#79501e}
 .boutique-stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(118px,42%);align-items:center;min-height:270px;overflow:hidden;border-radius:22px;padding:16px 10px 8px 18px;background:radial-gradient(ellipse at 72% 35%,#fff0c9 0,#f8dba4 38%,#8b4c38 100%);border:1px solid #d3a65e;box-shadow:inset 0 0 0 4px #ffffff35,0 12px 28px #44200e24}
 .boutique-stage:before{content:"";position:absolute;inset:auto -20px -65px;height:125px;border-radius:50%;background:linear-gradient(90deg,#462d48,#7b3c5c,#3b2442);opacity:.8}.boutique-stage-copy{position:relative;z-index:2;align-self:start;padding-top:18px;color:#4a2b35}.boutique-kicker,.boutique-section-heading span{font-size:9px;font-weight:900;letter-spacing:1.5px;color:#a45a39}.boutique-stage-copy h3{font-size:21px;line-height:1.05;margin:8px 0;color:#4d2835}.boutique-stage-copy p{font-size:12px;line-height:1.35;max-width:175px;color:#65404a}.boutique-equipped{display:grid;gap:5px;margin-top:16px}.boutique-equipped span{font-size:10px;font-weight:800;color:#67424a}
-.fashion-doll{position:relative;z-index:1;display:block;width:100%;height:260px;align-self:end}.fashion-doll img,.fashion-overlay{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom}.fashion-overlay{pointer-events:none;overflow:visible}
+.fashion-doll{position:relative;z-index:1;display:block;width:100%;height:260px;align-self:end}.fashion-doll img,.fashion-overlay{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom}.fashion-overlay{pointer-events:none;overflow:visible}.fashion-doll.gold-preview img{filter:drop-shadow(0 8px 8px #3f1f1b45)}
 .boutique-departments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.boutique-departments .button{min-width:0!important;flex:initial!important;padding:9px 5px;font-size:11px;white-space:normal}
 .boutique-section-heading{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #ead8bd;padding-bottom:9px}.boutique-section-heading h3{margin:3px 0 0;font-size:21px;color:#50334a}.boutique-section-heading small{font-size:11px;color:#8a776b}
 .fashion-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.fashion-item{display:grid;grid-template-columns:82px minmax(0,1fr);gap:9px;padding:9px;border-radius:15px;background:linear-gradient(145deg,#fffdf8,#f7ecdc);border:1px solid #e7d4b7;min-width:0}.fashion-item.is-equipped{border:2px solid #c69a48;box-shadow:0 0 0 2px #f7e8c7}
 .fashion-swatch{position:relative;display:grid;place-items:center;min-height:106px;border-radius:11px;background:radial-gradient(circle at 50% 25%,#fff,#f0dfc9 75%);overflow:hidden}.swatch-garment{display:grid;place-items:center;width:58px;height:66px;color:var(--item-accent);font-size:22px;background:var(--item-tone);border:3px solid var(--item-accent);border-radius:17px 17px 9px 9px;box-shadow:0 5px 0 #00000014}.swatch-garment.bottom{height:48px;border-radius:5px 5px 12px 12px;clip-path:polygon(0 0,100% 0,94% 100%,55% 88%,48% 100%,5% 100%)}.swatch-garment.shoes{height:30px;border-radius:8px 16px 8px 8px}.swatch-garment.hair,.swatch-garment.accessory{height:48px;border-radius:50%}.fashion-swatch i{position:absolute;bottom:4px;right:5px;font-size:20px;font-style:normal}
 .fashion-item-info{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}.fashion-item-info b{font-size:12px;line-height:1.15;color:#493247}.fashion-item-info small{font-size:10px;line-height:1.25;color:#786b66}.fashion-item-info strong{font-size:11px;color:#8b5c21;margin-top:auto}.fashion-item-info .button{font-size:10px;padding:6px 9px;min-height:30px}.boutique-footnote{font-size:10px;line-height:1.4;color:#81736b;text-align:center}
 @media(max-width:440px){.fashion-grid{grid-template-columns:1fr}.fashion-item{grid-template-columns:88px minmax(0,1fr)}.boutique-stage{grid-template-columns:minmax(0,1fr) 43%;min-height:250px}.fashion-doll{height:245px}.boutique-stage-copy h3{font-size:19px}}
+
+
+/* Boutique preview correction: show the approved frog artwork cleanly; no misaligned costume overlay. */
+.boutique-stage{grid-template-columns:minmax(0,44%) minmax(0,56%);min-height:340px;padding:14px 8px 0 18px;background:linear-gradient(145deg,#fffaf0 0%,#f5e4c5 58%,#ead1a5 100%);border:1px solid #d7b779;box-shadow:inset 0 0 0 3px #fff9ed,0 10px 26px #4c35191c}
+.boutique-stage:before{height:34px;bottom:-12px;background:linear-gradient(90deg,#c5a16c,#e2c99f,#c5a16c);opacity:.38}
+.boutique-stage-copy{padding-top:20px}
+.fashion-doll{height:320px;min-width:0;display:flex;align-items:flex-end;justify-content:center}
+.fashion-doll img{position:relative;inset:auto;display:block;width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 8px 7px #49351d25)}
+.fashion-overlay{display:none!important}
+@media(max-width:440px){.boutique-stage{grid-template-columns:minmax(0,42%) minmax(0,58%);min-height:330px}.fashion-doll{height:310px}.boutique-stage-copy h3{font-size:19px}}
+
+
+/* Premium Froggy Fashion Boutique: luminous showroom and clear try-on controls */
+.boutique-panel{padding:13px;gap:12px;background:linear-gradient(155deg,#fff7ed 0%,#fff0d2 54%,#f8e0d5 100%);border:2px solid #ffe0a0;box-shadow:0 8px 28px #27103b40,inset 0 0 0 2px #fff9e8}
+.boutique-brand{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:17px;background:linear-gradient(105deg,#662b83,#ae397e 52%,#6a3d91);border:2px solid #f5d17a;box-shadow:0 4px 0 #54235f;color:#fff7e4}
+.boutique-brand>span{font-size:29px;color:#ffdf70;text-shadow:0 2px 4px #3a1249}
+.boutique-brand>div{display:grid;min-width:0;gap:2px;flex:1}
+.boutique-brand>div>b{font-family:Georgia,serif;font-size:clamp(17px,4.6vw,23px);line-height:1.05;color:#ffe08a;text-shadow:0 2px 2px #411a56}
+.boutique-brand>div>small{font-size:9px;letter-spacing:.8px;color:#fff4e7}
+.boutique-wallet{flex:0 0 auto;padding:7px 9px;border-radius:20px;background:linear-gradient(#fff0c6,#f4d083);color:#62401b;font-size:10px;white-space:nowrap;box-shadow:inset 0 1px #fff}
+.boutique-genders{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.boutique-genders .button{min-width:0;border-radius:16px;font-size:13px;padding:9px 6px;background:linear-gradient(#ff82bc,#df328b);border:2px solid #ffcce3;box-shadow:0 3px 0 #8f245e;color:white;text-shadow:0 1px 2px #842455}
+.boutique-genders .button.secondary{background:linear-gradient(#71caff,#277cc4);border-color:#b8e5ff;box-shadow:0 3px 0 #20598d;color:white}
+.boutique-stage{grid-template-columns:minmax(0,42%) minmax(0,58%);min-height:335px;padding:12px 5px 0 14px;border:2px solid #eac36c;border-radius:21px;background:radial-gradient(ellipse at 68% 25%,#fff2f7 0%,#f7cbdc 34%,#8c4e94 70%,#49275f 100%);box-shadow:inset 0 0 0 3px #fff4d666,0 8px 20px #44214c33}
+.boutique-stage:before{inset:auto -5% -11px;height:55px;border-radius:50%;background:linear-gradient(90deg,#8e51a6,#45255f 25%,#7e42a0 52%,#48245f 77%,#a35fb2);border:3px solid #f2cd70;box-shadow:0 -2px 14px #fff0c8aa,0 4px 0 #5c2f69;opacity:1}
+.boutique-stage:after{content:"";position:absolute;inset:0 0 auto;height:100%;pointer-events:none;background:linear-gradient(90deg,#fff2 0 3%,transparent 3% 96%,#fff2 96%),radial-gradient(circle at 53% 18%,#fff9 0 2px,transparent 4px),radial-gradient(circle at 84% 32%,#fff7 0 2px,transparent 5px);opacity:.55}
+.boutique-stage-copy{padding-top:17px;color:#572a64}
+.boutique-kicker{color:#9c477c;font-size:8px;letter-spacing:1.1px}
+.boutique-stage-copy h3{font-family:Georgia,serif;font-size:clamp(17px,4.5vw,22px);color:#63275f;line-height:1.02;text-shadow:0 1px #fff}
+.boutique-stage-copy p{font-size:11px;line-height:1.3;color:#673c70}
+.boutique-equipped{gap:5px;margin-top:11px}
+.boutique-equipped span{font-size:9px;color:#5c3765}
+.boutique-reset{margin-top:4px;min-height:30px;padding:4px 8px;font-size:9px;border-radius:10px}
+.fashion-doll{height:320px;min-width:0;display:flex;align-items:flex-end;justify-content:center}
+.fashion-doll img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 7px 5px #2d123b55)}
+.fashion-overlay{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;pointer-events:none;overflow:visible}
+.boutique-departments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.boutique-departments .button{border-radius:14px;background:linear-gradient(#9c63c1,#62348d);border:2px solid #e8c2fa;box-shadow:0 3px 0 #43205e;color:#fff;font-size:11px;min-width:0!important;padding:9px 4px}
+.boutique-departments .button.secondary{background:linear-gradient(#fff0fb,#f1d5ed);border-color:#e6bfe2;box-shadow:0 3px 0 #b07caa;color:#693d70}
+.boutique-section-heading{border-color:#dcb5db}
+.boutique-section-heading span{color:#a14d84}
+.boutique-section-heading h3{color:#592b65}
+.fashion-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.fashion-item{grid-template-columns:75px minmax(0,1fr);gap:8px;padding:8px;border-radius:15px;background:linear-gradient(145deg,#fff,#f7e8f4);border:1px solid #e7c5df}
+.fashion-item.is-trying{border:2px solid #e23b9b;box-shadow:0 0 0 3px #ffc5e7,0 5px 14px #b62c7d25}
+.fashion-item.is-equipped{border:2px solid #c49b43;box-shadow:0 0 0 2px #ffedb9}
+.fashion-actions{display:grid;grid-template-columns:1fr 1fr;gap:5px;width:100%;margin-top:3px}
+.fashion-actions .button{font-size:10px;line-height:1.1;padding:6px 4px;min-height:31px;border-radius:10px;white-space:normal}
+.fashion-actions .button:first-child{background:linear-gradient(#f283bf,#cf3a8a);border-color:#ffc6e1;box-shadow:0 2px 0 #872252;color:#fff}
+.fashion-actions .button:last-child{background:linear-gradient(#76c94d,#39972b);border-color:#bbe98b;box-shadow:0 2px 0 #246724;color:white}
+.fashion-item-info b{font-size:11px;color:#4e285b}
+.fashion-item-info small{font-size:9px;color:#795d7d}
+.fashion-item-info strong{font-size:10px;color:#8b5c21}
+.boutique-footnote{color:#765c7b;font-size:9px}
+@media(max-width:440px){
+ .boutique-panel{padding:10px;gap:10px}
+ .boutique-brand>div>b{font-size:18px}
+ .boutique-stage{grid-template-columns:minmax(0,40%) minmax(0,60%);min-height:320px}
+ .fashion-doll{height:306px}
+ .boutique-stage-copy h3{font-size:18px}
+ .fashion-grid{grid-template-columns:1fr}
+ .fashion-item{grid-template-columns:86px minmax(0,1fr)}
+}
+
+
+/* Keep the frog artwork unobstructed until fitted garment artwork is available. */
+.fashion-overlay{display:none!important}
+.fashion-doll img,.fashion-doll.gold-preview img{z-index:1;filter:none!important}
+.fashion-swatch{display:flex;align-items:center;justify-content:center;min-height:98px;height:98px;padding:5px;border-radius:13px;background:radial-gradient(ellipse at 35% 18%,#fff 0%,#fff7e7 45%,#ead4e6 100%);border:1px solid #e5c6dc;overflow:hidden}
+.fashion-product-art{display:block;width:100%;height:100%;max-width:100%;max-height:100%;filter:drop-shadow(0 5px 3px #4a2c4a28)}
+.fashion-swatch .swatch-garment,.fashion-swatch>i{display:none!important}
+.fashion-empty{grid-column:1/-1;margin:0;padding:22px 14px;text-align:center;border:1px dashed #c8a4c8;border-radius:14px;background:#fff8f4;color:#6c4b71;font-size:12px}
+.boutique-stage.boy-stage{background:radial-gradient(ellipse at 70% 24%,#fff3c9 0%,#f4d98e 34%,#68417e 75%,#3e285b 100%)}
+.boy-fashion-overlay{mix-blend-mode:normal}
+@media(max-width:440px){.fashion-swatch{min-height:106px;height:106px}.fashion-product-art{max-width:100%;max-height:100%}}
+
+/* Boutique wardrobe try-on: keep garment layers aligned to the original frog sprites. */
+.boutique-panel{gap:10px;padding:10px}
+#hub-content:has(.boutique-panel){overflow-y:auto;overscroll-behavior:contain}
+.pond-shell{width:100%}
+body.hub-fit .pond-shell{width:100%}
+.hub-screen,#hub-content,.boutique-panel,.boutique-brand,.boutique-stage{min-width:0;max-width:100%}
+.boutique-stage{min-height:330px}
+.boutique-stage:before{bottom:-11px}
+.fashion-doll{position:relative;isolation:isolate;overflow:visible}
+.fashion-doll .fashion-base{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:none!important}
+.fashion-overlay{display:block!important;position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:contain;object-position:center bottom;pointer-events:none;overflow:visible}
+.boutique-outfits,.boutique-products{min-width:0}
+.boutique-section-heading{margin:0 1px 5px}
+.boutique-departments{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.boutique-departments .button{display:grid;place-items:center;align-content:center;gap:2px;min-height:50px;padding:5px 2px;font-size:9px;line-height:1.05}
+.boutique-departments .button span:first-child{font-size:18px}
+.fashion-grid{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding:5px 3px 10px;scrollbar-width:thin}
+.fashion-item{display:flex;flex:0 0 116px;flex-direction:column;align-items:stretch;gap:5px;min-width:0;min-height:154px;padding:7px;text-align:center;cursor:pointer;scroll-snap-align:start}
+.fashion-item:focus-visible{outline:3px solid #257eff;outline-offset:2px}
+.fashion-item.is-selected{border:2px solid #e23b9b;box-shadow:0 0 0 3px #ffc5e7,0 5px 14px #b62c7d25}
+.fashion-item.is-equipped:not(.is-selected){border:2px solid #c49b43;box-shadow:0 0 0 2px #ffedb9}
+.fashion-swatch{width:100%;min-height:75px;height:75px;padding:4px}
+.fashion-product-art{filter:none}
+.fashion-item-info{align-items:center;gap:3px}
+.fashion-item-info b{font-size:10px;line-height:1.12}
+.fashion-item-info small{font-size:8px;line-height:1.15}
+.fashion-item-info strong{font-size:9px;margin-top:2px}
+.fashion-selected-label{font-size:8px;font-weight:900;color:#c32881}
+.boutique-actions{position:sticky;bottom:0;z-index:4;display:grid;grid-template-columns:.75fr 1.15fr 1fr;gap:6px;padding:8px 0 3px;background:linear-gradient(180deg,#fff1d2e8,#fff1d2 30%)}
+.boutique-actions .button{min-width:0;min-height:42px;padding:6px 4px;font-size:11px;line-height:1.1;white-space:normal}
+.boutique-actions .boutique-try{background:linear-gradient(#ff79b6,#d82986);border-color:#ffd0e5;box-shadow:0 3px 0 #84224f}
+.boutique-actions .boutique-purchase{background:linear-gradient(#71ce4c,#378e29);border-color:#c3e98d;box-shadow:0 3px 0 #246724}
+.boutique-actions .button:disabled{opacity:.56}
+.boutique-footnote{margin:0;font-size:9px;line-height:1.3}
+@media(max-width:360px){
+ .boutique-stage{grid-template-columns:minmax(0,40%) minmax(0,60%);min-height:300px;padding-left:9px}
+ .fashion-doll{height:286px}
+ .boutique-stage-copy h3{font-size:16px}
+ .boutique-stage-copy p{font-size:10px}
+ .fashion-item{flex-basis:108px}
+ .boutique-departments .button{font-size:8px}
+}
+
+.boutique-restart{display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:6px;width:100%;max-width:760px;height:calc(var(--page-space) - 26px);max-height:calc(var(--page-space) - 26px);min-height:0;margin:0 auto;padding:0;box-sizing:border-box}
+.boutique-showcase{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:center;gap:12px;min-height:0;height:100%;padding:10px;border:2px solid #eac36c;border-radius:22px;background:linear-gradient(145deg,#fff7df,#f9dfdc 58%,#ead4f2);box-shadow:inset 0 0 0 3px #fff9}
+.boutique-showcase-copy{min-width:0;align-self:start;padding:18px 4px;color:#542b62}
+.boutique-showcase-copy .boutique-kicker{display:block}
+.boutique-showcase-copy h3{margin:8px 0;font:700 clamp(19px,5vw,27px)/1.05 Georgia,serif;color:#682c70}
+.boutique-showcase-copy p{font-size:12px;line-height:1.45;color:#654b68}
+.boutique-feature-art{display:grid;place-items:center;min-width:0;min-height:0;height:100%;margin:0;overflow:hidden;border:2px solid #fff;border-radius:16px;background:#fff;box-shadow:0 6px 20px #3d254426}
+.boutique-feature-art img{display:block;width:auto;height:max(0px,min(34vh,calc(var(--page-space) - 190px)));max-width:100%;object-fit:contain;object-position:center}
+@media(max-width:440px){
+ .boutique-showcase{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:7px;padding:8px}
+ .boutique-showcase-copy{padding:14px 2px}
+ .boutique-showcase-copy h3{font-size:18px}
+ .boutique-showcase-copy p{font-size:10px}
+}
+
+/* Premium gold showroom - website/PWA Boutique only */
+.boutique-gold-house{width:100%;max-width:100%;padding:12px;background:linear-gradient(145deg,#fff9e9,#f5e4c2 48%,#fff9eb);border:2px solid #d1aa58;box-shadow:inset 0 0 0 3px #fffdf4,0 8px 24px #4d321d25;color:#4a351b}
+.boutique-luxe-header{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:9px;padding:8px 4px 13px;border-bottom:1px solid #d8bd82}
+.boutique-crown{display:grid;place-items:center;width:40px;height:40px;border:1px solid #c49a43;border-radius:13px;background:linear-gradient(145deg,#fff2bd,#d6a943);color:#684716;font-size:26px;box-shadow:inset 0 0 0 2px #fff8dc}
+.boutique-luxe-title{min-width:0}
+.boutique-luxe-title>span,.boutique-selected-copy>span,.boutique-section-title>span{display:block;font-size:9px;letter-spacing:1.5px;font-weight:1000;color:#9b702b}
+.boutique-luxe-title h3{margin:2px 0;font:700 clamp(19px,5vw,26px)/1.05 Georgia,serif;color:#68451b}
+.boutique-luxe-title small{font-size:10px;color:#806b4d}
+.boutique-luxe-wallet{display:grid;justify-items:end;gap:2px;padding:7px 9px;border:1px solid #c49a43;border-radius:12px;background:linear-gradient(145deg,#fff8dd,#f0d58e);white-space:nowrap}
+.boutique-luxe-wallet small,.boutique-luxe-wallet span{font-size:8px;letter-spacing:.7px;color:#775523}
+.boutique-luxe-wallet b{font-size:17px;color:#68451b}
+.boutique-gold-house .boutique-genders{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.boutique-gold-house .boutique-genders .button{background:linear-gradient(#f8e7b3,#d3a94f);border-color:#fff0bd;box-shadow:0 3px 0 #98702e;color:#543a17}
+.boutique-gold-house .boutique-genders .button.secondary{background:linear-gradient(#fffdf5,#eee2c8);border-color:#d6c39a;box-shadow:0 3px 0 #b6a078;color:#725a35}
+.boutique-gold-house .boutique-showcase{grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);min-height:230px;height:auto;padding:9px;border:2px solid #d4ae60;border-radius:17px;background:radial-gradient(ellipse at 80% 20%,#fff9df,#f0d9a4 55%,#b78b46);box-shadow:inset 0 0 0 2px #fff8df}
+.boutique-gold-house .boutique-showcase-copy{align-self:center;padding:8px 5px;color:#523819}
+.boutique-gold-house .boutique-showcase-copy .boutique-kicker{font-size:8px;letter-spacing:1.1px;color:#815b24;font-weight:1000}
+.boutique-gold-house .boutique-showcase-copy h3{font:700 clamp(18px,5vw,25px)/1.06 Georgia,serif;color:#533716}
+.boutique-gold-house .boutique-showcase-copy p{font-size:11px;color:#5c482c}
+.boutique-showcase-note{margin-top:12px;padding-top:8px;border-top:1px solid #b38b4e;font-size:9px;line-height:1.35;color:#735629}
+.boutique-gold-house .boutique-feature-art{min-height:210px;border:1px solid #fff7d9;background:radial-gradient(ellipse,#fffdf6,#f5e6c5);box-shadow:0 5px 16px #50391930}
+.boutique-gold-house .boutique-feature-art img{height:clamp(190px,34vh,330px);max-height:100%;max-width:100%}
+.boutique-department-area,.boutique-products-area{margin-top:14px}
+.boutique-section-title{display:flex;justify-content:space-between;align-items:end;gap:8px;margin:0 2px 8px;padding-bottom:6px;border-bottom:1px solid #d9c18f}
+.boutique-section-title b{font:700 16px Georgia,serif;color:#67461f}
+.boutique-departments{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.boutique-gold-house .boutique-departments .button{display:grid;align-content:center;justify-items:center;gap:5px;min-width:0;min-height:58px;padding:6px 2px;border:1px solid #c49a43;border-radius:11px;background:linear-gradient(#f8e5ae,#d9b65e);box-shadow:0 3px 0 #9c762f;color:#583c19;font-size:9px;line-height:1.05}
+.boutique-gold-house .boutique-departments .button span:first-child{font-size:17px;color:#80571e}
+.boutique-gold-house .boutique-departments .button.secondary{background:linear-gradient(#fffdf5,#eee3ca);border-color:#d7c49c;box-shadow:0 3px 0 #b5a27a;color:#725b37}
+.boutique-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.boutique-product{display:flex;flex-direction:column;align-items:stretch;gap:5px;min-width:0;padding:8px;border:1px solid #d8c394;border-radius:13px;background:linear-gradient(150deg,#fffef8,#f2e6cc);color:#4d391d;text-align:left;box-shadow:0 3px 8px #65471c12}
+.boutique-product.selected{border:2px solid #bd8b2d;padding:7px;box-shadow:0 0 0 2px #f4dfaa,0 4px 12px #80602b24}
+.boutique-product.wearing{background:linear-gradient(150deg,#fff9df,#e9d49c)}
+.boutique-product-swatch{position:relative;display:grid;place-items:center;min-height:76px;overflow:hidden;border-radius:9px;background:radial-gradient(ellipse at 35% 25%,#fff,#f6ecd5 58%,#e6d2a8);border:1px solid #e4d1a6}
+.boutique-product-swatch i{display:block;width:43px;height:43px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#fff9,var(--swatch-accent) 20%,var(--swatch) 68%,#32261d 130%);border:2px solid var(--swatch-accent);box-shadow:0 4px 10px #3e2d1d38,inset 0 0 0 3px #ffffff40}
+.boutique-product-swatch small{position:absolute;bottom:5px;left:5px;right:5px;text-align:center;font-size:7px;letter-spacing:1px;font-weight:1000;color:#7a5c2d}
+.boutique-product-name{font:700 14px Georgia,serif;line-height:1.15;color:#553a1b}
+.boutique-product-detail{min-height:29px;font-size:10px;line-height:1.35;color:#786344}
+.boutique-product-price{font-size:10px;color:#90651f}
+.boutique-product-select{align-self:flex-start;padding:4px 8px;border-radius:20px;background:#f0dfb8;color:#6d4d1e;font-size:9px;font-weight:1000}
+.boutique-product.selected .boutique-product-select{background:#d6b35f;color:#432c12}
+.boutique-empty{grid-column:1/-1;padding:16px;border:1px dashed #c9ad71;border-radius:12px;text-align:center;font-size:12px}
+.boutique-selected-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-top:14px;padding:11px;border:1px solid #c9a352;border-radius:13px;background:linear-gradient(145deg,#fff8df,#efdbad)}
+.boutique-selected-copy{display:grid;gap:3px;min-width:0}
+.boutique-selected-copy b{font:700 15px Georgia,serif;color:#563b1b}
+.boutique-selected-copy small{font-size:9px;color:#745c37;line-height:1.3}
+.boutique-selected-copy strong{font-size:10px;color:#91651e}
+.boutique-selected-actions{display:grid;gap:6px;min-width:105px}
+.boutique-selected-actions .button{min-height:36px;padding:6px 8px;font-size:10px;white-space:normal}
+.boutique-gold-house .boutique-purchase{background:linear-gradient(#e7c35f,#ad7924);border-color:#fff0b2;box-shadow:0 3px 0 #76501b;color:#fff}
+.boutique-clear{grid-column:1/-1;min-height:30px;padding:4px 8px;font-size:9px}
+.boutique-gold-house .boutique-footnote{margin:9px 2px 2px;color:#786344;font-size:9px;line-height:1.4}
+@media(max-width:370px){
+ .boutique-luxe-header{grid-template-columns:34px minmax(0,1fr) auto;gap:5px}
+ .boutique-crown{width:33px;height:34px;font-size:21px}
+ .boutique-luxe-wallet{padding:6px}
+ .boutique-luxe-wallet b{font-size:14px}
+ .boutique-gold-house .boutique-departments{gap:3px}
+ .boutique-gold-house .boutique-departments .button{font-size:8px}
+ .boutique-selected-panel{grid-template-columns:minmax(0,1fr) 100px}
+}
+/* Boutique live try-on positioning */
+.boutique-feature-art {
+    position: relative;
+    isolation: isolate;
+}
+.boutique-feature-art > img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+}
+.boutique-feature-art > .fashion-overlay {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    object-fit: contain;
+    object-position: center bottom;
+    pointer-events: none;
+    overflow: visible;
+}
+
+/* Boutique full-look picker: complete artwork swaps, no drawn garment layers or color swatches. */
+#hub-content:has(.boutique-gold-house){height:100%;min-height:0;overflow:hidden!important}
+body.hub-fit .hub-screen:has(.boutique-gold-house){height:100%;min-height:0;grid-template-rows:42px minmax(0,1fr)}
+body.hub-fit #hub-content:has(.boutique-gold-house){height:100%;min-height:0;display:grid;grid-template-rows:minmax(0,1fr)}
+.boutique-gold-house{height:100%;max-height:100%;min-height:0;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);grid-template-rows:32px minmax(0,1fr) auto;gap:6px;padding:6px;overflow:hidden}
+.boutique-gold-house .boutique-luxe-header,.boutique-gold-house .boutique-department-area,.boutique-gold-house .boutique-footnote{display:none!important}
+.boutique-gold-house .boutique-genders{grid-column:1/-1;grid-row:1;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0;min-height:0}
+.boutique-gold-house .boutique-genders .button{min-height:30px;padding:3px 5px;font-size:10px;border-radius:10px}
+.boutique-look-layout{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:7px;min-width:0;min-height:0}
+.boutique-gold-house .boutique-showcase{grid-column:1;grid-row:1;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:4px;min-width:0;min-height:0;height:100%;padding:6px;border-radius:13px;background:radial-gradient(ellipse at 70% 25%,#fff9e5,#f0d9a4 58%,#c49a5e);box-shadow:inset 0 0 0 2px #fff6dc}
+.boutique-gold-house .boutique-showcase-copy{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 4px;align-content:start;align-self:auto;min-width:0;padding:0;color:#523819}
+.boutique-gold-house .boutique-showcase-copy .boutique-kicker{grid-column:1/-1;font-size:7px;letter-spacing:.7px;color:#815b24}
+.boutique-gold-house .boutique-showcase-copy h3{grid-column:1/-1;margin:0;font:700 14px/1.05 Georgia,serif;color:#533716}
+.boutique-gold-house .boutique-showcase-copy p{grid-column:1/-1;margin:0;font-size:8px;line-height:1.1;color:#715b39}
+.boutique-gold-house .boutique-showcase-copy .boutique-clear{grid-column:1/-1;min-height:22px;margin:2px 0 0;padding:2px 4px;font-size:8px}
+.boutique-gold-house .boutique-feature-art{grid-row:2;min-height:0;height:100%;border:1px solid #fff7d9;border-radius:10px;background:radial-gradient(ellipse,#fffdf6,#f5e6c5);box-shadow:0 3px 9px #50391920}
+.boutique-gold-house .boutique-feature-art img{width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center bottom;filter:none}
+.boutique-gold-house .boutique-products-area{grid-column:2;grid-row:1;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:5px;margin:0;min-width:0;min-height:0}
+.boutique-gold-house .boutique-section-title{display:grid;gap:2px;margin:0;padding:0 2px 4px;border-color:#d9c18f}
+.boutique-gold-house .boutique-section-title span{font-size:7px;letter-spacing:.8px}
+.boutique-gold-house .boutique-section-title b{font:700 13px/1.05 Georgia,serif;color:#67461f}
+.boutique-gold-house .boutique-product-grid{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:6px;min-height:0}
+.boutique-gold-house .boutique-product-grid:has(.boutique-product:nth-child(2)){grid-template-rows:repeat(2,minmax(0,1fr))}
+.boutique-gold-house .boutique-product{display:grid;grid-template-columns:48px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;column-gap:6px;row-gap:2px;align-items:center;min-width:0;min-height:0;padding:5px;border:1px solid #d8c394;border-radius:11px;background:linear-gradient(150deg,#fffef8,#f2e6cc);color:#4d391d;text-align:left;box-shadow:0 2px 6px #65471c12}
+.boutique-gold-house .boutique-product.selected{border:2px solid #bd8b2d;padding:4px;box-shadow:0 0 0 2px #f4dfaa,0 3px 8px #80602b20}
+.boutique-gold-house .boutique-product.wearing{background:linear-gradient(150deg,#fff9df,#e9d49c)}
+.boutique-gold-house .boutique-product-swatch{grid-column:1;grid-row:1/5;display:block;width:100%;height:100%;min-height:0;padding:0;overflow:hidden;border:0;border-radius:8px;background:linear-gradient(145deg,#fff9e7,#e8d9bc)}
+.boutique-gold-house .boutique-look-thumb img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:transparent}
+.boutique-gold-house .boutique-product-name{grid-column:2;grid-row:1;font:700 10px/1.08 Georgia,serif;color:#553a1b}
+.boutique-gold-house .boutique-product-detail{grid-column:2;grid-row:2;min-height:0;font-size:8px;line-height:1.18;color:#786344}
+.boutique-gold-house .boutique-product-price{grid-column:2;grid-row:3;font-size:8px;color:#90651f}
+.boutique-gold-house .boutique-product-select{grid-column:2;grid-row:4;justify-self:start;padding:2px 5px;border-radius:10px;background:#f0dfb8;color:#6d4d1e;font-size:7px;font-weight:900}
+.boutique-gold-house .boutique-selected-panel{grid-column:1/-1;grid-row:3;grid-template-columns:minmax(0,1fr) 112px;gap:4px;margin:0;padding:5px;border-radius:10px}
+.boutique-gold-house .boutique-selected-copy{gap:2px}
+.boutique-gold-house .boutique-selected-copy>span{font-size:7px;letter-spacing:.7px}
+.boutique-gold-house .boutique-selected-copy b{font-size:10px;line-height:1.1}
+.boutique-gold-house .boutique-selected-copy small{font-size:7px;line-height:1.1}
+.boutique-gold-house .boutique-selected-copy strong{font-size:8px}
+.boutique-gold-house .boutique-selected-actions{display:grid;gap:3px;min-width:0}
+.boutique-gold-house .boutique-selected-actions [data-action="preview-boutique-piece"]{display:none}
+.boutique-gold-house .boutique-selected-actions .button{min-width:0;min-height:28px;padding:3px 4px;font-size:8px;line-height:1.05;white-space:normal}
+.boutique-gold-house .boutique-selected-panel .boutique-clear{grid-column:1/-1;min-height:22px;padding:2px 4px;font-size:8px}
+@media(max-width:390px){
+ .boutique-gold-house{grid-template-rows:30px minmax(0,1fr) auto;padding:5px;gap:5px}
+ .boutique-look-layout{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:5px}
+ .boutique-gold-house .boutique-product{grid-template-columns:40px minmax(0,1fr);column-gap:4px;padding:4px}
+ .boutique-gold-house .boutique-product-name{font-size:9px}
+ .boutique-gold-house .boutique-product-detail{font-size:7px}
+ .boutique-gold-house .boutique-selected-panel{grid-template-columns:minmax(0,1fr) 98px}
+}
+
+/* Boutique occupies the available screen area; screen-fit otherwise paginates its single showroom card. */
+#hub-content:has(.boutique-gold-house){height:100%!important;min-height:0!important;display:grid!important;grid-template-rows:minmax(0,1fr)!important;overflow:hidden!important}
+#hub-content:has(.boutique-gold-house)>.screen-page:has(.boutique-gold-house){height:100%!important;min-height:0!important;max-height:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:hidden!important}
+#hub-content:has(.boutique-gold-house)>.screen-pager{display:none!important}
+.boutique-gold-house .boutique-look-layout{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:7px;min-width:0;min-height:0;height:100%}
+.boutique-gold-house .boutique-feature-art>.fashion-overlay{display:none!important}
+
+/* Match Frenzy full-body characters across the Boutique and website games. */
+.match-frenzy-portrait{display:inline-flex!important;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:10px;background:#10253d;vertical-align:middle}
+.match-frenzy-portrait>img{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;animation:match-frenzy-idle 2.2s ease-in-out infinite}
+.avatar .match-frenzy-portrait{width:100%;height:100%;margin:0}
+.avatar .match-frenzy-portrait>img{animation-duration:2.8s}
+.selected-avatar .match-frenzy-portrait{width:40px;height:48px}
+.dance .match-frenzy-portrait{width:120px;height:142px;overflow:visible;background:transparent}
+.dance .match-frenzy-portrait>img{border-radius:9px;animation-duration:1.25s}
+.page-heading:has(#hub-player-look){display:flex;align-items:center;gap:6px}
+#hub-title{min-width:0;flex:1}
+.hub-player-look{flex:none;width:38px;height:42px;margin:0;overflow:hidden;border-radius:8px;background:#10253d;box-shadow:0 2px 5px #153c2a55}
+.hub-player-look[hidden]{display:none!important}
+.hub-player-look img{display:block;width:100%;height:100%;object-fit:contain;animation:match-frenzy-idle 2.1s ease-in-out infinite}
+body.playing .game-screen{grid-template-rows:32px 46px 78px auto minmax(0,1fr) 36px!important}
+.game-character-row{display:flex;align-items:center;justify-content:center;gap:clamp(42px,18vw,105px);min-width:0;min-height:0;padding:2px 12px;border:1px solid #d4e7bd;border-radius:14px;background:linear-gradient(110deg,#164c43dd,#246b58e8,#164c43dd);overflow:hidden}
+.game-character-row.solo{gap:0}
+.game-avatar{display:flex;flex:0 1 92px;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px;width:92px;height:74px;min-width:0;margin:0;animation:match-frenzy-idle 2.1s ease-in-out infinite}
+.game-avatar.rival{animation-delay:-1s}
+.game-avatar img{display:block;max-width:100%;width:auto;height:57px;object-fit:contain;border-radius:5px;box-shadow:0 2px 6px #061b24aa}
+.game-avatar figcaption{font-size:7px;line-height:1;font-weight:900;letter-spacing:.7px;color:#fff6d7;text-shadow:0 1px 2px #10251b}
+.game-character-row.solo .game-avatar{flex-basis:104px;width:104px}
+@keyframes match-frenzy-idle{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-3px) rotate(-1deg)}65%{transform:translateY(0) rotate(1deg)}}
+body.reduce-motion .match-frenzy-portrait>img,body.reduce-motion .hub-player-look img,body.reduce-motion .game-avatar{animation:none!important}
+@media(prefers-reduced-motion:reduce){.match-frenzy-portrait>img,.hub-player-look img,.game-avatar{animation:none!important}}
+@media(max-width:390px){body.playing .game-screen{grid-template-rows:30px 42px 70px auto minmax(0,1fr) 34px!important}.game-character-row{gap:40px}.game-avatar{height:66px}.game-avatar img{height:50px}}
+
+/* Keep every current Match Frenzy outfit visible on one Boutique screen. */
+.boutique-gold-house .boutique-product-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:4px!important;min-height:0!important}
+.boutique-gold-house .boutique-product{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) auto auto auto auto!important;column-gap:0!important;row-gap:1px!important;align-items:center!important;padding:3px!important;text-align:center!important}
+.boutique-gold-house .boutique-product-swatch{grid-column:1!important;grid-row:1!important;width:100%!important;height:100%!important;max-height:51px!important;min-height:0!important;padding:0!important}
+.boutique-gold-house .boutique-look-thumb img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
+.boutique-gold-house .boutique-product-name{grid-column:1!important;grid-row:2!important;justify-self:center!important;font-size:9px!important;line-height:1.05!important;text-align:center!important}
+.boutique-gold-house .boutique-product-detail{grid-column:1!important;grid-row:3!important;min-height:0!important;font-size:7px!important;line-height:1.05!important;text-align:center!important}
+.boutique-gold-house .boutique-product-price{grid-column:1!important;grid-row:4!important;justify-self:center!important;font-size:7px!important;line-height:1!important}
+.boutique-gold-house .boutique-product-select{grid-column:1!important;grid-row:5!important;justify-self:center!important;padding:1px 4px!important;font-size:7px!important;line-height:1!important}
+@media(max-height:700px){.boutique-gold-house .boutique-product-swatch{max-height:45px!important}.boutique-gold-house .boutique-product{row-gap:0!important;padding:2px!important}.boutique-gold-house .boutique-product-detail{font-size:6px!important}}
+/* Fit the complete Match Frenzy figure in the Boutique showcase. */
+.boutique-gold-house .boutique-feature-art{display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
+.boutique-gold-house .boutique-feature-art>img{position:relative!important;inset:auto!important;display:block!important;width:auto!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;transform:none!important}
+.boutique-gold-house .boutique-product-swatch{max-height:58px!important}
+.boutique-gold-house .boutique-product-detail{display:none!important}
+@media(max-height:700px){.boutique-gold-house .boutique-product-swatch{max-height:54px!important}}
+
+/* Hair color uses full character previews so each choice stays recognizable. */
+.boutique-view-switch{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:0 0 4px}
+.boutique-view-switch .button{min-width:0!important;min-height:25px!important;padding:3px 5px!important;border-radius:8px!important;font-size:9px!important;line-height:1!important}
+.boutique-product-grid.hair-color-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:4px!important}
+.hair-color-option{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:2px;min-width:0;min-height:0;padding:3px;border:1px solid #c6a15d;border-radius:10px;background:linear-gradient(#fff9e8,#ead5aa);box-shadow:0 2px 0 #a98342;color:#563b1e;overflow:hidden}
+.hair-color-option.selected{border:2px solid #f0be3e;background:linear-gradient(#fff3c5,#e6bf65);box-shadow:0 2px 0 #9c7227,0 0 0 1px #fff8d9}
+.hair-color-preview{display:block;width:100%;height:100%;min-height:0;overflow:hidden;border-radius:7px;background:#10253d}
+.hair-color-preview img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top;animation:none!important}
+.hair-color-name{display:block;font-size:8px;line-height:1.05;font-weight:900;text-align:center;white-space:nowrap}
+
+/* Mobile game character setup: three ordered steps using complete avatar art. */
+body.hub-fit .hub-screen:has(.game-avatar-setup){height:100%;min-height:0;grid-template-rows:42px minmax(0,1fr);overflow:hidden}
+#hub-content:has(.game-avatar-setup){height:100%;min-height:0;display:grid;grid-template-rows:minmax(0,1fr);overflow:hidden}
+.game-avatar-setup{height:100%;min-height:0;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:6px;padding:7px;overflow:hidden;border-radius:16px;background:linear-gradient(145deg,#fff7e5,#f0dbb0);color:#45363c}
+.game-avatar-setup-heading{display:grid;gap:2px;text-align:center}
+.game-avatar-setup-heading>span{font-size:9px;font-weight:1000;letter-spacing:1.4px;color:#ad6937}
+.game-avatar-setup-heading h3{margin:0;font:700 18px/1.05 Georgia,serif;color:#513448}
+.game-avatar-setup-heading p{margin:0;font-size:10px;line-height:1.2;color:#765d5b}
+.game-avatar-current{display:grid;grid-template-columns:56px minmax(0,1fr);align-items:center;gap:8px;min-height:68px;padding:5px 8px;border:1px solid #d5b875;border-radius:12px;background:linear-gradient(110deg,#fffdf4,#f6e7c4)}
+.game-avatar-current figure{height:58px;margin:0;overflow:hidden;border-radius:8px;background:#10253d}
+.game-avatar-current img{display:block;width:100%;height:100%;object-fit:contain;animation:match-frenzy-idle 2.2s ease-in-out infinite}
+.game-avatar-current div{display:grid;gap:2px;min-width:0}
+.game-avatar-current small{font-size:7px;font-weight:900;letter-spacing:1px;color:#a16b38}
+.game-avatar-current b{font:700 12px/1.1 Georgia,serif;color:#50364b}
+.game-avatar-current span{font-size:9px;color:#785e5a}
+.game-avatar-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:5px;min-width:0;min-height:0;overflow:hidden}
+.game-avatar-choice-grid.hair-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+.game-avatar-choice-grid.body-choice-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:4px}
+.game-avatar-choice{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;align-items:center;gap:2px;min-width:0;min-height:0;padding:3px;border:1px solid #c9ad78;border-radius:10px;background:linear-gradient(#fffdf7,#f2e4c7);color:#523a48;overflow:hidden;box-shadow:0 2px 0 #b79a68}
+.game-avatar-choice.selected{border:2px solid #e3b340;background:linear-gradient(#fff4c5,#e8ca79);box-shadow:0 2px 0 #aa7d27,0 0 0 1px #fff8d9}
+.game-avatar-choice-art{display:block;min-width:0;min-height:0;width:100%;height:100%;overflow:hidden;border-radius:7px;background:#10253d}
+.game-avatar-choice-art img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;animation:none!important}
+.game-avatar-choice b{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;font-size:9px;line-height:1.05;font-weight:900}
+.body-choice-grid .game-avatar-choice b{padding-right:9px;font-size:7px}
+.body-choice-grid .game-avatar-choice-art{border-radius:6px}
+.game-body-swatch{position:absolute;right:4px;bottom:4px;width:8px;height:8px;border:1px solid #fff;border-radius:50%;background:var(--body-swatch);box-shadow:0 0 0 1px #614a45}
+.game-avatar-setup-actions{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:34px}
+.game-avatar-setup-actions>div{display:flex;justify-content:flex-end;gap:5px;min-width:0}
+.game-avatar-setup-actions .button{min-width:84px;min-height:32px;padding:4px 8px;border-radius:10px;font-size:10px;line-height:1.05;white-space:normal}
+.game-start-avatar{width:72px;height:86px;margin:0 auto 6px;overflow:hidden;border-radius:12px;background:#10253d;box-shadow:0 3px 12px #07293255}
+.game-start-avatar img{display:block;width:100%;height:100%;object-fit:contain;animation:match-frenzy-idle 1.5s ease-in-out infinite}
+.avatar-victory-stage{position:relative;display:flex;align-items:flex-end;justify-content:center;gap:10px;width:min(290px,82vw);height:154px;margin:0 auto 7px;overflow:hidden;border-radius:16px;background:radial-gradient(ellipse at 50% 100%,#f4d89e,#d6eec4 72%,#e3f7df)}
+.avatar-victory-character{position:relative;z-index:1;display:flex;flex:0 1 82px;flex-direction:column;align-items:center;justify-content:flex-end;width:82px;height:140px;margin:0;overflow:hidden;border-radius:10px;background:#10253d;box-shadow:0 3px 10px #18334155}
+.avatar-victory-character img{display:block;width:100%;height:calc(100% - 16px);object-fit:contain}
+.avatar-victory-character figcaption{width:100%;padding:3px 2px;text-align:center;background:#15344b;color:#fff2c6;font-size:7px;line-height:1;font-weight:1000;letter-spacing:1px}
+.avatar-victory-player{animation:avatar-victory-hop .72s ease-in-out infinite}
+.avatar-victory-rival{animation:avatar-victory-hop .9s ease-in-out -0.34s infinite}
+.avatar-victory-spark,.avatar-victory-stars{position:absolute;z-index:2;text-shadow:0 2px 4px #563c2c55}
+.avatar-victory-spark{top:8px;left:calc(50% - 12px);font-size:21px;animation:avatar-victory-spark 1s ease-in-out infinite}
+.avatar-victory-stars{right:8px;bottom:22px;font-size:13px;animation:avatar-victory-spark 1.1s ease-in-out -0.3s infinite}
+@keyframes avatar-victory-hop{0%,100%{transform:translateY(0) rotate(0)}45%{transform:translateY(-10px) rotate(-2deg)}70%{transform:translateY(0) rotate(1deg)}}
+@keyframes avatar-victory-spark{0%,100%{transform:scale(.85);opacity:.72}50%{transform:scale(1.18);opacity:1}}
+body.reduce-motion .game-avatar-current img,body.reduce-motion .game-start-avatar img,body.reduce-motion .avatar-victory-character,body.reduce-motion .avatar-victory-spark,body.reduce-motion .avatar-victory-stars{animation:none!important}
+@media(max-height:700px){.game-avatar-setup{gap:4px;padding:5px}.game-avatar-current{min-height:60px}.game-avatar-current figure{height:50px}.game-avatar-choice{padding:2px}.game-avatar-choice b{font-size:8px}.game-avatar-setup-actions .button{min-height:29px}.avatar-victory-stage{height:138px}.avatar-victory-character{height:126px}}
+@media(prefers-reduced-motion:reduce){.game-avatar-current img,.game-start-avatar img,.avatar-victory-character,.avatar-victory-spark,.avatar-victory-stars{animation:none!important}}
+
+/* Complete Match Frenzy outfit gallery in the Boutique. */
+.boutique-avatar-store{height:100%!important;min-height:0!important;max-height:100%!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:24px 28px minmax(0,1fr) auto!important;gap:5px!important;padding:6px!important;overflow:hidden!important}
+.boutique-gallery-header{display:flex;align-items:center;justify-content:space-between;gap:6px;min-width:0;padding:0 3px;color:#503746}
+.boutique-gallery-header>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;font-weight:1000;letter-spacing:1px}
+.boutique-gallery-header>b{flex:none;font-size:9px;white-space:nowrap}
+.boutique-avatar-store .boutique-view-switch{grid-column:1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr))!important;margin:0!important}
+.boutique-avatar-store .boutique-avatar-grid{grid-column:1;grid-row:3;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:5px!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+.boutique-avatar-card{display:grid;grid-template-rows:minmax(0,1fr) auto auto auto;align-content:stretch;gap:2px;min-width:0;min-height:0;padding:4px;border:1px solid #c6a45c;border-radius:10px;background:linear-gradient(155deg,#173653,#0b2238);box-shadow:0 2px 0 #775c36;color:#fff3cf;overflow:hidden;text-align:center}
+.boutique-avatar-card.selected{border:2px solid #f0c044;background:linear-gradient(155deg,#244a68,#102840);box-shadow:0 2px 0 #a17b28,0 0 0 1px #fff4cc}
+.boutique-avatar-card.wearing{border-color:#76bd79}
+.boutique-avatar-card-art{display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;width:100%;height:100%;overflow:hidden;border-radius:6px;background:#10253d}
+.boutique-avatar-card-art img{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;animation:none!important}
+.boutique-avatar-card>b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(8px,2.1vw,10px);line-height:1.05;font-weight:1000}
+.boutique-avatar-card>small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#d6d5cf;font-size:7px;line-height:1}
+.boutique-avatar-card>strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f5cb54;font-size:7px;line-height:1;font-weight:1000}
+.boutique-avatar-store .boutique-selected-panel{grid-column:1;grid-row:4;display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;align-items:center;gap:5px!important;min-height:0!important;margin:0!important;padding:5px!important;border-radius:10px!important}
+.boutique-avatar-store .boutique-selected-copy{gap:2px!important;min-width:0}
+.boutique-avatar-store .boutique-selected-copy>span{font-size:7px!important}
+.boutique-avatar-store .boutique-selected-copy>b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px!important;line-height:1.05}
+.boutique-avatar-store .boutique-selected-copy>small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:7px!important}
+.boutique-avatar-store .boutique-selected-copy>strong{font-size:8px!important;line-height:1}
+.boutique-avatar-store .boutique-selected-actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:3px!important;min-width:90px}
+.boutique-avatar-store .boutique-selected-actions [data-action="preview-boutique-piece"]{display:none!important}
+.boutique-avatar-store .boutique-selected-actions .button{min-width:0!important;min-height:30px!important;padding:3px 6px!important;font-size:8px!important;line-height:1.05!important;white-space:normal}
+.boutique-avatar-store .boutique-clear{min-width:52px!important;min-height:28px!important;padding:3px 5px!important;font-size:7px!important;line-height:1.05}
+.boutique-avatar-store .hair-color-option{min-height:0}
+@media(max-width:390px){.boutique-avatar-store{gap:4px!important;padding:5px!important}.boutique-avatar-store .boutique-avatar-grid{gap:4px!important}.boutique-avatar-card{padding:3px;gap:1px}.boutique-avatar-card>small{display:none}.boutique-avatar-store .boutique-selected-actions{min-width:82px}}
+@media(max-height:700px){.boutique-avatar-store{grid-template-rows:22px 26px minmax(0,1fr) auto!important;gap:4px!important;padding:5px!important}.boutique-avatar-card{padding:3px}.boutique-avatar-store .boutique-selected-panel{padding:4px!important}.boutique-avatar-store .boutique-avatar-grid.hair-color-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
