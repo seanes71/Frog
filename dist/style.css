@@ -1215,4 +1215,19 @@ body.reduce-motion .game-avatar-current img,body.reduce-motion .game-start-avata
 .boutique-avatar-store .boutique-clear{min-width:52px!important;min-height:28px!important;padding:3px 5px!important;font-size:7px!important;line-height:1.05}
 .boutique-avatar-store .hair-color-option{min-height:0}
 @media(max-width:390px){.boutique-avatar-store{gap:4px!important;padding:5px!important}.boutique-avatar-store .boutique-avatar-grid{gap:4px!important}.boutique-avatar-card{padding:3px;gap:1px}.boutique-avatar-card>small{display:none}.boutique-avatar-store .boutique-selected-actions{min-width:82px}}
-@media(max-height:700px){.boutique-avatar-store{grid-template-rows:22px 26px minmax(0,1fr) auto!important;gap:4px!important;padding:5px!important}.boutique-avatar-card{padding:3px}.boutique-avatar-store .boutique-selected-panel{padding:4px!important}.boutique-avatar-store .boutique-avatar-grid.hair-color-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-height:700px){.boutique-avatar-store{grid-template-rows:22px 26px minmax(0,1fr) auto!important;gap:4px!important;padding:5px!important}.boutique-avatar-card{padding:3px}.boutique-avatar-store .boutique-selected-panel{padding:4px!important}.boutique-avatar-store .boutique-avatar-grid.hair-color-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}/* Keep one shared player wardrobe across the mobile-sized game screens. */
+.boutique-avatar-store .boutique-view-switch{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.boutique-avatar-store .boutique-avatar-grid.frog-color-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(4,minmax(0,1fr))!important}
+.frog-color-option{min-height:0!important}
+.frog-color-preview{position:relative;display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:0;overflow:hidden;border-radius:7px;background:#10253d}
+.frog-color-preview>img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;animation:none!important}
+.frog-color-preview .game-body-swatch{width:9px;height:9px;right:3px;bottom:3px}
+.boutique-avatar-card.playing{border-color:#ffdc66;box-shadow:0 0 0 1px #fff6cd,0 2px 0 #a17b28}
+.boutique-avatar-store .boutique-selected-panel{grid-template-columns:44px minmax(0,1fr) auto!important;gap:5px!important;min-height:58px!important}
+.boutique-live-avatar{display:grid;grid-template-rows:minmax(0,1fr) auto;width:44px;height:54px;margin:0;overflow:hidden;border-radius:7px;background:#10253d}
+.boutique-live-avatar img{display:block;width:100%;height:100%;object-fit:contain;animation:match-frenzy-idle 2.1s ease-in-out infinite}
+.boutique-live-avatar figcaption{padding:2px 1px;text-align:center;background:#15344b;color:#fff2c6;font-size:5px;line-height:1;font-weight:1000;letter-spacing:.3px}
+.boutique-avatar-store .boutique-apply{min-width:84px!important;max-width:116px;min-height:29px!important;padding:3px 5px!important;font-size:8px!important;line-height:1.05!important;white-space:normal}
+.boutique-avatar-store .boutique-selected-copy>strong{font-size:7px!important;line-height:1.05}
+@media(max-width:390px){.boutique-avatar-store .boutique-view-switch .button{font-size:8px!important;padding:2px!important}.boutique-avatar-store .boutique-avatar-grid.frog-color-grid{gap:3px!important}.frog-color-option{padding:2px!important}.boutique-avatar-store .boutique-apply{min-width:74px!important;font-size:7px!important}.boutique-live-avatar{width:40px;height:50px}}
+@media(prefers-reduced-motion:reduce){.boutique-live-avatar img{animation:none!important}}
