@@ -212,8 +212,8 @@ const FASHION_FULL_LOOK_ART={girl:{'vegas-cards':'assets/match-frenzy-country-cu
 const MATCH_FRENZY_OUTFITS={girl:['vegas-cards','girl-sweetheart-overalls','girl-sunshine-dress','girl-denim-classic','girl-pretty-in-pink','girl-lily-explorer'],boy:['boy-vegas-hottie','boy-beach-breeze','boy-cool-explorer']};
 const MATCH_FRENZY_HAIR_STEMS={girl:{'vegas-cards':'country-cutie','girl-sweetheart-overalls':'sweetheart-overalls','girl-sunshine-dress':'sunshine-dress','girl-denim-classic':'denim-classic','girl-pretty-in-pink':'pretty-in-pink','girl-lily-explorer':'lily-explorer'},boy:{'boy-vegas-hottie':'street-star','boy-beach-breeze':'beach-breeze','boy-cool-explorer':'cool-explorer'}};
 const FASHION_HAIR_COLORS=[{id:'gold',name:'Gold'},{id:'blue',name:'Blue'},{id:'green',name:'Green'},{id:'pink',name:'Pink'},{id:'purple',name:'Purple'},{id:'rainbow',name:'Rainbow'},{id:'red',name:'Red'}];
-const BOUTIQUE_HAIR_COLORS=[{id:'blonde',name:'Blonde',art:'gold',price:0},{id:'blue',name:'Blue',art:'blue',price:15},{id:'green',name:'Green',art:'green',price:15},{id:'pink',name:'Pink',art:'pink',price:15},{id:'purple',name:'Purple',art:'purple',price:15},{id:'red',name:'Red',art:'red',price:15},{id:'rainbow',name:'Rainbow',art:'rainbow',price:30}];
-function mobileAvatarImage(id,hair='blonde',body='green',classes=''){const avatar=mobileAvatar(id);const selectedHair=BOUTIQUE_HAIR_COLORS.find(color=>color.id===hair)||BOUTIQUE_HAIR_COLORS[0];const art=matchFrenzyLook(avatar.gender,avatar.id,selectedHair.art).art;return `<img class="mobile-avatar-art ${classes}" src="${art}" alt="${avatar.name}" draggable="false">`;}
+const BOUTIQUE_HAIR_COLORS=[{id:'blonde',name:'Blonde',art:'gold',price:0},{id:'black',name:'Black',art:'black',price:15},{id:'brown',name:'Brown',art:'brown',price:15},{id:'blue',name:'Blue',art:'blue',price:15},{id:'green',name:'Green',art:'green',price:15},{id:'pink',name:'Pink',art:'pink',price:15},{id:'purple',name:'Purple',art:'purple',price:15},{id:'red',name:'Red',art:'red',price:15},{id:'rainbow',name:'Rainbow',art:'rainbow',price:30}];
+function mobileAvatarImage(id,hair='blonde',body='green',classes=''){const avatar=mobileAvatar(id);return `<img class="mobile-avatar-art ${classes}" data-game-avatar-art="${avatar.id}" data-hair-color="${hair}" data-body-color="${body}" src="${avatar.art}" alt="${avatar.name}" draggable="false">`;}
 function hydrateGameAvatarImages(root=document){if(!root?.querySelectorAll)return;root.querySelectorAll('[data-game-avatar-art]').forEach(img=>{const id=img.dataset.gameAvatarArt,hair=img.dataset.hairColor,body=img.dataset.bodyColor,key=`${id}|${hair}|${body}`;if(img.dataset.artKey===key)return;img.dataset.artKey=key;mobileAvatarArtUrl(id,hair,body).then(src=>{if(img.isConnected&&img.dataset.artKey===key)img.src=src;}).catch(()=>{});});}
 function mobilePlayerAvatar(){return mobileAvatar(p.gameAvatarId);}
 function mobileRivalAvatar(){const index=MOBILE_AVATARS.findIndex(avatar=>avatar.id===p.gameAvatarId);return MOBILE_AVATARS[(index+1)%MOBILE_AVATARS.length]||MOBILE_AVATARS[0];}
@@ -409,9 +409,8 @@ function boutique(){
   const active=color.id===currentHair.id;
   const owned=hairOwned.has(color.id);
   const status=active?'CURRENT HAIR':owned?'OWNED · SELECT':color.price===0?'FREE':`BUY · ${color.price} DOUGH`;
-  const art=matchFrenzyLook(avatar.gender,avatar.id,color.art).art;
   return `<button type='button' class='boutique-avatar-card ${active?'selected playing':''}' data-action='purchase-boutique-hair-color' data-id='${color.id}' aria-pressed='${active}' aria-label='${color.name} hair. ${owned?'Owned':color.price+' Froggy Dough'}'>
-   <span class='boutique-avatar-card-art'><img src='${art}' alt='' draggable='false'></span><b>${color.name}</b><small>Green frog · full hair art</small><strong>${status}</strong>
+    <span class='boutique-avatar-card-art'>${mobileAvatarImage(avatar.id,color.id,'green','')}</span><b>${color.name}</b><small>Green frog · full hair art</small><strong>${status}</strong>
   </button>`;
  }).join('');
  const outfitCards=outfitItems.map(item=>{
@@ -433,10 +432,11 @@ function boutique(){
   const itemGender=item.gender||'girl';
   const itemState=fashionState(itemGender);
   const owned=itemState.unlocked.includes(item.id);
-  const selected=item.id===fashionSelection;
+   const selected=item.id===fashionSelection;
+   const equipped=fashionItemEquipped(item,itemState);
   const canBuy=item.price===0||p.bank>=item.price;
-  const status=owned?'OWNED':item.price===0?'FREE':canBuy?`BUY · ${item.price} DOUGH`:`${item.price} DOUGH · NEED ${item.price-p.bank}`;
-  return `<button type='button' class='boutique-avatar-card ${selected?'selected':''}' data-action='select-boutique-piece' data-id='${item.id}' data-gender='${itemGender}' aria-pressed='${selected}' aria-label='${item.name}. ${owned?'Owned':item.price+' Froggy Dough'}'>
+   const status=equipped?'CURRENTLY WEARING':owned?'OWNED · TAP TO WEAR':item.price===0?'FREE · TAP TO WEAR':canBuy?`BUY · ${item.price} DOUGH`:`${item.price} DOUGH · NEED ${item.price-p.bank}`;
+   return `<button type='button' class='boutique-avatar-card ${equipped?'playing':''} ${selected?'selected':''}' data-action='select-boutique-piece' data-id='${item.id}' data-gender='${itemGender}' aria-pressed='${equipped}' aria-label='${item.name}. ${equipped?'Currently wearing':owned?'Tap to wear':item.price+' Froggy Dough'}'>
    <span class='boutique-avatar-card-art boutique-item-art'>${fashionProductArt(item)}</span><b>${item.name}</b><small>${item.detail}</small><strong>${status}</strong>
   </button>`;
  }).join(''):'';
@@ -710,9 +710,16 @@ document.addEventListener('click',e=>{
  } if(action==='select-boutique-piece'){
   const itemGender=button.dataset.gender||'girl';
   const item=FASHION_ITEMS.find(entry=>entry.id===id&&(entry.gender||'girl')===itemGender);if(!item)return;
-  boutiqueGender=itemGender;p.fashionGender=itemGender;fashionSelection=item.id;
-  if(item.kind==='outfit')fashionTryOn={outfit:item.id};else fashionTryOn={[fashionSlot(item)]:item.id};
-  boutique();return;
+   boutiqueGender=itemGender;p.fashionGender=itemGender;fashionSelection=item.id;
+   const f=fashionState(itemGender);
+   if(!f.unlocked.includes(item.id)){
+    if(p.bank<item.price){toast('You need '+(item.price-p.bank)+' more Froggy Dough for '+item.name+'.');boutique();return;}
+    p.bank-=item.price;f.unlocked.push(item.id);
+    (FASHION_OUTFIT_PARTS[item.id]||[]).forEach(part=>{if(!f.unlocked.includes(part))f.unlocked.push(part);});
+   }
+   if(item.kind==='outfit'){f.equipped.outfit=item.id;f.equipped.top='';f.equipped.bottom='';}
+   else{f.equipped.outfit='';f.equipped[fashionSlot(item)]=item.id;}
+   fashionTryOn={};save();boutique();toast(item.name+' is ready to wear!');return;
  }
  if(action==='preview-boutique-piece'){
   const item=FASHION_ITEMS.find(entry=>entry.id===fashionSelection&&(entry.gender||'girl')===boutiqueGender);if(!item)return;
