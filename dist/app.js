@@ -212,7 +212,8 @@ const FASHION_FULL_LOOK_ART={girl:{'vegas-cards':'assets/match-frenzy-country-cu
 const MATCH_FRENZY_OUTFITS={girl:['vegas-cards','girl-sweetheart-overalls','girl-sunshine-dress','girl-denim-classic','girl-pretty-in-pink','girl-lily-explorer'],boy:['boy-vegas-hottie','boy-beach-breeze','boy-cool-explorer']};
 const MATCH_FRENZY_HAIR_STEMS={girl:{'vegas-cards':'country-cutie','girl-sweetheart-overalls':'sweetheart-overalls','girl-sunshine-dress':'sunshine-dress','girl-denim-classic':'denim-classic','girl-pretty-in-pink':'pretty-in-pink','girl-lily-explorer':'lily-explorer'},boy:{'boy-vegas-hottie':'street-star','boy-beach-breeze':'beach-breeze','boy-cool-explorer':'cool-explorer'}};
 const FASHION_HAIR_COLORS=[{id:'gold',name:'Gold'},{id:'blue',name:'Blue'},{id:'green',name:'Green'},{id:'pink',name:'Pink'},{id:'purple',name:'Purple'},{id:'rainbow',name:'Rainbow'},{id:'red',name:'Red'}];
-function mobileAvatarImage(id,hair='blonde',body='green',classes=''){const avatar=mobileAvatar(id);return `<img class="mobile-avatar-art ${classes}" data-game-avatar-art="${avatar.id}" data-hair-color="blonde" data-body-color="green" src="${avatar.art}" alt="${avatar.name}" draggable="false">`;}
+const BOUTIQUE_HAIR_COLORS=[{id:'blonde',name:'Blonde',art:'gold',price:0},{id:'blue',name:'Blue',art:'blue',price:15},{id:'green',name:'Green',art:'green',price:15},{id:'pink',name:'Pink',art:'pink',price:15},{id:'purple',name:'Purple',art:'purple',price:15},{id:'red',name:'Red',art:'red',price:15},{id:'rainbow',name:'Rainbow',art:'rainbow',price:30}];
+function mobileAvatarImage(id,hair='blonde',body='green',classes=''){const avatar=mobileAvatar(id);const selectedHair=BOUTIQUE_HAIR_COLORS.find(color=>color.id===hair)||BOUTIQUE_HAIR_COLORS[0];const art=matchFrenzyLook(avatar.gender,avatar.id,selectedHair.art).art;return `<img class="mobile-avatar-art ${classes}" src="${art}" alt="${avatar.name}" draggable="false">`;}
 function hydrateGameAvatarImages(root=document){if(!root?.querySelectorAll)return;root.querySelectorAll('[data-game-avatar-art]').forEach(img=>{const id=img.dataset.gameAvatarArt,hair=img.dataset.hairColor,body=img.dataset.bodyColor,key=`${id}|${hair}|${body}`;if(img.dataset.artKey===key)return;img.dataset.artKey=key;mobileAvatarArtUrl(id,hair,body).then(src=>{if(img.isConnected&&img.dataset.artKey===key)img.src=src;}).catch(()=>{});});}
 function mobilePlayerAvatar(){return mobileAvatar(p.gameAvatarId);}
 function mobileRivalAvatar(){const index=MOBILE_AVATARS.findIndex(avatar=>avatar.id===p.gameAvatarId);return MOBILE_AVATARS[(index+1)%MOBILE_AVATARS.length]||MOBILE_AVATARS[0];}
@@ -389,59 +390,74 @@ function boutiqueLegacy(){
   </div>`,'boutique');
 }
 function boutique(){
- const categories=['Outfits'];
+ const categories=['Outfits','Shoes','Accessories','Hair Color'];
  if(!categories.includes(boutiqueCategory))boutiqueCategory='Outfits';
  const isHairCategory=boutiqueCategory==='Hair Color';
- const isBodyCategory=boutiqueCategory==='Frog Color';
+ const isProductCategory=boutiqueCategory==='Shoes'||boutiqueCategory==='Accessories';
  const outfitIds=[...MATCH_FRENZY_OUTFITS.girl,...MATCH_FRENZY_OUTFITS.boy];
- const visible=outfitIds.map(id=>FASHION_ITEMS.find(item=>item.id===id)).filter(Boolean);
- if(!visible.some(item=>item.id===fashionSelection))fashionSelection=visible.find(item=>item.id===p.gameAvatarId)?.id||visible[0]?.id||'';
+ const outfitItems=outfitIds.map(id=>FASHION_ITEMS.find(item=>item.id===id)).filter(Boolean);
+ const visible=boutiqueCategory==='Shoes'
+  ?FASHION_ITEMS.filter(item=>item.kind==='shoes')
+  :boutiqueCategory==='Accessories'
+   ?FASHION_ITEMS.filter(item=>item.kind==='hair'||item.kind==='accessory')
+   :outfitItems;
  const avatar=mobileAvatar(p.gameAvatarId);
- const currentHair=MOBILE_HAIR_COLORS.find(color=>color.id==='blonde')||MOBILE_HAIR_COLORS[2];
+ const currentHair=BOUTIQUE_HAIR_COLORS.find(color=>color.id===p.gameHairColor)||BOUTIQUE_HAIR_COLORS[0];
  const currentBody=MOBILE_BODY_COLORS.find(color=>color.id==='green')||MOBILE_BODY_COLORS[0];
- const hairId='blonde';
- const bodyId='green';
- const hairSelection=MOBILE_HAIR_COLORS.find(color=>color.id===hairId)||currentHair;
- const bodySelection=MOBILE_BODY_COLORS.find(color=>color.id===bodyId)||currentBody;
- const hairApplied=hairSelection.id===currentHair.id;
- const bodyApplied=bodySelection.id===currentBody.id;
- const hairCards=MOBILE_HAIR_COLORS.map(color=>{
-  const active=color.id===hairSelection.id;
-  return `<button type='button' class='hair-color-option ${active?'selected':''}' data-action='preview-boutique-hair' data-id='${color.id}' aria-pressed='${active}' aria-label='Preview ${color.name} hair on ${avatar.name}'>
-   <span class='hair-color-preview'>${mobileAvatarImage(avatar.id,color.id,bodySelection.id,'')}</span><span class='hair-color-name'>${color.name}</span>
+ const hairOwned=new Set(Array.isArray(p.hairColorsOwned)?p.hairColorsOwned:['blonde']);
+ const hairCards=BOUTIQUE_HAIR_COLORS.map(color=>{
+  const active=color.id===currentHair.id;
+  const owned=hairOwned.has(color.id);
+  const status=active?'CURRENT HAIR':owned?'OWNED · SELECT':color.price===0?'FREE':`BUY · ${color.price} DOUGH`;
+  const art=matchFrenzyLook(avatar.gender,avatar.id,color.art).art;
+  return `<button type='button' class='boutique-avatar-card ${active?'selected playing':''}' data-action='purchase-boutique-hair-color' data-id='${color.id}' aria-pressed='${active}' aria-label='${color.name} hair. ${owned?'Owned':color.price+' Froggy Dough'}'>
+   <span class='boutique-avatar-card-art'><img src='${art}' alt='' draggable='false'></span><b>${color.name}</b><small>Green frog · full hair art</small><strong>${status}</strong>
   </button>`;
  }).join('');
- const bodyCards=MOBILE_BODY_COLORS.map(color=>{
-  const active=color.id===bodySelection.id;
-  return `<button type='button' class='hair-color-option frog-color-option ${active?'selected':''}' data-action='preview-boutique-body' data-id='${color.id}' aria-pressed='${active}' aria-label='Preview ${color.name} frog color on ${avatar.name}'>
-   <span class='frog-color-preview'>${mobileAvatarImage(avatar.id,hairSelection.id,color.id,'')}<i class='game-body-swatch' style='--body-swatch:${color.swatch}' aria-hidden='true'></i></span><span class='hair-color-name'>${color.name}</span>
-  </button>`;
- }).join('');
- const outfitCards=visible.map(item=>{
+ const outfitCards=outfitItems.map(item=>{
   const itemGender=item.gender||'girl';
   const itemState=fashionState(itemGender);
   const itemOwned=itemState.unlocked.includes(item.id);
   const active=item.id===p.gameAvatarId;
   const canBuy=item.price===0||p.bank>=item.price;
   const outfitAvatar=MOBILE_AVATARS.find(choice=>choice.id===item.id);
-  const art=outfitAvatar?mobileAvatarImage(outfitAvatar.id,hairSelection.id,bodySelection.id,''):`<img src='${matchFrenzyLook(itemGender,item.id).art}' alt='${item.name}' draggable='false'>`;
-  const status=active?'PLAYING NOW':itemOwned?'CHOOSE TO PLAY':item.price===0?'CHOOSE FREE':canBuy?`BUY - ${item.price} DOUGH`:`${item.price} DOUGH - NEED ${item.price-p.bank}`;
+  const art=outfitAvatar?mobileAvatarImage(outfitAvatar.id,currentHair.id,'green',''):`<img src='${matchFrenzyLook(itemGender,item.id,currentHair.art).art}' alt='${item.name}' draggable='false'>`;
+  const status=active?'PLAYING NOW':itemOwned?'CHOOSE TO PLAY':item.price===0?'CHOOSE FREE':canBuy?`BUY · ${item.price} DOUGH`:`${item.price} DOUGH · NEED ${item.price-p.bank}`;
   const priceLabel=item.price===0?'Free':`${item.price} Froggy Dough`;
   const label=active?'Currently selected for all games':itemOwned?'Choose to play':`Buy ${item.name} for ${priceLabel}`;
-  return `<button type='button' class='boutique-avatar-card ${active?'selected playing':''}' data-action='choose-boutique-avatar' data-id='${item.id}' data-gender='${itemGender}' aria-pressed='${active}' aria-label='${item.name}. ${label}' ${!active&&!itemOwned&&!canBuy?'disabled':''}>
+  return `<button type='button' class='boutique-avatar-card ${active?'selected playing':''}' data-action='choose-boutique-avatar' data-id='${item.id}' data-gender='${itemGender}' aria-pressed='${active}' aria-label='${item.name}. ${label}'>
    <span class='boutique-avatar-card-art'>${art}</span><b>${item.name}</b><small>${item.detail}</small><strong>${status}</strong>
   </button>`;
  }).join('');
- const preview=mobileAvatarImage(avatar.id,hairSelection.id,bodySelection.id,'');
+ const productCards=isProductCategory?visible.map(item=>{
+  const itemGender=item.gender||'girl';
+  const itemState=fashionState(itemGender);
+  const owned=itemState.unlocked.includes(item.id);
+  const selected=item.id===fashionSelection;
+  const canBuy=item.price===0||p.bank>=item.price;
+  const status=owned?'OWNED':item.price===0?'FREE':canBuy?`BUY · ${item.price} DOUGH`:`${item.price} DOUGH · NEED ${item.price-p.bank}`;
+  return `<button type='button' class='boutique-avatar-card ${selected?'selected':''}' data-action='select-boutique-piece' data-id='${item.id}' data-gender='${itemGender}' aria-pressed='${selected}' aria-label='${item.name}. ${owned?'Owned':item.price+' Froggy Dough'}'>
+   <span class='boutique-avatar-card-art boutique-item-art'>${fashionProductArt(item)}</span><b>${item.name}</b><small>${item.detail}</small><strong>${status}</strong>
+  </button>`;
+ }).join(''):'';
+ const selectedProduct=visible.find(item=>item.id===fashionSelection);
+ const selectedState=selectedProduct?fashionState(selectedProduct.gender||'girl'):null;
+ const selectedOwned=selectedProduct?selectedState.unlocked.includes(selectedProduct.id):false;
+ const selectedEquipped=selectedProduct?fashionItemEquipped(selectedProduct,selectedState):false;
+ const canBuySelected=selectedProduct&&(selectedProduct.price===0||p.bank>=selectedProduct.price);
+ const preview=mobileAvatarImage(avatar.id,currentHair.id,'green','');
  const selectionPanel=isHairCategory
-  ?`<figure class='boutique-live-avatar'>${preview}<figcaption>LIVE PREVIEW</figcaption></figure><div class='boutique-selected-copy'><span>HAIR COLOR PREVIEW</span><b>${hairSelection.name} - ${avatar.name}</b><small>${hairApplied?'Already saved for your games.':'Choose Apply to save this hair color.'}</small></div><button type='button' class='button boutique-apply' data-action='apply-boutique-hair' ${hairApplied?'disabled':''}>${hairApplied?'Hair Applied':'Apply Hair'}</button>`
-  :isBodyCategory
-   ?`<figure class='boutique-live-avatar'>${preview}<figcaption>LIVE PREVIEW</figcaption></figure><div class='boutique-selected-copy'><span>FROG COLOR PREVIEW</span><b>${bodySelection.name} - ${avatar.name}</b><small>${bodyApplied?'Already saved for your games.':'Choose Apply to save this frog color.'}</small></div><button type='button' class='button boutique-apply' data-action='apply-boutique-body' ${bodyApplied?'disabled':''}>${bodyApplied?'Color Applied':'Apply Color'}</button>`
-   :`<figure class='boutique-live-avatar'>${mobileAvatarImage(avatar.id,currentHair.id,currentBody.id,'')}<figcaption>YOUR PLAYER</figcaption></figure><div class='boutique-selected-copy'><span>YOUR PLAYER FROG</span><b>${avatar.name}</b><small>${currentHair.name} hair - ${currentBody.name}</small><strong>${pendingGameLaunch?'Choose an outfit to continue to play.':'Your choice is saved across Froggy Faceoff games.'}</strong></div><span class='button boutique-apply boutique-player-status' aria-label='Green frog with original blonde hair'>GREEN FROG</span>`;
+  ?`<figure class='boutique-live-avatar'>${preview}<figcaption>YOUR PLAYER</figcaption></figure><div class='boutique-selected-copy'><span>HAIR COLOR · GREEN FROG</span><b>${currentHair.name} - ${avatar.name}</b><small>Uses the approved full-look hair artwork.</small><strong>Saved across Froggy Faceoff games.</strong></div><button type='button' class='button boutique-apply' data-action='purchase-boutique-hair-color' data-id='${currentHair.id}' disabled>USING ${currentHair.name.toUpperCase()}</button>`
+  :isProductCategory&&selectedProduct
+   ?`<figure class='boutique-live-avatar'>${preview}<figcaption>YOUR PLAYER</figcaption></figure><div class='boutique-selected-copy'><span>${boutiqueCategory.toUpperCase()}</span><b>${selectedProduct.name}</b><small>${selectedProduct.detail}</small><strong>${selectedOwned?'In your wardrobe':selectedProduct.price===0?'Free':`${selectedProduct.price} Froggy Dough`}</strong></div><button type='button' class='button boutique-apply' data-action='purchase-selected-fashion'>${selectedEquipped?'OWNED':selectedOwned?'ADD TO LOOK':canBuySelected?`BUY · ${selectedProduct.price} DOUGH`:`NEED ${selectedProduct.price-p.bank} MORE DOUGH`}</button>`
+   :`<figure class='boutique-live-avatar'>${preview}<figcaption>YOUR PLAYER</figcaption></figure><div class='boutique-selected-copy'><span>YOUR PLAYER FROG</span><b>${avatar.name}</b><small>${currentHair.name} hair - ${currentBody.name}</small><strong>${pendingGameLaunch?'Choose an outfit to continue to play.':'Your choice is saved across Froggy Faceoff games.'}</strong></div><span class='button boutique-apply boutique-player-status' aria-label='Green frog with ${currentHair.name} hair'>GREEN FROG</span>`;
+ const tabs=categories.map(category=>`<button type='button' class='button ${boutiqueCategory===category?'':'secondary'}' data-action='boutique-department' data-id='${category}' aria-pressed='${boutiqueCategory===category}'>${category==='Outfits'?'Full Outfits':category}</button>`).join('');
+ const cards=isHairCategory?hairCards:isProductCategory?productCards:outfitCards;
+ const ariaLabel=isHairCategory?'Hair color choices':isProductCategory?`${boutiqueCategory} choices`:'Complete outfit choices';
  openHub('Froggy Fashion Boutique',`<div class='boutique-panel boutique-gold-house boutique-avatar-store'>
-  <header class='boutique-gallery-header'><span>COMPLETE FROG LOOKS</span><b>${p.bank} Froggy Dough</b></header>
-  <div class='boutique-outfit-heading'><b>Choose a full outfit</b><small>Green frog · original blonde hair</small></div>
-  <div class='boutique-product-grid boutique-avatar-grid ${isHairCategory?'hair-color-grid':isBodyCategory?'frog-color-grid':''}' aria-label='${isHairCategory?'Hair color choices':isBodyCategory?'Frog color choices':'Complete outfit choices'}'>${isHairCategory?hairCards:isBodyCategory?bodyCards:outfitCards}</div>
+  <header class='boutique-gallery-header'><span>FROGGY WARDROBE</span><b>${p.bank} Froggy Dough</b></header>
+  <nav class='boutique-view-switch' aria-label='Boutique choices'>${tabs}</nav>
+  <div class='boutique-product-grid boutique-avatar-grid ${isHairCategory?'hair-color-grid':''}' aria-label='${ariaLabel}'>${cards}</div>
   <section class='boutique-selected-panel' aria-live='polite'>${selectionPanel}</section>
  </div>`,'boutique');
 }
@@ -662,8 +678,9 @@ document.addEventListener('click',e=>{
  if(action==='back-game-avatar'){if(gameAvatarFlow.step>1){gameAvatarFlow.step--;renderGameAvatarSetup();}else home();return;}
  if(action==='cancel-game-avatar'){gameAvatarFlow={step:1,pendingMode:null,pendingSeason:null};home();return;}
  if(action==='boutique-gender'){fashionTryOn={};fashionSelection='';return;}
+ if(action==='purchase-boutique-hair-color'){const option=BOUTIQUE_HAIR_COLORS.find(color=>color.id===id);if(!option)return;p.hairColorsOwned||=['blonde'];if(!p.hairColorsOwned.includes(option.id)){if(p.bank<option.price){toast('You need '+(option.price-p.bank)+' more Froggy Dough for '+option.name+' hair.');return;}p.bank-=option.price;p.hairColorsOwned.push(option.id);}p.gameHairColor=option.id;boutiqueHairPreviewColor=null;save();boutique();toast(option.name+' hair is saved for every game.');return;}
  if(action==='boutique-department'){
-  if(['Outfits','Hair Color','Frog Color'].includes(id)){boutiqueCategory=id;boutique();}
+  if(['Outfits','Shoes','Accessories','Hair Color'].includes(id)){boutiqueCategory=id;boutique();}
   return;
  }
  if(action==='preview-boutique-hair'){
