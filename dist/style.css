@@ -1243,3 +1243,13 @@ body.reduce-motion .game-avatar-current img,body.reduce-motion .game-start-avata
 .boutique-avatar-card-art>svg{display:block;width:100%;height:100%;max-width:100%;max-height:100%}
 .boutique-live-avatar{background:transparent!important}
 @media(max-width:390px){.boutique-avatar-store .boutique-view-switch .button{font-size:6.5px!important;padding:2px 1px!important}}
+
+/* A rewarded extra-play button shares the frog wallet's dark blue pill style. */
+.topbar-wallet-group{display:flex;align-items:center;gap:6px;margin-left:auto;min-width:0}
+.topbar-wallet-group .wallet{margin-left:0}
+.topbar-wallet-group .extra-plays{display:flex;align-items:center;justify-content:center;gap:5px;min-height:46px;padding:7px 9px;font-size:10px;line-height:1;white-space:nowrap}
+.extra-plays-video{width:14px;height:12px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+.extra-plays-video .play-triangle{fill:currentColor;stroke:none}
+.extra-plays #reward-plays-count{font-size:12px;min-width:10px}
+body.hub-fit .topbar-wallet-group .extra-plays{min-height:36px;padding:5px 7px;font-size:9px}
+@media(max-width:370px){.topbar .avatar,.topbar .gear{width:36px;height:36px;font-size:22px}.topbar-wallet-group{gap:4px}.topbar-wallet-group .extra-plays{gap:3px;padding:5px;font-size:8px}.topbar-wallet-group .wallet:not(.extra-plays){padding:6px 8px;font-size:14px}}
