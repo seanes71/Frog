@@ -50,7 +50,7 @@ const HAIR_ART_STEMS = {
   'boy-beach-breeze': 'beach-breeze',
   'boy-cool-explorer': 'cool-explorer'
 };
-const FULL_HAIR_VARIANTS = new Set(['red', 'blue', 'purple', 'pink', 'rainbow']);
+const FULL_HAIR_VARIANTS = new Set(['red', 'blue', 'green', 'purple', 'pink', 'rainbow']);
 
 const HSL_TARGETS = new Map(MOBILE_BODY_COLORS.filter(color => !color.rainbow).map(color => [color.id, color]));
 const SKIN_TONE_TRANSFORMS = {
