@@ -1231,3 +1231,7 @@ body.reduce-motion .game-avatar-current img,body.reduce-motion .game-start-avata
 .boutique-avatar-store .boutique-selected-copy>strong{font-size:7px!important;line-height:1.05}
 @media(max-width:390px){.boutique-avatar-store .boutique-view-switch .button{font-size:8px!important;padding:2px!important}.boutique-avatar-store .boutique-avatar-grid.frog-color-grid{gap:3px!important}.frog-color-option{padding:2px!important}.boutique-avatar-store .boutique-apply{min-width:74px!important;font-size:7px!important}.boutique-live-avatar{width:40px;height:50px}}
 @media(prefers-reduced-motion:reduce){.boutique-live-avatar img{animation:none!important}}
+.boutique-outfit-heading{grid-column:1;grid-row:2;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;padding:0 5px;color:#503746}
+.boutique-outfit-heading>b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;font-weight:1000}
+.boutique-outfit-heading>small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:7px;font-weight:800}
+.boutique-avatar-store .boutique-player-status{display:flex;align-items:center;justify-content:center;min-width:0!important;max-width:108px;min-height:29px!important;padding:3px 5px!important;background:#173e56!important;color:#fff2c6!important;font-size:7px!important;font-weight:1000!important;line-height:1.05!important;white-space:normal;text-align:center}
