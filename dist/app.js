@@ -460,11 +460,6 @@ function boutique(){
   <div class='boutique-product-grid boutique-avatar-grid ${isHairCategory?'hair-color-grid':''}' aria-label='${ariaLabel}'>${cards}</div>
   <section class='boutique-selected-panel' aria-live='polite'>${selectionPanel}</section>
  </div>`,'boutique');
- document.querySelectorAll('.boutique-view-switch [data-action="boutique-department"]').forEach(button=>button.addEventListener('click',event=>{
-  event.preventDefault();event.stopPropagation();
-  const category=button.dataset.id;
-  if(['Outfits','Shoes','Accessories','Hair Color'].includes(category)&&category!==boutiqueCategory){boutiqueCategory=category;boutique();}
- }));
 }
 function fighters(){pendingGameLaunch=null;boutiqueCategory='Outfits';boutique();}
 function openGameAvatarSetup(pendingMode=null,pendingSeason=null){pendingGameLaunch=pendingMode?{mode:pendingMode,season:pendingSeason}:null;boutiqueCategory='Outfits';boutique();}
@@ -738,4 +733,13 @@ document.addEventListener('click',e=>{
  }
  if(action==='clear-fashion-look'){fashionTryOn={};boutique();}
 },true);
+document.addEventListener('click',event=>{
+ const button=event.target?.closest?.('.boutique-view-switch [data-action="boutique-department"]');
+ if(!button||button.disabled)return;
+ const category=button.dataset.id;
+ if(!['Outfits','Shoes','Accessories','Hair Color'].includes(category)||category===boutiqueCategory)return;
+ event.preventDefault();
+ boutiqueCategory=category;
+ boutique();
+});
 window.frogReading=html=>modal(html+'<div class="actions"><button class="button" data-action="close-reading">Back</button></div>');
