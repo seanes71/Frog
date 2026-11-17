@@ -106,6 +106,8 @@ const HAIR_PROFILES = {
 };
 const imageCache = new Map();
 const pendingImages = new Map();
+const cutoutCache = new Map();
+const pendingCutouts = new Map();
 const MAX_CACHED_ART = 18;
 
 export function mobileAvatar(id) {
@@ -254,5 +256,80 @@ export async function mobileAvatarArtUrl(id, hairId, bodyId) {
     return await pending;
   } finally {
     pendingImages.delete(key);
+  }
+}
+
+// The Boutique's portrait art is delivered as a framed card. Word Search needs
+// the same selected character as a transparent figure, so remove only the
+// connected dark-blue card background and crop off the printed card edge.
+export async function mobileAvatarCutoutUrl(id, hairId, bodyId) {
+  const avatar = mobileAvatar(id);
+  const hair = MOBILE_HAIR_COLORS.find(color => color.id === hairId) || MOBILE_HAIR_COLORS[2];
+  const body = MOBILE_BODY_COLORS.find(color => color.id === bodyId) || MOBILE_BODY_COLORS[0];
+  const key = `${avatar.id}|${hair.id}|${body.id}`;
+  if (cutoutCache.has(key)) return cutoutCache.get(key);
+  if (pendingCutouts.has(key)) return pendingCutouts.get(key);
+
+  const pending = (async () => {
+    const source = await mobileAvatarArtUrl(avatar.id, hair.id, body.id);
+    const image = await loadImage(source);
+    const width = image.naturalWidth, height = image.naturalHeight;
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext('2d', { willReadFrequently: true });
+    context.drawImage(image, 0, 0);
+    const frame = context.getImageData(0, 0, width, height);
+    const pixels = frame.data, size = width * height;
+    const background = new Uint8Array(size);
+    const queue = new Int32Array(size);
+    let head = 0, tail = 0;
+    const isCardBlue = (pixel) => {
+      const i = pixel * 4, r = pixels[i], g = pixels[i + 1], b = pixels[i + 2];
+      return pixels[i + 3] > 0 && ((r < 65 && g < 80 && b < 115 && b - r > 12 && b - g > 2) || (r < 18 && g < 22 && b < 32));
+    };
+    const add = (x, y) => {
+      const pixel = y * width + x;
+      if (!background[pixel] && isCardBlue(pixel)) {
+        background[pixel] = 1;
+        queue[tail++] = pixel;
+      }
+    };
+    for (let x = 0; x < width; x++) { add(x, 0); add(x, height - 1); }
+    for (let y = 1; y < height - 1; y++) { add(0, y); add(width - 1, y); }
+    while (head < tail) {
+      const pixel = queue[head++], x = pixel % width, y = (pixel / width) | 0;
+      if (x > 0) add(x - 1, y);
+      if (x + 1 < width) add(x + 1, y);
+      if (y > 0) add(x, y - 1);
+      if (y + 1 < height) add(x, y + 1);
+    }
+    for (let pixel = 0; pixel < size; pixel++) {
+      const x = pixel % width, y = (pixel / width) | 0, i = pixel * 4;
+      if (background[pixel]) { pixels[i + 3] = 0; continue; }
+      const nearCardEdge = x < width * 0.045 || x >= width * 0.955;
+      const r = pixels[i], g = pixels[i + 1], b = pixels[i + 2];
+      if (nearCardEdge && r > 115 && g > 68 && b < 155 && r > g * 0.82 && g > b * 0.92) pixels[i + 3] = 0;
+    }
+
+    // The printed gold frame and card label are separate from the character.
+    // Cropping their narrow margins keeps the existing pose and clothing intact.
+    const insetX = Math.round(width * 0.045);
+    const insetTop = Math.round(height * 0.03);
+    const insetBottom = Math.round(height * 0.055);
+    const cutout = document.createElement('canvas');
+    cutout.width = width - insetX * 2;
+    cutout.height = height - insetTop - insetBottom;
+    cutout.getContext('2d').putImageData(frame, -insetX, -insetTop);
+    const result = cutout.toDataURL('image/png');
+    cutoutCache.set(key, result);
+    if (cutoutCache.size > MAX_CACHED_ART) cutoutCache.delete(cutoutCache.keys().next().value);
+    return result;
+  })();
+  pendingCutouts.set(key, pending);
+  try {
+    return await pending;
+  } finally {
+    pendingCutouts.delete(key);
   }
 }

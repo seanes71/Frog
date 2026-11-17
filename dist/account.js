@@ -1,5 +1,5 @@
-import {MOBILE_KEY,migrateLegacy} from './migration.js?v=mobile-1';
-import {loadProfile} from './engine.js?v=boutique-avatar-gallery-4';
+import {MOBILE_KEY,migrateLegacy} from './migration.js?v=word-bank-cycle-20261117';
+import {loadProfile} from './engine.js?v=word-bank-cycle-20261117';
 const config={apiKey:'AIzaSyCLTTGdeAKK5PILI4NHILlr0mqhSfivx0A',authDomain:'frog-match.firebaseapp.com',projectId:'frog-match',storageBucket:'frog-match.firebasestorage.app',messagingSenderId:'321187855188',appId:'1:321187855188:web:5a9766609c7bda9ccde6c1'};
 const dialog=document.querySelector('#account-dialog'),message=document.querySelector('#account-message'),email=document.querySelector('#account-email'),password=document.querySelector('#account-password'),firstName=document.querySelector('#account-name'),saveNameButton=document.querySelector('#account-save-name');
 let auth,db,api,user=null,timer=null,welcomeTimer=null,loading=false,cloudReady=false,session=0;
@@ -7,6 +7,7 @@ function status(text){window.frogAccountStatus=text;message.textContent=text;con
 function welcome(text){const el=document.querySelector('#toast');if(!el)return;clearTimeout(welcomeTimer);el.textContent=text;el.hidden=false;welcomeTimer=setTimeout(()=>el.hidden=true,3500);}
 window.openFrogAccount=()=>{if(!dialog.open)dialog.showModal();if(user){if(user.displayName){status(`Hi ${user.displayName}, you're already logged in!`);welcome(`Hi ${user.displayName}, you're already logged in!`);}else{status('You are already logged in. Add your first name below.');saveNameButton.hidden=false;}}};
 function errorMessage(error){const code=error?.code||'';if(code.includes('invalid-credential'))return 'Email or password is incorrect.';if(code.includes('email-already-in-use'))return 'That email already has an account. Try Log In.';if(code.includes('weak-password'))return 'Use a password with at least 6 characters.';if(code.includes('invalid-email'))return 'Enter a valid email address.';if(code.includes('unauthorized-domain'))return 'This mobile address needs to be authorized in the existing Firebase settings.';if(code.includes('operation-not-allowed'))return 'Email/password sign-in needs to be enabled in the existing Firebase account.';if(code.includes('permission-denied'))return 'Cloud save access needs to be enabled for your account.';return 'We could not connect. Your device progress is still saved. Please try again.';}
+function mergeWordSearchProgress(profile,...sources){const histories=[profile?.wordSearch,...sources.map(x=>x?.wordSearch)].filter(Boolean);if(!histories.length)return;profile.wordSearch||={level:1,found:[]};profile.wordSearch.usedWords=[...new Set(histories.flatMap(x=>Array.isArray(x.usedWords)?x.usedWords.map(w=>String(w).toUpperCase()).filter(w=>/^[A-Z]{3,20}$/.test(w)):[]))];profile.wordSearch.bankCycle=Math.max(0,...histories.map(x=>Math.floor(Number(x.bankCycle)||0)));}
 async function saveCloud(profile,key,expectedSession){if(!user||loading||!cloudReady||expectedSession!==session||key!==MOBILE_KEY+':'+user.uid)return;const uid=user.uid;try{await api.setDoc(api.doc(db,'users',uid),{frogShowdownV2:JSON.stringify(profile),frogShowdownUpdatedAt:Date.now()},{merge:true});if(expectedSession===session)status('Account connected · Cloud progress saved');}catch(error){if(expectedSession===session)status(errorMessage(error));}}
 async function showUser(nextUser){
  session++;cloudReady=false;clearTimeout(timer);const current=session;user=nextUser;loading=!!user;
@@ -16,8 +17,9 @@ async function showUser(nextUser){
  document.body.classList.add('account-loading');status('Loading your account progress…');const key=MOBILE_KEY+':'+user.uid;
  try{
   const snapshot=await api.getDoc(api.doc(db,'users',user.uid));if(current!==session)return;
-  const data=snapshot.exists()?snapshot.data():{};const local=localStorage.getItem(key);
-  const profile=data.frogShowdownV2?migrateLegacy(data):local?loadProfile(local):migrateLegacy(data);
+  const data=snapshot.exists()?snapshot.data():{};const local=localStorage.getItem(key),guestRaw=localStorage.getItem(MOBILE_KEY),guest=guestRaw?loadProfile(guestRaw):null,accountLocal=local?loadProfile(local):null;
+  const profile=data.frogShowdownV2?migrateLegacy(data):accountLocal||guest||migrateLegacy(data);
+  mergeWordSearchProgress(profile,accountLocal,guest);
   localStorage.setItem(key,JSON.stringify(profile));
   dispatchEvent(new CustomEvent('frog-account-profile',{detail:{key,profile}}));
   loading=false;cloudReady=true;
@@ -26,7 +28,7 @@ async function showUser(nextUser){
   if(current===session&&!user.displayName)status('You are signed in. Add your first name below, then choose Save First Name.');
  }catch(error){
   if(current!==session)return;
-  const profile=loadProfile(localStorage.getItem(key));localStorage.setItem(key,JSON.stringify(profile));
+  const profile=loadProfile(localStorage.getItem(key)),guestRaw=localStorage.getItem(MOBILE_KEY),guest=guestRaw?loadProfile(guestRaw):null;mergeWordSearchProgress(profile,guest);localStorage.setItem(key,JSON.stringify(profile));
   dispatchEvent(new CustomEvent('frog-account-profile',{detail:{key,profile}}));status(errorMessage(error));
  }finally{if(current===session){loading=false;document.body.classList.remove('account-loading');}}
 }

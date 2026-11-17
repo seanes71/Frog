@@ -38,8 +38,8 @@
 #hub-content:has(#wordsearch-grid){flex:1 1 auto!important;min-height:0!important;height:100%!important;max-height:none!important;display:flex!important;flex-direction:column!important}
 #hub-content:has(#wordsearch-grid) .panel.puzzle-stage{flex:1 1 auto!important;height:100%!important;min-height:0!important;max-height:none!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important;padding:12px!important;gap:7px!important}
 #hub-content:has(#wordsearch-grid) .puzzle-board-space{flex:1 1 auto!important;min-height:0!important;max-height:none!important;align-items:center!important;justify-content:center!important}
-#wordsearch-grid{--ws-cell:var(--puzzle-cell,36px)!important;padding:5px!important;gap:3px!important}
-#wordsearch-grid>button.search-cell{font-size:clamp(16px,calc(var(--puzzle-cell,36px)*.57),24px)!important;font-weight:750!important;border-radius:11px!important}
+#wordsearch-grid{--ws-cell:clamp(12px,calc((min(100vw,500px) - 86px) / var(--search-size)),28px)!important;--puzzle-cell:var(--ws-cell)!important;padding:5px!important;gap:3px!important}
+#wordsearch-grid>button.search-cell{font-size:clamp(12px,calc(var(--puzzle-cell,28px)*.66),20px)!important;font-weight:750!important;border-radius:11px!important}
 #hub-content:has(#wordsearch-grid) .wordsearch-list-heading{font-size:17px!important;margin:2px 0!important}
 #wordsearch-words{flex:0 0 auto!important;max-height:none!important;overflow:visible!important;gap:5px!important;padding-bottom:4px!important}
 #wordsearch-words span{font-size:12px!important;padding:5px 7px!important}
@@ -53,6 +53,15 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 #hub:has(#wordsearch-grid),#hub-content:has(#wordsearch-grid),#hub-content:has(#wordsearch-grid) .puzzle-stage,#hub-content:has(#wordsearch-grid) .puzzle-board-space,#wordsearch-grid,#wordsearch-grid .search-cell{overscroll-behavior:contain!important;overflow-anchor:none!important}
 #hub-content:has(#wordsearch-grid) .puzzle-board-space,#wordsearch-grid,#wordsearch-grid .search-cell{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
 #wordsearch-grid .search-cell{outline-offset:-2px!important}
+
+/* Word Search fills the phone canvas; keep the regular app bars and panel. */
+body.hub-fit:has(#wordsearch-grid) .pond-shell{box-sizing:border-box!important;width:100vw!important;max-width:none!important;height:var(--visible-height,100dvh)!important;margin:0!important;padding-left:0!important;padding-right:0!important;border:0!important;border-radius:0!important;background-image:none!important;background-color:#f7f3e8!important}
+body.hub-fit:has(#wordsearch-grid) .topbar{box-sizing:border-box!important;width:100%!important;padding-left:10px!important;padding-right:10px!important}
+body.hub-fit:has(#wordsearch-grid) #hub{box-sizing:border-box!important;width:100%!important;min-width:0!important;padding:0!important}
+body.hub-fit:has(#wordsearch-grid) #hub .page-heading{box-sizing:border-box!important;width:100%!important;padding:0 10px!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content{box-sizing:border-box!important;width:100%!important;min-width:0!important;overflow-y:auto!important;overflow-x:hidden!important;padding:0!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .panel.puzzle-stage{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin:0!important;border-radius:14px!important}
+body.hub-fit:has(#wordsearch-grid) #wordsearch-words{max-height:20dvh!important;overflow-y:auto!important;overscroll-behavior:contain!important}
 
 /* User-selected photographic pond, with the existing illustrated pond as fallback
    until Froggy_Pond_Photo.jpg is added to dist/assets. */
@@ -203,3 +212,400 @@ body.hub-fit #hub:has(#wordsearch-grid) #hub-content{min-height:0!important;heig
 /* One-time spoken start for Follow That Frog; normal rounds remain unchanged. */
 .frog-trail-start{display:grid!important;place-items:center!important;min-height:220px!important}
 .frog-trail-start-count{position:relative!important;z-index:5!important;display:grid!important;place-items:center!important;width:min(50vw,180px)!important;aspect-ratio:1!important;border-radius:50%!important;background:#f5d76c!important;color:#234e2c!important;border:6px solid #fff9cf!important;box-shadow:0 7px 0 #517a42,0 12px 25px #173d3955!important;font-size:clamp(70px,18vw,110px)!important;font-weight:1000!important;line-height:1!important;text-shadow:0 2px #ffffffaa!important}
+
+/* Keep every Word Search row inside its blue board; scroll the panel when needed. */
+body.hub-fit:has(#wordsearch-grid) #hub-content{overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .panel.puzzle-stage{flex:none!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .puzzle-board-space{flex:none!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:block!important}
+body.hub-fit:has(#wordsearch-grid) #wordsearch-grid{height:max-content!important;max-height:none!important;overflow:visible!important;grid-template-rows:repeat(var(--search-size),var(--puzzle-cell))!important;grid-auto-rows:var(--puzzle-cell)!important}
+
+/* Compact Word Search into the app frame: board starts high, all targets stay visible, no page scroll. */
+body.hub-fit:has(#wordsearch-grid) .pond-shell{overflow:hidden!important}
+body.hub-fit:has(#wordsearch-grid) #hub{min-height:0!important;overflow:hidden!important;grid-template-rows:36px minmax(0,1fr)!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content{height:100%!important;min-height:0!important;overflow:hidden!important;padding:0!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .panel.puzzle-stage{box-sizing:border-box!important;display:grid!important;grid-template-rows:auto auto auto auto minmax(0,1fr) auto auto!important;align-content:stretch!important;justify-content:stretch!important;gap:3px!important;height:100%!important;min-height:0!important;max-height:100%!important;overflow:hidden!important;padding:5px 7px!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .puzzle-stage>h3:first-child{font-size:14px!important;line-height:1.1!important;margin:0!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .puzzle-stage .tabs{gap:4px!important;margin:0!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .puzzle-stage .tabs .button{min-height:26px!important;padding:2px 4px!important;font-size:10px!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content #wordsearch-feedback{font-size:10px!important;line-height:1.12!important;margin:0!important;padding:3px 5px!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .puzzle-board-space{box-sizing:border-box!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;min-height:0!important;height:100%!important;overflow:hidden!important;padding:0!important}
+body.hub-fit:has(#wordsearch-grid) #wordsearch-grid{--ws-cell:min(28px,calc((min(100vw,500px) - 86px) / var(--search-size)),calc((var(--visible-height,100dvh) - 390px) / var(--search-rows)))!important;--puzzle-cell:var(--ws-cell)!important;box-sizing:border-box!important;width:max-content!important;max-width:100%!important;height:max-content!important;max-height:100%!important;overflow:hidden!important;grid-template-columns:repeat(var(--search-size),var(--puzzle-cell))!important;grid-template-rows:repeat(var(--search-rows),var(--puzzle-cell))!important;grid-auto-rows:var(--puzzle-cell)!important;gap:2px!important;padding:4px!important}
+body.hub-fit:has(#wordsearch-grid) #wordsearch-grid>button.search-cell{width:var(--puzzle-cell)!important;height:var(--puzzle-cell)!important;font-size:clamp(10px,calc(var(--puzzle-cell) * .62),19px)!important}
+body.hub-fit:has(#wordsearch-grid) #hub-content .wordsearch-list-heading{font-size:14px!important;line-height:1!important;margin:0!important}
+body.hub-fit:has(#wordsearch-grid) #wordsearch-words{display:flex!important;flex:0 0 auto!important;flex-wrap:wrap!important;max-height:none!important;overflow:hidden!important;gap:3px!important;margin:0!important;padding:0!important}
+body.hub-fit:has(#wordsearch-grid) #wordsearch-words span{font-size:10px!important;line-height:1!important;padding:3px 5px!important;border-radius:6px!important}
+body.hub-fit:has(#wordsearch-grid) .wordsearch-strengths.tabs{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important;margin:0!important}
+body.hub-fit:has(#wordsearch-grid) .wordsearch-strengths .button{box-sizing:border-box!important;min-width:0!important;min-height:24px!important;padding:2px!important;font-size:10px!important;line-height:1!important}
+body.hub-fit:has(#wordsearch-grid) .wordsearch-strengths .button.selected{filter:brightness(1.17)!important;border-color:#fff0a4!important;box-shadow:inset 0 2px 0 #fff4c288,inset 0 -3px 0 #4b2a1c99,0 0 0 2px #f4d26c!important}
+body.hub-fit:has(#wordsearch-grid) #wordsearch-grid{--ws-cell:min(28px,calc((min(100vw,500px) - 86px) / var(--search-size)),calc((var(--visible-height,100dvh) - 418px) / var(--search-rows)))!important}
+
+/* Illustrated Word Search landscape composition based on the supplied Froggy Faceoff mockup. */
+.wordsearch-screen.hub-fit .pond-shell{background-image:url('assets/pond-scenery-v1.png');background-position:center center;background-size:cover;background-repeat:no-repeat}
+.page-heading h2.wordsearch-title{display:flex;align-items:center;justify-content:space-between;gap:clamp(5px,2vw,14px);height:auto;min-height:44px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;white-space:normal}
+.wordsearch-faceoff-logo{display:block;flex:0 1 42%;width:42%;max-width:150px;height:auto;max-height:48px;object-fit:contain}
+.wordsearch-title-plaque{position:relative;isolation:isolate;flex:1;min-width:0;min-height:43px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 15px 4px;background:repeating-linear-gradient(0deg,#99521f 0 3px,#bd7832 4px 7px,#e0a353 8px 10px,#a45c25 11px 13px);border:2px solid #f3cc79;border-radius:16px 19px 15px 20px;box-shadow:inset 0 2px 4px #ffe39a99,0 3px 0 #59321a;transform:rotate(-1deg)}
+.wordsearch-title-plaque:before,.wordsearch-title-plaque:after{content:"";position:absolute;z-index:-1;top:4px;width:14px;height:30px;border-radius:80% 10% 80% 10%;background:linear-gradient(135deg,#d1fb61,#4daf24);border:1px solid #327e24}
+.wordsearch-title-plaque:before{left:-8px;transform:rotate(-34deg)}.wordsearch-title-plaque:after{right:-8px;transform:rotate(34deg)}
+.wordsearch-title-plaque>span{font-family:ui-rounded,"Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif;font-size:clamp(13px,3.6vw,21px);font-weight:1000;line-height:.9;letter-spacing:-.035em;-webkit-text-stroke:1px #164414;paint-order:stroke fill;text-shadow:0 2px #174519,0 3px 1px #2b180d;color:#fff7df}
+.wordsearch-title-plaque .wordsearch-plaque-nature{color:#b9ff46;font-size:1.08em}
+.wordsearch-title-plaque .wordsearch-logo-frog{top:-12px;width:34px;height:26px}.wordsearch-title-plaque .wordsearch-logo-frog-green{left:24%}.wordsearch-title-plaque .wordsearch-logo-frog-purple{right:24%}
+@media(orientation:landscape) and (min-width:520px){
+ .wordsearch-screen.hub-fit .pond-shell{max-width:1100px;width:100%}
+ .wordsearch-screen.hub-fit .hub-screen{grid-template-rows:52px minmax(0,1fr)}
+ .wordsearch-screen.hub-fit .page-heading{gap:8px}
+ #hub-content:has(#wordsearch-grid){position:relative;isolation:isolate}
+ #hub-content:has(#wordsearch-grid) .panel.puzzle-stage{position:relative;box-sizing:border-box;width:100%;height:100%;min-height:0;max-height:100%;overflow:hidden;display:grid!important;grid-template-columns:minmax(0,1.65fr) minmax(130px,.82fr);grid-template-rows:auto auto auto auto minmax(0,1fr) minmax(0,1.2fr);gap:4px 10px;padding:7px 10px!important;border:3px solid #408332;border-radius:18px;background:linear-gradient(#fffbe8ed,#fffbe8ed),url('assets/pond-scenery-v1.png') center/cover;box-shadow:0 4px 0 #225b2a}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(1){grid-column:1/3;grid-row:1;margin:0!important;font-size:14px!important;line-height:1.1}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(2){grid-column:1/3;grid-row:2;margin:0!important;justify-content:flex-start}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(3){grid-column:1/3;grid-row:3;margin:0!important;padding:3px 6px!important;font-size:11px!important;line-height:1.15}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(4){grid-column:1/3;grid-row:4;margin:0!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(5){grid-column:1;grid-row:5/7;display:flex!important;align-items:center;justify-content:center;overflow:hidden!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(6){grid-column:2;grid-row:5;align-self:end;margin:0!important;font-size:14px!important;color:#24522b!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(7){grid-column:2;grid-row:6;align-content:start;overflow:auto!important;max-height:none!important}
+ #hub-content:has(#wordsearch-grid) #wordsearch-grid{--ws-cell:min(28px,calc((100vw - 220px)/var(--search-size)),calc((100dvh - 170px)/var(--search-rows)))!important;--puzzle-cell:var(--ws-cell)!important;max-width:100%!important;max-height:100%!important;background:#f6f3d9!important;border:3px solid #38803b!important;border-radius:15px!important;box-shadow:0 3px 0 #28602f!important}
+ #hub-content:has(#wordsearch-grid) #wordsearch-grid>button.search-cell{border:0!important;border-radius:2px!important;background:transparent!important;color:#173f25!important;font-size:clamp(10px,calc(var(--puzzle-cell)*.62),18px)!important;text-shadow:none!important}
+ #hub-content:has(#wordsearch-grid) .wordsearch-list-heading{font-size:14px!important;color:#23512a!important}
+ #hub-content:has(#wordsearch-grid) #wordsearch-words{gap:2px!important;padding:0!important}
+ #hub-content:has(#wordsearch-grid) #wordsearch-words span{font-size:10px!important;padding:2px 4px!important;border:1px solid #699444!important;border-radius:6px!important;background:#fffdf0!important;color:#24472a!important}
+}@media(orientation:landscape) and (min-width:520px) and (max-height:500px){
+ .wordsearch-screen.hub-fit .pond-shell{grid-template-rows:32px minmax(0,1fr) 0!important;gap:3px!important;padding:3px 8px 0!important}
+ .wordsearch-screen.hub-fit .bottom-nav{display:none!important}
+ .wordsearch-screen.hub-fit .hub-screen{grid-template-rows:42px minmax(0,1fr)!important;gap:2px!important}
+ .wordsearch-screen.hub-fit .page-heading .back{min-height:32px!important;padding:2px 9px!important}
+ .wordsearch-screen.hub-fit .wordsearch-title-plaque{min-height:35px!important;padding:2px 12px!important}
+ .wordsearch-screen.hub-fit .wordsearch-faceoff-logo{max-height:38px!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage{padding:5px 8px!important;gap:3px 8px!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(1){font-size:12px!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(2) .button{min-height:24px!important;padding:2px 6px!important;font-size:10px!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(3){font-size:10px!important;padding:2px 5px!important}
+ #hub-content:has(#wordsearch-grid) .puzzle-stage>:nth-child(4) .button{min-height:23px!important;padding:2px 6px!important;font-size:10px!important}
+ #hub-content:has(#wordsearch-grid) #wordsearch-grid{--ws-cell:min(24px,calc((100vw - 220px)/var(--search-size)),calc((100dvh - 178px)/var(--search-rows)))!important;--puzzle-cell:var(--ws-cell)!important}
+}
+/* Nature Word Search reference scene: pond, real game branding, playable grid and checklist. */
+body.wordsearch-screen .pond-shell{background-image:url('assets/pond-scenery-v1.png');background-position:center center;background-size:cover;background-repeat:no-repeat}
+body.wordsearch-screen.hub-fit .hub-screen{grid-template-rows:52px minmax(0,1fr);gap:4px}
+body.wordsearch-screen.hub-fit .page-heading{gap:8px;margin:0}
+body.wordsearch-screen.hub-fit .page-heading h2.wordsearch-title{flex:1;min-width:0;height:48px;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;white-space:normal}
+.wordsearch-faceoff-logo{display:block;flex:0 1 43%;width:43%;max-width:158px;height:auto;max-height:48px;object-fit:contain}
+.wordsearch-title-plaque{position:relative;isolation:isolate;flex:1;min-width:0;min-height:43px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 15px 4px;border:2px solid #efcf89;border-radius:16px 19px 15px 20px;background:repeating-linear-gradient(0deg,#99521f 0 3px,#bd7832 4px 7px,#e0a353 8px 10px,#a45c25 11px 13px);box-shadow:inset 0 2px 4px #ffe39a99,0 3px 0 #59321a;transform:rotate(-1deg)}
+.wordsearch-title-plaque:before,.wordsearch-title-plaque:after{content:"";position:absolute;z-index:-1;top:3px;width:14px;height:30px;border:1px solid #327e24;border-radius:80% 10% 80% 10%;background:linear-gradient(135deg,#d1fb61,#4daf24)}
+.wordsearch-title-plaque:before{left:-8px;transform:rotate(-34deg)}.wordsearch-title-plaque:after{right:-8px;transform:rotate(34deg)}
+.wordsearch-title-plaque>span{font-family:ui-rounded,"Arial Rounded MT Bold","Trebuchet MS",system-ui,sans-serif;font-size:clamp(13px,3.6vw,21px);font-weight:1000;line-height:.9;letter-spacing:-.035em;-webkit-text-stroke:1px #164414;paint-order:stroke fill;text-shadow:0 2px #174519,0 3px 1px #2b180d;color:#fff7df}
+.wordsearch-title-plaque .wordsearch-plaque-nature{color:#b9ff46;font-size:1.08em}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){position:relative;display:flex;height:100%;min-height:0;max-height:100%;overflow:hidden;padding:0}
+.wordsearch-layout{box-sizing:border-box;display:grid;grid-template-rows:auto minmax(0,1fr);gap:6px;width:100%;height:100%;min-height:0;padding:8px;border:3px solid #43853b;border-radius:20px;background:linear-gradient(#fff9e9ed,#fff9e9ed),url('assets/pond-scenery-v1.png') center/cover;box-shadow:0 4px 0 #286332}
+.wordsearch-info{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto;align-items:center;gap:3px 8px;min-width:0}
+.wordsearch-info>h3{grid-column:1;grid-row:1;margin:0;color:#234e2b;font-size:clamp(13px,2.8vw,18px);font-weight:1000;line-height:1.1}
+.wordsearch-info>.tabs{grid-column:2;grid-row:1;display:flex;flex-wrap:nowrap;gap:4px;margin:0}
+.wordsearch-info>.tabs .button{min-height:28px;padding:3px 8px;border:2px solid #f6d58f;border-radius:15px;background:repeating-linear-gradient(0deg,#713d1c 0 3px,#995b2c 4px 7px,#b97a3c 8px 10px);box-shadow:inset 0 2px 2px #fff1c988,0 2px 0 #5b3118;color:#fff7df;font-size:11px;text-shadow:0 1px #422410}
+#wordsearch-feedback{grid-column:1/3;grid-row:2;margin:0;padding:3px 6px;border-radius:8px;background:#edf3d2;color:#2e4e2d;font-size:11px;line-height:1.15}
+.wordsearch-info>.wordsearch-strengths{grid-column:1/3;grid-row:3;display:flex;gap:5px;margin:0}
+.wordsearch-info>.wordsearch-strengths .button{flex:1;min-height:26px;padding:2px 4px;font-size:11px}
+.wordsearch-play-area{display:grid;grid-template-columns:minmax(54px,.18fr) minmax(0,1.6fr) minmax(135px,.9fr) minmax(54px,.18fr);grid-template-rows:minmax(0,1fr);align-items:stretch;gap:8px;min-width:0;min-height:0}
+.wordsearch-character{display:flex;align-items:flex-end;justify-content:center;min-width:0;min-height:0;overflow:visible}
+.wordsearch-character-art{display:block;width:100%;height:100%;max-height:220px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 3px 2px #173c2577);pointer-events:none}
+.wordsearch-player-character{grid-column:1;grid-row:1}.wordsearch-rival-character{grid-column:4;grid-row:1}
+.wordsearch-play-area>.puzzle-board-space{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;max-height:100%;overflow:hidden;padding:0}
+#wordsearch-grid{--puzzle-cell:min(30px,calc((100vw - 160px)/var(--search-size)),calc((var(--visible-height,100dvh) - 260px)/var(--search-rows)));box-sizing:content-box;display:grid;grid-template-columns:repeat(var(--search-size),var(--puzzle-cell));grid-template-rows:repeat(var(--search-rows),var(--puzzle-cell));grid-auto-rows:var(--puzzle-cell);gap:2px;width:max-content;max-width:100%;height:max-content;max-height:100%;margin:auto;padding:5px;border:4px solid #398339;border-radius:18px;background:#f7f3dc;box-shadow:inset 0 1px 4px #fff,0 4px 0 #286231;touch-action:none}
+#wordsearch-grid>button.search-cell{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:var(--puzzle-cell);height:var(--puzzle-cell);min-width:0;min-height:0;padding:0;border:0;border-radius:2px;background:transparent;color:#173e24;font-size:clamp(10px,calc(var(--puzzle-cell)*.61),20px);font-weight:1000;line-height:1;letter-spacing:0;text-shadow:none;touch-action:none}
+#wordsearch-grid.waiting{filter:saturate(.88)}#wordsearch-grid.waiting>button.search-cell{cursor:default}
+#wordsearch-grid>button.search-cell.selecting{background:#c2e86d;color:#133c20;border-radius:6px;box-shadow:0 0 0 1px #4b922c}
+#wordsearch-grid>button.search-cell.found{background:#a9e878;color:#164122;border-radius:5px}
+.wordsearch-checklist{grid-column:3;grid-row:1;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;padding:7px;border:3px solid #518a42;border-radius:17px;background:#fff9e8;box-shadow:0 3px 0 #c5a86d}
+.wordsearch-checklist>.wordsearch-list-heading{flex:none;margin:-2px -2px 5px;padding:6px 5px;border:2px solid #d7edaa;border-radius:11px;background:linear-gradient(#a1e94b,#57b832 55%,#359331);color:#fffbe8;font-size:clamp(13px,2.2vw,17px);font-weight:1000;line-height:1;text-align:center;text-shadow:0 2px #236224}
+#wordsearch-words{display:flex;flex-direction:column;align-items:stretch;gap:2px;min-height:0;overflow:auto;padding:0 1px}
+#wordsearch-words .word-target{display:flex;align-items:center;gap:5px;min-height:17px;padding:1px 3px;border-radius:5px;color:#23472b;font-size:clamp(10px,1.65vw,13px);font-weight:850;line-height:1.1}
+#wordsearch-words .word-target i{display:grid;place-items:center;flex:none;width:13px;height:13px;border-radius:50%;background:#5fba3b;color:white;font-size:10px;font-style:normal;font-weight:1000}
+#wordsearch-words .word-target.found{background:#e1f2c4;color:#617758;text-decoration:line-through;text-decoration-thickness:1px}
+#wordsearch-words .word-target.found i{background:#3a9b3d}
+.wordsearch-play-button{flex:none;align-self:stretch;min-height:42px;margin-top:auto;padding:5px 8px;border:3px solid #ffed9a;border-radius:16px;background:linear-gradient(180deg,#ffe56d 0%,#ffb524 48%,#f07810 100%);box-shadow:inset 0 3px 3px #fff6bd,0 4px 0 #a44911;color:#fffdf0;font-size:clamp(14px,2.5vw,20px);font-weight:1000;text-shadow:0 2px 0 #99420b;cursor:pointer}
+.wordsearch-play-button>span{margin-right:4px;color:#fff8d8}.wordsearch-play-button.is-playing{filter:saturate(.7);cursor:default}
+@media(orientation:portrait),(max-width:519px){
+ .wordsearch-layout{grid-template-rows:auto minmax(0,1fr);gap:4px;padding:6px}
+ body.wordsearch-screen.hub-fit .hub-screen{grid-template-rows:48px minmax(0,1fr)}
+ body.wordsearch-screen.hub-fit .page-heading h2.wordsearch-title{height:43px;gap:5px}
+ .wordsearch-faceoff-logo{flex-basis:39%;width:39%;max-height:40px}
+ .wordsearch-title-plaque{min-height:38px;padding:2px 10px}
+ .wordsearch-play-area{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(78px,.42fr) 42px;gap:4px}
+ .wordsearch-player-character{grid-column:1;grid-row:3}.wordsearch-rival-character{grid-column:2;grid-row:3}
+ .wordsearch-character-art{max-width:72px;max-height:58px}
+ .wordsearch-play-area>.puzzle-board-space{grid-column:1/3;grid-row:1}
+ .wordsearch-checklist{grid-column:1/3;grid-row:2;padding:4px 6px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr);gap:3px 6px}
+ .wordsearch-checklist>.wordsearch-list-heading{grid-column:1/3;margin:-1px -2px 0;padding:4px;font-size:13px}
+ #wordsearch-words{grid-column:1;grid-row:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(48px,1fr));align-content:start;gap:1px 3px;overflow:auto}
+ #wordsearch-words .word-target{font-size:10px;min-height:14px;padding:0 2px}
+ .wordsearch-play-button{grid-column:2;grid-row:2;align-self:center;min-height:36px;max-width:104px;font-size:13px;padding:3px 6px}
+ #wordsearch-grid{--puzzle-cell:min(28px,calc((100vw - 46px)/var(--search-size)),calc((var(--visible-height,100dvh) - 250px)/var(--search-rows)))}
+}
+@media(orientation:landscape) and (min-width:520px){
+ body.wordsearch-screen.hub-fit .pond-shell{max-width:1100px;width:100%}
+}
+@media(orientation:landscape) and (min-width:520px) and (max-height:500px){
+ body.wordsearch-screen.hub-fit .pond-shell{grid-template-rows:32px minmax(0,1fr) 0!important;gap:3px!important;padding:3px 8px 0!important}
+ body.wordsearch-screen.hub-fit .bottom-nav{display:none!important}
+ body.wordsearch-screen.hub-fit .hub-screen{grid-template-rows:42px minmax(0,1fr)!important;gap:2px!important}
+ body.wordsearch-screen.hub-fit .page-heading .back{min-height:32px!important;padding:2px 9px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-layout{padding:4px!important;gap:3px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-info{grid-template-rows:auto auto auto;gap:2px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-info>h3{font-size:12px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-info>.tabs .button,body.wordsearch-screen.hub-fit .wordsearch-info>.wordsearch-strengths .button{min-height:22px!important;padding:1px 4px!important;font-size:9px!important}
+ body.wordsearch-screen.hub-fit #wordsearch-feedback{font-size:9px!important;padding:2px 4px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-play-area{grid-template-columns:minmax(42px,.14fr) minmax(0,1.6fr) minmax(110px,.9fr) minmax(42px,.14fr);gap:4px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-character-art{max-height:125px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-checklist{padding:4px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-play-button{min-height:30px!important;font-size:13px!important}
+ body.wordsearch-screen.hub-fit #wordsearch-grid{--puzzle-cell:min(24px,calc((100vw - 120px)/var(--search-size)),calc((100dvh - 178px)/var(--search-rows)))!important;padding:3px!important;gap:1px!important;border-width:3px!important}
+}
+/* Keep the reference layout authoritative over older puzzle grid overrides. */
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-layout{display:grid!important;grid-template-rows:auto minmax(0,1fr)!important;min-height:0!important;max-height:100%!important;overflow:hidden!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info{display:grid!important;flex:none!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{display:grid!important;min-height:0!important;max-height:100%!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{display:flex!important;grid-column:2!important;grid-row:1!important;flex:initial!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;min-width:0!important;min-height:0!important;max-height:100%!important;padding:0!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid{--puzzle-cell:min(28px,calc((100vw - 160px)/var(--search-size)),calc((var(--visible-height,100dvh) - 260px)/var(--search-rows)))!important;--ws-cell:var(--puzzle-cell)!important;display:grid!important;grid-template-columns:repeat(var(--search-size),var(--puzzle-cell))!important;grid-template-rows:repeat(var(--search-rows),var(--puzzle-cell))!important;grid-auto-rows:var(--puzzle-cell)!important;width:max-content!important;height:max-content!important;max-width:100%!important;max-height:100%!important;overflow:hidden!important;margin:auto!important;padding:5px!important;gap:2px!important;border:4px solid #398339!important;border-radius:18px!important;background:#f7f3dc!important;box-shadow:inset 0 1px 4px #fff,0 4px 0 #286231!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid>button.search-cell{display:flex!important;width:var(--puzzle-cell)!important;height:var(--puzzle-cell)!important;align-items:center!important;justify-content:center!important;padding:0!important;border:0!important;border-radius:2px!important;background:transparent!important;color:#173e24!important;font-size:clamp(10px,calc(var(--puzzle-cell)*.61),20px)!important;font-weight:1000!important;line-height:1!important;text-shadow:none!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid>button.search-cell.selecting{background:#c2e86d!important;color:#133c20!important;border-radius:6px!important;box-shadow:0 0 0 1px #4b922c!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid>button.search-cell.found{background:#a9e878!important;color:#164122!important;border-radius:5px!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{display:flex!important;flex-direction:column!important;min-width:0!important;min-height:0!important;max-height:100%!important;overflow:hidden!important;background:#fff9e8!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{flex:none!important;margin:-2px -2px 5px!important;padding:6px 5px!important;border:2px solid #d7edaa!important;border-radius:11px!important;background:linear-gradient(#a1e94b,#57b832 55%,#359331)!important;color:#fffbe8!important;font-size:clamp(13px,2.2vw,17px)!important;text-align:center!important;text-shadow:0 2px #236224!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:2px!important;flex:1 1 auto!important;min-height:0!important;max-height:none!important;overflow:auto!important;padding:0 1px!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{display:flex!important;align-items:center!important;gap:5px!important;min-height:17px!important;padding:1px 3px!important;border:0!important;border-radius:5px!important;background:transparent!important;color:#23472b!important;font-size:clamp(10px,1.65vw,13px)!important;font-weight:850!important;line-height:1.1!important;text-decoration:none!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target.found{background:#e1f2c4!important;color:#617758!important;text-decoration:line-through!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target i{display:grid!important;place-items:center!important;flex:none!important;width:13px!important;height:13px!important;border-radius:50%!important;background:#5fba3b!important;color:white!important;font-size:10px!important;font-style:normal!important}
+@media(orientation:portrait),(max-width:519px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) minmax(78px,.42fr) 42px!important;gap:4px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{grid-column:1!important;grid-row:3!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-rival-character{grid-column:2!important;grid-row:3!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1/3!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:1/3!important;grid-row:2!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto minmax(0,1fr)!important;gap:3px 6px!important;padding:4px 6px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{grid-column:1/3!important;grid-row:1!important;margin:-1px -2px 0!important;padding:4px!important;font-size:13px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{grid-column:1!important;grid-row:2!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(48px,1fr))!important;align-content:start!important;gap:1px 3px!important;overflow:auto!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{min-height:14px!important;padding:0 2px!important;font-size:10px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-button{grid-column:2!important;grid-row:2!important;align-self:center!important;min-height:36px!important;max-width:104px!important;font-size:13px!important;padding:3px 6px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid{--puzzle-cell:min(28px,calc((100vw - 46px)/var(--search-size)),calc((var(--visible-height,100dvh) - 250px)/var(--search-rows)))!important;--ws-cell:var(--puzzle-cell)!important}
+}
+@media(orientation:landscape) and (min-width:520px) and (max-height:500px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid{--puzzle-cell:min(24px,calc((100vw - 120px)/var(--search-size)),calc((100dvh - 178px)/var(--search-rows)))!important;--ws-cell:var(--puzzle-cell)!important;padding:3px!important;gap:1px!important;border-width:3px!important}
+}
+/* Fill the available game area down to the bottom navigation and simplify the sign. */
+body.wordsearch-screen.hub-fit .hub-screen{position:relative!important;height:100%!important;min-height:0!important;grid-template-rows:52px minmax(0,1fr)!important;gap:4px!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){position:absolute!important;inset:51px 0 0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-layout{height:100%!important;min-height:0!important}
+body.wordsearch-screen .wordsearch-title-plaque::before,body.wordsearch-screen .wordsearch-title-plaque::after{display:none!important;content:none!important}
+@media(orientation:portrait),(max-width:519px){
+ body.wordsearch-screen.hub-fit .hub-screen{grid-template-rows:48px minmax(0,1fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){inset:48px 0 0!important}
+}
+
+/* Keep the reference's side-by-side puzzle composition on wide screens, even in a tall window. */
+@media(min-width:520px){
+ body.wordsearch-screen.hub-fit .pond-shell{max-width:1100px!important}
+ body.wordsearch-screen.hub-fit .hub-screen{grid-template-rows:52px minmax(0,1fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){inset:51px 0 0!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-layout{grid-template-rows:auto minmax(0,1fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(54px,.18fr) minmax(0,1.6fr) minmax(135px,.9fr) minmax(54px,.18fr)!important;grid-template-rows:minmax(0,1fr)!important;gap:8px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{grid-column:1!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:2!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:3!important;grid-row:1!important;display:flex!important;flex-direction:column!important;min-width:0!important;min-height:0!important;padding:7px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{margin:-2px -2px 5px!important;padding:6px 5px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start!important;align-items:start!important;gap:2px 6px!important;min-height:0!important;overflow:auto!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-button{align-self:stretch!important;min-height:42px!important;max-width:none!important;margin-top:auto!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-rival-character{grid-column:4!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-character-art{max-height:220px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid{--puzzle-cell:min(28px,calc((100vw - 220px)/var(--search-size)),calc((var(--visible-height,100dvh) - 170px)/var(--search-rows)))!important;--ws-cell:var(--puzzle-cell)!important}
+}
+/* Word Search uses one selected character, with a board that scales to its screen. */
+@media(min-width:680px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(54px,.18fr) minmax(0,1.6fr) minmax(135px,.9fr)!important;grid-template-rows:minmax(0,1fr)!important;gap:8px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{grid-column:1!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:2!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:3!important;grid-row:1!important;display:flex!important;flex-direction:column!important;min-width:0!important;min-height:0!important;padding:7px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start!important;align-items:start!important;gap:2px 6px!important;min-height:0!important;overflow:auto!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid{--puzzle-cell:min(28px,calc((100vw - 300px)/var(--search-size)),calc((var(--visible-height,100dvh) - 170px)/var(--search-rows)))!important;--ws-cell:var(--puzzle-cell)!important}
+}
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) minmax(64px,.32fr) 38px!important;gap:4px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{grid-column:1/3!important;grid-row:3!important;justify-self:center!important;width:72px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1/3!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:1/3!important;grid-row:2!important;display:flex!important;flex-direction:column!important;min-width:0!important;min-height:0!important;padding:4px 6px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-content:start!important;align-items:start!important;gap:1px 4px!important;min-height:0!important;overflow:auto!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-grid{--puzzle-cell:min(28px,calc((100vw - 100px)/var(--search-size)),calc((var(--visible-height,100dvh) - 280px)/var(--search-rows)))!important;--ws-cell:var(--puzzle-cell)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-character-art{max-width:62px!important;max-height:38px!important}
+}/* Measure the letter cells against their actual board space on web and mobile. */
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{min-width:0!important;overflow-wrap:anywhere!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target i{display:none!important}/* Mobile keeps the selected frog in the top profile and gives the board the height it needs. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) minmax(150px,.45fr)!important;gap:5px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{display:none!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1/3!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:1/3!important;grid-row:2!important}
+}
+/* Keep the complete mobile word bank visible by using the open screen width. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-rows:minmax(0,1fr) minmax(120px,.36fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-content:start!important;gap:1px 5px!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{min-height:13px!important;padding:0 1px!important;font-size:clamp(8px,2.4vw,10px)!important;line-height:1.05!important;overflow-wrap:anywhere!important}
+}
+
+/* Nature Word Search is a focused play screen with Home in the header. */
+body.wordsearch-screen.hub-fit .pond-shell{grid-template-rows:36px minmax(0,1fr) 0!important}
+body.wordsearch-screen .bottom-nav{display:none!important}
+body.wordsearch-screen .page-heading .back.wordsearch-home-button{box-sizing:border-box!important;flex:none!important;min-width:54px!important;min-height:36px!important;padding:4px 7px!important;font-size:11px!important;font-weight:900!important;white-space:nowrap!important}
+
+/* Give Discovery enough room to remain on one line and expose the full word-list heading. */
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info{grid-template-columns:minmax(0,1fr) max-content!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info>.tabs{min-width:max-content!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info>.tabs [data-action="puzzle-discovery"]{flex:0 0 auto!important;min-width:82px!important;white-space:nowrap!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{padding:4px!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{box-sizing:border-box!important;width:100%!important;margin:0 0 4px!important;padding:6px 3px!important;white-space:nowrap!important}
+@media(min-width:520px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{gap:4px!important}
+}
+@media(min-width:680px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(54px,.18fr) minmax(0,1.4fr) minmax(165px,1fr)!important;gap:4px!important}
+}
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{row-gap:2px!important}
+}
+
+/* Final full-screen Word Search layout for desktop and phones. */
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{min-height:0!important;overflow:hidden!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{display:flex!important;min-width:0!important;min-height:0!important;overflow:visible!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-rival-character{display:none!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{box-sizing:border-box!important;min-width:0!important;min-height:0!important;overflow:hidden!important;background:#fff9e8!important;border:3px solid #518a42!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:30px!important;flex:none!important;margin:0 0 5px!important;padding:5px 4px!important;white-space:nowrap!important;overflow:visible!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{box-sizing:border-box!important;min-width:0!important;min-height:16px!important;padding:1px 4px!important;border:1px solid #d4c99a!important;border-radius:5px!important;background:#fffdf3!important;color:#28472b!important;overflow-wrap:anywhere!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target.found{border-color:#91b877!important;background:#dff0cc!important;color:#617758!important}
+@media(min-width:680px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(62px,.16fr) minmax(0,1.45fr) minmax(190px,1fr)!important;grid-template-rows:minmax(0,1fr)!important;gap:6px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{grid-column:1!important;grid-row:1!important;align-items:flex-end!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:2!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:3!important;grid-row:1!important;padding:5px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-character-art{width:100%!important;max-width:120px!important;max-height:min(220px,55vh)!important;object-fit:contain!important;object-position:center bottom!important}
+}
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) minmax(120px,.36fr) 48px!important;gap:3px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1/3!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:1/3!important;grid-row:2!important;padding:4px 6px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{grid-column:1/3!important;grid-row:3!important;justify-self:center!important;align-items:flex-end!important;width:64px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-character-art{width:100%!important;max-width:54px!important;max-height:46px!important;object-fit:contain!important;object-position:center bottom!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-content:start!important;gap:1px 4px!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{min-height:13px!important;padding:0 2px!important;font-size:clamp(8px,2.35vw,10px)!important;line-height:1.05!important}
+}
+
+/* Word targets stay plain text; only the surrounding checklist keeps its frame. */
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:1px 3px!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target.found{border:0!important;background:transparent!important;color:#71836b!important;text-decoration:line-through!important}
+
+/* Mobile Word Search header: selected full figure left, title aligned with Froggy Dough, Home on the right. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit .topbar>.avatar{display:none!important}
+ body.wordsearch-screen.hub-fit .page-heading:has(#hub-player-look){position:relative!important;display:block!important;height:48px!important;min-height:48px!important;padding:0!important;margin:0!important;overflow:visible!important}
+ body.wordsearch-screen.hub-fit .page-heading h2.wordsearch-title{position:absolute!important;left:var(--wordsearch-header-start,128px)!important;right:56px!important;top:0!important;height:44px!important;min-height:0!important;margin:0!important;padding:0!important;display:flex!important;justify-content:center!important;min-width:0!important}
+ body.wordsearch-screen.hub-fit .wordsearch-faceoff-logo{display:none!important}
+ body.wordsearch-screen.hub-fit .page-heading .back.wordsearch-home-button{position:absolute!important;left:auto!important;right:0!important;top:4px!important;order:initial!important;box-sizing:border-box!important;width:50px!important;min-width:50px!important;min-height:36px!important;padding:3px 5px!important;font-size:10px!important}
+ body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look{position:absolute!important;left:2px!important;top:-36px!important;z-index:10!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;box-sizing:border-box!important;width:58px!important;height:84px!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+ body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look .wordsearch-header-frog{display:block!important;width:100%!important;height:100%!important;max-width:58px!important;max-height:84px!important;object-fit:contain!important;object-position:center bottom!important;filter:drop-shadow(0 2px 2px #173c2570)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-rows:minmax(0,1fr) minmax(120px,.36fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{display:none!important}
+}
+@media(min-width:680px){body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look{display:none!important}}
+
+/* Keep the mobile word checklist fully on-screen by giving its panel enough height. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-rows:minmax(0,1fr) minmax(152px,.48fr)!important;row-gap:2px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{min-height:152px!important;max-height:100%!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{flex:none!important;min-height:30px!important;margin:0 0 3px!important}
+}
+
+/* Keep puzzle tabs on one line and move the full word bank into view. */
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info>.tabs .button{flex:0 0 auto!important;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info>.tabs [data-action="puzzle-discovery"]{min-width:82px!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info>.tabs [data-action="search-words"]{min-width:58px!important}
+body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-info>.tabs [data-action="wordsearch-hint"]{min-width:48px!important}
+@media(min-width:520px) and (max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1.7fr) minmax(175px,1fr)!important;grid-template-rows:minmax(0,1fr)!important;gap:6px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:2!important;grid-row:1!important;display:flex!important;flex-direction:column!important;min-height:0!important;padding:5px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{display:none!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{grid-template-columns:repeat(2,minmax(0,1fr))!important;overflow:hidden!important}
+}
+@media(max-width:519px){
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(152px,.42fr) minmax(0,1fr)!important;gap:3px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:1!important;grid-row:1!important;display:flex!important;flex-direction:column!important;min-height:0!important;padding:4px 6px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{grid-column:auto!important;grid-row:auto!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{grid-column:auto!important;grid-row:auto!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1!important;grid-row:2!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{display:none!important}
+}
+
+/* Word Search elapsed timer and compact bottom word bank. */
+.wordsearch-elapsed{display:flex;align-items:center;justify-content:center;flex:none;min-width:82px;height:34px;margin:0 8px 0 0;padding:3px 8px;border:2px solid #f0d28e;border-radius:16px;background:linear-gradient(#9d6335,#6d3e20);box-shadow:inset 0 2px 2px #fff0c777,0 2px 0 #50301c;color:#fff7df;font-size:11px;font-weight:900;line-height:1;white-space:nowrap}
+body.wordsearch-screen.hub-fit .hub-screen{overflow:visible!important}
+body.wordsearch-screen.hub-fit .page-heading:has(#hub-player-look){z-index:5!important;overflow:visible!important}
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit .wordsearch-elapsed{position:absolute!important;left:68px!important;top:7px!important;width:min(82px,max(44px,calc(var(--wordsearch-header-start,128px) - 76px)))!important;min-width:44px!important;height:32px!important;margin:0!important;padding:2px 4px!important;font-size:9px!important}
+ body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look{z-index:12!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 140px!important;gap:2px!important;min-height:0!important;max-height:100%!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;min-height:0!important;height:100%!important;max-height:140px!important;padding:3px 5px!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{flex:none!important;min-height:23px!important;margin:0 0 2px!important;padding:3px!important;font-size:11px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-auto-rows:minmax(0,auto)!important;align-content:start!important;gap:0 4px!important;min-height:0!important;overflow:hidden!important;padding:0 1px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{min-height:11px!important;padding:0 1px!important;font-size:clamp(7px,2vw,9px)!important;line-height:1.05!important;white-space:normal!important;overflow-wrap:anywhere!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{display:none!important}
+}
+
+/* Keep the current upper-left frog position but let its full cutout escape header clipping. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look{position:fixed!important;left:6px!important;top:6px!important;z-index:999!important;width:58px!important;height:84px!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;clip-path:none!important;}
+ body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look .wordsearch-header-frog{position:static!important;display:block!important;width:58px!important;height:84px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center top!important;overflow:visible!important;clip-path:none!important;filter:drop-shadow(0 2px 2px #173c2570)!important}
+}
+/* Timer controls sit between the frog and the Nature title. */
+.wordsearch-timer-controls{display:flex;align-items:center;justify-content:center;gap:3px;flex:none;white-space:nowrap}
+.wordsearch-timer-control{box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:34px!important;min-width:34px!important;height:32px!important;min-height:32px!important;padding:1px 2px!important;border:2px solid #f0d28e!important;border-radius:14px!important;background:linear-gradient(#9d6335,#6d3e20)!important;box-shadow:inset 0 2px 2px #fff0c777,0 2px 0 #50301c!important;color:#fff7df!important;font-size:8px!important;font-weight:900!important;line-height:1!important;white-space:nowrap!important}
+.wordsearch-timer-control:disabled{opacity:.6!important}
+.wordsearch-elapsed{box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;width:48px!important;min-width:48px!important;height:32px!important;min-height:32px!important;margin:0!important;padding:2px!important;border:2px solid #f0d28e!important;border-radius:14px!important;background:linear-gradient(#9d6335,#6d3e20)!important;box-shadow:inset 0 2px 2px #fff0c777,0 2px 0 #50301c!important;color:#fff7df!important;font-size:9px!important;font-weight:900!important;line-height:1!important;white-space:nowrap!important}
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit .wordsearch-timer-controls{position:absolute!important;left:68px!important;top:7px!important;width:120px!important;z-index:8!important}
+ body.wordsearch-screen.hub-fit .wordsearch-elapsed{position:static!important;}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){inset:51px 0 20px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 128px!important;gap:0!important;min-height:0!important;max-height:100%!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area>.puzzle-board-space{grid-column:1!important;grid-row:1!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{grid-column:1!important;grid-row:2!important;display:flex!important;flex-direction:column!important;min-width:0!important;min-height:128px!important;height:128px!important;max-height:128px!important;margin:0!important;padding:3px 5px!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{flex:none!important;min-height:22px!important;margin:0 0 2px!important;padding:2px!important;font-size:11px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-auto-rows:minmax(0,auto)!important;align-content:start!important;gap:0 4px!important;min-height:0!important;overflow:hidden!important;padding:0 1px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{min-height:10px!important;padding:0 1px!important;font-size:clamp(7px,1.95vw,9px)!important;line-height:1.02!important;white-space:normal!important;overflow-wrap:anywhere!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-player-character{display:none!important}
+}
+@media(max-width:519px){body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){inset:48px 0 20px!important}}
+@media(max-width:360px){
+ body.wordsearch-screen.hub-fit .wordsearch-timer-controls{width:80px!important;gap:2px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-timer-control{width:24px!important;min-width:24px!important;height:28px!important;min-height:28px!important;font-size:7px!important}
+ body.wordsearch-screen.hub-fit .wordsearch-elapsed{width:28px!important;min-width:28px!important;height:28px!important;min-height:28px!important;font-size:7px!important}
+}
+
+/* Keep the selected frog above the top bar at its existing upper-left location. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit .pond-shell{grid-template-rows:36px minmax(0,1fr) 0!important;gap:4px!important}
+ body.wordsearch-screen.hub-fit #hub{position:relative!important;z-index:30!important;overflow:visible!important;grid-template-rows:48px minmax(0,1fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){padding-bottom:0!important;box-sizing:border-box!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{height:100%!important;min-height:0!important;max-height:100%!important;box-sizing:border-box!important;gap:0!important;grid-template-rows:minmax(0,1fr) 100px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist{min-height:100px!important;height:100px!important;max-height:100px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-checklist>.wordsearch-list-heading{min-height:20px!important;height:20px!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) #wordsearch-words .word-target{min-height:10px!important;font-size:clamp(7px,1.9vw,9px)!important;line-height:1.02!important}
+ body.wordsearch-screen.hub-fit .wordsearch-timer-controls{width:126px!important}
+}
+@media(max-width:360px){body.wordsearch-screen.hub-fit .wordsearch-timer-controls{width:80px!important}}
+/* Word Search fills the content row; its old fixed-height rule caused mobile clipping. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit .pond-shell{grid-template-rows:36px minmax(0,1fr) 0!important}
+ body.wordsearch-screen.hub-fit #hub:has(#wordsearch-grid){height:100%!important;max-height:100%!important;min-height:0!important;overflow:visible!important;grid-template-rows:48px minmax(0,1fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid){height:100%!important;max-height:100%!important;min-height:0!important;overflow:hidden!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-layout{height:100%!important;max-height:100%!important;min-height:0!important;overflow:hidden!important;grid-template-rows:auto minmax(0,1fr)!important}
+ body.wordsearch-screen.hub-fit #hub-content:has(#wordsearch-grid) .wordsearch-play-area{height:100%!important;max-height:100%!important;min-height:0!important;grid-template-rows:minmax(0,1fr) 100px!important}
+}
+body.home-fit #hub[hidden],body.home-fit #game[hidden]{display:none!important}
+/* Keep the selected character visible above the header and reserve its left slot. */
+@media(max-width:679px){
+ body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look{position:fixed!important;display:block!important;visibility:visible!important;opacity:1!important;left:6px!important;top:6px!important;z-index:1000!important;width:58px!important;height:84px!important;overflow:visible!important}
+ body.wordsearch-screen.hub-fit #hub-player-look.wordsearch-header-look .wordsearch-header-frog{display:block!important;visibility:visible!important;opacity:1!important;width:58px!important;height:84px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center top!important}
+}
